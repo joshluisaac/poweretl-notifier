@@ -1,0 +1,117 @@
+
+<div th:fragment="hostFragment" class="col-md-5">
+ <div class="x_panel">
+  <div class="x_title">
+   <h2>
+    Add Job <small></small>
+   </h2>
+   <ul class="nav navbar-right panel_toolbox">
+    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+    <li class="dropdown"><a href="#" class="dropdown-toggle"
+     data-toggle="dropdown" role="button" aria-expanded="false"><i
+      class="fa fa-wrench"></i></a>
+     <ul class="dropdown-menu" role="menu">
+      <li><a href="#">Settings 1</a></li>
+      <li><a href="#">Settings 2</a></li>
+     </ul></li>
+    <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+   </ul>
+   <div class="clearfix"></div>
+  </div>
+  <div class="x_content">
+   <br />
+   <form action="/host" method="post" id="ajaxForm" data-parsley-validate
+    class="form-horizontal form-label-left">
+    <input hidden="true" th:value="${hostEditList?.id}" name="id">
+    <div class="form-group">
+     <label class="control-label col-md-2"
+      for="name">Name <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+      <input th:value="${hostEditList?.name}" name="name" type="text" required="required"
+       placeholder="Name"
+       class="form-control col-md-7 col-xs-12 hasclear">
+     </div>
+    </div>
+    <div class="form-group">
+     <label class="control-label col-md-2"
+      for="fqdn">FQDN <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+      <input th:value="${hostEditList?.fqdn}" name="fqdn" type="text" required="required" placeholder="FQDN"
+       class="form-control col-md-7 col-xs-12 hasclear">
+     </div>
+    </div>
+        <div class="form-group">
+     <label class="control-label col-md-2"
+      for="username">Username <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+      <input th:value="${hostEditList?.username}" name="username" type="text" required="required"
+       placeholder="Username"
+       class="form-control col-md-7 col-xs-12 hasclear">
+     </div>
+    </div>
+
+    <div class="form-group">
+     <label class="control-label col-md-2"
+      for="host">Host <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+      <input th:value="${hostEditList?.host}" name="host" type="text" required="required" placeholder="Host"
+       class="form-control col-md-7 col-xs-12 hasclear">
+     </div>
+    </div>
+    
+        <div class="form-group">
+     <label class="control-label col-md-2"
+      for="port">Port <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+      <input th:value="${hostEditList?.port}" name="port" type="text" required="required" placeholder="Port"
+       class="form-control col-md-7 col-xs-12 validate hasclear" min="0" maxlength = "4" pattern="\d*">
+     </div>
+    </div>
+    
+            <div class="form-group">
+     <label class="control-label col-md-2"
+      for="public-key">Public Key <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+      <textarea th:text="${hostEditList?.publicKey}" name="publicKey" form="ajaxForm" required="required" placeholder="Public Key"
+       class="form-control col-md-7 col-xs-12 hasclear"></textarea>
+       <div id = "insertMessage"></div>
+     </div>
+    </div>
+    
+<!--             <div class="form-group">
+     <label class="control-label col-md-2"
+      for="created-at">Created At
+     </label>
+     <div class="col-md-10">
+      <input name="createdAt" type = "text" placeholder="Created At"
+       class="form-control col-md-7 col-xs-12 hasclear">
+     </div>
+    </div>
+    
+                <div class="form-group">
+     <label class="control-label col-md-2"
+      for="updated-at">Updated At
+     </label>
+     <div class="col-md-10">
+      <input name="updatedAt" placeholder="Updated At"
+       class="form-control col-md-7 col-xs-12 hasclear">
+     </div>
+    </div> -->
+
+    <div class="ln_solid"></div>
+    <div class="form-group">
+     <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-7">
+     <button type="reset" class="btn btn-primary">Reset</button>
+     <button type="submit" class="btn btn-success ">Save</button>
+     </div>
+    </div>
+   </form>
+  </div>
+ </div>
+</div>

@@ -1,0 +1,84 @@
+<div th:fragment="dsvFragment" class="col-md-12 col-xs-12">
+	<div class="x_panel">
+		<div class="x_title">
+			<div class="row">
+				<form method="post" action="/dsv" enctype="multipart/form-data">
+					<div class="col-md-10 col-xs-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-download-alt" style="color: black"></i></span>
+							<input type="file" name="file" class="form-control"
+								accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+								required />
+						</div>
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+						<button type="submit" class="btn btn-primary" value="Submit">Upload</button>
+					</div>
+				</form>
+			</div>
+			<h2>
+				<small>Data Visualizer Details </small>
+			</h2>
+			<small>
+				<h2 th:text="${status}"
+					style="color: red; padding-left: 20px; font-size: 18px; padding-top: 11px; font-weight: bold;"></h2>
+			</small>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button"><i class="fa fa-wrench"></i></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Settings 1</a></li>
+						<li><a href="#">Settings 2</a></li>
+					</ul></li>
+				<li><a class="close-link"><i class="fa fa-close"></i></a></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content"></div>
+		<div class='row'>
+			<div class='col-md-12'>
+				<br>
+				<table id="datatable-buttons"
+					class="table table-striped table-bordered">
+					<thead>
+						<tr th:each="csv,csvStat : ${csvIndex}"
+							th:if="${csvStat.index < 1}">
+
+							<th:block th:each="field, fieldStat :  ${#numbers.sequence(0, {sizeArray})}">
+								<th th:text="${csv?.map__${fieldStat.index}__}"></th>
+							</th:block>
+
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr th:each="csv,csvStat : ${csvIndex}"
+							th:if="${csvStat.index > 0}">
+
+							<th:block th:each="field, fieldStat :  ${#numbers.sequence(0, {sizeArray})}">
+								<th th:text="${csv?.map__${fieldStat.index}__}"></th>
+							</th:block>
+						</tr>
+					</tbody> 
+					
+					
+				<!-- 	<tbody>
+						<tr th:each="csv,csvStat : ${csvIndex}"
+							th:if="${csvStat.index > 0}">
+
+							<th:block th:each="field, fieldStat : ${csvIndex}">
+								<td th:text="${csv.map__${fieldStat.count}__}"></td>
+							</th:block>
+						</tr>
+					</tbody> -->
+				</table>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+

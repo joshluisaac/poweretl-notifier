@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/template_form_header :: header"></head>
+<div class="modal-header vertical-align-center">
+    <h3 class="text-center" style="color: white;">Batch Stats</h3>
+</div>
+<div class="modal-body" style="max-width: 1500px;margin: auto; width: 50%;">
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <h4>Last Run</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Number of Records Updated</th>
+                        <th>Time Taken (ms)</th>
+                        <th>Data Source</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="batch, status : ${latestBatchHistoryList}">
+                        <td th:text="${batch?.updateddate}">
+                        </td>
+                        <td th:text="${batch?.records}">
+                        </td>
+                        <td th:text="${batch?.timetaken}">
+                        </td>
+                        <td th:text="${batch?.data_source}">
+                        </td>
+                        <td th:text="${batch?.status}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <h4>Last 10 Runs</h4>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Date & Time</th>
+                        <th>Number of Records Updated</th>
+                        <th>Time Taken (ms)</th>
+                        <th>Data Source</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="batch, status : ${batchHistoryList}">
+                        <td th:text="${status.index + 1}"></td>
+                        <td th:text="${batch?.updateddate}">
+                        </td>
+                        <td th:text="${batch?.records}">
+                        </td>
+                        <td th:text="${batch?.timetaken}">
+                        </td>
+                        <td th:text="${batch?.data_source}">
+                        </td>
+                        <td th:text="${batch?.status}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-primary btn-sm" href="/runbatch">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/template_allscripts :: scripts"></div>
+</html>

@@ -1,0 +1,81 @@
+
+<div th:fragment="addBatchFragment" class="col-md-5 col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                Add Batch<small></small>
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                        data-toggle="dropdown" role="button" aria-expanded="false"><i
+                        class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a></li>
+                        <li><a href="#">Settings 2</a></li>
+                    </ul></li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br />
+            <form action="/batch" method="post" id="ajaxForm" data-parsley-validate
+                  class="form-horizontal form-label-left">
+                <input hidden="true" th:value="${batchEditList?.id}" name="id">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2"
+                           for="code">Code <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8">
+                        <input th:value="${batchEditList?.code}" name="code" type="text" required="required"
+                               placeholder="Batch Code"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2"
+                           for="name">Name <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8">
+                        <input th:value="${batchEditList?.name}" name="name" type="text" required="required"
+                               placeholder="Batch Name"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2"
+                           for="description">Description <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-8">
+                         <textarea th:text="${batchEditList?.description}" name="description"
+                                   required="required"
+                                   placeholder="Batch Description"
+                                   class="form-control col-md-7 col-xs-12 hasclear"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6"
+                           for="disable">Disable </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input th:checked="${batchEditList?.disable}" name="disable"
+                               type="checkbox" class="js-switch" />
+                        <div id = "insertMessage"></div>
+                    </div>
+                </div>
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-4">
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script>
+
+    </script>
+</div>

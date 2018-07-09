@@ -1,0 +1,122 @@
+
+<!-- <div th:fragment="dctablesettings" class="col-md-12 col-sm-12 col-xs-12"> -->
+<div th:fragment="dcParentSettings"
+	class="col-md-12 col-sm-12 col-xs-12">
+	<div class="x_panel">
+		<div class="x_title">
+			<h2>
+				Parent Table Settings <small></small>
+			</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false"><i
+						class="fa fa-wrench"></i></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Settings 1</a></li>
+						<li><a href="#">Settings 2</a></li>
+					</ul></li>
+				<li><a class="close-link"><i class="fa fa-close"></i></a></li>
+			</ul>
+
+			<div class="clearfix"></div>
+		</div>
+
+
+		<!-- Button trigger modal -->
+		<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> -->
+		<!--   Add -->
+		<!-- </button> -->
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+					</div>
+					<div class="modal-body">...</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save
+							changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div th:if="${dcconfigList != null}" class="x_content">
+			<p class="text-muted font-13 m-b-30"></p>
+
+			<table id="datatable-buttons"
+				class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Source File Name</th>
+						<th>Description</th>
+						<th>Table</th>
+						<th>Sequence Name</th>
+						<th>Updated Date</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="dcconf : ${dcconfigList}"
+						th:if="${dcconf.disable} == false">
+						<td th:text="${dcconf.sourceFileName}">1</td>
+						<td th:text="${dcconf.description}">1</td>
+						<td th:text="${dcconf.destinationTable}">1</td>
+						<td th:text="${dcconf.sequenceName}">1</td>
+						<td th:text="${#dates.format(dcconf.updatedDate,'dd-MMM-yyyy')}">1</td>
+
+						<td><a th:href="@{'/dctablesettings?id=' + ${dcconf.id}}"><span
+								data-toggle="tooltip" title="Edit"
+								class="glyphicon glyphicon-pencil blue"> </span></a> <a
+							th:href="@{'/dcconfig?global_config_id=' + ${dcconf.global_config_id}}"><span
+								data-toggle="tooltip" title="Add Fields"
+								class="glyphicon glyphicon-plus-sign green"> </span></a> <a
+							th:href="@{'/preview?id=' + ${dcconf.global_config_id} + '&download=no'}"><span
+								data-toggle="tooltip" title="Preview DC Configuration File"
+								class="glyphicon glyphicon-eye-open"> </span></a> <a
+							th:href="@{'/preview?id=' + ${dcconf.global_config_id}  + '&download=yes'}">
+								<span data-toggle="tooltip"
+								title="Download DC Configuration File"
+								class="glyphicon glyphicon-download red"> </span>
+						</a></td>
+					</tr>
+					<tr th:each="dcconf : ${dcconfigList}"
+						th:if="${dcconf.disable} == true"
+						style="background-color: rgba(255, 0, 0, 0.6); color: white;">
+						<td th:text="${dcconf.sourceFileName}">1</td>
+						<td th:text="${dcconf.description}">1</td>
+						<td th:text="${dcconf.destinationTable}">1</td>
+						<td th:text="${dcconf.sequenceName}">1</td>
+						<td th:text="${#dates.format(dcconf.updatedDate,'dd-MMM-yyyy')}">1</td>
+
+						<td><a th:href="@{'/dctablesettings?id=' + ${dcconf.id}}"><span
+								data-toggle="tooltip" title="Edit"
+								class="glyphicon glyphicon-pencil blue"> </span></a> <a
+							th:href="@{'/dcconfig?global_config_id=' + ${dcconf.global_config_id}}"><span
+								data-toggle="tooltip" title="Add Fields"
+								class="glyphicon glyphicon-plus-sign green"> </span></a> <a
+							th:href="@{'/preview?id=' + ${dcconf.global_config_id} + '&download=no'}"><span
+								data-toggle="tooltip" title="Preview DC Configuration File"
+								class="glyphicon glyphicon-eye-open"> </span></a> <a
+							th:href="@{'/preview?id=' + ${dcconf.global_config_id}  + '&download=yes'}">
+								<span data-toggle="tooltip"
+								title="Download DC Configuration File"
+								class="glyphicon glyphicon-download red"> </span>
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

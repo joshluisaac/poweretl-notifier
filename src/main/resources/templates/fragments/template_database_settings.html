@@ -1,0 +1,103 @@
+
+<div th:fragment="databaseFragment" class="col-md-12 col-xs-12">
+ <div class="x_panel">
+  <div class="x_title">
+   <h2>
+    Database Configuration Properties <small></small>
+   </h2>
+   <ul class="nav navbar-right panel_toolbox">
+    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+    <li class="dropdown"><a href="#" class="dropdown-toggle"
+     data-toggle="dropdown" role="button" aria-expanded="false"><i
+      class="fa fa-wrench"></i></a>
+     <ul class="dropdown-menu" role="menu">
+      <li><a href="#">Settings 1</a></li>
+      <li><a href="#">Settings 2</a></li>
+     </ul></li>
+    <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+   </ul>
+   <div class="clearfix"></div>
+  </div>
+  <div class="x_content">
+   <br />
+   <form action="/adminDatabaseProp" method="post" id="ajaxForm" data-parsley-validate
+    class="form-horizontal form-label-left">
+
+    <div class="form-group">
+     <label class="control-label col-md-2 col-sm-2"
+      for="first-name">Driver <span class="required">*</span>
+     </label>
+     <div class="col-md-4 col-sm-4">
+      <input th:value=${resultDatabase?.driver} name="driver" type="text" required
+       placeholder="Driver"
+       class="form-control col-md-7 col-xs-12 hasclear" maxlength = "50">
+     </div>
+    </div>
+    <div class="form-group">
+     <label class="control-label col-md-2 col-sm-2"
+      for="last-name">URL <span class="required">*</span>
+     </label>
+     <div class="col-md-4 col-sm-4">
+      <input th:value=${resultDatabase?.url} name="url" type="text"
+       required="required" placeholder="URL"
+       class="form-control col-md-7 col-xs-12 hasclear" maxlength = "50">
+     </div>
+    </div>
+    <div class="form-group">
+     <label for="middle-name"
+      class="control-label col-md-2 col-sm-2">Port <span class="required">*</span>
+     </label>
+     <div class="col-md-4 col-sm-4">
+      <input th:value=${resultDatabase?.port} name="port" required
+       placeholder="Port"
+       class="form-control col-md-7 col-xs-12 hasclear" type="text" pattern="\d*" min="0" maxlength="4">
+     </div>
+    </div>
+
+    <div class="form-group">
+     <label for="additional_args"
+      class="control-label col-md-2 col-sm-2">Additional Args </span>
+     </label>
+     <div class="col-md-4 col-sm-4">
+      <input th:value=${resultDatabase?.additionalArgs} name="additionalArgs"
+       placeholder="Additional Arguments"
+       class="form-control col-md-7 col-xs-12 hasclear" type="text" maxlength = "50">
+     </div>
+    </div>
+
+   <div class="form-group">
+     <label for="middle-name"
+      class="control-label col-md-2 col-sm-2">Username <span class="required">*</span>
+     </label>
+     <div class="col-md-4 col-sm-4">
+      <input th:value=${resultDatabase?.username} name="username" required
+       placeholder="Username"
+       class="form-control col-md-7 col-xs-12 hasclear" type="text" maxlength = "50">
+     </div>
+    </div>
+    
+    <div class="form-group">
+     <label for="middle-name"
+      class="control-label col-md-2 col-sm-2">Password <span class="required">*</span>
+     </label>
+     <div class="col-md-4 col-sm-4">
+      <input th:value=${resultDatabase?.password} name="password" required
+       placeholder="Password"
+       class="form-control col-md-7 col-xs-12 hasclear" type="password" maxlength = "50">
+       <div id = "insertMessage"></div>
+     </div>
+    </div>
+	
+
+    <div class="ln_solid"></div>
+    <div class="form-group">
+     <div class="col-md-8 col-md-offset-4">
+     <button type="reset" class="btn btn-primary">Reset</button>
+      <button type="submit" class="btn btn-success">Save</button>
+     </div>
+    </div>
+
+   </form>
+  </div>
+ </div>
+</div>

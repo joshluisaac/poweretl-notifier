@@ -1,0 +1,187 @@
+
+<div th:fragment="dcconfigAdd" class="col-md-6 col-xs-12">
+ <div class="x_panel">
+  <div class="x_title">
+   <h2>
+    Configuration - Add <small></small>
+   </h2>
+   <ul class="nav navbar-right panel_toolbox">
+    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+    <li class="dropdown"><a href="#" class="dropdown-toggle"
+     data-toggle="dropdown" role="button" aria-expanded="false"><i
+      class="fa fa-wrench"></i></a>
+     <ul class="dropdown-menu" role="menu">
+      <li><a href="#">Settings 1</a></li>
+      <li><a href="#">Settings 2</a></li>
+     </ul></li>
+    <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+   </ul>
+   <div class="clearfix"></div>
+  </div>
+  <div class="x_content">
+   <br />
+   <form action="/dcconfig" method="post" class="form-horizontal form-label-left">
+   <input type="hidden" th:value=${dcconfigSelectedList?.id} name="id" > 
+   
+   
+   	<div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">
+      Delete</label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <div class="">
+       <label> <input th:checked=${dcconfigSelectedList?.disable} name="disable" type="checkbox" class="js-switch" />
+       </label>
+      </div>
+      </div>
+      </div>
+      
+     <div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">
+      Table Name <span class="required">*</span></label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <input th:value=${dcconfigParent.destinationTable} readonly="readonly" name="parentTableName" type="text" class="form-control"  required="required">
+     </div>
+    </div>
+   
+       <div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">
+      Parent Id <span class="required">*</span></label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <input th:value=${dcconfigParent.id} readonly="readonly" name="global_config_id" type="text" class="form-control"  required="required">
+     </div>
+    </div>
+
+    <div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">Column
+      Name <span class="required">*</span></label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <input th:value=${dcconfigSelectedList?.column_name} name="column_name" type="text" class="form-control hasclear" placeholder="Column Name" required="required">
+     </div>
+    </div>
+    
+    <div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">Remark <span class="required">*</span></label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <input th:value=${dcconfigSelectedList?.remark} name="remark" type="text" class="form-control hasclear" placeholder="Remark" required="required">
+     </div>
+    </div>
+
+    <div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">Column
+      Default Value <span class="required">*</span></label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <input th:value=${dcconfigSelectedList?.column_default_value} name="column_default_value" type="text" class="hasclear form-control"
+       placeholder="Column Default Value" required="required">
+     </div>
+    </div>
+
+    <div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">Column
+      Start Position <span class="required">*</span></label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <input th:value=${dcconfigSelectedList?.column_start_position}  name="column_start_position" type="number" class="form-control"
+       placeholder="Enter Start Position" required="required">
+     </div>
+    </div>
+
+
+    <div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">Column
+      End Position <span class="required">*</span></label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <input th:value=${dcconfigSelectedList?.column_end_position} name="column_end_position" type="number" class="form-control"
+       placeholder="Enter End Position" required="required">
+     </div>
+    </div>
+
+
+    <div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">Column
+      Data Handler</label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <select name="column_data_handler" class="select2_single form-control" tabindex="-1" required="required">
+<!--       <option value="" disabled selected>Choose your option</option> -->
+       <option  th:selected="(${dcconfigSelectedList?.column_data_handler} == 1)"  value="1">Long Handler</option>
+       <option th:selected="(${dcconfigSelectedList?.column_data_handler} == 2)"  value="2">String Handler</option>
+       <option th:selected="(${dcconfigSelectedList?.column_data_handler} == 3)"  value="3">Default Date Handler</option>
+       <option th:selected="(${dcconfigSelectedList?.column_data_handler} == 4)"  value="4">Integer Handler</option>
+       <option th:selected="(${dcconfigSelectedList?.column_data_handler} == 5)" value="5">Y/N Boolean Handler</option>
+       <option th:selected="(${dcconfigSelectedList?.column_data_handler} == 6)" value="6">Currency Handler</option>
+       <option th:selected="(${dcconfigSelectedList?.column_data_handler} == 7)" value="6">Pass Through Handler</option>
+
+      </select>
+     </div>
+    </div>
+
+    <div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">Column
+      Properties</label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <div class="">
+       <label> <input th:checked=${dcconfigSelectedList?.column_is_key} name="column_is_key" type="checkbox" class="js-switch" />
+        Column Is Key
+       </label>
+      </div>
+      <div class="">
+       <label> <input th:checked=${dcconfigSelectedList?.column_is_iexternal} name="column_is_iexternal" type="checkbox" class="js-switch" />
+        Column Is External
+       </label>
+      </div>
+      <div class="">
+       <label> <input th:checked="${dcconfigSelectedList?.column_is_optional} or 'checked'" name="column_is_optional" type="checkbox" class="js-switch" />
+        Column Is Optional
+       </label>
+      </div>
+      <div class="">
+       <label> <input th:checked=${dcconfigSelectedList?.column_is_cached} name="column_is_cached" type="checkbox" class="js-switch" />
+        Column Is Cached
+       </label>
+      </div>
+     </div>
+    </div>
+
+
+
+    <div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">Look
+      Up Query<span class="required"></span>
+     </label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <textarea th:text=${dcconfigSelectedList?.lookup_query} name="lookup_query" class="hasclear form-control" rows="3"
+       placeholder="select id from subsidiaries where name = #subsidiary_id#"></textarea>
+     </div>
+       <a href="#"><p style="color:green!important; font-size:10px; padding-left:210px;">validate</p></a>
+    </div>
+
+	<div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">Look Insert Query<span class="required"></span>
+     </label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <textarea th:text=${dcconfigSelectedList?.lookup_query} name="lookup_insert_query" class="hasclear form-control" rows="3"
+       placeholder="INSERT INTO #subsidiary_id# ('','') VALUES ('','')"></textarea>
+     </div>
+     <a href="#"><p style="color:green!important; font-size:10px; padding-left:210px;">validate</p></a>
+    </div>
+    
+    <div class="form-group">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12">Look Insert Key Query<span class="required"></span>
+     </label>
+     <div class="col-md-9 col-sm-9 col-xs-12">
+      <textarea th:text=${dcconfigSelectedList?.lookup_query} name="lookup_insert_key_query" class="hasclear form-control" rows="3"
+       placeholder="select id from subsidiaries where name = #subsidiary_id#"></textarea>
+     </div>
+       <a href="#"><p style="color:green!important; font-size:10px; padding-left:210px;">validate</p></a>
+    </div>
+
+    <div class="ln_solid"></div>
+    <div class="form-group">
+     <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-8">
+      <button type="reset" class="btn btn-primary">Reset</button>
+      <button type="submit" class="btn btn-success">Save</button>
+     </div>
+    </div>
+
+   </form>
+  </div>
+ </div>
+</div>

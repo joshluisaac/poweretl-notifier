@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<p th:text="#{test.welcome}">Welcome to our grocery store!</p> <br /> <br />
+
+<form action="/adminEmailSettings" method="post">
+
+<input th:value=${sessionMap.user.name} name="userName" type="text" readonly="readonly"/> <br /> <br />
+
+<!--  <input th:value=${accessRightList.lists.accessRightsId} name="userName" type="text" /> <br /> <br /> -->
+ <textarea th:text=${accessRightList} name="msg"></textarea> <br /> <br />
+ 
+  <textarea th:text=${session} name="msg"></textarea> <br /> <br />
+ 
+ 
+ <div th:with="firstPer=${accessRightList[0]}">
+<p>
+The name of the first person is <span th:text="${firstPer.accessRightsId}">Julius Caesar</span>.
+</p>
+</div>
+ 
+ 
+ 
+</form>
+
+
+</html>

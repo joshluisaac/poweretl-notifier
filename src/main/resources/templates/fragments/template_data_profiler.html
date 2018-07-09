@@ -1,0 +1,156 @@
+<div th:fragment="fileCheckerFragment" class="col-md-5 col-sm-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                Data Profiler
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                        data-toggle="dropdown" role="button" aria-expanded="false"><i
+                        class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a></li>
+                        <li><a href="#">Settings 2</a></li>
+                    </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br/>
+            <form action="/savedataprofiler" id = "ajaxForm" method="post" data-parsley-validate
+                  class="form-horizontal form-label-left">
+                <input hidden="true" th:value="${DProEditList?.id}" name="id">
+                <div class="form-group">
+                    <label class="control-label col-md-2"
+                           for="name">Name <span class="required">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input th:value="${DProEditList?.name}" name="name" type="text" required="required"
+                               placeholder="what is the profiler name?"
+                               class="form-control col-md-7 col-xs-12 hasclear" maxlength="30">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2"
+                           for="path">File Path <span class="required">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input th:value="${DProEditList?.base_path}" name="base_path" type="text" required="required"
+                               placeholder="what is the file path?"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2"
+                           for="prefix">File Prefix <span class="required">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input th:value="${DProEditList?.prefix}" name="prefix" type="text" required="required"
+                               placeholder="what is the file prefix?"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2"
+                           for="clone-as">Clone As <span class="required">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input th:value="${DProEditList?.cloneAs}" name="cloneAs" type="text" required="required"
+                               placeholder="clone as?"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2"
+                           for="clone-before-unique">Clone Before Unique <span class="required">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input th:checked="${DProEditList?.cloneBeforeUnique}" name="cloneBeforeUnique"
+                               type="checkbox" class="js-switch"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2"
+                           for="clone-file">Clone File <span class="required">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input th:checked="${DProEditList?.cloneFile}" name="cloneFile"
+                               type="checkbox" class="js-switch"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6"
+                           for="unique-key-fields">Unique Key Fields <span class="required">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input th:value="${DProEditList?.uniqueKeyFields}" name="uniqueKeyFields"
+                                  required="required"
+                                  placeholder="columns (separated by commas) used to make a unique key"
+                                  class="form-control hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2"
+                           for="unique-key-index">Unique Key Index <span class="required">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input th:value="${DProEditList?.uniqueKeyIndex}" name="uniqueKeyIndex" type="text" required="required"
+                               placeholder="index of keys for unique keys fields (separated by commas)"
+                                  class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2"
+                           for="generate-hash">Generate Hash <span class="required">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input th:value="${DProEditList?.generateHash}" name="generateHash"
+                               type="checkbox" class="js-switch"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2"
+                           for="regex">Regex
+                    </label>
+                    <div class="col-md-10">
+                        <input th:value="${DProEditList?.regex}" name="regex" type="text"
+                               placeholder="regex"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2"
+                           for="replacement">Replacement
+                    </label>
+                    <div class="col-md-10">
+                        <input th:value="${DProEditList?.replacement}" name="replacement" type="text"
+                               placeholder="replacement"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2"
+                           for="expected-length">Expected Length <span class="required">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input th:value="${DProEditList?.expectedLength}" name="expectedLength" type="text"
+                               placeholder="expected length"
+                               class="form-control col-md-7 col-xs-12 hasclear" min="0" pattern="\d*" required>
+                        <div id = "insertMessage"></div>
+                    </div>
+                </div>
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-7">
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-success ">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

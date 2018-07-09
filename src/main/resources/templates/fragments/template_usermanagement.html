@@ -1,0 +1,132 @@
+<div th:fragment="userManagementFragment" class="col-md-5">
+ <div class="x_panel">
+  <div class="x_title">
+   <h2>
+    Create/Edit User <small></small>
+   </h2>
+   <ul class="nav navbar-right panel_toolbox">
+    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+    <li class="dropdown"><a href="#" class="dropdown-toggle"
+     data-toggle="dropdown" role="button" aria-expanded="false"><i
+      class="fa fa-wrench"></i></a>
+     <ul class="dropdown-menu" role="menu">
+      <li><a href="#">Settings 1</a></li>
+      <li><a href="#">Settings 2</a></li>
+     </ul></li>
+    <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+   </ul>
+   <div class="clearfix"></div>
+  </div>
+  <div class="x_content">
+   <br />
+   <form action="/usermanagement" method="post" id="ajaxForm" data-parsley-validate
+    class="form-horizontal form-label-left">
+    <input hidden="true" th:value="${userEditList?.id}" name="id">
+    <div class="form-group">
+     <label class="control-label col-md-2"
+      for="email">Email <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+     <span th:if="${userEditList?.email}">
+      <input th:value="${userEditList?.email}" readonly name="email" type="email" required="required"
+       placeholder="Email"
+       class="form-control col-md-7 col-xs-12">
+       </span>
+       <span th:unless="${userEditList?.email}">
+       <input th:value="${userEditList?.email}" name="email" type="email" required="required"
+       placeholder="Email"
+       class="form-control col-md-7 col-xs-12 hasclear">
+       </span>
+     </div>
+    </div>
+    <div class="form-group">
+     <label class="control-label col-md-2"
+      for="first-name">First Name <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+      <input th:value="${userEditList?.firstName}" name="firstName" type="text" required="required" placeholder="First Name"
+       class="form-control col-md-7 col-xs-12 hasclear">
+     </div>
+    </div>
+    <div class="form-group">
+     <label for="last-name"
+      class="control-label col-md-2">Last Name <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+      <input th:value="${userEditList?.lastName}" name="lastName" type = "text" required="required"
+       placeholder="Last Name"
+       class="form-control col-md-7 col-xs-12 hasclear">
+     </div>
+    </div>
+
+    <div class="form-group">
+     <label class="control-label col-md-2"
+      for="password">Password <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+      <input th:value="${userEditList?.password}" id="password" name="password" type="password" required="required" placeholder="Password"
+       class="form-control col-md-7 col-xs-12 hasclear" pattern=".{8,}">
+       <div class="help-block">Minimum of 8 characters</div>
+     </div>
+    </div>
+        <div class="form-group">
+     <label class="control-label col-md-2"
+      for="password2">Confirm Password <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+      <input th:value="${userEditList?.password}" id="password2" name="password2" type="password" required="required" placeholder="Confirm Password"
+       class="form-control col-md-7 col-xs-12 hasclear" pattern=".{8,}" data-parsley-equalto="#password">
+     </div>
+    </div>
+    
+        <div class="form-group">
+     <label class="control-label col-md-2"
+      for="enabled">Enabled <span class="required">*</span>
+     </label>
+<div class="col-md-6 col-sm-6 col-xs-12">
+      <input th:checked="${userEditList?.enabled}" name="enabled"
+       type="checkbox" class="js-switch" />
+     </div>
+    </div>
+            <div class="form-group">
+     <label class="control-label col-md-2"
+      for="role">Role <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+      <select name="role" required="required"
+       class="select2_single form-control" tabindex="-1">
+       <option disabled selected>Please Select</option>
+       <option th:selected="${userEditList?.role == 'ADMIN'}" value="ADMIN">Admin</option>
+       <option th:selected="${userEditList?.role == 'USER'}" value="USER">User</option>
+      </select>
+     </div>
+         </div>
+                 <div class="form-group">
+     <label class="control-label col-md-2"
+      for="tenant-id">Tenant ID <span class="required">*</span>
+     </label>
+     <div class="col-md-10">
+      <select name="tenant_id" th:selected="${user?.tenant_id}" required="required"
+       class="select2_single form-control" tabindex="-1">
+       <option disabled selected>Please Select</option>
+       <option th:selected="${userEditList?.tenant_id==1}" value="1">MAHB</option>
+       <option th:selected="${userEditList?.tenant_id==2}" value="2">YYC</option>
+       <option th:selected="${userEditList?.tenant_id==3}" value="3">CCO</option>
+       <option th:selected="${userEditList?.tenant_id==4}" value="4">Pelita</option>
+      </select>
+      <div id = "insertMessage"></div>
+     </div>
+    </div>
+
+    <div class="ln_solid"></div>
+    <div class="form-group">
+     <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-7">
+     <button type="reset" class="btn btn-primary">Reset</button>
+     <button type="submit" class="btn btn-success ">Save</button>
+     </div>
+    </div>
+   </form>
+
+  </div>
+ </div>
+</div>

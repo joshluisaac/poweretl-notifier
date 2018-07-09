@@ -1,6 +1,6 @@
 package com.powerapps.monitor.tasks;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,6 +10,10 @@ public class Scheduler {
     /*Required variables*/
 
     /*The constructor for the class to inject the necessary services*/
-    @Autowired
-    public Scheduler(){}
+
+    @Scheduled(fixedDelay = 120000)
+    public void runDummy() {
+        System.out.println(
+                "Fixed delay task every 2 minutes");
+    }
 }

@@ -26,3 +26,6 @@ target
 resources_
 *.iml
 /bin/
+.classpath
+.project
+.settings/

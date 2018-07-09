@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/template_form_header :: header"></head>
+
+<body class="nav-md">
+ <div class="container body">
+  <div class="main_container">
+   <div th:replace="fragments/template_menu :: menu"></div>
+
+   <!-- top navigation -->
+   <div th:replace="fragments/template_topnav :: topnav"></div>
+   <!-- /top navigation -->
+
+   <!-- page content -->
+   <div class="right_col" role="main">
+    <div class="">
+     <div class="page-title">
+      <div class="title_left">
+       <h3>Service Engine Settings</h3>
+      </div>
+     </div>
+     <div class="clearfix"></div>
+     <div class="row">
+<!--       <div th:replace="fragments/template_dcconfig_add :: dcconfigAdd"></div> -->
+      <div th:replace="fragments/template_se_settings :: serviceEngineSettingsFragment"></div>
+     </div>
+<!--      <div th:replace="fragments/template_dcconfig_table :: dcconfigTable"></div> -->
+    </div>
+   </div>
+   <!-- /page content -->
+
+   <!-- footer content -->
+   <footer th:replace="fragments/template_footer :: footer"> </footer>
+   <!-- /footer content -->
+  </div>
+ </div>
+
+  <div th:replace="fragments/template_allscripts :: scripts"></div>
+
+</body>
+</html>

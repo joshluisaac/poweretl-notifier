@@ -27,12 +27,35 @@ public class IndexController {
   @RequestMapping(value = "/seerrorreport", method = RequestMethod.GET)
   //@GetMapping(value = "/seerrorrepor")
   public String serviceEngineErrorLogReport(Model model) {
-    final File logFile = new File("/home/joshua/Desktop/HLBB/eCollect_batches_notifications/ServerError.log");
+    final File logFile = new File("./eCollect_batches_notifications/ServerError.log");
     model.addAttribute("errorReport", errorService.execute(logFile));
      return "dash-errorlogreport";
   }
   
+  @RequestMapping(value = "/sesettings", method = RequestMethod.GET)
+  public String serviceEngineSettings(Model model) {
+    return "serviceEngineSettings";
+  }
   
+  @RequestMapping(value = "/batchManager", method = RequestMethod.GET)
+  public String batchManagerSettings(Model model) {
+    return "batchManagerSettings";
+  }
+  
+  @RequestMapping(value = "/adminSftp", method = RequestMethod.GET)
+  public String dataConnectorSettings(Model model) {
+    return "dataConnectorSettings";
+  }
+  
+  @RequestMapping(value = "/fixedInterval", method = RequestMethod.GET)
+  public String fixedIntervalSettings(Model model) {
+    return "fixedIntervalSettings";
+  }
+  
+  @RequestMapping(value = "/emailScheduler", method = RequestMethod.GET)
+  public String emailScheduler(Model model) {
+    return "emailSchedulerSettings";
+  }
   
   @RequestMapping("/email")
   public String email() {

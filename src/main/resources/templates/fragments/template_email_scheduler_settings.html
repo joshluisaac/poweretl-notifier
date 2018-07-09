@@ -3,7 +3,7 @@
  <div class="x_panel">
   <div class="x_title">
    <h2>
-    Email Scheduler <small></small>
+    Email Scheduler Configuration <small></small>
    </h2>
    <ul class="nav navbar-right panel_toolbox">
     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -25,28 +25,93 @@
     class="form-horizontal form-label-left">
 
 <div class="form-group">
-     <label class="control-label col-md-2 col-sm-2 col-xs-6">Every </label>
+     <label class="control-label col-md-2 col-sm-2 col-xs-6"
+      for="email-port">Year <span class="required">*</span>
+     </label>
+     <div class="col-md-4 col-sm-4 col-xs-6">
+      <input th:value=${result?.port} name="year" type="text"
+       required="required" placeholder="Year"
+       class="form-control col-md-7 col-xs-12 validate hasclear" min="0" maxlength="4" pattern="\d*">
+     </div>
+    </div>
+    
+    <div class="form-group">
+     <label class="control-label col-md-2 col-sm-2 col-xs-6">Month <span class="required">*</span></label>
      <div class="col-md-6 col-sm-6 col-xs-12">
-      <select name="column_delimiter" required="required"
+      <select name="month" required="required"
        class="select2_single form-control" tabindex="-1">
 <!--        <option></option> -->
-       <option th:selected="(${dcconfigSelectedList?.delimiter} == 1)" value="1">Second(s)</option>
-       <option th:selected="(${dcconfigSelectedList?.delimiter} == 2)" value="2">Minute(s)</option>
-       <option th:selected="(${dcconfigSelectedList?.delimiter} == 3)" value="3">Hour(s)</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 1)" value="1">January</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 2)" value="2">February</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 3)" value="3">March</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 4)" value="4">April</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 5)" value="5">May</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 6)" value="6">June</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 7)" value="7">July</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 8)" value="8">August</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 9)" value="9">September</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 10)" value="10">October</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 11)" value="11">November</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 12)" value="12">December</option>
       </select>
      </div>
     </div>
 
+
+<div class="form-group">
+     <label class="control-label col-md-2 col-sm-2 col-xs-6">Day <span class="required">*</span></label>
+     <div class="col-md-6 col-sm-6 col-xs-12">
+      <select name="day" required="required"
+       class="select2_single form-control" tabindex="-1">
+<!--        <option></option> -->
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 1)" value="1">Monday</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 2)" value="2">Tuesday</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 3)" value="3">Wednesday</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 4)" value="4">Thursday</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 5)" value="5">Friday</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 6)" value="6">Saturday</option>
+       <option th:selected="(${dcconfigSelectedList?.delimiter} == 7)" value="7">Sunday</option>
+      </select>
+     </div>
+    </div>
+    
     <div class="form-group">
      <label class="control-label col-md-2 col-sm-2 col-xs-6"
-      for="email-port">Time <span class="required">*</span>
+      for="email-port">Hour(s) <span class="required">*</span>
      </label>
      <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.port} name="time" type="text"
-       required="required" placeholder="Time"
+      <input th:value=${result?.port} name="hour" type="text"
+       required="required" placeholder="Hour"
        class="form-control col-md-7 col-xs-12 validate hasclear" min="0" maxlength="4" pattern="\d*">
      </div>
     </div>
+    
+    <div class="form-group">
+     <label class="control-label col-md-2 col-sm-2 col-xs-6"
+      for="email-port">Minute(s) <span class="required">*</span>
+     </label>
+     <div class="col-md-4 col-sm-4 col-xs-6">
+      <input th:value=${result?.port} name="minute" type="text"
+       required="required" placeholder="Minute"
+       class="form-control col-md-7 col-xs-12 validate hasclear" min="0" maxlength="4" pattern="\d*">
+     </div>
+    </div>
+
+<div class="form-group">
+     <label class="control-label col-md-2 col-sm-2 col-xs-6"
+      for="email-port">Second(s) <span class="required">*</span>
+     </label>
+     <div class="col-md-4 col-sm-4 col-xs-6">
+      <input th:value=${result?.port} name="second" type="text"
+       required="required" placeholder="Second"
+       class="form-control col-md-7 col-xs-12 validate hasclear" min="0" maxlength="4" pattern="\d*">
+     </div>
+    </div>
+
+
+
+
+    
 
  
 

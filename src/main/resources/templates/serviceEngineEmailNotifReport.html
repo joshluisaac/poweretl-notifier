@@ -16,20 +16,14 @@
     <div class="">
      <div class="page-title">
       <div class="title_left">
-       <h3 th:text="${pageTitle}">DataConnector</h3>
+       <h3>Email Notification Report - Service Engine</h3>
       </div>
      </div>
      <div class="clearfix"></div>
      <div class="row">
-      
-      <div th:replace="fragments/template_dcconfig_prop :: dcconfigProp"></div>
+      <div th:replace="fragments/template_se_email_notif_current_report :: serviceEngineEmailNotifReportCurrentFragment"></div>
+      <div th:replace="fragments/template_se_email_notif_history_report :: serviceEngineEmailNotifReportHistoryFragment"></div>
      </div>
-     <!--      <div th:replace="fragments/template_data_visualizer :: dataVisualizer"></div> -->
-     
-     <div th:if="${dcconfigList != null}" >
-     <div  th:replace="fragments/template_dcparent_config :: dcParentSettings"></div>
-     </div>
-     
     </div>
    </div>
    <!-- /page content -->
@@ -41,6 +35,5 @@
  </div>
 
   <div th:replace="fragments/template_allscripts :: scripts"></div>
-
 </body>
 </html>

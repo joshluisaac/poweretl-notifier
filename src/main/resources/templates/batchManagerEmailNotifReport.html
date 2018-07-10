@@ -16,15 +16,14 @@
     <div class="">
      <div class="page-title">
       <div class="title_left">
-       <h3 th:text="${pageTitle}">Data Visualizer</h3>
+       <h3>Email Notification Report - Batch Manager</h3>
       </div>
      </div>
      <div class="clearfix"></div>
      <div class="row">
-<!--       <div th:replace="fragments/template_dcconfig_add :: dcconfigAdd"></div> -->
-      <div th:replace="fragments/template_dsv_viewer :: dsvFragment"></div>
+      <div th:replace="fragments/template_bm_email_notif_current_report :: batchManagerEmailNotifReportCurrentFragment"></div>
+      <div th:replace="fragments/template_bm_email_notif_history_report :: batchManagerEmailNotifReportHistoryFragment"></div>
      </div>
-<!--      <div th:replace="fragments/template_dcconfig_table :: dcconfigTable"></div> -->
     </div>
    </div>
    <!-- /page content -->
@@ -36,6 +35,5 @@
  </div>
 
   <div th:replace="fragments/template_allscripts :: scripts"></div>
-
 </body>
 </html>

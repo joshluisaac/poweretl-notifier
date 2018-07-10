@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class SchedulerController {
 
 
-	  @RequestMapping(value = "/fixedInterval", method = RequestMethod.GET)
+	  @RequestMapping(value = "/fixedinterval", method = RequestMethod.GET)
 	  public String fixedIntervalSettings(Model model) {
 	    return "fixedIntervalSettings";
 	  }
 	  
-	  @RequestMapping(value = "/emailScheduler", method = RequestMethod.GET)
+	  @RequestMapping(value = "/emailscheduler", method = RequestMethod.GET)
 	  public String emailScheduler(Model model) {
 	    return "emailSchedulerSettings";
 	  }

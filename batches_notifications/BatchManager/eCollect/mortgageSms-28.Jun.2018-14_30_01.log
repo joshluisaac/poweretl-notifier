@@ -1,0 +1,8 @@
+2018-06-28 14:30:01,691 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-28 14:30:01,828 DEBUG --START--
+2018-06-28 14:30:01,833 INFO  Starting - Batch - mortgageSms from /bcrp/prd/application/BatchManager/bin/mortgageSms.batch
+2018-06-28 14:30:01,838 INFO  Execute - Batch - mortgageSms
+2018-06-28 14:31:59,978 INFO  Completed - Batch - mortgageSms from /bcrp/prd/application/BatchManager/bin/mortgageSms.batch
+2018-06-28 14:31:59,978 INFO  Finished - Batch - mortgageSms
+2018-06-28 14:31:59,978 DEBUG --DONE--

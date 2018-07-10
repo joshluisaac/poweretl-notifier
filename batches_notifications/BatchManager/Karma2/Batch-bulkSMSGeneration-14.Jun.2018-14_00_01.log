@@ -1,0 +1,12 @@
+2018-06-14 14:00:02,125 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765
+LOGIN SUCCESSFUL
+2018-06-14 14:00:02,283 DEBUG --START--
+2018-06-14 14:00:02,288 INFO  Starting - Batch - bulkSmsGeneration from /carma/application/BatchManager/bin/bulkSMSGeneration.batch
+2018-06-14 14:00:02,295 INFO  Execute - Batch - bulkSmsGeneration
+2018-06-14 14:12:38,544 INFO  Completed - Batch - bulkSmsGeneration from /carma/application/BatchManager/bin/bulkSMSGeneration.batch
+2018-06-14 14:12:38,545 INFO  Finished - Batch - bulkSmsGeneration
+2018-06-14 14:12:38,545 INFO  Starting - Batch - bulkSmsExtraction from /carma/application/BatchManager/bin/bulkSMSGeneration.batch
+2018-06-14 14:12:38,546 INFO  Execute - Batch - bulkSmsExtraction
+2018-06-14 14:17:12,382 INFO  Completed - Batch - bulkSmsExtraction from /carma/application/BatchManager/bin/bulkSMSGeneration.batch
+2018-06-14 14:17:12,382 INFO  Finished - Batch - bulkSmsExtraction
+2018-06-14 14:17:12,382 DEBUG --DONE--

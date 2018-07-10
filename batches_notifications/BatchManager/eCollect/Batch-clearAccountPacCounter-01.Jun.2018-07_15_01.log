@@ -1,0 +1,8 @@
+2018-06-01 07:15:01,755 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-01 07:15:05,525 DEBUG --START--
+2018-06-01 07:15:05,529 INFO  Starting - Batch - clearAccountPacCounter from /bcrp/prd/application/BatchManager/bin/clearAccountPacCounter.batch
+2018-06-01 07:15:05,534 INFO  Execute - Batch - clearAccountPacCounter
+2018-06-01 07:15:06,000 INFO  Completed - Batch - clearAccountPacCounter from /bcrp/prd/application/BatchManager/bin/clearAccountPacCounter.batch
+2018-06-01 07:15:06,000 INFO  Finished - Batch - clearAccountPacCounter
+2018-06-01 07:15:06,001 DEBUG --DONE--

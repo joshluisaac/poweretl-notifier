@@ -64,14 +64,14 @@ public class HomeController {
   @RequestMapping(value = "/bmerrorreportJSON", method = RequestMethod.GET)
   @ResponseBody
   public Object batchManagerErrorLogReportJSON(Model model) {
-    List<LogSummary> summary = bmService.processLogSummary(bmService.getLogFiles(new File(bmRootPath)));
+    List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(bmRootPath)));
     model.addAttribute("summaryList", summary);
     return summary;
   }
 
   @RequestMapping(value = "/bmerrorreport", method = RequestMethod.GET)
    public Object batchManagerErrorLogReport(Model model) {
-    List<LogSummary> summary = bmService.processLogSummary(bmService.getLogFiles(new File(bmRootPath)));
+    List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(bmRootPath)));
     model.addAttribute("summaryList", summary);
     return "batchManager-report";
   }

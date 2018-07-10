@@ -1,0 +1,8 @@
+2018-06-08 21:30:01,560 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-08 21:30:01,773 DEBUG --START--
+2018-06-08 21:30:01,778 INFO  Starting - Batch - deleteClosedTransactions from /bcrp/prd/application/BatchManager/bin/deleteClosedTransactions.batch
+2018-06-08 21:30:01,783 INFO  Execute - Batch - deleteClosedTransactions
+2018-06-08 21:49:27,726 INFO  Completed - Batch - deleteClosedTransactions from /bcrp/prd/application/BatchManager/bin/deleteClosedTransactions.batch
+2018-06-08 21:49:27,727 INFO  Finished - Batch - deleteClosedTransactions
+2018-06-08 21:49:27,727 DEBUG --DONE--

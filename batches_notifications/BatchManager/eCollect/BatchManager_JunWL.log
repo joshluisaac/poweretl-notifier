@@ -1,0 +1,28 @@
+2018-06-01 16:43:54,470 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-01 16:43:54,705 DEBUG --START--
+2018-06-01 16:43:54,710 INFO  Starting - Batch - unAssignPaidOffAccountsSinceLastAssignment from /bcrp/prd/application/BatchManager/bin/1stOfMonthWlg_5.batch
+2018-06-01 16:43:54,716 INFO  Execute - Batch - unAssignPaidOffAccountsSinceLastAssignment
+2018-06-01 16:46:04,174 INFO  Completed - Batch - unAssignPaidOffAccountsSinceLastAssignment from /bcrp/prd/application/BatchManager/bin/1stOfMonthWlg_5.batch
+2018-06-01 16:46:04,174 INFO  Finished - Batch - unAssignPaidOffAccountsSinceLastAssignment
+2018-06-01 16:46:04,174 INFO  Starting - Batch - refreshCustomerIncomeBracket from /bcrp/prd/application/BatchManager/bin/1stOfMonthWlg_5.batch
+2018-06-01 16:46:04,176 INFO  Execute - Batch - refreshCustomerIncomeBracket
+2018-06-01 16:54:26,031 INFO  Completed - Batch - refreshCustomerIncomeBracket from /bcrp/prd/application/BatchManager/bin/1stOfMonthWlg_5.batch
+2018-06-01 16:54:26,031 INFO  Finished - Batch - refreshCustomerIncomeBracket
+2018-06-01 16:54:26,031 INFO  Starting - Batch - updateBrokenPromiseRecord from /bcrp/prd/application/BatchManager/bin/1stOfMonthWlg_5.batch
+2018-06-01 16:54:26,033 INFO  Execute - Batch - updateBrokenPromiseRecord
+2018-06-01 16:58:19,908 INFO  Completed - Batch - updateBrokenPromiseRecord from /bcrp/prd/application/BatchManager/bin/1stOfMonthWlg_5.batch
+2018-06-01 16:58:19,908 INFO  Finished - Batch - updateBrokenPromiseRecord
+2018-06-01 16:58:19,908 INFO  Starting - Batch - generateTreeHP from /bcrp/prd/application/BatchManager/bin/1stOfMonthWlg_5.batch
+2018-06-01 16:58:19,910 INFO  Execute - Batch - generateTreeHP
+2018-06-01 17:10:15,647 INFO  Completed - Batch - generateTreeHP from /bcrp/prd/application/BatchManager/bin/1stOfMonthWlg_5.batch
+2018-06-01 17:10:15,647 INFO  Finished - Batch - generateTreeHP
+2018-06-01 17:10:15,648 INFO  Starting - Batch - generateTreeUPL from /bcrp/prd/application/BatchManager/bin/1stOfMonthWlg_5.batch
+2018-06-01 17:10:15,649 INFO  Execute - Batch - generateTreeUPL
+2018-06-01 17:12:58,713 INFO  Completed - Batch - generateTreeUPL from /bcrp/prd/application/BatchManager/bin/1stOfMonthWlg_5.batch
+2018-06-01 17:12:58,713 INFO  Finished - Batch - generateTreeUPL
+2018-06-01 17:12:58,713 INFO  Starting - Batch - executeOdWlg from /bcrp/prd/application/BatchManager/bin/1stOfMonthWlg_5.batch
+2018-06-01 17:12:58,715 INFO  Execute - Batch - executeOdWlg
+2018-06-01 17:35:09,451 INFO  Completed - Batch - executeOdWlg from /bcrp/prd/application/BatchManager/bin/1stOfMonthWlg_5.batch
+2018-06-01 17:35:09,452 INFO  Finished - Batch - executeOdWlg
+2018-06-01 17:35:09,452 DEBUG --DONE--

@@ -1,0 +1,24 @@
+2018-06-02 08:39:31,413 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-02 08:39:31,712 DEBUG --START--
+2018-06-02 08:39:31,718 INFO  Starting - Batch - scoringMiaTrendAnalysisMg from /bcrp/prd/application/BatchManager/bin/MGScoring.batch
+2018-06-02 08:39:31,723 INFO  Execute - Batch - scoringMiaTrendAnalysisMg
+2018-06-02 08:42:47,238 INFO  Completed - Batch - scoringMiaTrendAnalysisMg from /bcrp/prd/application/BatchManager/bin/MGScoring.batch
+2018-06-02 08:42:47,238 INFO  Finished - Batch - scoringMiaTrendAnalysisMg
+2018-06-02 08:42:47,238 INFO  Starting - Rules - 861 from /bcrp/prd/application/BatchManager/bin/MGScoring.batch
+2018-06-02 08:42:47,249 INFO  Execute - Rules - 861
+2018-06-02 09:46:37,152 INFO  Completed - Rules - 861 from /bcrp/prd/application/BatchManager/bin/MGScoring.batch
+2018-06-02 09:46:37,153 INFO  Finished - Rules - 861
+2018-06-02 09:46:37,153 INFO  Starting - Batch - deleteOldScoring from /bcrp/prd/application/BatchManager/bin/MGScoring.batch
+2018-06-02 09:46:37,154 INFO  Execute - Batch - deleteOldScoring
+2018-06-02 09:46:57,635 INFO  Completed - Batch - deleteOldScoring from /bcrp/prd/application/BatchManager/bin/MGScoring.batch
+2018-06-02 09:46:57,635 INFO  Finished - Batch - deleteOldScoring
+2018-06-02 09:46:57,635 INFO  Starting - Batch - getScoringDetails from /bcrp/prd/application/BatchManager/bin/MGScoring.batch
+2018-06-02 09:46:57,637 INFO  Execute - Batch - getScoringDetails
+2018-06-02 09:55:47,758 INFO  Completed - Batch - getScoringDetails from /bcrp/prd/application/BatchManager/bin/MGScoring.batch
+2018-06-02 09:55:47,758 INFO  Finished - Batch - getScoringDetails
+2018-06-02 09:55:47,758 INFO  Starting - Batch - deleteAllLegalWorkListResults from /bcrp/prd/application/BatchManager/bin/MGScoring.batch
+2018-06-02 09:55:47,760 INFO  Execute - Batch - deleteAllLegalWorkListResults
+2018-06-02 09:56:00,489 INFO  Completed - Batch - deleteAllLegalWorkListResults from /bcrp/prd/application/BatchManager/bin/MGScoring.batch
+2018-06-02 09:56:00,490 INFO  Finished - Batch - deleteAllLegalWorkListResults
+2018-06-02 09:56:00,490 DEBUG --DONE--

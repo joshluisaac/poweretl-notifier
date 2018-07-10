@@ -1,0 +1,34 @@
+2018-06-14 07:58:09,096 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765
+LOGIN SUCCESSFUL
+2018-06-14 07:58:09,294 DEBUG --START--
+2018-06-14 07:58:09,300 INFO  Starting - Batch - processHostData from /carma/application/BatchManager/bin/Daily.batch
+2018-06-14 07:58:09,306 INFO  Execute - Batch - processHostData
+2018-06-14 08:17:41,595 INFO  Completed - Batch - processHostData from /carma/application/BatchManager/bin/Daily.batch
+2018-06-14 08:17:41,596 INFO  Finished - Batch - processHostData
+2018-06-14 08:17:41,596 INFO  Starting - Batch - appPaidEvaluationProcess from /carma/application/BatchManager/bin/Daily.batch
+2018-06-14 08:17:41,597 INFO  Execute - Batch - appPaidEvaluationProcess
+2018-06-14 08:18:14,266 INFO  Completed - Batch - appPaidEvaluationProcess from /carma/application/BatchManager/bin/Daily.batch
+2018-06-14 08:18:14,266 INFO  Finished - Batch - appPaidEvaluationProcess
+2018-06-14 08:18:14,266 INFO  Starting - Batch - ctiExtraction from /carma/application/BatchManager/bin/Daily.batch
+2018-06-14 08:18:14,267 INFO  Execute - Batch - ctiExtraction
+2018-06-14 08:21:49,567 INFO  Completed - Batch - ctiExtraction from /carma/application/BatchManager/bin/Daily.batch
+2018-06-14 08:21:49,568 INFO  Finished - Batch - ctiExtraction
+2018-06-14 08:21:49,568 INFO  Starting - Batch - promiseEvaluation from /carma/application/BatchManager/bin/Daily.batch
+2018-06-14 08:21:49,568 INFO  Execute - Batch - promiseEvaluation
+2018-06-14 08:23:51,400 INFO  Completed - Batch - promiseEvaluation from /carma/application/BatchManager/bin/Daily.batch
+2018-06-14 08:23:51,400 INFO  Finished - Batch - promiseEvaluation
+2018-06-14 08:23:51,400 INFO  Starting - Batch - appDailyProcess from /carma/application/BatchManager/bin/Daily.batch
+2018-06-14 08:23:51,401 INFO  Execute - Batch - appDailyProcess
+2018-06-14 08:27:03,910 INFO  Completed - Batch - appDailyProcess from /carma/application/BatchManager/bin/Daily.batch
+2018-06-14 08:27:03,910 INFO  Finished - Batch - appDailyProcess
+2018-06-14 08:27:03,910 INFO  Starting - Batch - updateSettlementProposal from /carma/application/BatchManager/bin/Daily.batch
+2018-06-14 08:27:03,911 INFO  Execute - Batch - updateSettlementProposal
+2018-06-14 08:27:04,828 ERROR Batch failed with return code: SPAWNED_THREAD_ERROR
+2018-06-14 08:27:04,828 INFO  Completed - Batch - updateSettlementProposal from /carma/application/BatchManager/bin/Daily.batch
+2018-06-14 08:27:04,828 ERROR Error - Batch - updateSettlementProposal
+com.profitera.descriptor.business.ServiceException
+	at com.profitera.client.RemoteProgressThread.execute(RemoteProgressThread.java:107)
+	at com.profitera.client.ProgressThread.doExecute(ProgressThread.java:54)
+	at com.profitera.client.ProgressThread.run(ProgressThread.java:45)
+	at com.profitera.batch.main.BatchExe.executeBatch(BatchExe.java:170)
+	at com.profitera.batch.main.BatchExe.main(BatchExe.java:245)

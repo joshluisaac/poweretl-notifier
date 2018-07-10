@@ -1,0 +1,68 @@
+2018-06-21 06:19:01,855 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-21 06:19:03,371 DEBUG --START--
+2018-06-21 06:19:03,376 INFO  Starting - Batch - processHostData from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:19:03,382 INFO  Execute - Batch - processHostData
+2018-06-21 06:48:14,420 INFO  Completed - Batch - processHostData from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:48:14,421 INFO  Finished - Batch - processHostData
+2018-06-21 06:48:14,421 INFO  Starting - Batch - dailyWorkListTabsUpdate from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:48:14,422 INFO  Execute - Batch - dailyWorkListTabsUpdate
+2018-06-21 06:48:58,784 INFO  Completed - Batch - dailyWorkListTabsUpdate from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:48:58,784 INFO  Finished - Batch - dailyWorkListTabsUpdate
+2018-06-21 06:48:58,784 INFO  Starting - Batch - promiseEvaluation from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:48:58,785 INFO  Execute - Batch - promiseEvaluation
+2018-06-21 06:54:31,503 INFO  Completed - Batch - promiseEvaluation from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:54:31,503 INFO  Finished - Batch - promiseEvaluation
+2018-06-21 06:54:31,504 INFO  Starting - Batch - refreshAccountCheck from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:54:31,505 INFO  Execute - Batch - refreshAccountCheck
+2018-06-21 06:54:31,530 INFO  Completed - Batch - refreshAccountCheck from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:54:31,530 INFO  Finished - Batch - refreshAccountCheck
+2018-06-21 06:54:31,530 INFO  Starting - Batch - refreshAccountLoanApplication from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:54:31,531 INFO  Execute - Batch - refreshAccountLoanApplication
+2018-06-21 06:55:23,952 INFO  Completed - Batch - refreshAccountLoanApplication from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:55:23,952 INFO  Finished - Batch - refreshAccountLoanApplication
+2018-06-21 06:55:23,952 INFO  Starting - Batch - refreshAccountCollateral from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:55:23,953 INFO  Execute - Batch - refreshAccountCollateral
+2018-06-21 06:57:27,014 INFO  Completed - Batch - refreshAccountCollateral from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:57:27,015 INFO  Finished - Batch - refreshAccountCollateral
+2018-06-21 06:57:27,015 INFO  Starting - Batch - updateAccountLastStandingInstructions from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:57:27,016 INFO  Execute - Batch - updateAccountLastStandingInstructions
+2018-06-21 06:58:00,960 INFO  Completed - Batch - updateAccountLastStandingInstructions from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:00,961 INFO  Finished - Batch - updateAccountLastStandingInstructions
+2018-06-21 06:58:00,961 INFO  Starting - Batch - refreshAccountGuarantor from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:00,962 INFO  Execute - Batch - refreshAccountGuarantor
+2018-06-21 06:58:10,018 INFO  Completed - Batch - refreshAccountGuarantor from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:10,018 INFO  Finished - Batch - refreshAccountGuarantor
+2018-06-21 06:58:10,019 INFO  Starting - Batch - DAILY_AGENCY_PAYMENT_DELETE_BATCH from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:10,020 INFO  Execute - Batch - DAILY_AGENCY_PAYMENT_DELETE_BATCH
+2018-06-21 06:58:10,091 INFO  Completed - Batch - DAILY_AGENCY_PAYMENT_DELETE_BATCH from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:10,091 INFO  Finished - Batch - DAILY_AGENCY_PAYMENT_DELETE_BATCH
+2018-06-21 06:58:10,091 INFO  Starting - Batch - DAILY_AGENCY_PAYMENT_INSERT_BATCH from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:10,092 INFO  Execute - Batch - DAILY_AGENCY_PAYMENT_INSERT_BATCH
+2018-06-21 06:58:27,514 INFO  Completed - Batch - DAILY_AGENCY_PAYMENT_INSERT_BATCH from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:27,514 INFO  Finished - Batch - DAILY_AGENCY_PAYMENT_INSERT_BATCH
+2018-06-21 06:58:27,514 INFO  Starting - Batch - AUTOMATICALLY_UNSUCCESSFUL_EARMARK from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:27,516 INFO  Execute - Batch - AUTOMATICALLY_UNSUCCESSFUL_EARMARK
+2018-06-21 06:58:27,543 INFO  Completed - Batch - AUTOMATICALLY_UNSUCCESSFUL_EARMARK from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:27,543 INFO  Finished - Batch - AUTOMATICALLY_UNSUCCESSFUL_EARMARK
+2018-06-21 06:58:27,543 INFO  Starting - Batch - RnRCurrScheActualRemainingAmtUpdate from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:27,544 INFO  Execute - Batch - RnRCurrScheActualRemainingAmtUpdate
+2018-06-21 06:58:29,053 INFO  Completed - Batch - RnRCurrScheActualRemainingAmtUpdate from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:29,053 INFO  Finished - Batch - RnRCurrScheActualRemainingAmtUpdate
+2018-06-21 06:58:29,053 INFO  Starting - Batch - AUTOMATICALLY_UNSUCCESSFUL_VISITATION from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:29,054 INFO  Execute - Batch - AUTOMATICALLY_UNSUCCESSFUL_VISITATION
+2018-06-21 06:58:29,122 INFO  Completed - Batch - AUTOMATICALLY_UNSUCCESSFUL_VISITATION from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:29,122 INFO  Finished - Batch - AUTOMATICALLY_UNSUCCESSFUL_VISITATION
+2018-06-21 06:58:29,122 INFO  Starting - Batch - ledgerDaily from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:58:29,123 INFO  Execute - Batch - ledgerDaily
+2018-06-21 06:59:33,288 INFO  Completed - Batch - ledgerDaily from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:59:33,288 INFO  Finished - Batch - ledgerDaily
+2018-06-21 06:59:33,288 INFO  Starting - Batch - appAgencyDailyProcess from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 06:59:33,289 INFO  Execute - Batch - appAgencyDailyProcess
+2018-06-21 07:01:48,621 INFO  Completed - Batch - appAgencyDailyProcess from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 07:01:48,621 INFO  Finished - Batch - appAgencyDailyProcess
+2018-06-21 07:01:48,621 INFO  Starting - Batch - poolCallingPriority from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 07:01:48,623 INFO  Execute - Batch - poolCallingPriority
+2018-06-21 07:01:52,583 INFO  Completed - Batch - poolCallingPriority from /bcrp/prd/application/BatchManager/bin/Daily.batch
+2018-06-21 07:01:52,583 INFO  Finished - Batch - poolCallingPriority
+2018-06-21 07:01:52,584 DEBUG --DONE--

@@ -1,0 +1,16 @@
+2018-06-29 19:00:02,035 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-29 19:00:02,183 DEBUG --START--
+2018-06-29 19:00:02,188 INFO  Starting - Batch - generateTreeBulkLetter from /bcrp/prd/application/BatchManager/bin/AdhocBulkLetter.batch
+2018-06-29 19:00:02,193 INFO  Execute - Batch - generateTreeBulkLetter
+2018-06-29 19:22:10,769 INFO  Completed - Batch - generateTreeBulkLetter from /bcrp/prd/application/BatchManager/bin/AdhocBulkLetter.batch
+2018-06-29 19:22:10,770 INFO  Finished - Batch - generateTreeBulkLetter
+2018-06-29 19:22:10,770 INFO  Starting - Batch - generateBulkLettertreatmentviaTreeGeneration from /bcrp/prd/application/BatchManager/bin/AdhocBulkLetter.batch
+2018-06-29 19:22:10,771 INFO  Execute - Batch - generateBulkLettertreatmentviaTreeGeneration
+2018-06-29 19:22:10,959 INFO  Completed - Batch - generateBulkLettertreatmentviaTreeGeneration from /bcrp/prd/application/BatchManager/bin/AdhocBulkLetter.batch
+2018-06-29 19:22:10,960 INFO  Finished - Batch - generateBulkLettertreatmentviaTreeGeneration
+2018-06-29 19:22:10,960 INFO  Starting - Batch - extractLetterFromSummTable from /bcrp/prd/application/BatchManager/bin/AdhocBulkLetter.batch
+2018-06-29 19:22:10,961 INFO  Execute - Batch - extractLetterFromSummTable
+2018-06-29 19:22:13,089 INFO  Completed - Batch - extractLetterFromSummTable from /bcrp/prd/application/BatchManager/bin/AdhocBulkLetter.batch
+2018-06-29 19:22:13,089 INFO  Finished - Batch - extractLetterFromSummTable
+2018-06-29 19:22:13,090 DEBUG --DONE--

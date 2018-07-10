@@ -1,0 +1,20 @@
+2018-06-19 07:41:02,354 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-19 07:41:02,501 DEBUG --START--
+2018-06-19 07:41:02,506 INFO  Starting - Batch - updateSupervisoryAccountHp from /bcrp/prd/application/BatchManager/bin/supervisory.batch
+2018-06-19 07:41:02,511 INFO  Execute - Batch - updateSupervisoryAccountHp
+2018-06-19 07:43:59,754 INFO  Completed - Batch - updateSupervisoryAccountHp from /bcrp/prd/application/BatchManager/bin/supervisory.batch
+2018-06-19 07:43:59,754 INFO  Finished - Batch - updateSupervisoryAccountHp
+2018-06-19 07:43:59,754 INFO  Starting - Batch - updateSupervisoryAccountUpl from /bcrp/prd/application/BatchManager/bin/supervisory.batch
+2018-06-19 07:43:59,756 INFO  Execute - Batch - updateSupervisoryAccountUpl
+2018-06-19 07:44:52,903 INFO  Completed - Batch - updateSupervisoryAccountUpl from /bcrp/prd/application/BatchManager/bin/supervisory.batch
+2018-06-19 07:44:52,903 INFO  Finished - Batch - updateSupervisoryAccountUpl
+2018-06-19 07:44:52,903 INFO  Starting - Batch - updateSupervisoryAccountOd from /bcrp/prd/application/BatchManager/bin/supervisory.batch
+2018-06-19 07:44:52,905 INFO  Execute - Batch - updateSupervisoryAccountOd
+2018-06-19 07:50:07,891 INFO  Completed - Batch - updateSupervisoryAccountOd from /bcrp/prd/application/BatchManager/bin/supervisory.batch
+2018-06-19 07:50:07,891 INFO  Finished - Batch - updateSupervisoryAccountOd
+2018-06-19 07:50:07,891 INFO  Starting - Batch - updateSupervisoryAccountMg from /bcrp/prd/application/BatchManager/bin/supervisory.batch
+2018-06-19 07:50:07,893 INFO  Execute - Batch - updateSupervisoryAccountMg
+2018-06-19 07:50:59,079 INFO  Completed - Batch - updateSupervisoryAccountMg from /bcrp/prd/application/BatchManager/bin/supervisory.batch
+2018-06-19 07:50:59,079 INFO  Finished - Batch - updateSupervisoryAccountMg
+2018-06-19 07:50:59,079 DEBUG --DONE--

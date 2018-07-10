@@ -1,0 +1,16 @@
+2018-06-25 21:35:17,960 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-25 21:35:18,134 DEBUG --START--
+2018-06-25 21:35:18,140 INFO  Starting - Batch - updateAccountWorklistAssignmentMg from /bcrp/prd/application/BatchManager/bin/DailyEvening_Raja.batch
+2018-06-25 21:35:18,145 INFO  Execute - Batch - updateAccountWorklistAssignmentMg
+2018-06-25 21:35:33,768 INFO  Completed - Batch - updateAccountWorklistAssignmentMg from /bcrp/prd/application/BatchManager/bin/DailyEvening_Raja.batch
+2018-06-25 21:35:33,769 INFO  Finished - Batch - updateAccountWorklistAssignmentMg
+2018-06-25 21:35:33,769 INFO  Starting - Batch - refreshAccountCorresspondenceAddress from /bcrp/prd/application/BatchManager/bin/DailyEvening_Raja.batch
+2018-06-25 21:35:33,770 INFO  Execute - Batch - refreshAccountCorresspondenceAddress
+2018-06-25 21:41:06,246 INFO  Completed - Batch - refreshAccountCorresspondenceAddress from /bcrp/prd/application/BatchManager/bin/DailyEvening_Raja.batch
+2018-06-25 21:41:06,246 INFO  Finished - Batch - refreshAccountCorresspondenceAddress
+2018-06-25 21:41:06,247 INFO  Starting - Batch - updateUserAutoInvalid from /bcrp/prd/application/BatchManager/bin/DailyEvening_Raja.batch
+2018-06-25 21:41:06,248 INFO  Execute - Batch - updateUserAutoInvalid
+2018-06-25 21:41:06,329 INFO  Completed - Batch - updateUserAutoInvalid from /bcrp/prd/application/BatchManager/bin/DailyEvening_Raja.batch
+2018-06-25 21:41:06,330 INFO  Finished - Batch - updateUserAutoInvalid
+2018-06-25 21:41:06,330 DEBUG --DONE--

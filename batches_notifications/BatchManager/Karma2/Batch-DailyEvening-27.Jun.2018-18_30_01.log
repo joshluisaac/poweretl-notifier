@@ -1,0 +1,16 @@
+2018-06-27 18:30:01,826 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765
+LOGIN SUCCESSFUL
+2018-06-27 18:30:02,211 DEBUG --START--
+2018-06-27 18:30:02,217 INFO  Starting - Batch - wlgSupplementary from /carma/application/BatchManager/bin/DailyEvening.batch
+2018-06-27 18:30:02,224 INFO  Execute - Batch - wlgSupplementary
+2018-06-27 19:15:30,129 INFO  Completed - Batch - wlgSupplementary from /carma/application/BatchManager/bin/DailyEvening.batch
+2018-06-27 19:15:30,129 INFO  Finished - Batch - wlgSupplementary
+2018-06-27 19:15:30,130 INFO  Starting - Batch - refreshLatestPhoneNumber from /carma/application/BatchManager/bin/DailyEvening.batch
+2018-06-27 19:15:30,130 INFO  Execute - Batch - refreshLatestPhoneNumber
+2018-06-27 19:18:51,003 INFO  Completed - Batch - refreshLatestPhoneNumber from /carma/application/BatchManager/bin/DailyEvening.batch
+2018-06-27 19:18:51,003 INFO  Finished - Batch - refreshLatestPhoneNumber
+2018-06-27 19:18:51,003 INFO  Starting - Batch - updateUserAutoInvalid from /carma/application/BatchManager/bin/DailyEvening.batch
+2018-06-27 19:18:51,004 INFO  Execute - Batch - updateUserAutoInvalid
+2018-06-27 19:18:51,060 INFO  Completed - Batch - updateUserAutoInvalid from /carma/application/BatchManager/bin/DailyEvening.batch
+2018-06-27 19:18:51,060 INFO  Finished - Batch - updateUserAutoInvalid
+2018-06-27 19:18:51,060 DEBUG --DONE--

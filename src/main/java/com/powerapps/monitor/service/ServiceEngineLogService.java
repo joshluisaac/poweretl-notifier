@@ -1,55 +1,38 @@
 package com.powerapps.monitor.service;
 
-import java.io.BufferedReader;
+
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.powerapps.monitor.Utils;
 import com.powerapps.monitor.model.ServiceEngineErrorReport;
 
 @Service
-public class ErrorLinesIsolatorService {
+public class ServiceEngineLogService {
   
   
   private static final Logger LOG = LoggerFactory.getLogger(ErrorFragmentIsolator.class);
-  public static final String REGEX = "^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (ERROR UNEXPECTED_EXCEPTION)";
   
   
-  private Matcher matcher(final String candidate, final String pattern) {
-    Pattern p = Pattern.compile(pattern);
-    Matcher m = p.matcher(candidate);
-    return m;
-  }
-
-  public List<String> readLogFile(File f) {
-    List<String> list = new ArrayList<>();
-    int lineNumber = 0;
-    try(BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream(f)))) {
-      String line;
-      while((line = r.readLine()) != null) {
-        lineNumber++;
-        list.add(lineNumber  + " " + line);
-      }
-    } catch(Exception e) {
-      LOG.error("{}",e.getMessage());
-    }
-    return list;
+  public String seExceptionRegex;
+  
+  public ServiceEngineLogService(@Value("${app.seExceptionRegex}") String seExceptionRegex) {
+    this.seExceptionRegex = seExceptionRegex;
   }
   
-  
+ 
   public List<ServiceEngineErrorReport> processLines(List<String> lines) {
     final List<ServiceEngineErrorReport> errorList = new ArrayList<>();
     for(String line : lines) {
-      Matcher m = matcher(line, REGEX);
+      Matcher m = Utils.matcher(line, seExceptionRegex);
       boolean matches = m.find();
       if(matches) {
         String column[] = line.split("\\s+");
@@ -67,7 +50,7 @@ public class ErrorLinesIsolatorService {
   }
   
   public List<ServiceEngineErrorReport> execute(File f) {
-    return processLines(readLogFile(f));
+    return processLines(Utils.readLogFile(f));
   }
 
 }

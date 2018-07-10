@@ -59,7 +59,11 @@
       <scope>compile</scope>
     </dependency>
 
-
+    <dependency>
+      <groupId>com.kollect.etl.services</groupId>
+      <artifactId>etl-services</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
 
   </dependencies>

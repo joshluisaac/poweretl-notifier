@@ -19,7 +19,7 @@
             <th>Start Date</th>
             <th>End Date</th>
             <th>Status</th>
-            <th>Running Time</th>
+            <th>Running Time(Min)</th>
             
           </tr>
           </thead>
@@ -30,11 +30,14 @@
             <td th:text="${#dates.format(report.startTime, 'dd-MMM-yyyy HH:mm')}"></td>
             <td th:text="${#dates.format(report.endTime, 'dd-MMM-yyyy HH:mm')}"></td>
             <td th:switch="${report.batchStatus}">
-            	<p th:case="1">Failed</p>
-  				<p th:case="2">Successful</p>
-  				<p th:case="3">In Progress</p> 
+            	<p class="label label-danger"th:case="1">Failed</p>
+  				<p class="label label-success" th:case="2">Successful</p>
+  				<p class="label label-info" th:case="3">In Progress</p> 
+  				
+  				
+  				
             </td>
-            <td> 1</td>
+            <td th:text="${#numbers.formatDecimal(report.runningTime,2,2)}"></td>
             
           </tr>
           </tbody>

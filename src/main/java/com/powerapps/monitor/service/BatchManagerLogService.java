@@ -64,6 +64,7 @@ public class BatchManagerLogService {
       
       Timestamp batchStartTime = null;
       Timestamp batchEndTime = null;
+      
       for (int i=0; i<lines.size(); i++) {
         
         String line = lines.get(i);
@@ -106,13 +107,15 @@ public class BatchManagerLogService {
         if((i == (lines.size() - 1)) && (endTime == null)) {
           batchStatus = 3; //inprogress
           batchEndTime = new Timestamp(System.currentTimeMillis());
+          //batchEndTime.get
         }
 
       }
       
       
-      
-      summaryMetrics.add(new LogSummary(log, isStartEntry, isDoneEntry, errorTerminated, batchStartTime,batchEndTime, batchStatus));
+      double runningTime = ((batchEndTime.getTime() - batchStartTime.getTime())/1000)/60f;
+      System.out.println(runningTime);
+      summaryMetrics.add(new LogSummary(log, isStartEntry, isDoneEntry, errorTerminated, batchStartTime,batchEndTime, batchStatus, runningTime));
     }
     return summaryMetrics;
   }

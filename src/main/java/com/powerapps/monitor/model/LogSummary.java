@@ -8,9 +8,10 @@ public class LogSummary {
   Timestamp startTime, endTime;
   String logFileName;
   int batchStatus;
+  double runningTime;
 
   public LogSummary(String logFileName, boolean isStartEntry, boolean isDoneEntry, boolean errorTerminated,
-      Timestamp startTime, Timestamp endTime, int batchStatus) {
+      Timestamp startTime, Timestamp endTime, int batchStatus, double runningTime) {
     this.isStartEntry = isStartEntry;
     this.isDoneEntry = isDoneEntry;
     this.errorTerminated = errorTerminated;
@@ -18,11 +19,27 @@ public class LogSummary {
     this.endTime = endTime;
     this.logFileName = logFileName;
     this.batchStatus = batchStatus;
+    this.runningTime = runningTime;
   }
   
   
+  
 
-  public int getBatchStatus() {
+  public double getRunningTime() {
+	return runningTime;
+}
+
+
+
+
+public void setRunningTime(double runningTime) {
+	this.runningTime = runningTime;
+}
+
+
+
+
+public int getBatchStatus() {
     return batchStatus;
   }
 

@@ -16,7 +16,7 @@ public class EmailNotificationController {
 	
 	@RequestMapping(value = "/dcemailnotifreport", method = RequestMethod.GET)
 	  public String dataConnetorEmailNotifReport(Model model) {
-	    return "dataConnetorEmailNotifReport";
+	    return "dataConnectorEmailNotifReport";
 	  }
 	
 	@RequestMapping(value = "/bmemailnotifreport", method = RequestMethod.GET)

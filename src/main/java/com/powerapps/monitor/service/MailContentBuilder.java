@@ -14,11 +14,11 @@ public class MailContentBuilder {
         this.templateEngine = templateEngine;
     }
 
-    public String buildEmail(String intro, String message) {
+    public String buildEmail() {
         Context context = new Context();
         context.setVariable("title", "Hi there,");
-        context.setVariable("intro", intro);
-        context.setVariable("message", message);
+        context.setVariable("intro", "This is an automated email from PowerApps.");
+        context.setVariable("message", "The following error have occurred: ");
         context.setVariable("salutation", "Regards,");
         context.setVariable("signOff", "PowerApps Auto Update");
         context.setVariable("footer", null);

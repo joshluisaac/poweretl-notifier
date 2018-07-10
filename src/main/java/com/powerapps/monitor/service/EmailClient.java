@@ -23,14 +23,13 @@ public class EmailClient {
         this.builder = builder;
     }
 
-    public void sendEmail(String recipient,String subject, String intro,
-                          String message){
+    public void sendEmail(String recipient){
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom(emailFrom);
             messageHelper.setTo(recipient.split(","));
-            messageHelper.setSubject(subject);
-            String content = builder.buildEmail(intro, message);
+            messageHelper.setSubject("PowerApps - Log Errors");
+            String content = builder.buildEmail();
             messageHelper.setText(content, true);
         };
         try {

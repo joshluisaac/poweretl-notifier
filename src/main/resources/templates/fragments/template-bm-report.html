@@ -29,7 +29,11 @@
             <td th:text="${report.logFileName}"></td>
             <td th:text="${#dates.format(report.startTime, 'dd-MMM-yyyy HH:mm')}"></td>
             <td th:text="${#dates.format(report.endTime, 'dd-MMM-yyyy HH:mm')}"></td>
-            <td th:text="${report.batchStatus}"></td>
+            <td th:switch="${report.batchStatus}">
+            	<p th:case="1">Failed</p>
+  				<p th:case="2">Successful</p>
+  				<p th:case="3">In Progress</p> 
+            </td>
             <td> 1</td>
             
           </tr>

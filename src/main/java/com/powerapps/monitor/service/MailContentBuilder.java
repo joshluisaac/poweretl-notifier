@@ -18,7 +18,7 @@ public class MailContentBuilder {
         Context context = new Context();
         context.setVariable("title", "Hi there,");
         context.setVariable("intro", "This is an automated email from PowerApps.");
-        context.setVariable("message", "The following error have occurred: ");
+        context.setVariable("message", "The following errors have occurred: ");
         context.setVariable("salutation", "Regards,");
         context.setVariable("signOff", "PowerApps Auto Update");
         context.setVariable("footer", null);

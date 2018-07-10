@@ -2,7 +2,7 @@
   <div class="x_panel">
     <div class="x_title">
       <h2>
-        <small>Today's Error Report</small>
+        <small>Today's Report</small>
       </h2>
       <div class="clearfix"></div>
     </div>
@@ -26,16 +26,14 @@
           <tbody>
           <tr th:each="report, status : ${summaryList}">
             <td th:text="${status.index + 1}"></td>
-            <td th:text="${report.logFileName}"></td>
+            <td><a th:text="${report.logFileName}" href="#myModal"></a></td>
+            
             <td th:text="${#dates.format(report.startTime, 'dd-MMM-yyyy HH:mm')}"></td>
             <td th:text="${#dates.format(report.endTime, 'dd-MMM-yyyy HH:mm')}"></td>
             <td th:switch="${report.batchStatus}">
             	<p class="label label-danger"th:case="1">Failed</p>
   				<p class="label label-success" th:case="2">Successful</p>
   				<p class="label label-info" th:case="3">In Progress</p> 
-  				
-  				
-  				
             </td>
             <td th:text="${#numbers.formatDecimal(report.runningTime,2,2)}"></td>
             

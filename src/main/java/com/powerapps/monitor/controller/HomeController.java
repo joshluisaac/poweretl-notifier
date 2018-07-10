@@ -61,12 +61,18 @@ public class HomeController {
   }
 
   // return json response
-  @RequestMapping(value = "/bmerrorreport", method = RequestMethod.GET)
+  @RequestMapping(value = "/bmerrorreportJSON", method = RequestMethod.GET)
   @ResponseBody
-  public Object batchManagerErrorLogReport(Model model) {
+  public Object batchManagerErrorLogReportJSON(Model model) {
     List<LogSummary> summary = bmService.processLogSummary(bmService.getLogFiles(new File(bmRootPath)));
     model.addAttribute("summaryList", summary);
     return summary;
   }
 
+  @RequestMapping(value = "/bmerrorreport", method = RequestMethod.GET)
+   public Object batchManagerErrorLogReport(Model model) {
+    List<LogSummary> summary = bmService.processLogSummary(bmService.getLogFiles(new File(bmRootPath)));
+    model.addAttribute("summaryList", summary);
+    return "batchManager-report";
+  }
 }

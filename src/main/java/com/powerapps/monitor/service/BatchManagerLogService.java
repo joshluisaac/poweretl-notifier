@@ -29,16 +29,19 @@ public class BatchManagerLogService {
   // private final String batchFinishedRegex = "";
   private final String rootPath;
   
-  private final String cacheFileName = "/media/joshua/martian/kvworkspace/powerappslogmonitor/config/bmcache.csv";
+  private final String bmCache; //= "/media/joshua/martian/kvworkspace/powerappslogmonitor/config/bmcache.csv";
 
   @Autowired
   public BatchManagerLogService(@Value("${app.bmRootPath}") String rootPath,
       @Value("${app.batchStartRegex}") String batchStartRegex, @Value("${app.batchDoneRegex}") String batchDoneRegex,
-      @Value("${app.batchErrorRegex}") String batchErrorRegex) {
+      @Value("${app.batchErrorRegex}") String batchErrorRegex,
+      @Value("${app.bmCache}") String bmCache
+      ) {
     this.batchStartRegex = batchStartRegex;
     this.batchDoneRegex = batchDoneRegex;
     this.batchErrorRegex = batchErrorRegex;
     this.rootPath = rootPath;
+    this.bmCache = bmCache;
   }
 
   // needs refactoring
@@ -71,7 +74,7 @@ public class BatchManagerLogService {
 
   public void emailAndPersistToCache() throws IOException {
     List<String> availableLogList = getLogFiles(new File(rootPath));
-    List<String> cacheList = getCachedList(new File(cacheFileName));
+    List<String> cacheList = getCachedList(new File(bmCache));
     List<String> unCachedList = fetchNewlyAddedLogFiles(cacheList, availableLogList);
     int count = unCachedList.size();
     LOG.info("Number of files uncached: {}", count);
@@ -82,12 +85,12 @@ public class BatchManagerLogService {
           if(status == 1) {
             //send failed email
             //if email was sent then persist to cache
-            new FileUtils().writeTextFile(cacheFileName, log + "\n");
+            new FileUtils().writeTextFile(bmCache, log + "\n");
             LOG.info("Cached {}", log);
           } else {
             //send successful email
             //if email was sent then persist to cache
-            new FileUtils().writeTextFile(cacheFileName, log + "\n");
+            new FileUtils().writeTextFile(bmCache, log + "\n");
             LOG.info("Cached {}", log);
           }
         }

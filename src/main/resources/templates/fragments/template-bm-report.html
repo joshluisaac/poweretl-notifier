@@ -49,7 +49,7 @@
 				  <div class="modal-dialog" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLongTitle">Batch Log</h5>
+				        <h5 class="modal-title" id="exampleModalLongTitle" >Batch Log</h5>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				          <span aria-hidden="true">&times;</span>
 				        </button>
@@ -87,16 +87,13 @@
 
 
         <a
-       th:href="${report.logFileName}">
+     th:href="@{'/downloadbatch?logname=' + ${report.logFileName}}">
         <span data-toggle="tooltip"
         title="Download Batch Manager File"
         class="glyphicon glyphicon-download red"> </span>
       </a>
 
-      </td>
-
-            
-            
+      </td>           
           </tr>
           </tbody>
         </table>

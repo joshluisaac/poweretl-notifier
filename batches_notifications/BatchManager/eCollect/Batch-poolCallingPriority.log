@@ -1,0 +1,25 @@
+LOGIN SUCCESSFUL
+
+2018-07-06 13:37:00,747 DEBUG --START--
+
+2018-07-06 13:37:00,753 INFO  Starting - Batch - poolCallingPriority from /carma/application/BatchManager/bin/Daily_Rerun.batch
+
+2018-07-06 13:37:00,759 INFO  Execute - Batch - poolCallingPriority
+
+2018-07-06 13:37:30,492 ERROR Batch failed with return code: SPAWNED_THREAD_ERROR
+
+2018-07-06 13:37:30,492 INFO  Completed - Batch - poolCallingPriority from /carma/application/BatchManager/bin/Daily_Rerun.batch
+
+2018-07-06 13:37:30,492 ERROR Error - Batch - poolCallingPriority
+
+com.profitera.descriptor.business.ServiceException
+
+        at com.profitera.client.RemoteProgressThread.execute(RemoteProgressThread.java:107)
+
+        at com.profitera.client.ProgressThread.doExecute(ProgressThread.java:54)
+
+        at com.profitera.client.ProgressThread.run(ProgressThread.java:45)
+
+        at com.profitera.batch.main.BatchExe.executeBatch(BatchExe.java:170)
+
+        at com.profitera.batch.main.BatchExe.main(BatchExe.java:245)

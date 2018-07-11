@@ -6,7 +6,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +28,8 @@ public class BatchManagerLogService {
   // private final String batchStartingRegex = "";
   // private final String batchFinishedRegex = "";
   private final String rootPath;
+  
+  private final String cacheFileName = "/media/joshua/martian/kvworkspace/powerappslogmonitor/config/bmcache.csv";
 
   @Autowired
   public BatchManagerLogService(@Value("${app.bmRootPath}") String rootPath,
@@ -40,7 +41,7 @@ public class BatchManagerLogService {
     this.rootPath = rootPath;
   }
 
-  //needs refactoring
+  // needs refactoring
   public List<String> getLogFiles(File dir) {
     List<String> bmLogFiles = new ArrayList<>();
     for (String file : new FileUtils().getFileList(dir)) {
@@ -59,7 +60,7 @@ public class BatchManagerLogService {
 
   // compares all files starting with prefix "Batch-" against cache list
   // removes the cache list from available list aka logList
-  public List<String> resolveNewlyAddedLogFiles(List<String> cacheList, List<String> logList) {
+  public List<String> fetchNewlyAddedLogFiles(List<String> cacheList, List<String> logList) {
     return new ListUtils().subtract(cacheList, logList);
   }
 
@@ -68,9 +69,38 @@ public class BatchManagerLogService {
     return summarizeLog(log).getBatchStatus();
   }
 
+  public void emailAndPersistToCache() throws IOException {
+    List<String> availableLogList = getLogFiles(new File(rootPath));
+    List<String> cacheList = getCachedList(new File(cacheFileName));
+    List<String> unCachedList = fetchNewlyAddedLogFiles(cacheList, availableLogList);
+    int count = unCachedList.size();
+    LOG.info("Number of files uncached: {}", count);
+    if (count != 0) {
+      for (String log : unCachedList) {
+        int status = getBatchStatus(log);
+        if (status != 3) {
+          if(status == 1) {
+            //send failed email
+            //if email was sent then persist to cache
+            new FileUtils().writeTextFile(cacheFileName, log + "\n");
+            LOG.info("Cached {}", log);
+          } else {
+            //send successful email
+            //if email was sent then persist to cache
+            new FileUtils().writeTextFile(cacheFileName, log + "\n");
+            LOG.info("Cached {}", log);
+          }
+        }
+      }
+    } else {
+      LOG.info("Count is {}, nothing to cache", count);
+    }
+
+  }
+
   public LogSummary summarizeLog(String log) {
     List<String> regexList = new ArrayList<>(Arrays.asList(batchStartRegex, batchErrorRegex, batchDoneRegex));
-    LOG.info("Processing {}", log);
+    //LOG.info("Processing {}", log);
     List<String> lines = Utils.readLogFile(new File(rootPath, log));
     boolean isStartEntry = false;
     boolean isDoneEntry = false;

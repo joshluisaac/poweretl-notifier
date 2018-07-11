@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailClient {
     private JavaMailSender mailSender;
-    private String emailFrom = "abc@gmail.com";
+    private String emailFrom = "datareceived@kollect.my";
     private MailContentBuilder builder;
     private static final Logger LOG = LoggerFactory.getLogger(EmailClient.class);
 

@@ -1,11 +1,13 @@
 package com.powerapps.monitor.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,11 +17,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.powerapps.monitor.model.LogSummary;
+import com.powerapps.monitor.service.BatchManagerLogMetrics;
 import com.powerapps.monitor.service.BatchManagerLogService;
 import com.powerapps.monitor.service.ServiceEngineLogService;
+
+import ch.qos.logback.classic.util.LoggerNameUtil;
 
 @Controller
 public class HomeController {
@@ -82,22 +88,35 @@ public class HomeController {
     return "batchManager-report";
   }
   
-  @RequestMapping(value = "/downloadbatch", method = RequestMethod.GET, produces = "text/html")
-  public String downloadBatch(Model model,HttpServletRequest req, 
-            HttpServletResponse response) {
+  @RequestMapping(value = "/downloadbatch", produces = "text/plain")
+  public int downloadBatch(Model model, @RequestParam String logname, 
+            HttpServletResponse response) throws IOException {
     
-    
-    
-    String uploadDir = "./etl-server/uploads/";
-    Path path = Paths.get(uploadDir + "fileName");
+   
+    //resource path
+    Path path = Paths.get(bmRootPath+"/"+logname);
     //Files.write(path, dcXml.getRawByte());
   
-  response.setContentType("text/html");
-  response.addHeader("Content-Disposition", "attachment; filename=" + "");
+  response.setContentType("text/plain");
+  response.addHeader("Content-Disposition", "attachment; filename=" + logname);
+  ServletOutputStream outStream = response.getOutputStream();
+  long numberOfBytesCopied = Files.copy(path, outStream);
+  outStream.flush();
+  
   //response.setHeader(name, value);
-    return "someTemplate";
+    return -1;
   }
   
+  @RequestMapping ("/batchdetailsJSON")
+  @ResponseBody 
+  public Object getBatchDetails() throws IOException {
+	  File f = new File("C:\\Users\\Chelsea\\workspace\\powerappslogmonitor\\batches_notifications\\BatchManager\\eCollect\\Batch-01.Jun.2018-07_48_02.log");  
+	  BatchManagerLogMetrics m = new BatchManagerLogMetrics();
+	List<String> lines = m.getFile(f);
+		
+	return m.extract2(lines);
+	
+  }
   
   
 }

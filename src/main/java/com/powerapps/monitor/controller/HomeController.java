@@ -1,7 +1,13 @@
 package com.powerapps.monitor.controller;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -75,4 +81,23 @@ public class HomeController {
     model.addAttribute("summaryList", summary);
     return "batchManager-report";
   }
+  
+  @RequestMapping(value = "/downloadbatch", method = RequestMethod.GET, produces = "text/html")
+  public String downloadBatch(Model model,HttpServletRequest req, 
+            HttpServletResponse response) {
+    
+    
+    
+    String uploadDir = "./etl-server/uploads/";
+    Path path = Paths.get(uploadDir + "fileName");
+    //Files.write(path, dcXml.getRawByte());
+  
+  response.setContentType("text/html");
+  response.addHeader("Content-Disposition", "attachment; filename=" + "");
+  //response.setHeader(name, value);
+    return "someTemplate";
+  }
+  
+  
+  
 }

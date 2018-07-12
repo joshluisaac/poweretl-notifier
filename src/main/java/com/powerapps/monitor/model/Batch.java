@@ -2,6 +2,14 @@ package com.powerapps.monitor.model;
 
 import java.sql.Timestamp;
 
+/**
+ * The Class Batch contains information required to build BatchManager log
+ * report
+ * 
+ * @author Chelsea Kosasih 
+ */
+
+
 public class Batch {
 	Timestamp startTime, endTime;
 	double runningTime;

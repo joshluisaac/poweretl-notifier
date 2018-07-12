@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
+
+import org.springframework.stereotype.Component;
+
 import com.kollect.etl.util.FileUtils;
 import com.powerapps.monitor.Utils;
 import com.powerapps.monitor.model.Batch;
@@ -18,13 +21,17 @@ import com.powerapps.monitor.model.Batch;
  */
 
 //consider moving this to a component package and remaning this to feature extractor as in FeatureExtractor
+
+
+@Component
 public class BatchManagerLogMetrics {
+	
 
   public static final String STARTING_REGEX = "(\\d+-\\d+-\\d+\\s+\\d+:\\d+\\d+:\\d+,\\d+)\\s+(INFO)\\s+(Starting)\\s+-\\s+(Batch)\\s+-\\s+(\\w+)";
   public static final String FINISHED_REGEX = "(\\d+-\\d+-\\d+\\s+\\d+:\\d+\\d+:\\d+,\\d+)\\s+(INFO)\\s+(Finished)\\s+-\\s+(Batch)\\s+-\\s+";
 
-  public List<String> getFile(File cacheFile) throws IOException {
-    return new FileUtils().readFile(cacheFile);
+  public List<String> getFile(File file) throws IOException {
+    return new FileUtils().readFile(file);
   }
 
   
@@ -57,7 +64,7 @@ public class BatchManagerLogMetrics {
           String[] timeTokens = timeString.split("\\,");
           Timestamp endTime = Timestamp.valueOf(timeTokens[0] + "." + timeTokens[1]);
           batch.setEndTime(endTime);
-          double runningTime = (endTime.getTime() - batch.getStartTime().getTime() / 1000) / 60f;
+          double runningTime = ((endTime.getTime() - batch.getStartTime().getTime()) / 1000) / 60f;
           batch.setRunningTime(runningTime);
           batchList.add(batch);
           finishFound = true;

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.powerapps.monitor.model.Batch;
 import com.powerapps.monitor.model.LogSummary;
 import com.powerapps.monitor.service.BatchManagerLogMetrics;
 import com.powerapps.monitor.service.BatchManagerLogService;
@@ -29,21 +30,25 @@ import com.powerapps.monitor.service.ServiceEngineLogService;
 @Controller
 public class HomeController {
 
+  //Dependency Injection region
   private ServiceEngineLogService errorService;
   private BatchManagerLogService bmService;
+  private BatchManagerLogMetrics bmMetrics;
   private String bmRootPath;
   private String seRootPath;
   private String seErrorLog;
+  
 
   @Autowired
   public HomeController(@Value("${app.bmRootPath}") String bmRootPath, @Value("${app.seRootPath}") String seRootPath,
       @Value("${app.seErrorLog}") String seErrorLog, ServiceEngineLogService errorService,
-      BatchManagerLogService bmService) {
+      BatchManagerLogService bmService, BatchManagerLogMetrics bmMetrics) {
     this.errorService = errorService;
     this.bmService = bmService;
     this.bmRootPath = bmRootPath;
     this.seRootPath = seRootPath;
     this.seErrorLog = seErrorLog;
+    this.bmMetrics = bmMetrics;
   }
 
   @RequestMapping("/")
@@ -109,9 +114,17 @@ public class HomeController {
   @ResponseBody 
   public Object getBatchDetails() throws IOException {
 	  File f = new File("C:\\Users\\Chelsea\\workspace\\powerappslogmonitor\\batches_notifications\\BatchManager\\eCollect\\Batch-01.Jun.2018-07_48_02.log");  
-	  BatchManagerLogMetrics m = new BatchManagerLogMetrics();
-	List<String> lines = m.getFile(f);	
-	return m.extractFeatures(lines);
+	
+	return bmMetrics.extractFeatures(bmMetrics.getFile(f));
+	
+  }
+  
+  
+  @RequestMapping (value = "/batchdetails", method = RequestMethod.GET)
+  public Object getBatchDetails(Model model, @RequestParam String logname) throws IOException {
+	  System.out.println("Got here");
+	  model.addAttribute("batchDetails", bmMetrics.extractFeatures(bmMetrics.getFile(new File(bmRootPath+"/"+logname))));
+	  return "fragments/template-bm-logmetric-report";
 	
   }
   

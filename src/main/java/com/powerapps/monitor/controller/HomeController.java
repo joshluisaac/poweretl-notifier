@@ -25,7 +25,6 @@ import com.powerapps.monitor.service.BatchManagerLogMetrics;
 import com.powerapps.monitor.service.BatchManagerLogService;
 import com.powerapps.monitor.service.ServiceEngineLogService;
 
-import ch.qos.logback.classic.util.LoggerNameUtil;
 
 @Controller
 public class HomeController {
@@ -91,18 +90,17 @@ public class HomeController {
   @RequestMapping(value = "/downloadbatch", produces = "text/plain")
   public int downloadBatch(Model model, @RequestParam String logname, 
             HttpServletResponse response) throws IOException {
-    
    
     //resource path
     Path path = Paths.get(bmRootPath+"/"+logname);
-    //Files.write(path, dcXml.getRawByte());
   
   response.setContentType("text/plain");
   response.addHeader("Content-Disposition", "attachment; filename=" + logname);
+  
   ServletOutputStream outStream = response.getOutputStream();
   long numberOfBytesCopied = Files.copy(path, outStream);
   outStream.flush();
-  
+  System.out.println(numberOfBytesCopied);
   //response.setHeader(name, value);
     return -1;
   }
@@ -112,9 +110,8 @@ public class HomeController {
   public Object getBatchDetails() throws IOException {
 	  File f = new File("C:\\Users\\Chelsea\\workspace\\powerappslogmonitor\\batches_notifications\\BatchManager\\eCollect\\Batch-01.Jun.2018-07_48_02.log");  
 	  BatchManagerLogMetrics m = new BatchManagerLogMetrics();
-	List<String> lines = m.getFile(f);
-		
-	return m.extract2(lines);
+	List<String> lines = m.getFile(f);	
+	return m.extractFeatures(lines);
 	
   }
   

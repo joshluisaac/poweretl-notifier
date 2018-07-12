@@ -1,118 +1,132 @@
 <div th:fragment="bmLogFragment" class="col-md-12 col-xs-12">
-	<div class="x_panel">
-		<div class="x_title">
-			<h2>
-				<small>Today's Report</small>
-			</h2>
-			<div class="clearfix"></div>
-		</div>
-		<div class="x_content"></div>
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                <small>Today's Report</small>
+            </h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content"></div>
 
-		<div class='row'>
-			<div class='col-md-12'>
-				<br>
-				<table id="datatable-buttons"
-					class="table table-striped table-bordered">
-					<thead>
-						<tr>
-							<th>No.</th>
-							<th>Batch Manager Log</th>
-							<th>Start Date</th>
-							<th>End Date</th>
-							<th>Status</th>
-							<th>Running Time(Min)</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="report, status : ${summaryList}">
-							<td th:text="${status.index + 1}"></td>
-							<td th:text="${report.logFileName}"></td>
-							<td
-								th:text="${#dates.format(report.startTime, 'dd-MMM-yyyy HH:mm')}"></td>
-							<td
-								th:text="${#dates.format(report.endTime, 'dd-MMM-yyyy HH:mm')}"></td>
-							<td th:switch="${report.batchStatus}">
-								<p class="label label-danger" th:case="1">Failed</p>
-								<p class="label label-success" th:case="2">Successful</p>
-								<p class="label label-info" th:case="3">In Progress</p>
-							</td>
-							<td th:text="${#numbers.formatDecimal(report.runningTime,2,2)}"></td>
-							<td><a
-								th:href="@{'/batchdetails?logname=' + ${report.logFileName}}"
-								data-backdrop="static" id="viewBatchManagerFile"> <span
-									data-toggle="tooltip" title="Preview Batch Manager File"
-									class="glyphicon glyphicon-eye-open"> </span>
-							</a> <!-- 				Modal --> <!-- 				<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"  -->
-								<!-- 				aria-labelledby="exampleModalLongTitle" aria-hidden="true"> -->
-								<!-- 				  <div class="modal-dialog" role="document"> --> <!-- 				    <div class="modal-content"> -->
-								<!-- 				      <div class="modal-header"> --> <!-- 				        <h5 class="modal-title" id="exampleModalLongTitle" >Batch Log</h5> -->
-								<!-- 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-								<!-- 				          <span aria-hidden="true">&times;</span> --> <!-- 				        </button> -->
-								<!-- 				      </div> --> <!-- 				      <div class="modal-body"> -->
-								<!-- 				      <div class='row'> --> <!-- 							<div class='col-md-12'> -->
-								<!-- 							<br> --> <!-- 							<table id="datatable-buttons" class="table table-striped table-bordered"> -->
-								<!-- 												<thead> --> <!-- 										          <tr> --> <!-- 										            <th>No.</th> -->
-								<!-- 										            <th>Batch</th> --> <!-- 										            <th>Status</th> -->
-								<!-- 										            <th>Running Time</th> --> <!-- 										          </tr> -->
-								<!-- 										          </thead> --> <!-- 										          <tbody> -->
-								<!-- 										          <tr> --> <!-- 										          	<tr th:each="report, status : ${batchDetails}">  -->
-								<!-- 										             <td th:text="${report.batchName}"></td> -->
-								<!-- 										            <td th:text="${#dates.format(report.startTime, 'dd-MMM-yyyy HH:mm')}"></td> -->
-								<!-- 										            <td th:text="${report.runningTime)}"></td> -->
-								<!-- 										          </tr> --> <!-- 										          </tbody> -->
-								<!-- 							 </table> --> <!-- 							</div> --> <!-- </div> -->
-								<!-- 				      </div> --> <!-- 				      <div class="modal-footer"> -->
-								<!-- 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-								<!-- 				      </div> --> <!-- 				    </div> --> <!-- 				  </div> -->
-								<!-- 				</div> --> <a
-								th:href="@{'/downloadbatch?logname=' + ${report.logFileName}}">
+        <div class='row'>
+            <div class='col-md-12'>
+                <br>
+                <table id="datatable-buttons"
+                       class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Batch Manager Log</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th>Running Time(Min)</th>
+                        <th>Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="report, status : ${summaryList}">
+                        <td th:text="${status.index + 1}"></td>
+                        <td id = "logFileName" th:text="${report.logFileName}"></td>
+                        <td
+                                th:text="${#dates.format(report.startTime, 'dd-MMM-yyyy HH:mm')}"></td>
+                        <td
+                                th:text="${#dates.format(report.endTime, 'dd-MMM-yyyy HH:mm')}"></td>
+                        <td th:switch="${report.batchStatus}">
+                            <p class="label label-danger" th:case="1">Failed</p>
+                            <p class="label label-success" th:case="2">Successful</p>
+                            <p class="label label-info" th:case="3">In Progress</p>
+                        </td>
+                        <td th:text="${#numbers.formatDecimal(report.runningTime,2,2)}"></td>
+                        <td><a
+                                th:href="@{'/batchdetails?logname=' + ${report.logFileName}}"
+                                data-backdrop="static" id="viewBatchManagerFile"> <span
+                                data-toggle="tooltip" title="Preview Batch Manager File"
+                                class="glyphicon glyphicon-eye-open"> </span>
+                        </a> <!-- 				Modal -->
+                            <!-- 				<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"  -->
+                            <!-- 				aria-labelledby="exampleModalLongTitle" aria-hidden="true"> -->
+                            <!-- 				  <div class="modal-dialog" role="document"> -->
+                            <!-- 				    <div class="modal-content"> -->
+                            <!-- 				      <div class="modal-header"> -->
+                            <!-- 				        <h5 class="modal-title" id="exampleModalLongTitle" >Batch Log</h5> -->
+                            <!-- 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+                            <!-- 				          <span aria-hidden="true">&times;</span> -->
+                            <!-- 				        </button> -->
+                            <!-- 				      </div> --> <!-- 				      <div class="modal-body"> -->
+                            <!-- 				      <div class='row'> --> <!-- 							<div class='col-md-12'> -->
+                            <!-- 							<br> -->
+                            <!-- 							<table id="datatable-buttons" class="table table-striped table-bordered"> -->
+                            <!-- 												<thead> -->
+                            <!-- 										          <tr> -->
+                            <!-- 										            <th>No.</th> -->
+                            <!-- 										            <th>Batch</th> -->
+                            <!-- 										            <th>Status</th> -->
+                            <!-- 										            <th>Running Time</th> -->
+                            <!-- 										          </tr> -->
+                            <!-- 										          </thead> -->
+                            <!-- 										          <tbody> -->
+                            <!-- 										          <tr> -->
+                            <!-- 										          	<tr th:each="report, status : ${batchDetails}">  -->
+                            <!-- 										             <td th:text="${report.batchName}"></td> -->
+                            <!-- 										            <td th:text="${#dates.format(report.startTime, 'dd-MMM-yyyy HH:mm')}"></td> -->
+                            <!-- 										            <td th:text="${report.runningTime)}"></td> -->
+                            <!-- 										          </tr> -->
+                            <!-- 										          </tbody> -->
+                            <!-- 							 </table> --> <!-- 							</div> -->
+                            <!-- </div> -->
+                            <!-- 				      </div> --> <!-- 				      <div class="modal-footer"> -->
+                            <!-- 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                            <!-- 				      </div> --> <!-- 				    </div> -->
+                            <!-- 				  </div> -->
+                            <!-- 				</div> --> <a
+                                    th:href="@{'/downloadbatch?logname=' + ${report.logFileName}}">
 									<span data-toggle="tooltip" title="Download Batch Manager File"
-									class="glyphicon glyphicon-download red"> </span>
-							</a> <a
-								th:href="@{'/sendadhocemail?logname=' + ${report.logFileName}}"
-								data-toggle="modal" data-target="#exampleModal"> <span
-									data-toggle="tooltip" title="Send Email"
-									class="glyphicon glyphicon-envelope"> </span>
-							</a> 
-					
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group ">
-            <label for="recipient-name" class="col-form-label">Title:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div><br><br>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-       
-                          
-                 <input type="file" name="file" class="form-control" required/>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
-    </div>
-  </div>
-</div>
-</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+                                          class="glyphicon glyphicon-download red"> </span>
+                            </a>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/sendadhocemail" method="POST" enctype="multipart/form-data">
+                                                <input th:text="${report.logFileName}" name="logFileName" hidden>
+                                                <div class="form-group ">
+                                                    <label for="title" class="col-form-label">Title:</label>
+                                                    <input type="text" name="title" class="form-control" id="title">
+                                                </div>
+                                                <br><br>
+                                                <div class="form-group">
+                                                    <label for="message" class="col-form-label">Message:</label>
+                                                    <textarea name="body" class="form-control" id="message"></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="file" name="file" class="form-control" required/>
+                                                    <button type="submit" class="btn btn-primary">Send message</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-	</div>
+                            <a href="#" data-toggle="modal" data-target="#exampleModal"> <span
+                                    data-toggle="tooltip" title="Send Email"
+                                    class="glyphicon glyphicon-envelope"> </span>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
 </div>
 

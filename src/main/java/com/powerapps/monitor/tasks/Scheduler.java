@@ -1,15 +1,14 @@
 package com.powerapps.monitor.tasks;
 
-import java.io.IOException;
-
+import com.powerapps.monitor.service.BatchManagerLogService;
+import com.powerapps.monitor.service.EmailClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.powerapps.monitor.service.BatchManagerLogService;
-import com.powerapps.monitor.service.EmailClient;
+import java.io.IOException;
 
 @Component
 public class Scheduler {
@@ -29,11 +28,5 @@ public class Scheduler {
     @Scheduled(fixedDelay = 120000)
     public void runFixedSchedule() throws IOException {
         bmService.emailAndPersistToCache();
-    }
-    
-    
-    
-    void sendEmail() {
-      this.emailClient.sendEmail("joshua@kollect.my,nwaankwo.joshua@gmail.com");
     }
 }

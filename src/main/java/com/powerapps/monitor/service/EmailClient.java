@@ -8,6 +8,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 @Service
 public class EmailClient {
@@ -23,14 +26,18 @@ public class EmailClient {
         this.builder = builder;
     }
 
-    public void sendEmail(String recipient){
+    public void sendAdhocEmail(String title, String body,
+                               MultipartFile attachment, File logFile){
         MimeMessagePreparator messagePreparator = mimeMessage -> {
-            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            String recipient = "hashim@kollect.my";
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
             messageHelper.setFrom(emailFrom);
             messageHelper.setTo(recipient.split(","));
             messageHelper.setSubject("PowerApps - Log Errors");
-            String content = builder.buildEmail();
+            String content = builder.buildAdhocEmail(title, body);
             messageHelper.setText(content, true);
+            messageHelper.addAttachment(attachment.getOriginalFilename(), attachment);
+            messageHelper.addAttachment(logFile.getName(), logFile);
         };
         try {
             mailSender.send(messagePreparator);

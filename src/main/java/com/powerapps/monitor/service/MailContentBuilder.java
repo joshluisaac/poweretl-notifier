@@ -14,14 +14,10 @@ public class MailContentBuilder {
         this.templateEngine = templateEngine;
     }
 
-    public String buildEmail() {
+    public String buildAdhocEmail(String title, String body) {
         Context context = new Context();
-        context.setVariable("title", "Hi there,");
-        context.setVariable("intro", "This is an automated email from PowerApps.");
-        context.setVariable("message", "The following errors have occurred: ");
-        context.setVariable("salutation", "Regards,");
-        context.setVariable("signOff", "PowerApps Auto Update");
-        context.setVariable("footer", null);
-        return templateEngine.process("fragments/template_email", context);
+        context.setVariable("title", title);
+        context.setVariable("body", body);
+        return templateEngine.process("fragments/template_adhoc_mail_template", context);
     }
 }

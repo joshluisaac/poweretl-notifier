@@ -14,12 +14,14 @@ public class Batch {
 	Timestamp startTime, endTime;
 	double runningTime;
 	String batchName;
-	public Batch(Timestamp startTime, Timestamp endTime, double runningTime, String batchName) {
+	int batchStatus;
+	public Batch(Timestamp startTime, Timestamp endTime, double runningTime, String batchName, int batchStatus) {
 		
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.runningTime = runningTime;
 		this.batchName = batchName;
+		this.batchStatus = batchStatus;
 	}
 	public Batch() {
 		
@@ -47,6 +49,13 @@ public class Batch {
 	}
 	public void setBatchName(String batchName) {
 		this.batchName = batchName;
+	}
+	
+	public int getBatchStatus() {
+		return batchStatus;
+	}
+	public void setBatchStatus(int batchStatus) {
+		this.batchStatus = batchStatus;
 	}
 	@Override
 	public String toString() {

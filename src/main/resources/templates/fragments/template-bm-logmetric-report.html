@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head th:replace="fragments/template_form_header :: header"></head>
 <div class="modal-header vertical-align-center">
@@ -14,7 +14,7 @@
                     <tr>
                         <th>No.</th>
 						<th>Batch</th>
-						<!-- <th>Status</th> -->
+						<th>Status</th>
 						<th>Running Time</th>
                     </tr>
                     </thead>
@@ -24,6 +24,11 @@
                         </td>
                         <td th:text="${report.batchName}">
                         </td>
+                        <td th:switch="${report.batchStatus}">
+                            <p class="label label-success" th:case="1">Successful</p>
+                            <p class="label label-info" th:case="2">In Progress</p>
+                            <p class="label label-danger" th:case="3">Failed</p>
+                        </td>
                         <td th:text="${#numbers.formatDecimal(report.runningTime,2,2)}">
                         </td>
                     </tr>
@@ -32,7 +37,7 @@
             </div>
         </div>
             <div class="modal-footer">
-                <a type="button" class="btn btn-primary btn-sm" href="/runbatch">Close</a>
+                <a type="button" class="btn btn-primary btn-sm" href="/bmerrorreport">Close</a>
             </div>
         
     </div>

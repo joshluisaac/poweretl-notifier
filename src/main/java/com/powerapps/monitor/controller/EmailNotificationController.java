@@ -18,8 +18,6 @@ public class EmailNotificationController {
     @Value("${app.bmRootPath}")
     private String bmRootPath;
 
-    private static final String UPLOAD_DIR = "uploads/";
-
     @RequestMapping(value = "/seemailnotifreport", method = RequestMethod.GET)
     public String serviceEngineEmailNotifReport(Model model) {
         return "serviceEngineEmailNotifReport";
@@ -38,8 +36,8 @@ public class EmailNotificationController {
 
     @GetMapping("/sendadhocemail")
     public Object sendAdhocEmail(@RequestParam String logFileName,
-                                 RedirectAttributes redirAttr){
-        redirAttr.addAttribute("logFileName", logFileName);
+                                 Model model){
+        model.addAttribute("logFileName", logFileName);
         return "fragments/template_adhoc_email_modal";
     }
 

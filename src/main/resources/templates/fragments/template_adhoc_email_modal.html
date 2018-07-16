@@ -17,12 +17,20 @@
                     <label for="message" class="col-form-label">Message:</label>
                     <textarea name="body" class="form-control" id="message" required></textarea>
                 </div>
+                <span class="blue">
+                    Upload only up to 1MB attachments.
+                </span>
             </div>
             <div class="modal-footer">
+                <div class = "col-md-8 text-left">
                 <label>
-                    <input type="file" name="attachment" class="form-control"/>
+                    <input type="file" name="attachment" class="form-control" style="width: 225px; height: 33px;"/>
                 </label>
+                </div>
+                <div class = "col-md-4">
                 <button type="submit" class="btn btn-primary btn-sm">Send</button>
+                    <a href="/bmerrorreport" class = "btn btn-warning btn-sm">Close</a>
+                </div>
             </div>
         </form>
     </div>

@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -41,7 +38,7 @@ public class EmailNotificationController {
     @PostMapping("/sendadhocemail")
     public Object sendAdhocEmail(@RequestParam String title,
                                  @RequestParam String body,
-                                 @RequestParam("file") MultipartFile attachment,
+                                 @RequestParam (required = false) MultipartFile attachment,
                                  Model model, @RequestParam String
                                  logFileName) {
         /* Check if file is too large (>1MB), redirect to error message if true. */

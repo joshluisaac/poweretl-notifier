@@ -33,8 +33,8 @@ public class EmailClient {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
             messageHelper.setFrom(emailFrom);
             messageHelper.setTo(recipient.split(","));
-            messageHelper.setSubject("PowerApps - Log Errors");
-            String content = builder.buildAdhocEmail(title, body);
+            messageHelper.setSubject(title);
+            String content = builder.buildAdhocEmail(body);
             messageHelper.setText(content, true);
             messageHelper.addAttachment(attachment.getOriginalFilename(), attachment);
             messageHelper.addAttachment(logFile.getName(), logFile);

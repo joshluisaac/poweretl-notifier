@@ -14,9 +14,8 @@ public class MailContentBuilder {
         this.templateEngine = templateEngine;
     }
 
-    public String buildAdhocEmail(String title, String body) {
+    public String buildAdhocEmail(String body) {
         Context context = new Context();
-        context.setVariable("title", title);
         context.setVariable("body", body);
         return templateEngine.process("fragments/template_adhoc_mail_template", context);
     }

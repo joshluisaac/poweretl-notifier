@@ -38,8 +38,8 @@ public class EmailNotificationController {
 
     @GetMapping("/sendadhocemail")
     public Object sendAdhocEmail(@RequestParam String logFileName,
-                                 Model model){
-        model.addAttribute("logFileName", logFileName);
+                                 RedirectAttributes redirAttr){
+        redirAttr.addAttribute("logFileName", logFileName);
         return "fragments/template_adhoc_email_modal";
     }
 

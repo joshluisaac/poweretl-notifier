@@ -35,12 +35,19 @@ public class EmailNotificationController {
         return "batchManagerEmailNotifReport";
     }
 
+    @GetMapping("/sendadhocemail")
+    public Object sendAdhocEmail(@RequestParam String logFileName,
+                                 Model model){
+        model.addAttribute("logFileName", logFileName);
+        return "fragments/template_adhoc_email_modal";
+    }
+
     @PostMapping("/sendadhocemail")
-    public Object sendAdhocEmail(@RequestParam String title,
+    public Object sendAdhocEmail(@RequestParam String logFileName,
+                                 @RequestParam String title,
                                  @RequestParam String body,
                                  @RequestParam (required = false) MultipartFile attachment,
-                                 Model model, @RequestParam String
-                                 logFileName) {
+                                 Model model) {
         /* Check if file is too large (>1MB), redirect to error message if true. */
         if (attachment.getSize() > 1000000){
             model.addAttribute("size", "File size is too large, please upload only up to 1MB.");

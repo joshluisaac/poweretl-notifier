@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/template_form_header :: header"></head>
+<div class="modal-header vertical-align-center">
+    <h3 class="text-center" style="color: white;">New Message</h3>
+</div>
+<div class="modal-body" style="max-width: 1500px;margin: auto; width: 50%;">
+    <div class="panel panel-default">
+        <form method="POST" action="/sendadhocemail" enctype="multipart/form-data">
+            <input th:value="${logFileName}" name="logFileName" hidden>
+            <div class="panel-body">
+                <div class="form-group ">
+                    <label for="title" class="col-form-label">Title:</label>
+                    <input type="text" name="title" class="form-control" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="col-form-label">Message:</label>
+                    <textarea name="body" class="form-control" id="message" required></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <label>
+                    <input type="file" name="attachment" class="form-control"/>
+                </label>
+                <button type="submit" class="btn btn-primary btn-sm">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="fragments/template_allscripts :: scripts"></div>
+</html>

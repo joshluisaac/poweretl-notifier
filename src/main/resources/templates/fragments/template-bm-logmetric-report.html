@@ -6,16 +6,14 @@
 </div>
 <div class="modal-body" style="max-width: 1500px;margin: auto; width: 50%;">
     <div class="panel panel-default">
-        
         <div class="panel-body">
-            <div class="row">
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
                         <th>No.</th>
 						<th>Batch</th>
 						<th>Status</th>
-						<th>Running Time</th>
+						<th>Running Time (Min)</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,12 +32,10 @@
                     </tr>
                     </tbody>
                 </table>
-            </div>
         </div>
             <div class="modal-footer">
                 <a type="button" class="btn btn-primary btn-sm" href="/bmerrorreport">Close</a>
             </div>
-        
     </div>
 </div>
 <div th:replace="fragments/template_allscripts :: scripts"></div>

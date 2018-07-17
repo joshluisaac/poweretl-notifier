@@ -1,4 +1,4 @@
-package com.powerapps.monitor.controller;
+package dummy;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

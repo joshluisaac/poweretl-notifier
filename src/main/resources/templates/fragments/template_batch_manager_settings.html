@@ -20,9 +20,7 @@
   </div>
   <div class="x_content">
    <br />
-   <form action="/adminEmailSettings" method="post"
-    id="ajaxForm" data-parsley-validate
-    class="form-horizontal form-label-left">
+   <form action="/savebmsetting" method="post" id="" data-parsley-validate class="form-horizontal form-label-left">
 
     <div class="form-group">
      <label class="control-label col-md-2 col-sm-2 col-xs-6"
@@ -48,11 +46,33 @@
     </div>
 
     <div class="form-group">
-     <label class="control-label col-md-2 col-sm-2 col-xs-6" for="host">Regular Expression<span class="required">*</span>
+     <label class="control-label col-md-2 col-sm-2 col-xs-6" for="host">Start Regex<span class="required">*</span>
      </label>
      <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.host} name="regularExpression" type="text"
-       required="required" placeholder="Regular Expression"
+      <input th:value=${result?.host} name="batchStartRegex" type="text"
+       required="required" placeholder="Batch Started Regular Expression"
+       class="form-control col-md-7 col-xs-12 hasclear">
+     </div>
+    </div>
+    
+    
+        <div class="form-group">
+     <label class="control-label col-md-2 col-sm-2 col-xs-6" for="host">Done Regex<span class="required">*</span>
+     </label>
+     <div class="col-md-4 col-sm-4 col-xs-6">
+      <input th:value=${result?.host} name="batchDoneRegex" type="text"
+       required="required" placeholder="Batch Ended Regular Expression"
+       class="form-control col-md-7 col-xs-12 hasclear">
+     </div>
+    </div>
+    
+    
+            <div class="form-group">
+     <label class="control-label col-md-2 col-sm-2 col-xs-6" for="host">Error Regex<span class="required">*</span>
+     </label>
+     <div class="col-md-4 col-sm-4 col-xs-6">
+      <input th:value=${result?.host} name="batchErrorRegex" type="text"
+       required="required" placeholder="Batch Error Regular Expression"
        class="form-control col-md-7 col-xs-12 hasclear">
      </div>
     </div>
@@ -63,7 +83,7 @@
       for="email-port">Last Processed Line<span class="required">*</span>
      </label>
      <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.port} name="lastLineProcessed" type="text"
+      <input th:value=${result?.port} name="lastLineProcessed" type="number"
        required="required" placeholder="Last Line Processed"
        class="form-control col-md-7 col-xs-12 validate hasclear" min="0" maxlength="4" pattern="\d*">
      </div>

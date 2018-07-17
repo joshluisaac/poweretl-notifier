@@ -20,8 +20,8 @@
   </div>
   <div class="x_content">
    <br />
-   <form action="/adminEmailSettings" method="post"
-    id="ajaxForm" data-parsley-validate
+   <form action="/savesesetting" method="post"
+    id="" data-parsley-validate
     class="form-horizontal form-label-left">
 
     <div class="form-group">
@@ -31,7 +31,7 @@
      </label>
      <div class="col-md-4 col-sm-4 col-xs-6">
       <input th:value="${result?.userAuthentication}"
-       name="logFileLocation" type="text" required="required"
+       name="seRootPath" type="text" required="required"
        placeholder="Log File Location"
        class="form-control col-md-7 col-xs-12 hasclear">
      </div>
@@ -41,7 +41,7 @@
       for="userName">Log File Name <span class="required">*</span>
      </label>
      <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.userName} name="logFileName" type="text"
+      <input th:value=${result?.userName} name="seErrorLog" type="text"
        required="required" placeholder="Log File Name"
        class="form-control col-md-7 col-xs-12 hasclear">
      </div>
@@ -51,7 +51,7 @@
      <label class="control-label col-md-2 col-sm-2 col-xs-6" for="host">Regular Expression<span class="required">*</span>
      </label>
      <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.host} name="regularExpression" type="text"
+      <input th:value=${result?.host} name="seExceptionRegex" type="text"
        required="required" placeholder="Regular Expression"
        class="form-control col-md-7 col-xs-12 hasclear">
      </div>

@@ -20,7 +20,7 @@ import com.powerapps.monitor.util.Utils;;
 @Controller
 public class BatchManagerSettingController {
   
-  //private static final Logger LOG = LoggerFactory.getLogger(BatchManagerSettingController.class);
+ private static final Logger LOG = LoggerFactory.getLogger(BatchManagerSettingController.class);
   private final JsonWriter bmWriter;
   private final Utils util;
 

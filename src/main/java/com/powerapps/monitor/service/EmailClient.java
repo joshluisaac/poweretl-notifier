@@ -29,7 +29,7 @@ public class EmailClient {
     public void sendAdhocEmail(String title, String body,
                                MultipartFile attachment, File logFile){
         MimeMessagePreparator messagePreparator = mimeMessage -> {
-            String recipient = "hashim@kollect.my";
+            String recipient = "chels.kollect@gmail.com";
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
             messageHelper.setFrom(emailFrom);
             messageHelper.setTo(recipient.split(","));

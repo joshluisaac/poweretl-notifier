@@ -11,8 +11,8 @@ import java.util.regex.Matcher;
 import org.springframework.stereotype.Component;
 
 import com.kollect.etl.util.FileUtils;
-import com.powerapps.monitor.Utils;
 import com.powerapps.monitor.model.Batch;
+import com.powerapps.monitor.util.Utils;
 
 /**
  * The Class that extracts some relevant features from BatchManager log file

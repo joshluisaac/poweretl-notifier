@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 
 import com.kollect.etl.util.FileUtils;
 import com.kollect.etl.util.ListUtils;
-import com.powerapps.monitor.Utils;
 import com.powerapps.monitor.model.LogSummary;
+import com.powerapps.monitor.util.Utils;
 
 @Service
 public class BatchManagerLogService {

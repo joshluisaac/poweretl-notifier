@@ -1,4 +1,4 @@
-package com.powerapps.monitor;
+package com.powerapps.monitor.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,8 +11,11 @@ import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+import com.kollect.etl.util.FileUtils;
 
+@Component
 public class Utils {
   
   private static final Logger LOG = LoggerFactory.getLogger(Utils.class);
@@ -40,6 +43,11 @@ public class Utils {
     Pattern p = Pattern.compile(pattern);
     Matcher m = p.matcher(candidate);
     return m;
+  }
+  
+  
+  public void writeTextFile(final String filePath, final Object data, boolean append) {
+    new FileUtils().writeTextFile(filePath, data,append );
   }
 
 

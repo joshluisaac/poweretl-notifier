@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 
 
 /**
- * The purpose of this class is to convert Java plain objects into JSON object
+ * The purpose of this class is to convert Java plain objects into JSON formatted string
  * @author joshua
  */
 

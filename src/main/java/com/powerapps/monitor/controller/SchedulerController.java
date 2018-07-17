@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class SchedulerController {
+  
+  
 
 
 	  @RequestMapping(value = "/fixedinterval", method = RequestMethod.GET)

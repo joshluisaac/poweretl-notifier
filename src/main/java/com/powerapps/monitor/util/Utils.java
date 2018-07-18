@@ -13,15 +13,16 @@ import org.springframework.stereotype.Component;
 
 import com.kollect.etl.util.FileUtils;
 
+/**
+ * The purpose of this class is to perform adhoc tasks such as reading and writing to files, formatting tasks etc
+ *
+ * @author joshua 
+ */
+
 @Component
 public class Utils {
 
   private static final Logger LOG = LoggerFactory.getLogger(Utils.class);
-
-
-  public Utils() {
-
-  }
 
 
   //reads a text file into a list data structure

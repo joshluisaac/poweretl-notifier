@@ -49,11 +49,11 @@ public class EmailSettingController {
                                   @RequestParam String password,
                                   @RequestParam String fromEmail,
                                   @RequestParam String host,
-                                  @RequestParam Integer port,
+                                  @RequestParam String port,
                                   @RequestParam String recipient,
                                   @RequestParam String subject,
                                   @RequestParam String message) {
-        Map<String, Object> autoEmailSettings = new HashMap<>();
+        Map<String, String> autoEmailSettings = new HashMap<>();
         autoEmailSettings.put("username", username);
         autoEmailSettings.put("password", password);
         autoEmailSettings.put("fromEmail", fromEmail);
@@ -72,9 +72,9 @@ public class EmailSettingController {
                                    @RequestParam String password,
                                    @RequestParam String fromEmail,
                                    @RequestParam String host,
-                                   @RequestParam Integer port,
+                                   @RequestParam String port,
                                    @RequestParam String recipient) {
-        Map<String, Object> adhocEmailSettings = new HashMap<>();
+        Map<String, String> adhocEmailSettings = new HashMap<>();
         adhocEmailSettings.put("username", username);
         adhocEmailSettings.put("password", password);
         adhocEmailSettings.put("fromEmail", fromEmail);

@@ -26,12 +26,12 @@ public class SettingController {
     private static final Logger LOG = LoggerFactory.getLogger(SettingController.class);
 
 
-    private final JsonWriter emailSettingsWriter;
+    private final JsonWriter settingsWriter;
     private final Utils util;
 
-    public SettingController(JsonWriter emailSettingsWriter,
+    public SettingController(JsonWriter settingsWriter,
                              Utils util) {
-        this.emailSettingsWriter = emailSettingsWriter;
+        this.settingsWriter = settingsWriter;
         this.util = util;
     }
 
@@ -93,7 +93,7 @@ public class SettingController {
         autoEmailSettings.put("recipient", recipient);
         autoEmailSettings.put("subject", subject);
         autoEmailSettings.put("message", message);
-        String jsonOut = emailSettingsWriter.generateJson(autoEmailSettings);
+        String jsonOut = settingsWriter.generateJson(autoEmailSettings);
         util.writeTextFile(autoEmailJsonPath, jsonOut, false);
     }
 
@@ -112,7 +112,7 @@ public class SettingController {
         adhocEmailSettings.put("host", host);
         adhocEmailSettings.put("port", port);
         adhocEmailSettings.put("recipient", recipient);
-        String jsonOut = emailSettingsWriter.generateJson(adhocEmailSettings);
+        String jsonOut = settingsWriter.generateJson(adhocEmailSettings);
         util.writeTextFile(adhocEmailJsonPath, jsonOut, false);
     }
 }

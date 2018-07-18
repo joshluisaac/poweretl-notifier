@@ -1,7 +1,10 @@
 package com.powerapps.monitor.controller;
 
+import com.powerapps.monitor.config.JsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,36 +15,43 @@ import com.powerapps.monitor.config.JsonWriter;
 import com.powerapps.monitor.model.SeProperties;
 import com.powerapps.monitor.util.Utils;
 
+import java.io.File;
+import java.io.IOException;
+
 @Controller
 public class ServiceEngineSettingController {
-	private final JsonWriter seWriter;
-	  private final Utils util;
-	  
-	 @Autowired
-	public ServiceEngineSettingController(JsonWriter seWriter, Utils util) {
-		this.seWriter = seWriter;
-		this.util = util;
-	}
-	 @RequestMapping(value="/savesesetting", method=RequestMethod.POST)
-	 @ResponseBody
-	 public String save(@RequestParam String seRootPath,
-			 @RequestParam String seExceptionRegex,@RequestParam String seErrorLog) {
-		 //Persist to DTO(data transfer object)
-		 SeProperties data = new SeProperties(seRootPath, seExceptionRegex, seErrorLog);
-		 //JSON conversion
-		 String output = seWriter.generateJson(data);
-		 //write JSON to file
-		 util.writeTextFile("./config/seconfig.json", output, false);
-		 return output;
-	 }
-	 @RequestMapping(value="/viewsesettings", method=RequestMethod.GET)
-	 public String view() {
-		 Gson gson = new Gson();
-		 
-		 SeProperties prop = gson.fromJson("{\"seRootPath\":\"kewfk\",\"seExceptionRegex\":\"fken\",\"seErrorLog\":\"fkewn12367\"}", SeProperties.class);
-		 System.out.println(prop.getSeErrorLog());
-		 
-		 return null;
-	 }
-	  
+  private final JsonWriter seWriter;
+  private final JsonReader jsonReader;
+  private final Utils util;
+
+  @Value("${app.seJson}")
+  private String seJsonPath;
+
+  @Autowired
+  public ServiceEngineSettingController(JsonWriter seWriter, JsonReader jsonReader, Utils util) {
+    this.seWriter = seWriter;
+    this.jsonReader = jsonReader;
+    this.util = util;
+  }
+
+  @RequestMapping(value = "/savesesetting", method = RequestMethod.POST)
+  //@ResponseBody
+  public String save(@RequestParam String seRootPath, @RequestParam String seExceptionRegex,
+      @RequestParam String seErrorLog) {
+    // Persist to DTO(data transfer object)
+    SeProperties data = new SeProperties(seRootPath, seExceptionRegex, seErrorLog);
+    // JSON conversion
+    String output = seWriter.generateJson(data);
+    // write JSON to file
+    util.writeTextFile(seJsonPath, output, false);
+    return "redirect:/viewsesetting";
+  }
+
+  @RequestMapping(value = "/viewsesetting", method = RequestMethod.GET)
+  public String view(Model model) throws IOException {
+    String jsonText = util.listToBuffer(util.readFile(new File(seJsonPath))).toString();
+    model.addAttribute("result",jsonReader.readJson(jsonText,SeProperties.class));
+    return "serviceEngineSettings";
+  }
+
 }

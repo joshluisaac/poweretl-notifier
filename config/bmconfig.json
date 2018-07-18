@@ -1,1 +1,7 @@
-{"bmRootPath":"11","batchStartRegex":"39","batchDoneRegex":"40","batchErrorRegex":"57","bmCache":"x.txt"}
+{
+	"bmRootPath": "11",
+	"batchStartRegex": "39",
+	"batchDoneRegex": "40",
+	"batchErrorRegex": "57",
+	"bmCache": "x.txt"
+}

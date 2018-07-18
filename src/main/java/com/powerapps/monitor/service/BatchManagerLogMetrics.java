@@ -59,7 +59,6 @@ public class BatchManagerLogMetrics {
           startFound = true;
           finishFound = false;
           errorFound = false;
-         
           continue;
         }
       }
@@ -73,7 +72,7 @@ public class BatchManagerLogMetrics {
             double runningTime = ((endTime.getTime() - batch.getStartTime().getTime()) / 1000) / 60f;
             System.out.println(runningTime);
             batch.setRunningTime(runningTime);
-            batchStatus = 1;
+            batchStatus = 1; // successful
      	   batch.setBatchStatus(batchStatus);
      	   batchList.add(batch);
           finishFound = true;
@@ -88,7 +87,7 @@ public class BatchManagerLogMetrics {
       if((j+2) == list.size() ) { 
     	 Matcher inprogressMatcher = Utils.matcher(list.get(j), regexList.get(3)+ "(" + processName + ")");
     		 if(inprogressMatcher.find()) {
-    		  batchStatus = 2;
+    		  batchStatus = 2; // in progress
     		  batch.setBatchStatus(batchStatus);
     		  String timeString = inprogressMatcher.group(1);
               String[] timeTokens = timeString.split("\\,");
@@ -111,11 +110,9 @@ public class BatchManagerLogMetrics {
               double runningTime = ((endTime.getTime() - batch.getStartTime().getTime()) / 1000) / 60f;
              // System.out.println(endTime+"minus"+batch.getStartTime());
               batch.setRunningTime(runningTime);
-    		  batchStatus = 3;
+    		  batchStatus = 3; //error
     		  batch.setBatchStatus(batchStatus);
     	      batchList.add(batch);
-              //startFound = false;
-              //errorFound = true;
               break;  
     	  }
       }

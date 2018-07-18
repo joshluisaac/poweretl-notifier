@@ -3,6 +3,7 @@ package com.powerapps.monitor.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -14,8 +15,12 @@ import java.io.File;
 
 @Service
 public class EmailClient {
+    @Value("${app.autoEmailJson}")
+    private String autoEmailJsonPath;
+    @Value("${app.adhocEmailJson}")
+    private String adhocEmailJsonPath;
+
     private JavaMailSender mailSender;
-    private String emailFrom = "datareceived@kollect.my";
     private MailContentBuilder builder;
     private static final Logger LOG = LoggerFactory.getLogger(EmailClient.class);
 
@@ -31,7 +36,7 @@ public class EmailClient {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             String recipient = "chels.kollect@gmail.com";
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
-            messageHelper.setFrom(emailFrom);
+            messageHelper.setFrom("");
             messageHelper.setTo(recipient.split(","));
             messageHelper.setSubject(title);
             String content = builder.buildAdhocEmail(body);

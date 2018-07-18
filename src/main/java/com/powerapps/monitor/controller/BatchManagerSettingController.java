@@ -19,36 +19,40 @@ import com.powerapps.monitor.util.Utils;;
 
 @Controller
 public class BatchManagerSettingController {
-  
- private static final Logger LOG = LoggerFactory.getLogger(BatchManagerSettingController.class);
-  private final JsonWriter bmWriter;
-  private final Utils util;
 
-  @Value("${app.bmJson}")
-  private String bmJsonPath;
+    private static final Logger LOG = LoggerFactory.getLogger(BatchManagerSettingController.class);
+    private final JsonWriter bmWriter;
+    private final Utils util;
 
-  
-  @Autowired
-  BatchManagerSettingController(JsonWriter bmWriter,Utils util){
-    this.bmWriter = bmWriter;
-    this.util = util;
-  }
-  
-  @RequestMapping(value = "/savebmsetting", method = RequestMethod.POST)
-  @ResponseBody
-  public String save(Model model,@RequestParam Integer lastLineProcessed,
-      @RequestParam String batchErrorRegex,
-      @RequestParam String batchDoneRegex,
-      @RequestParam String batchStartRegex,
-      @RequestParam String logFileName,
-      @RequestParam String logFileLocation){
+    @Value("${app.bmJson}")
+    private String bmJsonPath;
 
-    BmProperties bmProp = new BmProperties(logFileLocation, batchStartRegex, batchDoneRegex, batchErrorRegex, "x.txt");
-    String out = bmWriter.generateJson(bmProp);
-    util.writeTextFile(bmJsonPath,out,false);
-    return out;
-  }
-  
-  
+
+    @Autowired
+    BatchManagerSettingController(JsonWriter bmWriter, Utils util) {
+        this.bmWriter = bmWriter;
+        this.util = util;
+    }
+
+    @RequestMapping(value = "/viewbmsetting", method = RequestMethod.GET)
+    public String batchManagerSettings(Model model) {
+        return "batchManagerSettings";
+    }
+
+    @RequestMapping(value = "/savebmsetting", method = RequestMethod.POST)
+    @ResponseBody
+    public String save(Model model, @RequestParam Integer lastLineProcessed,
+                       @RequestParam String batchErrorRegex,
+                       @RequestParam String batchDoneRegex,
+                       @RequestParam String batchStartRegex,
+                       @RequestParam String logFileName,
+                       @RequestParam String logFileLocation) {
+
+        BmProperties bmProp = new BmProperties(logFileLocation, batchStartRegex, batchDoneRegex, batchErrorRegex, "x.txt");
+        String out = bmWriter.generateJson(bmProp);
+        util.writeTextFile(bmJsonPath, out, false);
+        return out;
+    }
+
 
 }

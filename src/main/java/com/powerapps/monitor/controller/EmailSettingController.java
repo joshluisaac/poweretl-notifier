@@ -1,65 +1,45 @@
 package com.powerapps.monitor.controller;
 
+import com.powerapps.monitor.config.JsonReader;
 import com.powerapps.monitor.config.JsonWriter;
-import com.powerapps.monitor.service.JsonFileReader;
 import com.powerapps.monitor.util.Utils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-public class SettingController {
+public class EmailSettingController {
     @Value("${app.autoEmailJson}")
     private String autoEmailJsonPath;
     @Value("${app.adhocEmailJson}")
     private String adhocEmailJsonPath;
 
-    private static final Logger LOG = LoggerFactory.getLogger(SettingController.class);
-
-
     private final JsonWriter settingsWriter;
     private final Utils util;
-    private final JsonFileReader jsonFileReader;
+    private final JsonReader jsonReader;
 
-    public SettingController(JsonWriter settingsWriter,
-                             Utils util,
-                             JsonFileReader jsonFileReader) {
+    public EmailSettingController(JsonWriter settingsWriter,
+                                  Utils util,
+                                  JsonReader jsonReader) {
         this.settingsWriter = settingsWriter;
         this.util = util;
-        this.jsonFileReader = jsonFileReader;
-    }
-
-    @RequestMapping(value = "/sesettings", method = RequestMethod.GET)
-    public String serviceEngineSettings(Model model) {
-        return "serviceEngineSettings";
-    }
-
-    @RequestMapping(value = "/batchManager", method = RequestMethod.GET)
-    public String batchManagerSettings(Model model) {
-        return "batchManagerSettings";
-    }
-
-    @RequestMapping(value = "/dcsettings", method = RequestMethod.GET)
-    public String dataConnectorSettings(Model model) {
-        return "dataConnectorSettings";
+        this.jsonReader = jsonReader;
     }
 
     @RequestMapping("/autoemailsettings")
-    public String autoEmailSettings(Model model) throws IOException {
-        model.addAttribute("result", this.jsonFileReader.readJsonToMap(autoEmailJsonPath));
+    public String autoEmailSettings(Model model) {
+        model.addAttribute("result", jsonReader.readJson(this.util.listToBuffer(util.readFile(new File(autoEmailJsonPath))).toString(),HashMap.class));
         return "autoEmailSettingsForm";
     }
 
     @GetMapping("/adhocemailsettings")
-    public String adhocEmailSettings(Model model) throws IOException {
-        model.addAttribute("result", this.jsonFileReader.readJsonToMap(adhocEmailJsonPath));
+    public String adhocEmailSettings(Model model) {
+        model.addAttribute("result", jsonReader.readJson(this.util.listToBuffer(util.readFile(new File(adhocEmailJsonPath))).toString(),HashMap.class));
         return "adhocEmailSettingsForm";
     }
 

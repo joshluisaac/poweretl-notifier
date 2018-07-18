@@ -16,7 +16,7 @@ import com.kollect.etl.util.FileUtils;
 /**
  * The purpose of this class is to perform adhoc tasks such as reading and writing to files, formatting tasks etc
  *
- * @author joshua 
+ * @author joshua
  */
 
 @Component

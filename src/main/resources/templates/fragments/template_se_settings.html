@@ -26,11 +26,11 @@
 
     <div class="form-group">
      <label class="control-label col-md-2 col-sm-2 col-xs-6"
-      for="user-authentication">Log File Location <span
+      for="seRootPath">Log File Location <span
       class="required">*</span>
      </label>
      <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value="${result?.userAuthentication}"
+      <input id="seRootPath" th:value="${result?.seRootPath}"
        name="seRootPath" type="text" required="required"
        placeholder="Log File Location"
        class="form-control col-md-7 col-xs-12 hasclear">
@@ -38,36 +38,27 @@
     </div>
     <div class="form-group">
      <label class="control-label col-md-2 col-sm-2 col-xs-6"
-      for="userName">Log File Name <span class="required">*</span>
+      for="seErrorLog">Log File Name <span class="required">*</span>
      </label>
      <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.userName} name="seErrorLog" type="text"
+      <input id="seErrorLog" th:value=${result?.seErrorLog} name="seErrorLog" type="text"
        required="required" placeholder="Log File Name"
        class="form-control col-md-7 col-xs-12 hasclear">
      </div>
     </div>
 
     <div class="form-group">
-     <label class="control-label col-md-2 col-sm-2 col-xs-6" for="host">Regular Expression<span class="required">*</span>
+     <label class="control-label col-md-2 col-sm-2 col-xs-6" for="seExceptionRegex">Regular Expression<span class="required">*</span>
      </label>
      <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.host} name="seExceptionRegex" type="text"
+      <input th:value=${result?.seExceptionRegex} id="seExceptionRegex" name="seExceptionRegex" type="text"
        required="required" placeholder="Regular Expression"
        class="form-control col-md-7 col-xs-12 hasclear">
      </div>
     </div>
 
 
-    <div class="form-group">
-     <label class="control-label col-md-2 col-sm-2 col-xs-6"
-      for="email-port">Last Processed Line<span class="required">*</span>
-     </label>
-     <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.port} name="lastLineProcessed" type="text"
-       required="required" placeholder="Last Line Processed"
-       class="form-control col-md-7 col-xs-12 validate hasclear" min="0" maxlength="4" pattern="\d*">
-     </div>
-    </div>
+
 
     <div class="ln_solid"></div>
     <div class="form-group">

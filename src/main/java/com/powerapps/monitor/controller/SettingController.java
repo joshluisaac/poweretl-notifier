@@ -2,6 +2,7 @@ package com.powerapps.monitor.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,12 +24,13 @@ public class SettingController {
 	    return "dataConnectorSettings";
 	  }
 	
-	  @RequestMapping("/email")
-	  public String email() {
-	     return "emailSettingsForm";
+	  @RequestMapping("/autoemailsettings")
+	  public String autoEmailSettings() {
+	     return "autoEmailSettingsForm";
 	  }
 	  
-	
-	
-	
+	  @GetMapping("/adhocemailsettings")
+	  public String adhocEmailSettings() {
+		  return "adhocEmailSettingsForm";
+	  }
 }

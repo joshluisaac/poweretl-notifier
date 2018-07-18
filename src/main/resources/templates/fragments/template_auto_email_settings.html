@@ -1,0 +1,110 @@
+<div th:fragment="emailSettingsFragment" class="col-md-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                Email Configuration Properties
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                        data-toggle="dropdown" role="button" aria-expanded="false"><i
+                        class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a></li>
+                        <li><a href="#">Settings 2</a></li>
+                    </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br/>
+            <form action="/emailsettings" method="post"
+                  id="ajaxForm" data-parsley-validate
+                  class="form-horizontal form-label-left">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6">Username <span
+                            class>*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <input th:value="${result?.username}"
+                               name="username" type="text" required
+                               placeholder="Username for the email"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label
+                            class="control-label col-md-2 col-sm-2 col-xs-6">Password <span class>*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <input th:value=${result?.password} name="password" type="password"
+                               required placeholder="Password of email authenticator (username)"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6">
+                        From Email <span class>*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <input th:value=${result?.fromEmail} name="fromEmail" type="text"
+                               required placeholder="Sender for the email"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6">Email Host <span
+                            class>*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <input th:value=${result?.host} name="host" type="text"
+                               required placeholder="Email Host"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6">
+                        Email Port <span class>*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <input th:value=${result?.port} name="port" type="text"
+                               required placeholder="Email Port"
+                               class="form-control col-md-7 col-xs-12 validate hasclear" min="0" maxlength="4"
+                               pattern="\d*">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6">
+                        Email Recipient(s) <span class>*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <textarea th:text=${result?.recipient} name="recipient"
+                                  required placeholder="Email Recipient(s) - separate by commas(,)"
+                                  class="form-control col-md-7 col-xs-12 hasclear">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6">
+                        Email Subject <span class>*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <input th:value=${result?.subject} name="subject" type="text"
+                               required placeholder="Subject for automated emails"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-4">
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-success ">Save</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

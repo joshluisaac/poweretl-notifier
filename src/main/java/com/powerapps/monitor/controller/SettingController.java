@@ -1,7 +1,7 @@
 package com.powerapps.monitor.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.powerapps.monitor.config.JsonWriter;
+import com.powerapps.monitor.service.JsonFileReader;
 import com.powerapps.monitor.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,11 +26,14 @@ public class SettingController {
 
     private final JsonWriter settingsWriter;
     private final Utils util;
+    private final JsonFileReader jsonFileReader;
 
     public SettingController(JsonWriter settingsWriter,
-                             Utils util) {
+                             Utils util,
+                             JsonFileReader jsonFileReader) {
         this.settingsWriter = settingsWriter;
         this.util = util;
+        this.jsonFileReader = jsonFileReader;
     }
 
     @RequestMapping(value = "/sesettings", method = RequestMethod.GET)
@@ -52,25 +53,13 @@ public class SettingController {
 
     @RequestMapping("/autoemailsettings")
     public String autoEmailSettings(Model model) throws IOException {
-        try {
-            HashMap currentSettings =
-                    new ObjectMapper().readValue(new File(autoEmailJsonPath), HashMap.class);
-            model.addAttribute("result", currentSettings);
-        } catch (FileNotFoundException e) {
-            LOG.info("First time visiting the page, content will be displayed after saving json data." +e);
-        }
+        model.addAttribute("result", this.jsonFileReader.readJsonToMap(autoEmailJsonPath));
         return "autoEmailSettingsForm";
     }
 
     @GetMapping("/adhocemailsettings")
     public String adhocEmailSettings(Model model) throws IOException {
-        try {
-            HashMap currentSettings =
-                    new ObjectMapper().readValue(new File(adhocEmailJsonPath), HashMap.class);
-            model.addAttribute("result", currentSettings);
-        } catch (FileNotFoundException e) {
-            LOG.info("First time visiting the page, content will be displayed after saving json data."+e);
-        }
+        model.addAttribute("result", this.jsonFileReader.readJsonToMap(adhocEmailJsonPath));
         return "adhocEmailSettingsForm";
     }
 

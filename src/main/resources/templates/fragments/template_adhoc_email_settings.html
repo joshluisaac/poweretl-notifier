@@ -1,4 +1,4 @@
-<div th:fragment="autoEmailSettingsFragment" class="col-md-12 col-xs-12">
+<div th:fragment="adhocEmailSettingsFragment" class="col-md-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
             <h2>
@@ -20,7 +20,7 @@
         </div>
         <div class="x_content">
             <br/>
-            <form action="/autoemailsettings" method="post"
+            <form action="/adhocemailsettings" method="post"
                   id="ajaxForm" data-parsley-validate
                   class="form-horizontal form-label-left">
                 <div class="form-group">
@@ -82,27 +82,6 @@
                     <div class="col-md-4 col-sm-4 col-xs-6">
                         <textarea th:text=${result?.recipient} name="recipient"
                                   required placeholder="Email Recipient(s) - separate by commas(,)"
-                                  class="form-control col-md-7 col-xs-12 hasclear">
-                        </textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-6">
-                        Email Subject <span class>*</span>
-                    </label>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <input th:value=${result?.subject} name="subject" type="text"
-                               required placeholder="Subject for automated emails"
-                               class="form-control col-md-7 col-xs-12 hasclear">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-6">
-                        Email Message <span class>*</span>
-                    </label>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <textarea th:text=${result?.message} name="message"
-                                  required placeholder="Automated email message content"
                                   class="form-control col-md-7 col-xs-12 hasclear">
                         </textarea>
                     </div>

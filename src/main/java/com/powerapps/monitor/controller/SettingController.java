@@ -57,7 +57,7 @@ public class SettingController {
                     new ObjectMapper().readValue(new File(autoEmailJsonPath), HashMap.class);
             model.addAttribute("result", currentSettings);
         } catch (FileNotFoundException e) {
-            LOG.info("First time visiting the page, content will be displayed after saving json data.");
+            LOG.info("First time visiting the page, content will be displayed after saving json data." +e);
         }
         return "autoEmailSettingsForm";
     }
@@ -69,7 +69,7 @@ public class SettingController {
                     new ObjectMapper().readValue(new File(adhocEmailJsonPath), HashMap.class);
             model.addAttribute("result", currentSettings);
         } catch (FileNotFoundException e) {
-            LOG.info("First time visiting the page, content will be displayed after saving json data.");
+            LOG.info("First time visiting the page, content will be displayed after saving json data."+e);
         }
         return "adhocEmailSettingsForm";
     }

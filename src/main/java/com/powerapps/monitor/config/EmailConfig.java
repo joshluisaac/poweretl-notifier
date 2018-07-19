@@ -23,27 +23,27 @@ import java.util.Properties;
 
 @Component
 public class EmailConfig {
-    private final GetEmailSettings getEmailSettings;
+    private final JsonToHashMap jsonToHashMap;
 
     @Value("${app.generalEmailJson}")
     private String generalEmailJsonPath;
 
-    public EmailConfig(GetEmailSettings getEmailSettings){
-        this.getEmailSettings=getEmailSettings;
+    public EmailConfig(JsonToHashMap jsonToHashMap){
+        this.jsonToHashMap = jsonToHashMap;
     }
 
     @Bean
     public JavaMailSender javaMailService() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
         javaMailSender.setHost(
-                this.getEmailSettings.getSettings(generalEmailJsonPath).get("host"));
+                this.jsonToHashMap.toHmap(generalEmailJsonPath).get("host"));
         javaMailSender.setPort(
                 Integer.valueOf(
-                        this.getEmailSettings.getSettings(
+                        this.jsonToHashMap.toHmap(
                                 generalEmailJsonPath).get("port")));
-        javaMailSender.setUsername(this.getEmailSettings.getSettings(
+        javaMailSender.setUsername(this.jsonToHashMap.toHmap(
                 generalEmailJsonPath).get("username"));
-        javaMailSender.setPassword(this.getEmailSettings.getSettings(
+        javaMailSender.setPassword(this.jsonToHashMap.toHmap(
                 generalEmailJsonPath).get("password"));
         javaMailSender.setDefaultEncoding("UTF-8");
         javaMailSender.setProtocol("smtp");

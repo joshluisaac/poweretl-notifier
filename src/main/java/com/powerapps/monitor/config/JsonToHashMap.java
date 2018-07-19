@@ -7,23 +7,23 @@ import java.io.File;
 import java.util.HashMap;
 
 /**
- * This class reads in email properties from jSon using gson and returns a map.
+ * This class reads in json file using path using gson and returns a map.
  *
  * @author hashim
  */
 @Component
-public class GetEmailSettings {
+public class JsonToHashMap {
     private final JsonReader jsonReader;
     private final Utils util;
 
-    public GetEmailSettings(JsonReader jsonReader,
-                            Utils util){
+    public JsonToHashMap(JsonReader jsonReader,
+                         Utils util){
         this.jsonReader=jsonReader;
         this.util=util;
     }
 
     @SuppressWarnings("unchecked")
-    public HashMap<String, String> getSettings(String path){
+    public HashMap<String, String> toHmap(String path){
         return jsonReader.readJson(this.util.listToBuffer(util.readFile(new File(path))).toString(),HashMap.class);
     }
 }

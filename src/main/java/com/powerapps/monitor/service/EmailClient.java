@@ -1,6 +1,6 @@
 package com.powerapps.monitor.service;
 
-import com.powerapps.monitor.config.GetEmailSettings;
+import com.powerapps.monitor.config.JsonToHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,25 +30,25 @@ public class EmailClient {
 
     private JavaMailSender mailSender;
     private MailContentBuilder builder;
-    private final GetEmailSettings getEmailSettings;
+    private final JsonToHashMap jsonToHashMap;
 
     private static final Logger LOG = LoggerFactory.getLogger(EmailClient.class);
 
     @Autowired
     public EmailClient(JavaMailSender mailSender,
                        MailContentBuilder builder,
-                       GetEmailSettings getEmailSettings){
+                       JsonToHashMap jsonToHashMap){
         this.mailSender = mailSender;
         this.builder = builder;
-        this.getEmailSettings=getEmailSettings;
+        this.jsonToHashMap = jsonToHashMap;
     }
 
     public void sendAdhocEmail(String title, String body,
                                MultipartFile attachment, File logFile){
         MimeMessagePreparator messagePreparator = mimeMessage -> {
-            String recipient = this.getEmailSettings.getSettings(adhocEmailJsonPath).get("recipient");
+            String recipient = this.jsonToHashMap.toHmap(adhocEmailJsonPath).get("recipient");
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
-            messageHelper.setFrom(this.getEmailSettings.getSettings(generalEmailJsonPath).get("fromEmail"));
+            messageHelper.setFrom(this.jsonToHashMap.toHmap(generalEmailJsonPath).get("fromEmail"));
             messageHelper.setTo(recipient.split(","));
             messageHelper.setSubject(title);
             String content = builder.buildEmail(body);
@@ -66,13 +66,13 @@ public class EmailClient {
 
     public void sendAutoEmail(){
         MimeMessagePreparator messagePreparator = mimeMessage -> {
-            String recipient = this.getEmailSettings.getSettings(adhocEmailJsonPath).get("recipient");
+            String recipient = this.jsonToHashMap.toHmap(adhocEmailJsonPath).get("recipient");
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
-            messageHelper.setFrom(this.getEmailSettings.getSettings(generalEmailJsonPath).get("fromEmail"));
+            messageHelper.setFrom(this.jsonToHashMap.toHmap(generalEmailJsonPath).get("fromEmail"));
             messageHelper.setTo(recipient.split(","));
-            messageHelper.setSubject(this.getEmailSettings.getSettings(adhocEmailJsonPath).get("subject"));
+            messageHelper.setSubject(this.jsonToHashMap.toHmap(adhocEmailJsonPath).get("subject"));
             String content = builder.buildEmail(
-                    this.getEmailSettings.getSettings(adhocEmailJsonPath).get("message"));
+                    this.jsonToHashMap.toHmap(adhocEmailJsonPath).get("message"));
             messageHelper.setText(content, true);
         };
         try {

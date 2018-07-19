@@ -70,20 +70,10 @@ public class EmailSettingController {
 
     @ResponseBody
     @PostMapping("/autoemailsettings")
-    public void autoEmailSettings(@RequestParam String username,
-                                  @RequestParam String password,
-                                  @RequestParam String fromEmail,
-                                  @RequestParam String host,
-                                  @RequestParam String port,
-                                  @RequestParam String recipient,
+    public void autoEmailSettings(@RequestParam String recipient,
                                   @RequestParam String subject,
                                   @RequestParam String message) {
         Map<String, String> autoEmailSettings = new HashMap<>();
-        autoEmailSettings.put("username", username);
-        autoEmailSettings.put("password", password);
-        autoEmailSettings.put("fromEmail", fromEmail);
-        autoEmailSettings.put("host", host);
-        autoEmailSettings.put("port", port);
         autoEmailSettings.put("recipient", recipient);
         autoEmailSettings.put("subject", subject);
         autoEmailSettings.put("message", message);

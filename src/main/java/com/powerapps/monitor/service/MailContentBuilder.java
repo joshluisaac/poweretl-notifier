@@ -5,6 +5,11 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+/**
+ * This class is used to prepare the email template using thymeleaf.
+ *
+ * @author hashim
+ */
 @Service
 public class MailContentBuilder {
     private TemplateEngine templateEngine;
@@ -17,6 +22,7 @@ public class MailContentBuilder {
     public String buildEmail(String body) {
         Context context = new Context();
         context.setVariable("body", body);
-        return templateEngine.process("fragments/template_email_template", context);
+        return templateEngine.process(
+                "fragments/template_email_template", context);
     }
 }

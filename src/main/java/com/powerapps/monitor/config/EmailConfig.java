@@ -8,6 +8,19 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
+/**
+ * This class is an implementation of the JavaMailSender
+ * Used when sending email. It sets the necessary information needed such as
+ * username
+ * password
+ * host
+ * port
+ * protocol
+ * DefaultEncoding
+ * It also sets a few extra email properties such as tls, debug and authentication.
+ * @author hashim
+ */
+
 @Component
 public class EmailConfig {
     private final GetEmailSettings getEmailSettings;

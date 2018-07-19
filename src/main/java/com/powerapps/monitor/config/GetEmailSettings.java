@@ -6,6 +6,11 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.util.HashMap;
 
+/**
+ * This class reads in email properties from jSon using gson and returns a map.
+ *
+ * @author hashim
+ */
 @Component
 public class GetEmailSettings {
     private final JsonReader jsonReader;

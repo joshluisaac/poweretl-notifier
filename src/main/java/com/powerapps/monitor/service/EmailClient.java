@@ -14,6 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 
+/**
+ * This class is used to send out the emails, automated and adhoc.
+ *
+ * @author hashim
+ */
 @Service
 public class EmailClient {
     @Value("${app.autoEmailJson}")

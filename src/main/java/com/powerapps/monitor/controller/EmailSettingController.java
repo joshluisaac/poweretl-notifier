@@ -18,6 +18,8 @@ public class EmailSettingController {
     private String autoEmailJsonPath;
     @Value("${app.adhocEmailJson}")
     private String adhocEmailJsonPath;
+    @Value("${app.generalEmailJson}")
+    private String generalEmailJsonPath;
 
     private final JsonWriter settingsWriter;
     private final Utils util;
@@ -41,6 +43,29 @@ public class EmailSettingController {
     public String adhocEmailSettings(Model model) {
         model.addAttribute("result", jsonReader.readJson(this.util.listToBuffer(util.readFile(new File(adhocEmailJsonPath))).toString(),HashMap.class));
         return "adhocEmailSettingsForm";
+    }
+
+    @GetMapping("/generalemailsettings")
+    public String generalEmailSettings(Model model) {
+        model.addAttribute("result", jsonReader.readJson(this.util.listToBuffer(util.readFile(new File(generalEmailJsonPath))).toString(),HashMap.class));
+        return "generalEmailSettingsForm";
+    }
+
+    @ResponseBody
+    @PostMapping("/generalemailsettings")
+    public void generalEmailSettings(@RequestParam String username,
+                                     @RequestParam String password,
+                                     @RequestParam String fromEmail,
+                                     @RequestParam String host,
+                                     @RequestParam String port){
+        Map<String, String> generalEmailSettings = new HashMap<>();
+        generalEmailSettings.put("username", username);
+        generalEmailSettings.put("password", password);
+        generalEmailSettings.put("fromEmail", fromEmail);
+        generalEmailSettings.put("host", host);
+        generalEmailSettings.put("port", port);
+        String jsonOut = settingsWriter.generateJson(generalEmailSettings);
+        util.writeTextFile(generalEmailJsonPath, jsonOut, false);
     }
 
     @ResponseBody
@@ -68,18 +93,8 @@ public class EmailSettingController {
 
     @ResponseBody
     @PostMapping("/adhocemailsettings")
-    public void adhocEmailSettings(@RequestParam String username,
-                                   @RequestParam String password,
-                                   @RequestParam String fromEmail,
-                                   @RequestParam String host,
-                                   @RequestParam String port,
-                                   @RequestParam String recipient) {
+    public void adhocEmailSettings(@RequestParam String recipient) {
         Map<String, String> adhocEmailSettings = new HashMap<>();
-        adhocEmailSettings.put("username", username);
-        adhocEmailSettings.put("password", password);
-        adhocEmailSettings.put("fromEmail", fromEmail);
-        adhocEmailSettings.put("host", host);
-        adhocEmailSettings.put("port", port);
         adhocEmailSettings.put("recipient", recipient);
         String jsonOut = settingsWriter.generateJson(adhocEmailSettings);
         util.writeTextFile(adhocEmailJsonPath, jsonOut, false);

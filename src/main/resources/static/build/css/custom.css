@@ -228,7 +228,7 @@ html , body{
     top: 0;
     width: 210px;
     z-index: 4000;
-    background: #3E5367;
+    background: #d2d3d6;
     display: none
 }
 .nav-sm ul.nav.child_menu li {

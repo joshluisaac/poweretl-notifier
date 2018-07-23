@@ -9,12 +9,13 @@ import java.util.HashMap;
 import java.util.Properties;
 
 /**
- * This class is used to read and write Property files needed by the scheduler
+ * This class is used to read and write Property files to and from Hmap
+ * needed by the scheduler
  *
  * @author hashim
  */
 @Component
-public class PropertyFileUtils {
+public class PropertyToHashMap {
 
     public void hashMapToProp(String path, HashMap<String, String> keyValuePair)
             throws IOException{

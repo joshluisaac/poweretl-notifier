@@ -1,7 +1,7 @@
 package com.powerapps.monitor.controller;
 
-import com.powerapps.monitor.util.JsonToHashMap;
 import com.powerapps.monitor.config.JsonWriter;
+import com.powerapps.monitor.util.JsonToHashMap;
 import com.powerapps.monitor.util.Utils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class EmailSettingController {
@@ -52,21 +53,33 @@ public class EmailSettingController {
     @ResponseBody
     @PostMapping("/generalemailsettings")
     public void generalEmailSettings(@RequestParam HashMap<String, String> generalEmailSettings) {
-        String jsonOut = writer.generateJson(generalEmailSettings);
+        Map<String, String> toStore = new HashMap<>();
+        toStore.put("username", generalEmailSettings.get("username"));
+        toStore.put("password", generalEmailSettings.get("password"));
+        toStore.put("fromEmail", generalEmailSettings.get("fromEmail"));
+        toStore.put("host", generalEmailSettings.get("host"));
+        toStore.put("port", generalEmailSettings.get("port"));
+        String jsonOut = writer.generateJson(toStore);
         util.writeTextFile(generalEmailJsonPath, jsonOut, false);
     }
 
     @ResponseBody
     @PostMapping("/autoemailsettings")
     public void autoEmailSettings(@RequestParam HashMap<String, String> autoEmailSettings) {
-        String jsonOut = writer.generateJson(autoEmailSettings);
+        Map<String, String> toStore = new HashMap<>();
+        toStore.put("recipient", autoEmailSettings.get("recipient"));
+        toStore.put("subject", autoEmailSettings.get("subject"));
+        toStore.put("message", autoEmailSettings.get("message"));
+        String jsonOut = writer.generateJson(toStore);
         util.writeTextFile(autoEmailJsonPath, jsonOut, false);
     }
 
     @ResponseBody
     @PostMapping("/adhocemailsettings")
     public void adhocEmailSettings(@RequestParam HashMap<String, String> adhocEmailSettings) {
-        String jsonOut = writer.generateJson(adhocEmailSettings);
+        Map<String, String> toStore = new HashMap<>();
+        toStore.put("recipient", adhocEmailSettings.get("recipient"));
+        String jsonOut = writer.generateJson(toStore);
         util.writeTextFile(adhocEmailJsonPath, jsonOut, false);
     }
 }

@@ -35,8 +35,11 @@ public class SchedulerController {
 
     @ResponseBody
     @PostMapping("/fixedinterval")
-    public void saveFixedSetting(@RequestParam HashMap<String, String> keyValuePair) throws IOException {
-        this.propertyToHashMap.hashMapToProp(fixedSchedulerPropPath, keyValuePair);
+    public void saveFixedSetting(@RequestParam HashMap<String, String> keyValuePair)
+            throws IOException {
+        HashMap<String, String> toStore = new HashMap<>();
+        toStore.put("interval", keyValuePair.get("interval"));
+        this.propertyToHashMap.hashMapToProp(fixedSchedulerPropPath, toStore);
     }
 
     @RequestMapping(value = "/emailscheduler", method = RequestMethod.GET)
@@ -50,7 +53,18 @@ public class SchedulerController {
     @PostMapping("/emailscheduler")
     public void saveEmailSetting(@RequestParam HashMap<String, String> keyValuePair)
             throws IOException {
-        this.propertyToHashMap.hashMapToProp(emailSchedulerPropPath, keyValuePair);
+        HashMap<String, String> toStore = new HashMap<>();
+        toStore.put("second", keyValuePair.get("second"));
+        toStore.put("minute", keyValuePair.get("minute"));
+        toStore.put("hour", keyValuePair.get("hour"));
+        toStore.put("day", keyValuePair.get("day"));
+        toStore.put("month", keyValuePair.get("month"));
+        toStore.put("year", keyValuePair.get("year"));
+        toStore.put("emailSchedulerExpression", keyValuePair.get("second")+" ".
+                concat(keyValuePair.get("minute"))+" ".concat(keyValuePair.get("hour"))+" ".
+                concat(keyValuePair.get("day"))+" ".concat(keyValuePair.get("month")+" ".
+                concat(keyValuePair.get("year"))));
+        this.propertyToHashMap.hashMapToProp(emailSchedulerPropPath, toStore);
     }
 
 }

@@ -35,7 +35,6 @@ public class Scheduler {
 
     @Scheduled(fixedRateString = "${interval}")
     public void runFixedSchedule() throws IOException {
-        LOG.info("We are here fam...");
         bmService.emailAndPersistToCache();
     }
 }

@@ -1,5 +1,6 @@
-package com.powerapps.monitor.config;
+package com.powerapps.monitor.util;
 
+import com.powerapps.monitor.config.JsonReader;
 import com.powerapps.monitor.util.Utils;
 import org.springframework.stereotype.Component;
 

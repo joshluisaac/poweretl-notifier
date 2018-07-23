@@ -1,6 +1,6 @@
 package com.powerapps.monitor.controller;
 
-import com.powerapps.monitor.config.JsonToHashMap;
+import com.powerapps.monitor.util.JsonToHashMap;
 import com.powerapps.monitor.config.JsonWriter;
 import com.powerapps.monitor.util.Utils;
 import org.springframework.beans.factory.annotation.Value;

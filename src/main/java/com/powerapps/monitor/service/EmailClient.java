@@ -1,6 +1,6 @@
 package com.powerapps.monitor.service;
 
-import com.powerapps.monitor.config.JsonToHashMap;
+import com.powerapps.monitor.util.JsonToHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

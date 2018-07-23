@@ -1,6 +1,7 @@
 package com.powerapps.monitor.controller;
 
 
+import com.powerapps.monitor.util.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +35,12 @@ public class BatchManagerSettingController {
         this.util = util;
     }
 
-    @RequestMapping(value = "/viewbmsetting", method = RequestMethod.GET)
+    @RequestMapping(value = Path.Web.GET_BM_WEB_SETTING, method = RequestMethod.GET)
     public String batchManagerSettings(Model model) {
         return "batchManagerSettings";
     }
 
-    @RequestMapping(value = "/savebmsetting", method = RequestMethod.POST)
+    @RequestMapping(value = Path.Web.POST_BM_WEB_SETTING, method = RequestMethod.POST)
     @ResponseBody
     public String save(Model model, @RequestParam Integer lastLineProcessed,
                        @RequestParam String batchErrorRegex,

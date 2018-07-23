@@ -46,13 +46,11 @@ public class EmailClient {
     public void sendAdhocEmail(String title, String body,
                                MultipartFile attachment, File logFile){
         MimeMessagePreparator messagePreparator = mimeMessage -> {
-            String recipient = this.jsonToHashMap.toHmap(adhocEmailJsonPath).get("recipient");
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
             messageHelper.setFrom(this.jsonToHashMap.toHmap(generalEmailJsonPath).get("fromEmail"));
-            messageHelper.setTo(recipient.split(","));
+            messageHelper.setTo(this.jsonToHashMap.toHmap(adhocEmailJsonPath).get("recipient").split(","));
             messageHelper.setSubject(title);
-            String content = builder.buildEmail(body);
-            messageHelper.setText(content, true);
+            messageHelper.setText(builder.buildEmail(body), true);
             messageHelper.addAttachment(attachment.getOriginalFilename(), attachment);
             messageHelper.addAttachment(logFile.getName(), logFile);
         };
@@ -66,14 +64,12 @@ public class EmailClient {
 
     public void sendAutoEmail(){
         MimeMessagePreparator messagePreparator = mimeMessage -> {
-            String recipient = this.jsonToHashMap.toHmap(adhocEmailJsonPath).get("recipient");
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
             messageHelper.setFrom(this.jsonToHashMap.toHmap(generalEmailJsonPath).get("fromEmail"));
-            messageHelper.setTo(recipient.split(","));
-            messageHelper.setSubject(this.jsonToHashMap.toHmap(adhocEmailJsonPath).get("subject"));
-            String content = builder.buildEmail(
-                    this.jsonToHashMap.toHmap(adhocEmailJsonPath).get("message"));
-            messageHelper.setText(content, true);
+            messageHelper.setTo(this.jsonToHashMap.toHmap(autoEmailJsonPath).get("recipient").split(","));
+            messageHelper.setSubject(this.jsonToHashMap.toHmap(autoEmailJsonPath).get("subject"));
+            messageHelper.setText(builder.buildEmail(
+                    this.jsonToHashMap.toHmap(adhocEmailJsonPath).get("message")), true);
         };
         try {
             mailSender.send(messagePreparator);

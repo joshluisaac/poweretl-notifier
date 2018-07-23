@@ -34,19 +34,19 @@ public class EmailSettingController {
 
     @RequestMapping("/autoemailsettings")
     public String autoEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHmap(autoEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMap(autoEmailJsonPath));
         return "autoEmailSettingsForm";
     }
 
     @GetMapping("/adhocemailsettings")
     public String adhocEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHmap(adhocEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMap(adhocEmailJsonPath));
         return "adhocEmailSettingsForm";
     }
 
     @GetMapping("/generalemailsettings")
     public String generalEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHmap(generalEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMap(generalEmailJsonPath));
         return "generalEmailSettingsForm";
     }
 

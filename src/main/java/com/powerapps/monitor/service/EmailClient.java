@@ -47,8 +47,8 @@ public class EmailClient {
                                MultipartFile attachment, File logFile){
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
-            messageHelper.setFrom(this.jsonToHashMap.toHmap(generalEmailJsonPath).get("fromEmail"));
-            messageHelper.setTo(this.jsonToHashMap.toHmap(adhocEmailJsonPath).get("recipient").split(","));
+            messageHelper.setFrom(this.jsonToHashMap.toHashMap(generalEmailJsonPath).get("fromEmail"));
+            messageHelper.setTo(this.jsonToHashMap.toHashMap(adhocEmailJsonPath).get("recipient").split(","));
             messageHelper.setSubject(title);
             messageHelper.setText(builder.buildEmail(body), true);
             messageHelper.addAttachment(attachment.getOriginalFilename(), attachment);
@@ -65,11 +65,11 @@ public class EmailClient {
     public void sendAutoEmail(){
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
-            messageHelper.setFrom(this.jsonToHashMap.toHmap(generalEmailJsonPath).get("fromEmail"));
-            messageHelper.setTo(this.jsonToHashMap.toHmap(autoEmailJsonPath).get("recipient").split(","));
-            messageHelper.setSubject(this.jsonToHashMap.toHmap(autoEmailJsonPath).get("subject"));
+            messageHelper.setFrom(this.jsonToHashMap.toHashMap(generalEmailJsonPath).get("fromEmail"));
+            messageHelper.setTo(this.jsonToHashMap.toHashMap(autoEmailJsonPath).get("recipient").split(","));
+            messageHelper.setSubject(this.jsonToHashMap.toHashMap(autoEmailJsonPath).get("subject"));
             messageHelper.setText(builder.buildEmail(
-                    this.jsonToHashMap.toHmap(autoEmailJsonPath).get("message")), true);
+                    this.jsonToHashMap.toHashMap(autoEmailJsonPath).get("message")), true);
         };
         try {
             mailSender.send(messagePreparator);

@@ -36,14 +36,14 @@ public class EmailConfig {
     public JavaMailSender javaMailService() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
         javaMailSender.setHost(
-                this.jsonToHashMap.toHmap(generalEmailJsonPath).get("host"));
+                this.jsonToHashMap.toHashMap(generalEmailJsonPath).get("host"));
         javaMailSender.setPort(
                 Integer.valueOf(
-                        this.jsonToHashMap.toHmap(
+                        this.jsonToHashMap.toHashMap(
                                 generalEmailJsonPath).get("port")));
-        javaMailSender.setUsername(this.jsonToHashMap.toHmap(
+        javaMailSender.setUsername(this.jsonToHashMap.toHashMap(
                 generalEmailJsonPath).get("username"));
-        javaMailSender.setPassword(this.jsonToHashMap.toHmap(
+        javaMailSender.setPassword(this.jsonToHashMap.toHashMap(
                 generalEmailJsonPath).get("password"));
         javaMailSender.setDefaultEncoding("UTF-8");
         javaMailSender.setProtocol("smtp");

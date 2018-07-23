@@ -23,7 +23,7 @@ public class JsonToHashMap {
     }
 
     @SuppressWarnings("unchecked")
-    public HashMap<String, String> toHmap(String path){
+    public HashMap<String, String> toHashMap(String path){
         return jsonReader.readJson(this.util.listToBuffer(util.readFile(new File(path))).toString(),HashMap.class);
     }
 }

@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class EmailSettingController {
@@ -52,39 +51,21 @@ public class EmailSettingController {
 
     @ResponseBody
     @PostMapping("/generalemailsettings")
-    public void generalEmailSettings(@RequestParam String username,
-                                     @RequestParam String password,
-                                     @RequestParam String fromEmail,
-                                     @RequestParam String host,
-                                     @RequestParam String port) {
-        Map<String, String> generalEmailSettings = new HashMap<>();
-        generalEmailSettings.put("username", username);
-        generalEmailSettings.put("password", password);
-        generalEmailSettings.put("fromEmail", fromEmail);
-        generalEmailSettings.put("host", host);
-        generalEmailSettings.put("port", port);
+    public void generalEmailSettings(@RequestParam HashMap<String, String> generalEmailSettings) {
         String jsonOut = writer.generateJson(generalEmailSettings);
         util.writeTextFile(generalEmailJsonPath, jsonOut, false);
     }
 
     @ResponseBody
     @PostMapping("/autoemailsettings")
-    public void autoEmailSettings(@RequestParam String recipient,
-                                  @RequestParam String subject,
-                                  @RequestParam String message) {
-        Map<String, String> autoEmailSettings = new HashMap<>();
-        autoEmailSettings.put("recipient", recipient);
-        autoEmailSettings.put("subject", subject);
-        autoEmailSettings.put("message", message);
+    public void autoEmailSettings(@RequestParam HashMap<String, String> autoEmailSettings) {
         String jsonOut = writer.generateJson(autoEmailSettings);
         util.writeTextFile(autoEmailJsonPath, jsonOut, false);
     }
 
     @ResponseBody
     @PostMapping("/adhocemailsettings")
-    public void adhocEmailSettings(@RequestParam String recipient) {
-        Map<String, String> adhocEmailSettings = new HashMap<>();
-        adhocEmailSettings.put("recipient", recipient);
+    public void adhocEmailSettings(@RequestParam HashMap<String, String> adhocEmailSettings) {
         String jsonOut = writer.generateJson(adhocEmailSettings);
         util.writeTextFile(adhocEmailJsonPath, jsonOut, false);
     }

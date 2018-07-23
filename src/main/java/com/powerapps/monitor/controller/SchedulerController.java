@@ -4,10 +4,7 @@ import com.powerapps.monitor.config.PropertyFileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -37,7 +34,7 @@ public class SchedulerController {
 
     @ResponseBody
     @PostMapping("/fixedinterval")
-    public void saveFixedSetting(String interval) throws IOException {
+    public void saveFixedSetting(@RequestParam String interval) throws IOException {
         this.propertyFileUtils.writePropFile
                 (fixedSchedulerPropPath, "interval", interval);
     }
@@ -51,16 +48,8 @@ public class SchedulerController {
 
     @ResponseBody
     @PostMapping("/emailscheduler")
-    public void saveEmailSetting(String year, String month, String day,
-                                 String hour, String minute, String second)
+    public void saveEmailSetting(@RequestParam HashMap<String, String> keyValuePair)
             throws IOException {
-        HashMap<String, String> keyValuePair = new HashMap<>();
-        keyValuePair.put("year", year);
-        keyValuePair.put("month", month);
-        keyValuePair.put("day", day);
-        keyValuePair.put("hour", hour);
-        keyValuePair.put("minute", minute);
-        keyValuePair.put("second", second);
         this.propertyFileUtils.writeManyPropToFile(emailSchedulerPropPath, keyValuePair);
     }
 

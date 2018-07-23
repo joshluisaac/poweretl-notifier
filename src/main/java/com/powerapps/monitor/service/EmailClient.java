@@ -69,7 +69,7 @@ public class EmailClient {
             messageHelper.setTo(this.jsonToHashMap.toHmap(autoEmailJsonPath).get("recipient").split(","));
             messageHelper.setSubject(this.jsonToHashMap.toHmap(autoEmailJsonPath).get("subject"));
             messageHelper.setText(builder.buildEmail(
-                    this.jsonToHashMap.toHmap(adhocEmailJsonPath).get("message")), true);
+                    this.jsonToHashMap.toHmap(autoEmailJsonPath).get("message")), true);
         };
         try {
             mailSender.send(messagePreparator);

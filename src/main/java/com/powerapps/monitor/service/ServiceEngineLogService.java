@@ -9,8 +9,6 @@ import java.util.regex.Matcher;
 import com.powerapps.monitor.config.JsonReader;
 import com.powerapps.monitor.model.SeProperties;
 import org.joda.time.format.DateTimeFormat;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,11 +19,7 @@ import com.powerapps.monitor.util.Utils;
 @Service
 public class ServiceEngineLogService {
 
-
-  private static final Logger LOG = LoggerFactory.getLogger(ErrorFragmentIsolator.class);
-
-
-
+  
   private JsonReader reader;
   private final Utils util;
 
@@ -37,19 +31,33 @@ public class ServiceEngineLogService {
     this.reader = reader;
     this.util = util;
   }
-
-
-  private String getSeExceptionRegex(){
-    String jsonText = util.listToBuffer(util.readFile(new File(seJsonPath))).toString();
-
-
-    return reader.readJson(jsonText, SeProperties.class).getSeExceptionRegex();
+  
+  
+  private String getConfig() {
+    return util.listToBuffer(util.readFile(new File(seJsonPath))).toString();
   }
+  
+  
+  private String getRegexPattern(final String config){
+    return reader.readJson(config, SeProperties.class).getSeExceptionRegex();
+  }
+  
+  private String getRootPath(final String config){
+    return reader.readJson(config, SeProperties.class).getSeRootPath();
+  }
+  
+  private String getLogFileName(final String config){
+    return reader.readJson(config, SeProperties.class).getSeErrorLog();
+  }
+  
 
   public List<ServiceEngineErrorReport> processLines(List<String> lines) {
+    final String config = getConfig();
+    final String regexPattern =  getRegexPattern(config);
+    final String logFileName = getLogFileName(config);
     final List<ServiceEngineErrorReport> errorList = new ArrayList<>();
     for (String line : lines) {
-      Matcher m = Utils.matcher(line, getSeExceptionRegex());
+      Matcher m = Utils.matcher(line, regexPattern);
       boolean matches = m.find();
       if (matches) {
         String column[] = line.split("\\s+");
@@ -58,7 +66,7 @@ public class ServiceEngineLogService {
         report.setEventQueryName(column[10]);
         report.setPcName(column[12]);
         String timeStamp = column[1] + " " + column[2];
-        report.setLogName("ServerError.log");
+        report.setLogName(logFileName);
         report.setOccurredDate(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss,SSS").parseDateTime(timeStamp));
         errorList.add(report);
       }
@@ -66,8 +74,9 @@ public class ServiceEngineLogService {
     return errorList;
   }
 
-  public List<ServiceEngineErrorReport> execute(File f) {
-    return processLines(Utils.readLogFile(f));
+  public List<ServiceEngineErrorReport> execute() {
+    final String config = getConfig();
+    return processLines(Utils.readLogFile(new File(getRootPath(config), getLogFileName(config))));
   }
 
 }

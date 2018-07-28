@@ -1,1 +1,5 @@
-{"seRootPath":"100","seExceptionRegex":"^(\\\\d+ \\\\d+\\\\-\\\\d+-\\\\d+) (\\\\d+:\\\\d+:\\\\d+)(,)(\\\\d+) (ERROR UNEXPECTED_EXCEPTION)","seErrorLog":"100008976"}
+{
+	"seRootPath": "batches_notifications/",
+	"seExceptionRegex": "^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (ERROR UNEXPECTED_EXCEPTION)",
+	"seErrorLog": "ServerError.log"
+}

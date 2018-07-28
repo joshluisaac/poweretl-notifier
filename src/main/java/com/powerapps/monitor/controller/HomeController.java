@@ -35,19 +35,17 @@ public class HomeController {
   private BatchManagerLogService bmService;
   private BatchManagerLogMetrics bmMetrics;
   private String bmRootPath;
-  private String seRootPath;
-  private String seErrorLog;
+
   
 
   @Autowired
-  public HomeController(@Value("${app.bmRootPath}") String bmRootPath, @Value("${app.seRootPath}") String seRootPath,
-      @Value("${app.seErrorLog}") String seErrorLog, ServiceEngineLogService errorService,
+  public HomeController(
+      @Value("${app.bmRootPath}") String bmRootPath, 
+      ServiceEngineLogService errorService,
       BatchManagerLogService bmService, BatchManagerLogMetrics bmMetrics) {
     this.errorService = errorService;
     this.bmService = bmService;
     this.bmRootPath = bmRootPath;
-    this.seRootPath = seRootPath;
-    this.seErrorLog = seErrorLog;
     this.bmMetrics = bmMetrics;
   }
 
@@ -58,21 +56,19 @@ public class HomeController {
 
   @RequestMapping(value = "/seerrorreport", method = RequestMethod.GET)
   public String serviceEngineErrorLogReport(Model model) {
-    final File logFile = new File(seRootPath, seErrorLog);
-    model.addAttribute("errorReport", errorService.execute(logFile));
+    model.addAttribute("errorReport", errorService.execute());
     return "dash-errorlogreport";
   }
 
   @RequestMapping(value = "/seerrorreportJSON", method = RequestMethod.GET)
   @ResponseBody
   public Object serviceEngineErrorLogReportJSON(Model model) {
-    return errorService.execute(new File(seRootPath, seErrorLog));
+    return errorService.execute();
   }
 
   @RequestMapping(value = "/dcerrorreport", method = RequestMethod.GET)
   public String dataConnectorErrorLogReport(Model model) {
-    final File logFile = new File(seRootPath, seErrorLog);
-    model.addAttribute("errorReport", errorService.execute(logFile));
+    model.addAttribute("errorReport", errorService.execute());
     return "dash-errorlogreport";
   }
 

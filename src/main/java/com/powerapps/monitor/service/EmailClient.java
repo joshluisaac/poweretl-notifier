@@ -62,7 +62,7 @@ public class EmailClient {
         }
     }
 
-    public void sendAutoEmail(){
+    public void sendAutoEmail(File logFile){
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
             messageHelper.setFrom(this.jsonToHashMap.toHashMap(generalEmailJsonPath).get("fromEmail"));
@@ -70,6 +70,7 @@ public class EmailClient {
             messageHelper.setSubject(this.jsonToHashMap.toHashMap(autoEmailJsonPath).get("subject"));
             messageHelper.setText(builder.buildEmail(
                     this.jsonToHashMap.toHashMap(autoEmailJsonPath).get("message")), true);
+            messageHelper.addAttachment(logFile.getName(), logFile);
         };
         try {
             mailSender.send(messagePreparator);

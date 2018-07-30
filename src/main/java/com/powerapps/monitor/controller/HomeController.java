@@ -65,6 +65,16 @@ public class HomeController {
   public Object serviceEngineErrorLogReportJSON(Model model) {
     return errorService.execute();
   }
+  
+  
+  @RequestMapping(value = "/seshowstacktrace", method = RequestMethod.GET)
+  public String serviceEngineErrorShowStackTrace(@RequestParam int lineNumber, Model model) {
+    String stackTraceText = errorService.getStackTrace(lineNumber);
+    model.addAttribute("stackTrace", stackTraceText);
+    return "dash-errorlogreport";
+  }
+  
+  
 
   @RequestMapping(value = "/dcerrorreport", method = RequestMethod.GET)
   public String dataConnectorErrorLogReport(Model model) {

@@ -78,5 +78,29 @@ public class ServiceEngineLogService {
     final String config = getConfig();
     return processLines(Utils.readLogFile(new File(getRootPath(config), getLogFileName(config))));
   }
+  
+  public String getStackTrace(final int lineNumber) {
+    final String config = getConfig();
+    return getStackTrace(Utils.readLogFile(new File(getRootPath(config), getLogFileName(config))),lineNumber).toString();
+  }
+  
+  
+  //associates an error event to a multiline stacktrace
+  private StringBuilder getStackTrace(List<String> lines, final int lineNumber) {
+    final String config = getConfig();
+    final String regexPattern =  getRegexPattern(config);
+    final StringBuilder buf = new StringBuilder();
+    for(int i=lineNumber; i<lines.size(); i++) {
+      String line = lines.get(i);
+      Matcher m = Utils.matcher(line, regexPattern);
+      boolean matches = m.find();
+      if(!matches) {
+        buf.append(line);
+      }else {
+        break;
+      }
+    }
+    return buf;
+  }
 
 }

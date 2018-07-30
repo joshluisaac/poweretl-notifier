@@ -20,7 +20,7 @@ import com.powerapps.monitor.util.Utils;
  * @author Chelsea Kosasih 
  */
 
-//consider moving this to a component package and remaning this to feature extractor as in FeatureExtractor
+//consider moving this to a component package and renaming this to feature extractor as in FeatureExtractor
 
 
 @Component

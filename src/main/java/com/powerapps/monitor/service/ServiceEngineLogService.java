@@ -95,7 +95,7 @@ public class ServiceEngineLogService {
       Matcher m = Utils.matcher(line, regexPattern);
       boolean matches = m.find();
       if(!matches) {
-        buf.append(line);
+        buf.append(line+"\n");
       }else {
         break;
       }

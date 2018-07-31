@@ -76,8 +76,7 @@ public class HomeController {
 
   @RequestMapping(value = "/seshowstacktrace", method = RequestMethod.GET)
   public String serviceEngineErrorShowStackTrace(@RequestParam int lineNumber, Model model) {
-    String stackTraceText = errorService.getStackTrace(lineNumber);
-    model.addAttribute("stackTrace", stackTraceText);
+    model.addAttribute("stackTrace", errorService.getStackTrace(lineNumber));
     return "fragments/template_preview_se_error_report";
   }
 
@@ -158,7 +157,7 @@ public class HomeController {
 
   @RequestMapping(value = "/batchdetails", method = RequestMethod.GET)
   public Object getBatchDetails(Model model, @RequestParam String logname) throws IOException {
-    System.out.println("Got here");
+    //System.out.println("Got here");
     model.addAttribute("batchDetails",
         bmMetrics.extractFeatures(bmMetrics.getFile(new File(bmRootPath + "/" + logname))));
     return "fragments/template-bm-logmetric-report";

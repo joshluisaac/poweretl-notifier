@@ -4186,7 +4186,19 @@ ul.notifications {
    .dataTables_length { float:none; }
 }
 
+.border-top {
+    display: inline-block;
+    width: 250px;
+    height: 100px;
+    margin: 6px;
+  }
 
+.border-down {
+    display: inline-block;
+    width: 500px;
+    height: 200px;
+    margin: 6px;
+  }
 
 
 /* CSS3 Checkbox */
@@ -4249,4 +4261,5 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     border-radius: 0px !important;
     background-color: #ffff !important;
 }
-/** /bootstrap-datetimepicker **/
+
+

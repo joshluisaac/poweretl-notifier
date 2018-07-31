@@ -36,13 +36,14 @@
 							<td th:text="${report.eventQueryName}"></td>
 							<td th:text="${report.pcName}"></td>
 							<td>No</td>
+
 							<td><a
 								th:href="@{'/seshowstacktrace?lineNumber=' + ${report.lineNumber}}"
-								><span
+								data-backdrop="static"><span
 									data-toggle="tooltip" title="Preview Stacktrace"
-									class="glyphicon glyphicon-eye-open"> </span></a> 
-									
-								<a th:href="@{'/downloadstacktrace?lineNumber=' + ${report.lineNumber}}">
+									class="glyphicon glyphicon-eye-open"> </span></a>
+								 <a
+								th:href="@{'/downloadstacktrace?lineNumber=' + ${report.lineNumber}}">
 									<span data-toggle="tooltip" title="Download Stacktrace"
 									class="glyphicon glyphicon-download red"> </span>
 							</a> <a

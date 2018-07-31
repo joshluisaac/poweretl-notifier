@@ -127,7 +127,7 @@ public class HomeController {
         Path path = Paths.get(bmRootPath + "/" + logname);
 
         response.setContentType("text/plain");
-        response.setContentLength(logname.length());
+        response.setContentLength((int)path.toFile().length());
         response.addHeader("Content-Disposition", "attachment; filename=" + logname);
 
         ServletOutputStream outStream = response.getOutputStream();

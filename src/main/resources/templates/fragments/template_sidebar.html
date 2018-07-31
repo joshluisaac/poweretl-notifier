@@ -1,51 +1,49 @@
 <div th:fragment="sidebar" id="sidebar-menu"
-     class="main_menu_side hidden-print main_menu">
-    <div class="menu_section">
+	class="main_menu_side hidden-print main_menu">
+	<div class="menu_section">
 
-        <ul class="nav side-menu">
-            <li><a><i class="fa fa-home"></i> Home <span
-                    class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="/seerrorreport">Service Engine Log Report</a></li>
-                    <li><a href="/dcerrorreport">DataConnector Log Report</a></li>
-                    <li><a href="/bmerrorreport">BatchManager Log Report</a></li>
+		<ul class="nav side-menu">
+			<li><a><i class="fa fa-home"></i> Home <span
+					class="fa fa-chevron-down"></span></a>
+				<ul class="nav child_menu">
+					<li><a href="/dashboard">Dashboard</a></li>
+					<li><a href="/seerrorreport">Service Engine Log Report</a></li>
+					<li><a href="/dcerrorreport">DataConnector Log Report</a></li>
+					<li><a href="/bmerrorreport">BatchManager Log Report</a></li>
 
 
-                </ul>
-            </li>
-            <li sec:authorize="hasRole('ADMIN')"><a><i class="fa fa-edit"></i>Settings Manager<span
-                    class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="/viewsesetting">ServiceEngine Log Settings</a></li>
-                    <li><a href="/dcsettings">DataConnector Log Settings</a></li>
-                    <li><a href="/viewbmsetting">BatchManager Log Settings</a></li>
-                    <li><a href="#" onclick="$('#emailSettings').toggle();">Email Settings</a>
-                    <ul class="nav child_menu" id="emailSettings" onload="hide();">
-                        <li><a href="/generalemailsettings">General</a></li>
-                        <li><a href="/autoemailsettings">Automated</a></li>
-                        <li><a href="/adhocemailsettings">Adhoc</a></li>
-                    </ul>
-                    </li>
-                    <li><a href="/ftpsettings">FTP Settings</a></li>
-                </ul>
-            </li>
+				</ul></li>
+			<li sec:authorize="hasRole('ADMIN')"><a><i
+					class="fa fa-edit"></i>Settings Manager<span
+					class="fa fa-chevron-down"></span></a>
+				<ul class="nav child_menu">
+					<li><a href="/viewsesetting">ServiceEngine Log Settings</a></li>
+					<li><a href="/dcsettings">DataConnector Log Settings</a></li>
+					<li><a href="/viewbmsetting">BatchManager Log Settings</a></li>
+					<li><a href="#" onclick="$('#emailSettings').toggle();">Email
+							Settings</a>
+						<ul class="nav child_menu" id="emailSettings" onload="hide();">
+							<li><a href="/generalemailsettings">General</a></li>
+							<li><a href="/autoemailsettings">Automated</a></li>
+							<li><a href="/adhocemailsettings">Adhoc</a></li>
+						</ul></li>
+					<li><a href="/ftpsettings">FTP Settings</a></li>
+				</ul></li>
 
-            <li><a><i class="fa fa-bar-chart-o"></i> Scheduler <span
-                    class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="/fixedinterval">Fixed Interval</a></li>
-                    <li><a href="/emailscheduler">Email Scheduler</a></li>
-                </ul>
-            </li>
+			<li><a><i class="fa fa-bar-chart-o"></i> Scheduler <span
+					class="fa fa-chevron-down"></span></a>
+				<ul class="nav child_menu">
+					<li><a href="/fixedinterval">Fixed Interval</a></li>
+					<li><a href="/emailscheduler">Email Scheduler</a></li>
+				</ul></li>
 
-            <li><a><i class="fa fa-bar-chart-o"></i>Notification Report<span
-                    class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="/seemailnotifreport">ServiceEngine</a></li>
-                    <li><a href="/dcemailnotifreport">DataConnector</a></li>
-                    <li><a href="/bmemailnotifreport">BatchManager</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+			<li><a><i class="fa fa-bar-chart-o"></i>Notification Report<span
+					class="fa fa-chevron-down"></span></a>
+				<ul class="nav child_menu">
+					<li><a href="/seemailnotifreport">ServiceEngine</a></li>
+					<li><a href="/dcemailnotifreport">DataConnector</a></li>
+					<li><a href="/bmemailnotifreport">BatchManager</a></li>
+				</ul></li>
+		</ul>
+	</div>
 </div>

@@ -1,0 +1,62 @@
+<div th:fragment="seerrorlogFragment" class="col-md-12 col-xs-12">
+	<div class="x_panel">
+		<div class="x_title">
+			<h2>
+				<small>Today's Report</small>
+			</h2>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content"></div>
+		<div class='row'>
+			<div class='col-md-12'>
+				<br>
+				<table id="datatable-buttons"
+					class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>No.</th>
+							<th>Line Number</th>
+							<th>Log Name</th>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Event/Query Where Error Occured</th>
+							<th>User PC Name</th>
+							<th>Notification Sent</th>
+							<th>Details</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="report, status : ${errorReport}">
+							<td th:text="${status.index + 1}"></td>
+							<td th:text="${report.lineNumber}"></td>
+							<td th:text="${report.logName}"></td>
+							<td
+								th:text="${#dates.format(report.occurredDate, 'dd-MMM-yyyy HH:mm')}"></td>
+							<td th:text="${#dates.format(report.occurredDate, 'HH:mm')}"></td>
+							<td th:text="${report.eventQueryName}"></td>
+							<td th:text="${report.pcName}"></td>
+							<td>No</td>
+							<td><a
+								th:href="@{'/seshowstacktrace?lineNumber=' + ${report.lineNumber}}"
+								><span
+									data-toggle="tooltip" title="Preview Stacktrace"
+									class="glyphicon glyphicon-eye-open"> </span></a> 
+									
+								<a th:href="@{'/downloadstacktrace?lineNumber=' + ${report.lineNumber}}">
+									<span data-toggle="tooltip" title="Download Stacktrace"
+									class="glyphicon glyphicon-download red"> </span>
+							</a> <a
+								th:href="@{'/sendadhocemail?logFileName=' + ${report.logName}}"
+								data-toggle="modal"> <span data-toggle="tooltip"
+									title="Send Email" class="glyphicon glyphicon-envelope">
+								</span>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</div>
+

@@ -1,6 +1,9 @@
 package com.powerapps.monitor.controller;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,22 +29,17 @@ import com.powerapps.monitor.service.BatchManagerLogMetrics;
 import com.powerapps.monitor.service.BatchManagerLogService;
 import com.powerapps.monitor.service.ServiceEngineLogService;
 
-
 @Controller
 public class HomeController {
 
-  //Dependency Injection region
+  // Dependency Injection region
   private ServiceEngineLogService errorService;
   private BatchManagerLogService bmService;
   private BatchManagerLogMetrics bmMetrics;
   private String bmRootPath;
 
-  
-
   @Autowired
-  public HomeController(
-      @Value("${app.bmRootPath}") String bmRootPath, 
-      ServiceEngineLogService errorService,
+  public HomeController(@Value("${app.bmRootPath}") String bmRootPath, ServiceEngineLogService errorService,
       BatchManagerLogService bmService, BatchManagerLogMetrics bmMetrics) {
     this.errorService = errorService;
     this.bmService = bmService;
@@ -57,7 +55,7 @@ public class HomeController {
   @RequestMapping(value = "/seerrorreport", method = RequestMethod.GET)
   public String serviceEngineErrorLogReport(Model model) {
     model.addAttribute("errorReport", errorService.execute());
-    return "dash-errorlogreport";
+    return "se-errorlogreport";
   }
 
   @RequestMapping(value = "/seerrorreportJSON", method = RequestMethod.GET)
@@ -65,16 +63,38 @@ public class HomeController {
   public Object serviceEngineErrorLogReportJSON(Model model) {
     return errorService.execute();
   }
-  
-  
+
   @RequestMapping(value = "/seshowstacktrace", method = RequestMethod.GET)
   public String serviceEngineErrorShowStackTrace(@RequestParam int lineNumber, Model model) {
     String stackTraceText = errorService.getStackTrace(lineNumber);
     model.addAttribute("stackTrace", stackTraceText);
-    return "dash-errorlogreport";
+    return "fragments/template_preview_se_error_report";
   }
+
+  @RequestMapping(value = "/downloadstacktrace", produces = "text/plain")
+  public int downloadStackTrace(Model model, @RequestParam int lineNumber, 
+            HttpServletResponse response) throws IOException {
+    String stackTraceText = errorService.getStackTrace(lineNumber);
+    
+    //create file and write content into the file
+    FileOutputStream out = new FileOutputStream("./stack_traces/stackTrace.txt");
+    out.write(stackTraceText.getBytes());
+    out.flush();
+    out.close();
+    
+    //resource path
+    Path path = Paths.get("./stack_traces/stackTrace.txt");
   
+  response.setContentType("text/plain");
+  response.addHeader("Content-Disposition", "attachment; filename=" + "stackTrace");
   
+  ServletOutputStream outStream = response.getOutputStream();
+  long numberOfBytesCopied = Files.copy(path, outStream);
+  outStream.flush();
+  System.out.println(numberOfBytesCopied);
+  //response.setHeader(name, value);
+    return -1;
+  }
 
   @RequestMapping(value = "/dcerrorreport", method = RequestMethod.GET)
   public String dataConnectorErrorLogReport(Model model) {
@@ -92,47 +112,46 @@ public class HomeController {
   }
 
   @RequestMapping(value = "/bmerrorreport", method = RequestMethod.GET)
-   public Object batchManagerErrorLogReport(Model model) {
+  public Object batchManagerErrorLogReport(Model model) {
     List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(bmRootPath)));
     model.addAttribute("summaryList", summary);
     return "batchManager-report";
   }
-  
+
   @RequestMapping(value = "/downloadbatch", produces = "text/plain")
-  public int downloadBatch(Model model, @RequestParam String logname, 
-            HttpServletResponse response) throws IOException {
-   
-    //resource path
-    Path path = Paths.get(bmRootPath+"/"+logname);
-  
-  response.setContentType("text/plain");
-  response.addHeader("Content-Disposition", "attachment; filename=" + logname);
-  
-  ServletOutputStream outStream = response.getOutputStream();
-  long numberOfBytesCopied = Files.copy(path, outStream);
-  outStream.flush();
-  System.out.println(numberOfBytesCopied);
-  //response.setHeader(name, value);
+  public int downloadBatch(Model model, @RequestParam String logname, HttpServletResponse response) throws IOException {
+
+    // resource path
+    Path path = Paths.get(bmRootPath + "/" + logname);
+
+    response.setContentType("text/plain");
+    response.addHeader("Content-Disposition", "attachment; filename=" + logname);
+
+    ServletOutputStream outStream = response.getOutputStream();
+    long numberOfBytesCopied = Files.copy(path, outStream);
+    outStream.flush();
+    System.out.println(numberOfBytesCopied);
+    // response.setHeader(name, value);
     return -1;
   }
-  
-  @RequestMapping ("/batchdetailsJSON")
-  @ResponseBody 
+
+  @RequestMapping("/batchdetailsJSON")
+  @ResponseBody
   public Object getBatchDetails() throws IOException {
-	  File f = new File("C:\\Users\\Chelsea\\workspace\\powerappslogmonitor\\batches_notifications\\BatchManager\\eCollect\\Batch-01.Jun.2018-07_48_02.log");  
-	
-	return bmMetrics.extractFeatures(bmMetrics.getFile(f));
-	
+    File f = new File(
+        "C:\\Users\\Chelsea\\workspace\\powerappslogmonitor\\batches_notifications\\BatchManager\\eCollect\\Batch-01.Jun.2018-07_48_02.log");
+
+    return bmMetrics.extractFeatures(bmMetrics.getFile(f));
+
   }
-  
-  
-  @RequestMapping (value = "/batchdetails", method = RequestMethod.GET)
+
+  @RequestMapping(value = "/batchdetails", method = RequestMethod.GET)
   public Object getBatchDetails(Model model, @RequestParam String logname) throws IOException {
-	  System.out.println("Got here");
-	  model.addAttribute("batchDetails", bmMetrics.extractFeatures(bmMetrics.getFile(new File(bmRootPath+"/"+logname))));
-	  return "fragments/template-bm-logmetric-report";
-	
+    System.out.println("Got here");
+    model.addAttribute("batchDetails",
+        bmMetrics.extractFeatures(bmMetrics.getFile(new File(bmRootPath + "/" + logname))));
+    return "fragments/template-bm-logmetric-report";
+
   }
-  
-  
+
 }

@@ -1,8 +1,0 @@
-2018-06-26 15:00:01,935 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
-LOGIN SUCCESSFUL
-2018-06-26 15:00:02,413 DEBUG --START--
-2018-06-26 15:00:02,417 INFO  Starting - Batch - legalHostExtraction from /bcrp/prd/application/BatchManager/bin/legalHostExtraction.batch
-2018-06-26 15:00:02,423 INFO  Execute - Batch - legalHostExtraction
-2018-06-26 15:04:31,672 INFO  Completed - Batch - legalHostExtraction from /bcrp/prd/application/BatchManager/bin/legalHostExtraction.batch
-2018-06-26 15:04:31,672 INFO  Finished - Batch - legalHostExtraction
-2018-06-26 15:04:31,672 DEBUG --DONE--

@@ -1,8 +1,0 @@
-2018-06-27 18:00:01,841 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
-LOGIN SUCCESSFUL
-2018-06-27 18:00:01,993 DEBUG --START--
-2018-06-27 18:00:01,998 INFO  Starting - Batch - extractExcelImportLetter from /bcrp/prd/application/BatchManager/bin/extractExcelImportLetter.batch
-2018-06-27 18:00:02,003 INFO  Execute - Batch - extractExcelImportLetter
-2018-06-27 18:00:06,935 INFO  Completed - Batch - extractExcelImportLetter from /bcrp/prd/application/BatchManager/bin/extractExcelImportLetter.batch
-2018-06-27 18:00:06,936 INFO  Finished - Batch - extractExcelImportLetter
-2018-06-27 18:00:06,936 DEBUG --DONE--

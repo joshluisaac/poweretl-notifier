@@ -1,8 +1,0 @@
-2018-06-01 11:00:02,105 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765
-LOGIN SUCCESSFUL
-2018-06-01 11:00:02,325 DEBUG --START--
-2018-06-01 11:00:02,331 INFO  Starting - Batch - adhocSmsExtraction from /carma/application/BatchManager/bin/adhocSmsExtraction.batch
-2018-06-01 11:00:02,337 INFO  Execute - Batch - adhocSmsExtraction
-2018-06-01 11:00:02,796 INFO  Completed - Batch - adhocSmsExtraction from /carma/application/BatchManager/bin/adhocSmsExtraction.batch
-2018-06-01 11:00:02,796 INFO  Finished - Batch - adhocSmsExtraction
-2018-06-01 11:00:02,797 DEBUG --DONE--

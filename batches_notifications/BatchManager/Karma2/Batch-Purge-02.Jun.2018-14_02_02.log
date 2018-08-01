@@ -1,8 +1,0 @@
-2018-06-02 14:02:03,305 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765
-LOGIN SUCCESSFUL
-2018-06-02 14:02:03,494 DEBUG --START--
-2018-06-02 14:02:03,500 INFO  Starting - Batch - oneTimePurgeAccounts from /carma/application/BatchManager/bin/oneTimePurgeAccounts.batch
-2018-06-02 14:02:03,507 INFO  Execute - Batch - oneTimePurgeAccounts
-2018-06-02 14:38:17,225 INFO  Completed - Batch - oneTimePurgeAccounts from /carma/application/BatchManager/bin/oneTimePurgeAccounts.batch
-2018-06-02 14:38:17,225 INFO  Finished - Batch - oneTimePurgeAccounts
-2018-06-02 14:38:17,225 DEBUG --DONE--

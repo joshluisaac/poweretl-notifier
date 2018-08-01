@@ -1,8 +1,0 @@
-2018-06-08 12:10:01,562 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
-LOGIN SUCCESSFUL
-2018-06-08 12:10:01,701 DEBUG --START--
-2018-06-08 12:10:01,706 INFO  Starting - Batch - defaultSms from /bcrp/prd/application/BatchManager/bin/defaultSms.batch
-2018-06-08 12:10:01,711 INFO  Execute - Batch - defaultSms
-2018-06-08 12:10:21,915 INFO  Completed - Batch - defaultSms from /bcrp/prd/application/BatchManager/bin/defaultSms.batch
-2018-06-08 12:10:21,916 INFO  Finished - Batch - defaultSms
-2018-06-08 12:10:21,916 DEBUG --DONE--

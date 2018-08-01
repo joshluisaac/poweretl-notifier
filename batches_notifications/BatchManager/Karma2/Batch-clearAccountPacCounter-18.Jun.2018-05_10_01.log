@@ -1,8 +1,0 @@
-2018-06-18 05:10:01,926 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765
-LOGIN SUCCESSFUL
-2018-06-18 05:10:02,570 DEBUG --START--
-2018-06-18 05:10:02,576 INFO  Starting - Batch - clearAccountPacCounter from /carma/application/BatchManager/bin/clearAccountPacCounter.batch
-2018-06-18 05:10:02,583 INFO  Execute - Batch - clearAccountPacCounter
-2018-06-18 05:10:02,881 INFO  Completed - Batch - clearAccountPacCounter from /carma/application/BatchManager/bin/clearAccountPacCounter.batch
-2018-06-18 05:10:02,881 INFO  Finished - Batch - clearAccountPacCounter
-2018-06-18 05:10:02,881 DEBUG --DONE--

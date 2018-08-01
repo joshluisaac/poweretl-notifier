@@ -1,8 +1,0 @@
-2018-06-10 14:22:02,850 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
-LOGIN SUCCESSFUL
-2018-06-10 14:22:03,069 DEBUG --START--
-2018-06-10 14:22:03,074 INFO  Starting - Batch - processCallLog from /bcrp/prd/application/BatchManager/bin/CallLogger.batch
-2018-06-10 14:22:03,079 INFO  Execute - Batch - processCallLog
-2018-06-10 14:22:11,215 INFO  Completed - Batch - processCallLog from /bcrp/prd/application/BatchManager/bin/CallLogger.batch
-2018-06-10 14:22:11,215 INFO  Finished - Batch - processCallLog
-2018-06-10 14:22:11,215 DEBUG --DONE--

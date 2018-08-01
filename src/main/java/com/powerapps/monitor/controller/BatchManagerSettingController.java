@@ -2,8 +2,6 @@ package com.powerapps.monitor.controller;
 
 
 import com.powerapps.monitor.util.Path;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,7 +19,6 @@ import com.powerapps.monitor.util.Utils;;
 @Controller
 public class BatchManagerSettingController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BatchManagerSettingController.class);
     private final JsonWriter bmWriter;
     private final Utils util;
 

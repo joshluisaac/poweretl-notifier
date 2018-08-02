@@ -2,10 +2,13 @@ package com.powerapps.monitor.service;
 
 import com.kollect.etl.util.FileUtils;
 import com.kollect.etl.util.ListUtils;
+import com.powerapps.monitor.config.JsonReader;
+import com.powerapps.monitor.model.BmProperties;
 import com.powerapps.monitor.model.LogSummary;
 import com.powerapps.monitor.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,22 +23,55 @@ import java.util.List;
 public class BatchManagerLogService {
 
     private static final Logger LOG = LoggerFactory.getLogger(BatchManagerLogService.class);
+
     @Value("${app.batchStartRegex}")
     private String batchStartRegex;
     @Value("${app.batchDoneRegex}")
     private String batchDoneRegex;
     @Value("${app.batchErrorRegex}")
     private String batchErrorRegex;
-    // private final String batchStartingRegex = "";
-    // private final String batchFinishedRegex = "";
+
     @Value("${app.bmRootPath}")
     private String rootPath;
 
     @Value("${app.bmCache}")
-    private String bmCache; //= "/media/joshua/martian/kvworkspace/powerappslogmonitor/config/bmcache.csv";
+    private String bmCache;
 
     @Value("${app.bmJson}")
-    private String bmJson;
+    private String bmJsonPath;
+
+    private JsonReader reader;
+    private final Utils util;
+
+    @Autowired
+    public BatchManagerLogService(JsonReader reader, Utils util) {
+        this.reader = reader;
+        this.util = util;
+    }
+
+    private String getConfig() {
+        return util.listToBuffer(util.readFile(new File(bmJsonPath))).toString();
+    }
+
+    private String getStartRegex(final String config){
+        return reader.readJson(config, BmProperties.class).getBatchStartRegex();
+    }
+
+    private String getErrorRegex(final String config){
+        return reader.readJson(config, BmProperties.class).getBatchErrorRegex();
+    }
+
+    private String getDoneRegex(final String config){
+        return reader.readJson(config, BmProperties.class).getBatchDoneRegex();
+    }
+
+    private String getRootPath(final String config){
+        return reader.readJson(config, BmProperties.class).getBmRootPath();
+    }
+
+    private String getBmCache(final String config){
+        return reader.readJson(config, BmProperties.class).getBmCache();
+    }
 
     // needs refactoring
     public List<String> getLogFiles(File dir) {

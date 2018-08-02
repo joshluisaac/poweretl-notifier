@@ -1,24 +1,21 @@
 package com.powerapps.monitor.service;
 
+import com.powerapps.monitor.config.JsonReader;
+import com.powerapps.monitor.model.SeProperties;
+import com.powerapps.monitor.model.ServiceEngineErrorReport;
+import com.powerapps.monitor.util.Utils;
+import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 
-import com.powerapps.monitor.config.JsonReader;
-import com.powerapps.monitor.model.SeProperties;
-import org.joda.time.format.DateTimeFormat;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
-import com.powerapps.monitor.model.ServiceEngineErrorReport;
-import com.powerapps.monitor.util.Utils;
-
 @Service
 public class ServiceEngineLogService {
-
   
   private JsonReader reader;
   private final Utils util;
@@ -31,13 +28,11 @@ public class ServiceEngineLogService {
     this.reader = reader;
     this.util = util;
   }
-  
-  
+
   private String getConfig() {
     return util.listToBuffer(util.readFile(new File(seJsonPath))).toString();
   }
-  
-  
+
   private String getRegexPattern(final String config){
     return reader.readJson(config, SeProperties.class).getSeExceptionRegex();
   }
@@ -49,9 +44,8 @@ public class ServiceEngineLogService {
   private String getLogFileName(final String config){
     return reader.readJson(config, SeProperties.class).getSeErrorLog();
   }
-  
 
-  public List<ServiceEngineErrorReport> processLines(List<String> lines) {
+  private List<ServiceEngineErrorReport> processLines(List<String> lines) {
     final String config = getConfig();
     final String regexPattern =  getRegexPattern(config);
     final String logFileName = getLogFileName(config);
@@ -83,8 +77,7 @@ public class ServiceEngineLogService {
     final String config = getConfig();
     return getStackTrace(Utils.readLogFile(new File(getRootPath(config), getLogFileName(config))),lineNumber).toString();
   }
-  
-  
+
   //associates an error event to a multiline stacktrace
   private StringBuilder getStackTrace(List<String> lines, final int lineNumber) {
     final String config = getConfig();
@@ -95,7 +88,7 @@ public class ServiceEngineLogService {
       Matcher m = Utils.matcher(line, regexPattern);
       boolean matches = m.find();
       if(!matches) {
-        buf.append(line+"\n");
+        buf.append(line).append("\n");
       }else {
         break;
       }

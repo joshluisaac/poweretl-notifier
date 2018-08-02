@@ -19,10 +19,10 @@ public class MailContentBuilder {
         this.templateEngine = templateEngine;
     }
 
-    public String buildEmail(String body) {
+    public String buildEmail(String body, String templateName) {
         Context context = new Context();
         context.setVariable("body", body);
         return templateEngine.process(
-                "fragments/template_email_template", context);
+                templateName, context);
     }
 }

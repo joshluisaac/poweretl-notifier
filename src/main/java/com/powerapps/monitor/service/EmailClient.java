@@ -50,7 +50,7 @@ public class EmailClient {
             messageHelper.setFrom(this.jsonToHashMap.toHashMap(generalEmailJsonPath).get("fromEmail"));
             messageHelper.setTo(this.jsonToHashMap.toHashMap(adhocEmailJsonPath).get("recipient").split(","));
             messageHelper.setSubject(title);
-            messageHelper.setText(builder.buildEmail(body), true);
+            messageHelper.setText(builder.buildEmail(body, "fragments/template_email_template"), true);
             messageHelper.addAttachment(attachment.getOriginalFilename(), attachment);
             messageHelper.addAttachment(logFile.getName(), logFile);
         };
@@ -69,7 +69,8 @@ public class EmailClient {
             messageHelper.setTo(this.jsonToHashMap.toHashMap(autoEmailJsonPath).get("recipient").split(","));
             messageHelper.setSubject(this.jsonToHashMap.toHashMap(autoEmailJsonPath).get("subject"));
             messageHelper.setText(builder.buildEmail(
-                    this.jsonToHashMap.toHashMap(autoEmailJsonPath).get("message")), true);
+                    this.jsonToHashMap.toHashMap(autoEmailJsonPath).get("message"),
+                    "fragments/template_email_template"), true);
             messageHelper.addAttachment(logFile.getName(), logFile);
         };
         try {

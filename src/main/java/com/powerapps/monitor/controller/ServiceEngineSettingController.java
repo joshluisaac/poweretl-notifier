@@ -1,6 +1,9 @@
 package com.powerapps.monitor.controller;
 
 import com.powerapps.monitor.config.JsonReader;
+import com.powerapps.monitor.config.JsonWriter;
+import com.powerapps.monitor.model.SeProperties;
+import com.powerapps.monitor.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -8,13 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.powerapps.monitor.config.JsonWriter;
-import com.powerapps.monitor.model.SeProperties;
-import com.powerapps.monitor.util.Utils;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.File;
-import java.io.IOException;
 
 @Controller
 public class ServiceEngineSettingController {
@@ -33,8 +32,8 @@ public class ServiceEngineSettingController {
   }
 
   @RequestMapping(value = "/savesesetting", method = RequestMethod.POST)
-  //@ResponseBody
-  public String save(@RequestParam String seRootPath, @RequestParam String seExceptionRegex,
+  @ResponseBody
+  public void save(@RequestParam String seRootPath, @RequestParam String seExceptionRegex,
       @RequestParam String seErrorLog) {
     // Persist to DTO(data transfer object)
     SeProperties data = new SeProperties(seRootPath, seExceptionRegex, seErrorLog);
@@ -42,11 +41,10 @@ public class ServiceEngineSettingController {
     String output = seWriter.generateJson(data);
     // write JSON to file
     util.writeTextFile(seJsonPath, output, false);
-    return "redirect:/viewsesetting";
   }
 
   @RequestMapping(value = "/viewsesetting", method = RequestMethod.GET)
-  public String view(Model model) throws IOException {
+  public String view(Model model) {
     String jsonText = util.listToBuffer(util.readFile(new File(seJsonPath))).toString();
     model.addAttribute("result",jsonReader.readJson(jsonText,SeProperties.class));
     return "serviceEngineSettings";

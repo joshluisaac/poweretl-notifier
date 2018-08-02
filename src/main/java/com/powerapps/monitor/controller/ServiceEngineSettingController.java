@@ -35,11 +35,8 @@ public class ServiceEngineSettingController {
   @ResponseBody
   public void save(@RequestParam String seRootPath, @RequestParam String seExceptionRegex,
       @RequestParam String seErrorLog) {
-    // Persist to DTO(data transfer object)
     SeProperties data = new SeProperties(seRootPath, seExceptionRegex, seErrorLog);
-    // JSON conversion
     String output = seWriter.generateJson(data);
-    // write JSON to file
     util.writeTextFile(seJsonPath, output, false);
   }
 

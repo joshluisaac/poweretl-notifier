@@ -1,103 +1,82 @@
-
 <div th:fragment="bacthManagerSettingsFragment" class="col-md-12 col-xs-12">
- <div class="x_panel">
-  <div class="x_title">
-   <h2>
-    Batch Manager Configuration <small></small>
-   </h2>
-   <ul class="nav navbar-right panel_toolbox">
-    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-    <li class="dropdown"><a href="#" class="dropdown-toggle"
-     data-toggle="dropdown" role="button" aria-expanded="false"><i
-      class="fa fa-wrench"></i></a>
-     <ul class="dropdown-menu" role="menu">
-      <li><a href="#">Settings 1</a></li>
-      <li><a href="#">Settings 2</a></li>
-     </ul></li>
-    <li><a class="close-link"><i class="fa fa-close"></i></a></li>
-   </ul>
-   <div class="clearfix"></div>
-  </div>
-  <div class="x_content">
-   <br />
-   <form action="/savebmsetting" method="post" id="" data-parsley-validate class="form-horizontal form-label-left">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                Batch Manager Configuration
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                        data-toggle="dropdown" role="button" aria-expanded="false"><i
+                        class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a></li>
+                        <li><a href="#">Settings 2</a></li>
+                    </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br/>
+            <form action="/savebmsetting" method="post" id="ajaxForm" data-parsley-validate
+                  class="form-horizontal form-label-left">
 
-    <div class="form-group">
-     <label class="control-label col-md-2 col-sm-2 col-xs-6"
-      for="user-authentication">Log File Location <span
-      class="required">*</span>
-     </label>
-     <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value="${result?.userAuthentication}"
-       name="logFileLocation" type="text" required="required"
-       placeholder="Log File Location"
-       class="form-control col-md-7 col-xs-12 hasclear">
-     </div>
-    </div>
-    <div class="form-group">
-     <label class="control-label col-md-2 col-sm-2 col-xs-6"
-      for="userName">Log File Name <span class="required">*</span>
-     </label>
-     <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.userName} name="logFileName" type="text"
-       required="required" placeholder="Log File Name"
-       class="form-control col-md-7 col-xs-12 hasclear">
-     </div>
-    </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6"
+                    >Log File Location <span
+                            class="required">*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <input th:value="${result?.bmRootPath}"
+                               name="bmRootPath" type="text" required="required"
+                               placeholder="Log File Location"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
 
-    <div class="form-group">
-     <label class="control-label col-md-2 col-sm-2 col-xs-6" for="host">Start Regex<span class="required">*</span>
-     </label>
-     <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.host} name="batchStartRegex" type="text"
-       required="required" placeholder="Batch Started Regular Expression"
-       class="form-control col-md-7 col-xs-12 hasclear">
-     </div>
-    </div>
-    
-    
-        <div class="form-group">
-     <label class="control-label col-md-2 col-sm-2 col-xs-6" for="host">Done Regex<span class="required">*</span>
-     </label>
-     <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.host} name="batchDoneRegex" type="text"
-       required="required" placeholder="Batch Ended Regular Expression"
-       class="form-control col-md-7 col-xs-12 hasclear">
-     </div>
-    </div>
-    
-    
-            <div class="form-group">
-     <label class="control-label col-md-2 col-sm-2 col-xs-6" for="host">Error Regex<span class="required">*</span>
-     </label>
-     <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.host} name="batchErrorRegex" type="text"
-       required="required" placeholder="Batch Error Regular Expression"
-       class="form-control col-md-7 col-xs-12 hasclear">
-     </div>
-    </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6">Start Regex<span class="required">*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <input th:value=${result?.batchStartRegex} name="batchStartRegex" type="text"
+                               required="required" placeholder="Batch Started Regular Expression"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6">Done Regex<span class="required">*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <input th:value=${result?.batchDoneRegex} name="batchDoneRegex" type="text"
+                               required="required" placeholder="Batch Ended Regular Expression"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                    </div>
+                </div>
 
-    <div class="form-group">
-     <label class="control-label col-md-2 col-sm-2 col-xs-6"
-      for="email-port">Last Processed Line<span class="required">*</span>
-     </label>
-     <div class="col-md-4 col-sm-4 col-xs-6">
-      <input th:value=${result?.port} name="lastLineProcessed" type="number"
-       required="required" placeholder="Last Line Processed"
-       class="form-control col-md-7 col-xs-12 validate hasclear" min="0" maxlength="4" pattern="\d*">
-     </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6">Error Regex<span
+                            class="required">*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <input th:value=${result?.batchErrorRegex} name="batchErrorRegex" type="text"
+                               required="required" placeholder="Batch Error Regular Expression"
+                               class="form-control col-md-7 col-xs-12 hasclear">
+                        <div id = "insertMessage"></div>
+                    </div>
+                </div>
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-4">
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-success ">Save</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
     </div>
-
-    <div class="ln_solid"></div>
-    <div class="form-group">
-     <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-4">
-      <button type="reset" class="btn btn-primary">Reset</button>
-      <button type="submit" class="btn btn-success ">Save</button>
-     </div>
-    </div>
-
-   </form>
-  </div>
- </div>
 </div>

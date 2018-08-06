@@ -50,7 +50,12 @@
    <optional>true</optional>
   </dependency>
 
-
+      <dependency>
+          <groupId>com.kollect.etl</groupId>
+          <artifactId>etl-notification</artifactId>
+          <version>${etl.version}</version>
+          <scope>compile</scope>
+      </dependency>
 
     <dependency>
       <groupId>com.kollect.etl</groupId>

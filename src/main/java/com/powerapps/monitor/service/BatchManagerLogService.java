@@ -3,6 +3,7 @@ package com.powerapps.monitor.service;
 import com.kollect.etl.util.FileUtils;
 import com.kollect.etl.util.ListUtils;
 import com.powerapps.monitor.config.JsonReader;
+import com.powerapps.monitor.model.Batch;
 import com.powerapps.monitor.model.BmProperties;
 import com.powerapps.monitor.model.LogSummary;
 import com.powerapps.monitor.util.Utils;
@@ -23,19 +24,6 @@ import java.util.List;
 public class BatchManagerLogService {
 
     private static final Logger LOG = LoggerFactory.getLogger(BatchManagerLogService.class);
-
-    @Value("${app.batchStartRegex}")
-    private String batchStartRegex;
-    @Value("${app.batchDoneRegex}")
-    private String batchDoneRegex;
-    @Value("${app.batchErrorRegex}")
-    private String batchErrorRegex;
-
-    @Value("${app.bmRootPath}")
-    private String rootPath;
-
-    @Value("${app.bmCache}")
-    private String bmCache;
 
     @Value("${app.bmJson}")
     private String bmJsonPath;
@@ -102,8 +90,8 @@ public class BatchManagerLogService {
     }
 
     public void emailAndPersistToCache() throws IOException {
-        List<String> availableLogList = getLogFiles(new File(rootPath));
-        List<String> cacheList = getCachedList(new File(bmCache));
+        List<String> availableLogList = getLogFiles(new File(getRootPath(getConfig())));
+        List<String> cacheList = getCachedList(new File(getBmCache(getConfig())));
         List<String> unCachedList = fetchNewlyAddedLogFiles(cacheList, availableLogList);
         int count = unCachedList.size();
         LOG.info("Number of files uncached: {}", count);
@@ -114,12 +102,12 @@ public class BatchManagerLogService {
                     if (status == 1) {
                         //send failed email
                         //if email was sent then persist to cache
-                        new FileUtils().writeTextFile(bmCache, log + "\n");
+                        new FileUtils().writeTextFile(getBmCache(getConfig()), log + "\n");
                         LOG.info("Cached {}", log);
                     } else {
                         //send successful email
                         //if email was sent then persist to cache
-                        new FileUtils().writeTextFile(bmCache, log + "\n");
+                        new FileUtils().writeTextFile(getBmCache(getConfig()), log + "\n");
                         LOG.info("Cached {}", log);
                     }
                 }
@@ -131,14 +119,17 @@ public class BatchManagerLogService {
     }
 
     private LogSummary summarizeLog(String log) {
-        List<String> regexList = new ArrayList<>(Arrays.asList(batchStartRegex, batchErrorRegex, batchDoneRegex));
+        List<String> regexList = new ArrayList<>(Arrays.asList(getStartRegex(getConfig()),
+                getErrorRegex(getConfig()), getDoneRegex(getConfig())));
         //LOG.info("Processing {}", log);
-        List<String> lines = Utils.readLogFile(new File(rootPath, log));
+        List<String> lines = Utils.readLogFile(new File(getRootPath(getConfig()), log));
         boolean isStartEntry = false;
         boolean isDoneEntry = false;
         boolean isErrorEntry = false;
         boolean errorTerminated = false;
         int batchStatus = 0;
+        double runningTime = 0.0;
+        Batch batch = new Batch();
         String startTime;
         String endTime = null;
         Timestamp batchStartTime = null;
@@ -151,6 +142,7 @@ public class BatchManagerLogService {
                     String columns[] = line.split("\\s+");
                     startTime = columns[1] + " " + columns[2].split(",")[0] + "." + columns[2].split(",")[1];
                     batchStartTime = Timestamp.valueOf(startTime);
+                    batch.setStartTime(batchStartTime);
                     isStartEntry = true;
                     continue;
                 }
@@ -161,6 +153,7 @@ public class BatchManagerLogService {
                     String columns[] = line.split("\\s+");
                     endTime = columns[1] + " " + columns[2].split(",")[0] + "." + columns[2].split(",")[1];
                     batchEndTime = Timestamp.valueOf(endTime);
+                    batch.setEndTime(batchEndTime);
                     isDoneEntry = true;
                     isErrorEntry = true;
                     errorTerminated = true;
@@ -174,6 +167,7 @@ public class BatchManagerLogService {
                     String columns[] = line.split("\\s+");
                     endTime = columns[1] + " " + columns[2].split(",")[0] + "." + columns[2].split(",")[1];
                     batchEndTime = Timestamp.valueOf(endTime);
+                    batch.setEndTime(batchEndTime);
                     isDoneEntry = true;
                     batchStatus = 2; // successful
                     continue;
@@ -183,11 +177,13 @@ public class BatchManagerLogService {
             if ((i == (lines.size() - 1)) && (endTime == null)) {
                 batchStatus = 3; // inprogress
                 batchEndTime = new Timestamp(System.currentTimeMillis());
+                batch.setEndTime(batchEndTime);
             }
         }
-        double runningTime = ((batchEndTime.getTime() - batchStartTime.getTime()) / 1000) / 60f;
-        return new LogSummary(log, isStartEntry, isDoneEntry, errorTerminated, batchStartTime, batchEndTime, batchStatus,
-                runningTime);
+        batch.setRunningTime(batch.getEndTime().getTime() - batch.getStartTime().getTime());
+        //runningTime = ((batchEndTime.getTime() - batchStartTime.getTime()) / 1000) / 60f;
+        return new LogSummary(log, isStartEntry, isDoneEntry, errorTerminated, batch.getStartTime(), batch.getEndTime(), batchStatus,
+                batch.getRunningTime());
     }
 
     // needs refactoring

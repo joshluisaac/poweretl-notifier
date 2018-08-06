@@ -4,6 +4,7 @@ import com.powerapps.monitor.model.LogSummary;
 import com.powerapps.monitor.service.BatchManagerLogMetrics;
 import com.powerapps.monitor.service.BatchManagerLogService;
 import com.powerapps.monitor.service.ServiceEngineLogService;
+import com.powerapps.monitor.util.JsonToHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,16 +33,23 @@ public class HomeController {
     private ServiceEngineLogService errorService;
     private BatchManagerLogService bmService;
     private BatchManagerLogMetrics bmMetrics;
-    private String bmRootPath;
+private JsonToHashMap jsonToHashMap;
+    @Value("${app.bmJson}")
+    private String bmJson;
     private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
-    public HomeController(@Value("${app.bmRootPath}") String bmRootPath, ServiceEngineLogService errorService,
-                          BatchManagerLogService bmService, BatchManagerLogMetrics bmMetrics) {
+    public HomeController(ServiceEngineLogService errorService,
+                          BatchManagerLogService bmService, BatchManagerLogMetrics bmMetrics,
+                          JsonToHashMap jsonToHashMap) {
         this.errorService = errorService;
         this.bmService = bmService;
-        this.bmRootPath = bmRootPath;
         this.bmMetrics = bmMetrics;
+        this.jsonToHashMap=jsonToHashMap;
+    }
+
+    private String getRootPath(){
+        return jsonToHashMap.toHashMap(bmJson).get("bmRootPath");
     }
 
     @RequestMapping("/")
@@ -109,14 +117,14 @@ public class HomeController {
     @RequestMapping(value = "/bmerrorreportJSON", method = RequestMethod.GET)
     @ResponseBody
     public Object batchManagerErrorLogReportJSON(Model model) {
-        List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(bmRootPath)));
+        List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(getRootPath())));
         model.addAttribute("summaryList", summary);
         return summary;
     }
 
     @RequestMapping(value = "/bmerrorreport", method = RequestMethod.GET)
     public Object batchManagerErrorLogReport(Model model) {
-        List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(bmRootPath)));
+        List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(getRootPath())));
         model.addAttribute("summaryList", summary);
         return "batchManager-report";
     }
@@ -124,7 +132,7 @@ public class HomeController {
     @RequestMapping(value = "/downloadbatch", produces = "text/plain")
     public String downloadBatch(@RequestParam String logname, HttpServletResponse response) throws IOException {
         // resource path
-        Path path = Paths.get(bmRootPath + "/" + logname);
+        Path path = Paths.get(getRootPath() + "/" + logname);
 
         response.setContentType("text/plain");
         response.setContentLength((int)path.toFile().length());
@@ -151,7 +159,7 @@ public class HomeController {
     @RequestMapping(value = "/batchdetails", method = RequestMethod.GET)
     public Object getBatchDetails(Model model, @RequestParam String logname) throws IOException {
         model.addAttribute("batchDetails",
-                bmMetrics.extractFeatures(bmMetrics.getFile(new File(bmRootPath + "/" + logname))));
+                bmMetrics.extractFeatures(bmMetrics.getFile(new File(getRootPath() + "/" + logname))));
         return "fragments/template-bm-logmetric-report";
 
     }

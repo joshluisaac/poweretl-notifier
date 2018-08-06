@@ -1,6 +1,9 @@
 package com.powerapps.monitor.controller;
 
+import com.powerapps.monitor.config.JsonReader;
+import com.powerapps.monitor.model.SeProperties;
 import com.powerapps.monitor.service.EmailClient;
+import com.powerapps.monitor.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -13,10 +16,32 @@ import java.io.File;
 
 @Controller
 public class EmailNotificationController {
-    @Autowired
-    private EmailClient emailClient;
+
     @Value("${app.bmRootPath}")
     private String bmRootPath;
+    @Value("${app.seJson}")
+    private String seJsonPath;
+
+    private EmailClient emailClient;
+    private JsonReader reader;
+    private Utils util;
+
+    @Autowired
+    public EmailNotificationController(EmailClient emailClient,
+                                       JsonReader reader,
+                                       Utils util){
+        this.emailClient=emailClient;
+        this.reader=reader;
+        this.util=util;
+    }
+
+    private String getConfig() {
+        return util.listToBuffer(util.readFile(new File(seJsonPath))).toString();
+    }
+
+    private String getRootPath(final String config){
+        return reader.readJson(config, SeProperties.class).getSeRootPath();
+    }
 
     @RequestMapping(value = "/seemailnotifreport", method = RequestMethod.GET)
     public String serviceEngineEmailNotifReport(Model model) {
@@ -46,6 +71,7 @@ public class EmailNotificationController {
                                  @RequestParam String body,
                                  @RequestParam (required = false) MultipartFile attachment,
                                  RedirectAttributes redirAttr) {
+        String redirectPage = null;
         /* Check if file is too large (>1MB), redirect to error message if true. */
         if (attachment.getSize() > 1000000){
             redirAttr.addFlashAttribute("size", "Error: Email attachment file is too large, please upload only up to 1MB.");
@@ -53,10 +79,18 @@ public class EmailNotificationController {
 
         /* Check if attachment meets size criterion and is not empty, or if there was no attachment at all. */
         if (attachment.getSize() < 1000001 && attachment.getSize() != 0 || attachment.isEmpty()){
-            File logFile = new File(bmRootPath+"/"+logFileName);
-            this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
+            if (logFileName.equals("ServerError.log")){
+                File logFile = new File(this.getRootPath(this.getConfig())+"/"+logFileName);
+                this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
+                redirectPage = "seerrorreport";
+            }
+            else {
+                File logFile = new File(bmRootPath + "/" + logFileName);
+                this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
+                redirectPage = "bmerrorreport";
+            }
             redirAttr.addFlashAttribute("success", "Email for "+logFileName+" was sent successfully.");
         }
-        return "redirect:/bmerrorreport";
+        return "redirect:/"+redirectPage;
     }
 }

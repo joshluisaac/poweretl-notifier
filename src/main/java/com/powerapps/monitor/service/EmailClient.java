@@ -1,16 +1,14 @@
 package com.powerapps.monitor.service;
 
+import com.kollect.etl.notification.service.EmailContentBuilder;
+import com.kollect.etl.notification.service.IEmailClient;
 import com.powerapps.monitor.util.JsonToHashMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.TemplateEngine;
 
 import java.io.File;
 
@@ -27,57 +25,39 @@ public class EmailClient {
     private String adhocEmailJsonPath;
     @Value("${app.generalEmailJson}")
     private String generalEmailJsonPath;
+    private final String templateName = "fragments/template_email_template";
 
     private JavaMailSender mailSender;
-    private MailContentBuilder builder;
+    private final TemplateEngine templateEngine;
     private final JsonToHashMap jsonToHashMap;
-
-    private static final Logger LOG = LoggerFactory.getLogger(EmailClient.class);
 
     @Autowired
     public EmailClient(JavaMailSender mailSender,
-                       MailContentBuilder builder,
-                       JsonToHashMap jsonToHashMap){
+                       JsonToHashMap jsonToHashMap,
+                       TemplateEngine templateEngine){
         this.mailSender = mailSender;
-        this.builder = builder;
         this.jsonToHashMap = jsonToHashMap;
+        this.templateEngine=templateEngine;
     }
 
     public void sendAdhocEmail(String title, String body,
                                MultipartFile attachment, File logFile){
-        MimeMessagePreparator messagePreparator = mimeMessage -> {
-            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
-            messageHelper.setFrom(this.jsonToHashMap.toHashMap(generalEmailJsonPath).get("fromEmail"));
-            messageHelper.setTo(this.jsonToHashMap.toHashMap(adhocEmailJsonPath).get("recipient").split(","));
-            messageHelper.setSubject(title);
-            messageHelper.setText(builder.buildEmail(body, "fragments/template_email_template"), true);
-            messageHelper.addAttachment(attachment.getOriginalFilename(), attachment);
-            messageHelper.addAttachment(logFile.getName(), logFile);
-        };
-        try {
-            mailSender.send(messagePreparator);
-            LOG.info("Email has been sent successfully.");
-        } catch (MailException e) {
-            LOG.error("An error occurred during email send." + e);
-        }
+        final IEmailClient eClient =
+                new com.kollect.etl.notification.service.EmailClient(mailSender);
+        eClient.sendAdhocEmail(jsonToHashMap.toHashMap(generalEmailJsonPath).get("fromEmail"),
+                jsonToHashMap.toHashMap(adhocEmailJsonPath).get("recipient"),
+                title, body, attachment, logFile,
+                new EmailContentBuilder(templateEngine), templateName);
     }
 
-    public void sendAutoEmail(File logFile){
-        MimeMessagePreparator messagePreparator = mimeMessage -> {
-            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
-            messageHelper.setFrom(this.jsonToHashMap.toHashMap(generalEmailJsonPath).get("fromEmail"));
-            messageHelper.setTo(this.jsonToHashMap.toHashMap(autoEmailJsonPath).get("recipient").split(","));
-            messageHelper.setSubject(this.jsonToHashMap.toHashMap(autoEmailJsonPath).get("subject"));
-            messageHelper.setText(builder.buildEmail(
-                    this.jsonToHashMap.toHashMap(autoEmailJsonPath).get("message"),
-                    "fragments/template_email_template"), true);
-            messageHelper.addAttachment(logFile.getName(), logFile);
-        };
-        try {
-            mailSender.send(messagePreparator);
-            LOG.info("Email has been sent successfully.");
-        } catch (MailException e) {
-            LOG.error("An error occurred during email send." + e);
-        }
+    public void sendAutoemail(File logFile){
+        final IEmailClient eClient =
+                new com.kollect.etl.notification.service.EmailClient(mailSender);
+        eClient.sendAutoEmail(jsonToHashMap.toHashMap(generalEmailJsonPath).get("fromEmail"),
+                jsonToHashMap.toHashMap(autoEmailJsonPath).get("recipient"),
+                jsonToHashMap.toHashMap(autoEmailJsonPath).get("subject"),
+                jsonToHashMap.toHashMap(autoEmailJsonPath).get("message"),
+                logFile, new EmailContentBuilder(templateEngine), templateName);
+
     }
 }

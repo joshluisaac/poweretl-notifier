@@ -54,7 +54,7 @@ private JsonToHashMap jsonToHashMap;
 
     @RequestMapping("/")
     public String index() {
-        return "redirect:/dashboard";
+        return "redirect:/seerrorreport";
     }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)

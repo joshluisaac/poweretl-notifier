@@ -46,9 +46,10 @@ public class BatchManagerSettingController {
     public void save(@RequestParam String bmRootPath,
                        @RequestParam String batchStartRegex,
                        @RequestParam String batchDoneRegex,
-                       @RequestParam String batchErrorRegex) {
+                       @RequestParam String batchErrorRegex,
+                       @RequestParam String bmCache) {
 
-        BmProperties bmProp = new BmProperties(bmRootPath, batchStartRegex, batchDoneRegex, batchErrorRegex, "config/bmcache.csv");
+        BmProperties bmProp = new BmProperties(bmRootPath, batchStartRegex, batchDoneRegex, batchErrorRegex, bmCache);
         String out = bmWriter.generateJson(bmProp);
         util.writeTextFile(bmJsonPath, out, false);
     }

@@ -64,6 +64,18 @@
                         <input th:value=${result?.batchErrorRegex} name="batchErrorRegex" type="text"
                                required="required" placeholder="Batch Error Regular Expression"
                                class="form-control col-md-7 col-xs-12 hasclear">
+                        
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-6">Cache Location<span
+                            class="required">*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <input th:value=${result?.bmCache} name="bmCache" type="text"
+                               required="required" placeholder="Cache Location"
+                               class="form-control col-md-7 col-xs-12 hasclear">
                         <div id = "insertMessage"></div>
                     </div>
                 </div>

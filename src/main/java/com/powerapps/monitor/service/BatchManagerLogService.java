@@ -180,8 +180,7 @@ public class BatchManagerLogService {
                 batch.setEndTime(batchEndTime);
             }
         }
-        batch.setRunningTime(batch.getEndTime().getTime() - batch.getStartTime().getTime());
-        //runningTime = ((batchEndTime.getTime() - batchStartTime.getTime()) / 1000) / 60f;
+        batch.setRunningTime(((batch.getEndTime().getTime() - batch.getStartTime().getTime())/ 1000) / 60f);
         return new LogSummary(log, isStartEntry, isDoneEntry, errorTerminated, batch.getStartTime(), batch.getEndTime(), batchStatus,
                 batch.getRunningTime());
     }

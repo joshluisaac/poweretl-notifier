@@ -1,9 +1,7 @@
 package com.powerapps.monitor.controller;
 
-import com.powerapps.monitor.config.JsonReader;
-import com.powerapps.monitor.model.SeProperties;
 import com.powerapps.monitor.service.EmailClient;
-import com.powerapps.monitor.util.Utils;
+import com.powerapps.monitor.util.JsonToHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -17,30 +15,19 @@ import java.io.File;
 @Controller
 public class EmailNotificationController {
 
-    @Value("${app.bmRootPath}")
-    private String bmRootPath;
+    @Value("${app.bmJson}")
+    private String bmJsonPath;
     @Value("${app.seJson}")
     private String seJsonPath;
 
     private EmailClient emailClient;
-    private JsonReader reader;
-    private Utils util;
+    private JsonToHashMap jsonToHashMap;
 
     @Autowired
     public EmailNotificationController(EmailClient emailClient,
-                                       JsonReader reader,
-                                       Utils util){
+                                       JsonToHashMap jsonToHashMap){
         this.emailClient=emailClient;
-        this.reader=reader;
-        this.util=util;
-    }
-
-    private String getConfig() {
-        return util.listToBuffer(util.readFile(new File(seJsonPath))).toString();
-    }
-
-    private String getRootPath(final String config){
-        return reader.readJson(config, SeProperties.class).getSeRootPath();
+        this.jsonToHashMap=jsonToHashMap;
     }
 
     @RequestMapping(value = "/seemailnotifreport", method = RequestMethod.GET)
@@ -80,12 +67,14 @@ public class EmailNotificationController {
         /* Check if attachment meets size criterion and is not empty, or if there was no attachment at all. */
         if (attachment.getSize() < 1000001 && attachment.getSize() != 0 || attachment.isEmpty()){
             if (logFileName.equals("ServerError.log")){
-                File logFile = new File(this.getRootPath(this.getConfig())+"/"+logFileName);
+                File logFile = new File(jsonToHashMap.toHashMap(seJsonPath).get("seRootPath")
+                        +"/"+logFileName);
                 this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
                 redirectPage = "seerrorreport";
             }
             else {
-                File logFile = new File(bmRootPath + "/" + logFileName);
+                File logFile = new File(jsonToHashMap.toHashMap(bmJsonPath).get("bmRootPath")
+                        + "/" + logFileName);
                 this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
                 redirectPage = "bmerrorreport";
             }

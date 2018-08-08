@@ -13,8 +13,12 @@ import java.util.Map;
 
 @Controller
 public class EmailSettingController {
-    @Value("${app.autoEmailJson}")
-    private String autoEmailJsonPath;
+    @Value("${app.seAutoEmailJson}")
+    private String seAutoEmailJsonPath;
+    @Value("${app.dcAutoEmailJson}")
+    private String dcAutoEmailJsonPath;
+    @Value("${app.bmAutoEmailJson}")
+    private String bmAutoEmailJsonPath;
     @Value("${app.adhocEmailJson}")
     private String adhocEmailJsonPath;
     @Value("${app.generalEmailJson}")
@@ -32,10 +36,22 @@ public class EmailSettingController {
         this.jsonToHashMap = jsonToHashMap;
     }
 
-    @RequestMapping("/autoemailsettings")
-    public String autoEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHashMap(autoEmailJsonPath));
-        return "autoEmailSettingsForm";
+    @GetMapping("/seautoemailsettings")
+    public String seAutoEmailSettings(Model model) {
+        model.addAttribute("result", jsonToHashMap.toHashMap(seAutoEmailJsonPath));
+        return "seAutoEmailSettingsForm";
+    }
+
+    @GetMapping("/dcautoemailsettings")
+    public String dcAutoEmailSettings(Model model) {
+        model.addAttribute("result", jsonToHashMap.toHashMap(dcAutoEmailJsonPath));
+        return "dcAutoEmailSettingsForm";
+    }
+
+    @GetMapping("/bmautoemailsettings")
+    public String bmAutoEmailSettings(Model model) {
+        model.addAttribute("result", jsonToHashMap.toHashMap(bmAutoEmailJsonPath));
+        return "bmAutoEmailSettingsForm";
     }
 
     @GetMapping("/adhocemailsettings")
@@ -63,15 +79,32 @@ public class EmailSettingController {
         util.writeTextFile(generalEmailJsonPath, jsonOut, false);
     }
 
-    @ResponseBody
-    @PostMapping("/autoemailsettings")
-    public void autoEmailSettings(@RequestParam HashMap<String, String> autoEmailSettings) {
+    private void autoEmailSettingWriter(HashMap<String, String> AutoEmailSettings,
+                                        String autoEmailJsonPath){
         Map<String, String> toStore = new HashMap<>();
-        toStore.put("recipient", autoEmailSettings.get("recipient"));
-        toStore.put("subject", autoEmailSettings.get("subject"));
-        toStore.put("message", autoEmailSettings.get("message"));
+        toStore.put("recipient", AutoEmailSettings.get("recipient"));
+        toStore.put("subject", AutoEmailSettings.get("subject"));
+        toStore.put("message", AutoEmailSettings.get("message"));
         String jsonOut = writer.generateJson(toStore);
         util.writeTextFile(autoEmailJsonPath, jsonOut, false);
+    }
+
+    @ResponseBody
+    @PostMapping("/seautoemailsettings")
+    public void seAutoEmailSettings(@RequestParam HashMap<String, String> seAutoEmailSettings) {
+        autoEmailSettingWriter(seAutoEmailSettings, seAutoEmailJsonPath);
+    }
+
+    @ResponseBody
+    @PostMapping("/dcautoemailsettings")
+    public void dcAutoEmailSettings(@RequestParam HashMap<String, String> dcAutoEmailSettings) {
+        autoEmailSettingWriter(dcAutoEmailSettings, dcAutoEmailJsonPath);
+    }
+
+    @ResponseBody
+    @PostMapping("/bmautoemailsettings")
+    public void bmAutoEmailSettings(@RequestParam HashMap<String, String> bmAutoEmailSettings) {
+        autoEmailSettingWriter(bmAutoEmailSettings, bmAutoEmailJsonPath);
     }
 
     @ResponseBody

@@ -21,8 +21,8 @@ import java.io.File;
  */
 @Service
 public class EmailClient {
-    @Value("${app.autoEmailJson}")
-    private String autoEmailJsonPath;
+    @Value("${app.seAutoEmailJson}")
+    private String seAutoEmailJsonPath;
     @Value("${app.adhocEmailJson}")
     private String adhocEmailJsonPath;
     @Value("${app.generalEmailJson}")
@@ -60,9 +60,9 @@ public class EmailClient {
         final IEmailClient eClient =
                 new com.kollect.etl.notification.service.EmailClient(mailSender, emailLogger);
         eClient.sendAutoEmail(jsonToHashMap.toHashMap(generalEmailJsonPath).get("fromEmail"),
-                jsonToHashMap.toHashMap(autoEmailJsonPath).get("recipient"),
-                jsonToHashMap.toHashMap(autoEmailJsonPath).get("subject"),
-                jsonToHashMap.toHashMap(autoEmailJsonPath).get("message"),
+                jsonToHashMap.toHashMap(seAutoEmailJsonPath).get("recipient"),
+                jsonToHashMap.toHashMap(seAutoEmailJsonPath).get("subject"),
+                jsonToHashMap.toHashMap(seAutoEmailJsonPath).get("message"),
                 logFile, new EmailContentBuilder(templateEngine), templateName,
                 "config/autoEmailLog.json");
 

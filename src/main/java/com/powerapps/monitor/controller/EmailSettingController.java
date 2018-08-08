@@ -51,6 +51,7 @@ public class EmailSettingController {
     @GetMapping("/bmautoemailsettings")
     public String bmAutoEmailSettings(Model model) {
         model.addAttribute("result", jsonToHashMap.toHashMap(bmAutoEmailJsonPath));
+        System.out.println(model);
         return "bmAutoEmailSettingsForm";
     }
 
@@ -85,6 +86,7 @@ public class EmailSettingController {
         toStore.put("recipient", AutoEmailSettings.get("recipient"));
         toStore.put("subject", AutoEmailSettings.get("subject"));
         toStore.put("message", AutoEmailSettings.get("message"));
+        toStore.put("pathToEmailLog", AutoEmailSettings.get("pathToEmailLog"));
         String jsonOut = writer.generateJson(toStore);
         util.writeTextFile(autoEmailJsonPath, jsonOut, false);
     }

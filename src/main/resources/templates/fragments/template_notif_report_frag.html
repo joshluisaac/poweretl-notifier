@@ -10,17 +10,19 @@
                     <th>No.</th>
                     <th>Recipient</th>
                     <th>Email Title</th>
+                    <th>Log File Name</th>
                     <th>Date Sent</th>
                     <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>abcd</td>
-                    <td>Error</td>
-                    <td>2018-07-04 09:05:000</td>
-                    <td><span class="label label-success">Success</span></td>
+                <tr th:each= "result, status : ${resultList}">
+                    <td th:text="${status.index + 1}"></td>
+                    <td th:text="${result.map0}"></td>
+                    <td th:text="${result.map1}"></td>
+                    <td th:text="${result.map2}"></td>
+                    <td th:text="${result.map3}"></td>
+                    <td th:text="${result.map4}"></td>
                 </tr>
                 </tbody>
             </table>

@@ -57,7 +57,7 @@ public class EmailClient {
                 jsonToHashMap.toHashMap(adhocEmailJsonPath).get("recipient"),
                 title, body, attachment, logFile,
                 new EmailContentBuilder(templateEngine), templateName,
-                "config/adhocEmailLog.json");
+                "config/adhocEmailLog.csv");
     }
 
     private void sendAutoEmail(File logFile, String autoEmailJsonPath){

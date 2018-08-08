@@ -56,15 +56,15 @@ public class EmailClient {
                 "config/adhocEmailLog.json");
     }
 
-    public void sendAutoemail(File logFile){
+    private void sendAutoEmail(File logFile, String autoEmailJsonPath){
         final IEmailClient eClient =
                 new com.kollect.etl.notification.service.EmailClient(mailSender, emailLogger);
         eClient.sendAutoEmail(jsonToHashMap.toHashMap(generalEmailJsonPath).get("fromEmail"),
-                jsonToHashMap.toHashMap(seAutoEmailJsonPath).get("recipient"),
-                jsonToHashMap.toHashMap(seAutoEmailJsonPath).get("subject"),
-                jsonToHashMap.toHashMap(seAutoEmailJsonPath).get("message"),
+                jsonToHashMap.toHashMap(autoEmailJsonPath).get("recipient"),
+                jsonToHashMap.toHashMap(autoEmailJsonPath).get("subject"),
+                jsonToHashMap.toHashMap(autoEmailJsonPath).get("message"),
                 logFile, new EmailContentBuilder(templateEngine), templateName,
-                "config/autoEmailLog.json");
+                jsonToHashMap.toHashMap(autoEmailJsonPath).get("pathToEmailLog"));
 
     }
 }

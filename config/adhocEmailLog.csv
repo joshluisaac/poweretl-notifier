@@ -1,3 +1,4 @@
-recipient, subject, sendTime, status
-hashim@kollect.my, A test, 2018-08-219 18:08:00, Success
-hashim@kollect.my,Test to add multiple logs, 2018-08-220 17:08:00, Success
+hashim@kollect.my|This is a test|ServerError.log|2018-08-220 18:08:18|Success
+hashim@kollect.my|This is a test|ServerError.log|2018-08-220 18:08:18|Success
+hashim@kollect.my|Test|defaultSms-13.Jun.2018-12_10_01.log|2018-08-220 18:08:52|Success
+hashim@kollect.my|Another test|Batch-ContactNumRefresh-25.Jun.2018-21_35_17.log|2018-08-220 18:08:06|Success

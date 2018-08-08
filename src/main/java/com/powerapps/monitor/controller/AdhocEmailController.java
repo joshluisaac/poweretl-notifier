@@ -23,6 +23,12 @@ public class AdhocEmailController {
     private EmailClient emailClient;
     private JsonToHashMap jsonToHashMap;
 
+    public AdhocEmailController(EmailClient emailClient,
+                                JsonToHashMap jsonToHashMap){
+        this.emailClient=emailClient;
+        this.jsonToHashMap=jsonToHashMap;
+    }
+
     @GetMapping("/sendadhocemail")
     public Object sendAdhocEmail(@RequestParam String logFileName,
                                  Model model){

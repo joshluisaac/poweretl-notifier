@@ -23,6 +23,10 @@ import java.io.File;
 public class EmailClient {
     @Value("${app.seAutoEmailJson}")
     private String seAutoEmailJsonPath;
+    @Value("${app.dcAutoEmailJson}")
+    private String dcAutoEmailJsonPath;
+    @Value("${app.bmAutoEmailJson}")
+    private String bmAutoEmailJsonPath;
     @Value("${app.adhocEmailJson}")
     private String adhocEmailJsonPath;
     @Value("${app.generalEmailJson}")
@@ -66,5 +70,17 @@ public class EmailClient {
                 logFile, new EmailContentBuilder(templateEngine), templateName,
                 jsonToHashMap.toHashMap(autoEmailJsonPath).get("pathToEmailLog"));
 
+    }
+
+    private void sendSeAutoEmail(File logFile){
+        sendAutoEmail(logFile, seAutoEmailJsonPath);
+    }
+
+    private void sendDcAutoEmail(File logFile){
+        sendAutoEmail(logFile, dcAutoEmailJsonPath);
+    }
+
+    private void sendBmAutoEmail(File logFile){
+        sendAutoEmail(logFile, bmAutoEmailJsonPath);
     }
 }

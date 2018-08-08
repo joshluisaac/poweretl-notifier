@@ -23,45 +23,7 @@
             <form action="/seautoemailsettings" method="post"
                   id="ajaxForm" data-parsley-validate
                   class="form-horizontal form-label-left">
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-6">
-                        Email Recipient(s) <span class>*</span>
-                    </label>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <textarea th:text=${result?.recipient} name="recipient"
-                                  required placeholder="Email Recipient(s) - separate by commas(,)"
-                                  class="form-control col-md-7 col-xs-12 hasclear">
-                        </textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-6">
-                        Email Subject <span class>*</span>
-                    </label>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <input th:value=${result?.subject} name="subject" type="text"
-                               required placeholder="Subject for automated emails"
-                               class="form-control col-md-7 col-xs-12 hasclear">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-6">
-                        Email Message <span class>*</span>
-                    </label>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <textarea th:text=${result?.message} name="message"
-                                  required placeholder="Automated email message content"
-                                  class="form-control col-md-7 col-xs-12 hasclear">
-                        </textarea>
-                        <div id = "insertMessage"></div>
-                    </div>
-                </div>
-                <div class="ln_solid"></div>
-                <div class="form-group">
-                    <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-4">
-                        <button type="reset" class="btn btn-primary">Reset</button>
-                        <button type="submit" class="btn btn-success ">Save</button>
-                    </div>
+                <div th:replace="fragments/template_auto_email_settings_frag :: autoEmailSettingsFormFrag">
                 </div>
             </form>
         </div>

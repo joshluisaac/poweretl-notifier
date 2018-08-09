@@ -1,12 +1,15 @@
 package com.powerapps.monitor.controller;
 
-import com.powerapps.monitor.config.JsonWriter;
-import com.powerapps.monitor.util.JsonToHashMap;
-import com.powerapps.monitor.util.Utils;
+import com.kollect.etl.util.JsonToHashMap;
+import com.kollect.etl.util.JsonUtils;
+import com.kollect.etl.util.Utils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,46 +27,38 @@ public class EmailSettingController {
     @Value("${app.generalEmailJson}")
     private String generalEmailJsonPath;
 
-    private final JsonWriter writer;
-    private final Utils util;
-    private final JsonToHashMap jsonToHashMap;
-
-    public EmailSettingController(JsonWriter writer,
-                                  Utils util,
-                                  JsonToHashMap jsonToHashMap) {
-        this.writer = writer;
-        this.util = util;
-        this.jsonToHashMap = jsonToHashMap;
-    }
+    private JsonUtils jsonUtils = new JsonUtils();
+    private Utils utils = new Utils();
+    private final JsonToHashMap jsonToHashMap = new JsonToHashMap(jsonUtils, utils);
 
     @GetMapping("/seautoemailsettings")
     public String seAutoEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHashMap(seAutoEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(seAutoEmailJsonPath));
         return "seAutoEmailSettingsForm";
     }
 
     @GetMapping("/dcautoemailsettings")
     public String dcAutoEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHashMap(dcAutoEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(dcAutoEmailJsonPath));
         return "dcAutoEmailSettingsForm";
     }
 
     @GetMapping("/bmautoemailsettings")
     public String bmAutoEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHashMap(bmAutoEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(bmAutoEmailJsonPath));
         System.out.println(model);
         return "bmAutoEmailSettingsForm";
     }
 
     @GetMapping("/adhocemailsettings")
     public String adhocEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHashMap(adhocEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(adhocEmailJsonPath));
         return "adhocEmailSettingsForm";
     }
 
     @GetMapping("/generalemailsettings")
     public String generalEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHashMap(generalEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(generalEmailJsonPath));
         return "generalEmailSettingsForm";
     }
 
@@ -76,8 +71,8 @@ public class EmailSettingController {
         toStore.put("fromEmail", generalEmailSettings.get("fromEmail"));
         toStore.put("host", generalEmailSettings.get("host"));
         toStore.put("port", generalEmailSettings.get("port"));
-        String jsonOut = writer.generateJson(toStore);
-        util.writeTextFile(generalEmailJsonPath, jsonOut, false);
+        String jsonOut = jsonUtils.toJson(toStore);
+        utils.writeTextFile(generalEmailJsonPath, jsonOut, false);
     }
 
     private void autoEmailSettingWriter(HashMap<String, String> AutoEmailSettings,
@@ -87,8 +82,8 @@ public class EmailSettingController {
         toStore.put("subject", AutoEmailSettings.get("subject"));
         toStore.put("message", AutoEmailSettings.get("message"));
         toStore.put("pathToEmailLog", AutoEmailSettings.get("pathToEmailLog"));
-        String jsonOut = writer.generateJson(toStore);
-        util.writeTextFile(autoEmailJsonPath, jsonOut, false);
+        String jsonOut = jsonUtils.toJson(toStore);
+        utils.writeTextFile(autoEmailJsonPath, jsonOut, false);
     }
 
     @ResponseBody
@@ -114,7 +109,7 @@ public class EmailSettingController {
     public void adhocEmailSettings(@RequestParam HashMap<String, String> adhocEmailSettings) {
         Map<String, String> toStore = new HashMap<>();
         toStore.put("recipient", adhocEmailSettings.get("recipient"));
-        String jsonOut = writer.generateJson(toStore);
-        util.writeTextFile(adhocEmailJsonPath, jsonOut, false);
+        String jsonOut = jsonUtils.toJson(toStore);
+        utils.writeTextFile(adhocEmailJsonPath, jsonOut, false);
     }
 }

@@ -1,7 +1,7 @@
 package com.powerapps.monitor.controller;
 
 import com.kollect.etl.util.PropertiesUtils;
-import com.powerapps.monitor.util.PropertyToHashMap;
+import com.kollect.etl.util.PropertyToHashMap;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +19,7 @@ public class SchedulerController {
     @Value("${app.emailSchedulerProp}")
     private String emailSchedulerPropPath;
 
-    private PropertyToHashMap propertyToHashMap;
-
-    public SchedulerController(PropertyToHashMap propertyToHashMap) {
-        this.propertyToHashMap = propertyToHashMap;
-    }
+    private PropertyToHashMap propertyToHashMap = new PropertyToHashMap();
 
     @RequestMapping(value = "/fixedinterval", method = RequestMethod.GET)
     public String fixedIntervalSettings(Model model) throws IOException {

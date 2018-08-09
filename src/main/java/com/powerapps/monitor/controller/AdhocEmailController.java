@@ -1,7 +1,9 @@
 package com.powerapps.monitor.controller;
 
+import com.kollect.etl.util.JsonToHashMap;
+import com.kollect.etl.util.JsonUtils;
+import com.kollect.etl.util.Utils;
 import com.powerapps.monitor.service.EmailClient;
-import com.powerapps.monitor.util.JsonToHashMap;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +23,10 @@ public class AdhocEmailController {
     private String seJsonPath;
 
     private EmailClient emailClient;
-    private JsonToHashMap jsonToHashMap;
+    private final JsonToHashMap jsonToHashMap = new JsonToHashMap(new JsonUtils(), new Utils());
 
-    public AdhocEmailController(EmailClient emailClient,
-                                JsonToHashMap jsonToHashMap){
+    public AdhocEmailController(EmailClient emailClient){
         this.emailClient=emailClient;
-        this.jsonToHashMap=jsonToHashMap;
     }
 
     @GetMapping("/sendadhocemail")
@@ -51,13 +51,13 @@ public class AdhocEmailController {
         /* Check if attachment meets size criterion and is not empty, or if there was no attachment at all. */
         if (attachment.getSize() < 1000001 && attachment.getSize() != 0 || attachment.isEmpty()){
             if (logFileName.equals("ServerError.log")){
-                File logFile = new File(jsonToHashMap.toHashMap(seJsonPath).get("seRootPath")
+                File logFile = new File(jsonToHashMap.toHashMapFromJson(seJsonPath).get("seRootPath")
                         +"/"+logFileName);
                 this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
                 redirectPage = "seerrorreport";
             }
             else {
-                File logFile = new File(jsonToHashMap.toHashMap(bmJsonPath).get("bmRootPath")
+                File logFile = new File(jsonToHashMap.toHashMapFromJson(bmJsonPath).get("bmRootPath")
                         + "/" + logFileName);
                 this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
                 redirectPage = "bmerrorreport";

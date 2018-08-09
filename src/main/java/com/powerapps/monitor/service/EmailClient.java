@@ -34,8 +34,7 @@ public class EmailClient {
     private final String templateName = "fragments/template_email_template";
 
     private JavaMailSender mailSender;
-    private IEmailLogger emailLogger = new EmailLogger(
-            new com.kollect.etl.util.Utils());
+    private IEmailLogger emailLogger = new EmailLogger();
     private final TemplateEngine templateEngine;
     private final JsonToHashMap jsonToHashMap;
 

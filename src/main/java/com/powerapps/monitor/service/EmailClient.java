@@ -7,9 +7,9 @@ import com.kollect.etl.notification.service.IEmailLogger;
 import com.kollect.etl.util.JsonToHashMap;
 import com.kollect.etl.util.JsonUtils;
 import com.kollect.etl.util.Utils;
+import com.powerapps.monitor.config.EmailConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.TemplateEngine;
@@ -35,13 +35,13 @@ public class EmailClient {
     private String generalEmailJsonPath;
     private final String templateName = "fragments/template_email_template";
 
-    private JavaMailSender mailSender;
+    private EmailConfig mailSender;
     private IEmailLogger emailLogger = new EmailLogger();
     private final TemplateEngine templateEngine;
     private final JsonToHashMap jsonToHashMap = new JsonToHashMap(new JsonUtils(), new Utils());
 
     @Autowired
-    public EmailClient(JavaMailSender mailSender,
+    public EmailClient(EmailConfig mailSender,
                        TemplateEngine templateEngine){
         this.mailSender = mailSender;
         this.templateEngine=templateEngine;
@@ -50,7 +50,7 @@ public class EmailClient {
     public void sendAdhocEmail(String title, String body,
                                MultipartFile attachment, File logFile){
         final IEmailClient eClient =
-                new com.kollect.etl.notification.service.EmailClient(mailSender,emailLogger);
+                new com.kollect.etl.notification.service.EmailClient(mailSender.javaMailService(),emailLogger);
         eClient.sendAdhocEmail(jsonToHashMap.toHashMapFromJson(generalEmailJsonPath).get("fromEmail"),
                 jsonToHashMap.toHashMapFromJson(adhocEmailJsonPath).get("recipient"),
                 title, body, attachment, logFile,
@@ -60,7 +60,7 @@ public class EmailClient {
 
     private void sendAutoEmail(File logFile, String autoEmailJsonPath){
         final IEmailClient eClient =
-                new com.kollect.etl.notification.service.EmailClient(mailSender, emailLogger);
+                new com.kollect.etl.notification.service.EmailClient(mailSender.javaMailService(), emailLogger);
         eClient.sendAutoEmail(jsonToHashMap.toHashMapFromJson(generalEmailJsonPath).get("fromEmail"),
                 jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("recipient"),
                 jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("subject"),

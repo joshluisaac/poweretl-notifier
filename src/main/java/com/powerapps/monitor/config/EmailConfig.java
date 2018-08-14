@@ -26,7 +26,7 @@ public class EmailConfig {
     @Bean
     public JavaMailSender javaMailService() {
         final IEmailConfig config = new com.kollect.etl.notification.config.EmailConfig();
-        return config.emailService(this.jsonToHashMap.toHashMap(generalEmailJsonPath).get("host"),
+        return config.setEmailSettings(this.jsonToHashMap.toHashMap(generalEmailJsonPath).get("host"),
                 Integer.valueOf(
                         this.jsonToHashMap.toHashMap(
                                 generalEmailJsonPath).get("port")),

@@ -59,7 +59,7 @@ public class EmailClient {
     public void sendAdhocEmail(String title, String body,
                                MultipartFile attachment, File logFile) {
         final IEmailClient eClient =
-                new com.kollect.etl.notification.service.EmailClient(mailSender.javaMailService(), emailLogger);
+                new com.kollect.etl.notification.service.EmailClient(mailSender.javaMailService());
         final IEmailContentBuilder emailContentBuilder = new EmailContentBuilder(templateEngine);
         String content = emailContentBuilder.buildSimpleEmail
                 (body, templateName);
@@ -75,7 +75,7 @@ public class EmailClient {
 
     private void sendAutoEmail(File logFile, String autoEmailJsonPath) {
         final IEmailClient eClient =
-                new com.kollect.etl.notification.service.EmailClient(mailSender.javaMailService(), emailLogger);
+                new com.kollect.etl.notification.service.EmailClient(mailSender.javaMailService());
         final IEmailContentBuilder emailContentBuilder = new EmailContentBuilder(templateEngine);
         String content = emailContentBuilder.buildSimpleEmail(jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("message")
                 , templateName);

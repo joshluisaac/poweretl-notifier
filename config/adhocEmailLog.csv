@@ -1,6 +1,3 @@
-hashim@kollect.my|This is a test|ServerError.log|2018-08-220 18:08:18|Success|
-hashim@kollect.my|This is a test|ServerError.log|2018-08-220 18:08:18|Success|
-hashim@kollect.my|Test|defaultSms-13.Jun.2018-12_10_01.log|2018-08-220 18:08:52|Success|
-hashim@kollect.my|Another test|Batch-ContactNumRefresh-25.Jun.2018-21_35_17.log|2018-08-220 18:08:06|Success|
-hashim@kollect.my|Test Email for SeError|ServerError.log|2018-08-221 08:08:52|Success|
-hashim@kollect.my|Test|Batch-AdhocBulkLetter-04.Jun.2018-19_00_01.log|2018-08-221 08:08:23|Success|
+hashim@kollect.my|Batch-CallLogger-11.Jun.2018-14_17_02.log Test |Batch-CallLogger-11.Jun.2018-14_17_02.log|2018-08-14 12:08:02|Success|
+hashim@kollect.my|Changed to config javamail sender from JavamailSender|Batch-ctiExtraction-04.Jun.2018-07_11_04.log|2018-08-14 13:08:19|Success|
+hashim@kollect.my|Test Email With new Implementation|ServerError.log|2018-08-16 14:08:57|Success|

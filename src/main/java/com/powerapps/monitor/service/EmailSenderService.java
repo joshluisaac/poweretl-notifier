@@ -24,7 +24,7 @@ import java.util.Date;
  * @author hashim
  */
 @Service
-public class EmailClient {
+public class EmailSenderService {
     @Value("${app.seAutoEmailJson}")
     private String seAutoEmailJsonPath;
     @Value("${app.dcAutoEmailJson}")
@@ -39,13 +39,16 @@ public class EmailClient {
     @Value("${app.adhocEmailLog}")
     String adhocEmailLogPath;
 
+  //comments:You don't need this. The emailclient will construct itself using the rules of DI and beans in EmailConfigAssembler.java
     private EmailConfig mailSender;
     private IEmailLogger emailLogger = new EmailLogger();
+    
+  //comments:You don't need this. The EmailContentBuilder will construct itself using this template since you have already autowired it in EmailContentBuilder.java
     private final TemplateEngine templateEngine;
     private final JsonToHashMap jsonToHashMap = new JsonToHashMap(new JsonUtils(), new Utils());
 
     @Autowired
-    public EmailClient(EmailConfig mailSender,
+    public EmailSenderService(EmailConfig mailSender,
                        TemplateEngine templateEngine) {
         this.mailSender = mailSender;
         this.templateEngine = templateEngine;
@@ -58,11 +61,17 @@ public class EmailClient {
 
     public void sendAdhocEmail(String title, String body,
                                MultipartFile attachment, File logFile) {
+      
+      //comments:move this to the class scope and use dependency injection
         final IEmailClient eClient =
                 new com.kollect.etl.notification.service.EmailClient(mailSender.javaMailService());
+        
+      //comments:move this to the class scope and use dependency injection
         final IEmailContentBuilder emailContentBuilder = new EmailContentBuilder(templateEngine);
-        String content = emailContentBuilder.buildSimpleEmail
-                (body, templateName);
+       
+        
+        String content = emailContentBuilder.buildSimpleEmail(body, templateName);
+                
         Email mail = new Email(jsonToHashMap.toHashMapFromJson(generalEmailJsonPath).get("fromEmail"),
                 jsonToHashMap.toHashMapFromJson(adhocEmailJsonPath).get("recipient"),
                 title, content, attachment, logFile);

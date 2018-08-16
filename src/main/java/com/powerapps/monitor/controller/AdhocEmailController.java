@@ -3,7 +3,7 @@ package com.powerapps.monitor.controller;
 import com.kollect.etl.util.JsonToHashMap;
 import com.kollect.etl.util.JsonUtils;
 import com.kollect.etl.util.Utils;
-import com.powerapps.monitor.service.EmailClient;
+import com.powerapps.monitor.service.EmailSenderService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,10 +22,10 @@ public class AdhocEmailController {
     @Value("${app.seJson}")
     private String seJsonPath;
 
-    private EmailClient emailClient;
+    private EmailSenderService emailClient;
     private final JsonToHashMap jsonToHashMap = new JsonToHashMap(new JsonUtils(), new Utils());
 
-    public AdhocEmailController(EmailClient emailClient){
+    public AdhocEmailController(EmailSenderService emailClient){
         this.emailClient=emailClient;
     }
 

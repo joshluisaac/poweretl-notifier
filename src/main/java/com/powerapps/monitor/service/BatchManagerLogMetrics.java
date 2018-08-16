@@ -70,7 +70,6 @@ public class BatchManagerLogMetrics {
             Timestamp endTime = Timestamp.valueOf(timeTokens[0] + "." + timeTokens[1]);
             batch.setEndTime(endTime);
             double runningTime = ((endTime.getTime() - batch.getStartTime().getTime()) / 1000) / 60f;
-            System.out.println(runningTime);
             batch.setRunningTime(runningTime);
             batchStatus = 1; // successful
      	   batch.setBatchStatus(batchStatus);
@@ -108,7 +107,6 @@ public class BatchManagerLogMetrics {
               Timestamp endTime = Timestamp.valueOf(timeTokens[0] + "." + timeTokens[1]);
               batch.setEndTime(endTime);
               double runningTime = ((endTime.getTime() - batch.getStartTime().getTime()) / 1000) / 60f;
-             // System.out.println(endTime+"minus"+batch.getStartTime());
               batch.setRunningTime(runningTime);
     		  batchStatus = 3; //error
     		  batch.setBatchStatus(batchStatus);

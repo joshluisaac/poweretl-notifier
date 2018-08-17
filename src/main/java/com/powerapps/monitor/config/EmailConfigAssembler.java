@@ -17,6 +17,7 @@ import com.kollect.etl.notification.config.IEmailConfig;
 import com.kollect.etl.notification.entity.EmailConfigEntity;
 import com.kollect.etl.util.JsonUtils;
 
+
 @Component
 public class EmailConfigAssembler {
   

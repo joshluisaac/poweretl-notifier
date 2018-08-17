@@ -5,12 +5,10 @@ import com.kollect.etl.notification.service.*;
 import com.kollect.etl.util.JsonToHashMap;
 import com.kollect.etl.util.JsonUtils;
 import com.kollect.etl.util.Utils;
-import com.powerapps.monitor.config.EmailConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.TemplateEngine;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -39,19 +37,16 @@ public class EmailSenderService {
     @Value("${app.adhocEmailLog}")
     String adhocEmailLogPath;
 
-  //comments:You don't need this. The emailclient will construct itself using the rules of DI and beans in EmailConfigAssembler.java
-    private EmailConfig mailSender;
+    private IEmailClient emailClient;
+    private final IEmailContentBuilder emailContentBuilder;
     private IEmailLogger emailLogger = new EmailLogger();
-    
-  //comments:You don't need this. The EmailContentBuilder will construct itself using this template since you have already autowired it in EmailContentBuilder.java
-    private final TemplateEngine templateEngine;
+
     private final JsonToHashMap jsonToHashMap = new JsonToHashMap(new JsonUtils(), new Utils());
 
     @Autowired
-    public EmailSenderService(EmailConfig mailSender,
-                       TemplateEngine templateEngine) {
-        this.mailSender = mailSender;
-        this.templateEngine = templateEngine;
+    public EmailSenderService(IEmailClient emailClient,IEmailContentBuilder emailContentBuilder) {
+        this.emailClient = emailClient;
+        this.emailContentBuilder = emailContentBuilder;
     }
 
     private String getSendTime() {
@@ -61,21 +56,12 @@ public class EmailSenderService {
 
     public void sendAdhocEmail(String title, String body,
                                MultipartFile attachment, File logFile) {
-      
-      //comments:move this to the class scope and use dependency injection
-        final IEmailClient eClient =
-                new com.kollect.etl.notification.service.EmailClient(mailSender.javaMailService());
-        
-      //comments:move this to the class scope and use dependency injection
-        final IEmailContentBuilder emailContentBuilder = new EmailContentBuilder(templateEngine);
-       
-        
         String content = emailContentBuilder.buildSimpleEmail(body, templateName);
                 
         Email mail = new Email(jsonToHashMap.toHashMapFromJson(generalEmailJsonPath).get("fromEmail"),
                 jsonToHashMap.toHashMapFromJson(adhocEmailJsonPath).get("recipient"),
                 title, content, attachment, logFile);
-        String status = eClient.execute(mail);
+        String status = emailClient.execute(mail);
         String[] logArray = {jsonToHashMap.toHashMapFromJson(adhocEmailJsonPath).get("recipient"),
                 title, logFile.getName(), getSendTime(), status};
         emailLogger.persistLogToCsv(new ArrayList<>(Arrays.asList(logArray)),
@@ -83,16 +69,13 @@ public class EmailSenderService {
     }
 
     private void sendAutoEmail(File logFile, String autoEmailJsonPath) {
-        final IEmailClient eClient =
-                new com.kollect.etl.notification.service.EmailClient(mailSender.javaMailService());
-        final IEmailContentBuilder emailContentBuilder = new EmailContentBuilder(templateEngine);
         String content = emailContentBuilder.buildSimpleEmail(jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("message")
                 , templateName);
         Email mail = new Email(jsonToHashMap.toHashMapFromJson(generalEmailJsonPath).get("fromEmail"),
                 jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("recipient"),
                 jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("subject"),
                 content, null, logFile);
-        String status = eClient.execute(mail);
+        String status = emailClient.execute(mail);
         String[] logArray = {jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("recipient")
                 , jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("subject")
                 , logFile.getName(), getSendTime(), status};

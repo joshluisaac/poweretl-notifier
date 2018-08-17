@@ -1,7 +1,7 @@
 package com.powerapps.monitor.tasks;
 
 import com.powerapps.monitor.service.BatchManagerLogService;
-import com.powerapps.monitor.service.EmailClient;
+import com.powerapps.monitor.service.EmailSenderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,13 @@ import java.io.IOException;
 public class Scheduler {
     /*Required services*/
     private final BatchManagerLogService bmService;
-    private final EmailClient emailClient;
+    private final EmailSenderService emailClient;
     /*Required variables*/
     private static final Logger LOG = LoggerFactory.getLogger(Scheduler.class);
     /*The constructor for the class to inject the necessary services*/
     @Autowired
     public Scheduler(BatchManagerLogService bmService,
-                     EmailClient emailClient){
+                     EmailSenderService emailClient){
         this.bmService=bmService;
         this.emailClient=emailClient;
     }

@@ -76,9 +76,10 @@ private JsonToHashMap jsonToHashMap;
     }
 
     @RequestMapping(value = "/seshowstacktrace", method = RequestMethod.GET)
-    public String serviceEngineErrorShowStackTrace(@RequestParam int lineNumber, Model model) {
-        model.addAttribute("stackTrace", errorService.getStackTrace(lineNumber));
-        return "fragments/template_preview_se_error_report";
+    @ResponseBody
+    public String serviceEngineErrorShowStackTrace(@RequestParam String lineNumber) {
+      String stackTraceText = errorService.getStackTrace(Integer.parseInt(lineNumber));
+        return stackTraceText;
     }
 
     @RequestMapping(value = "/downloadstacktrace", produces = "text/plain")

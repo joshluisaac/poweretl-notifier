@@ -9,11 +9,7 @@
 		<div class="x_content"></div>
 		<div class='row'>
 			<div class='col-md-12'>
-				<span class = "text-center">
-                    <p th:text="${size}" class="red"></p>
-                    <p th:text="${content}" class="red"></p>
-                    <p th:text="${success}" class="green"></p>
-                </span>
+				<br>
 				<table id="datatable-buttons"
 					class="table table-striped table-bordered">
 					<thead>
@@ -41,12 +37,34 @@
 							<td th:text="${report.pcName}"></td>
 							<td>No</td>
 
-							<td><a
-								th:href="@{'/seshowstacktrace?lineNumber=' + ${report.lineNumber}}"
-								data-backdrop="static"><span
+							<td><a href="#"
+								th:onclick="'javascript:show(\'' + ${report.lineNumber} + '\')'"><span
 									data-toggle="tooltip" title="Preview Stacktrace"
-									class="glyphicon glyphicon-eye-open"> </span></a>
-								 <a
+									class="glyphicon glyphicon-eye-open"> </span></a> <!-- Bootstrap Modal -->
+								<div class="modal fade" id="modalId" role="dialog">
+									<div class="modal-dialog" style="margin: auto; width: 1000px;">
+
+										<!-- Bootstrap Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Stacktrace</h4>
+											</div>
+
+											<div class="modal-body">
+
+												<pre id="greetingId"></pre>
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Close</button>
+
+											</div>
+										</div>
+									</div>
+
+								</div> <a
 								th:href="@{'/downloadstacktrace?lineNumber=' + ${report.lineNumber}}">
 									<span data-toggle="tooltip" title="Download Stacktrace"
 									class="glyphicon glyphicon-download red"> </span>

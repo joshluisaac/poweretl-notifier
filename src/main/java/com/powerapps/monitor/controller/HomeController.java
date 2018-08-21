@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -57,7 +56,6 @@ public class HomeController {
 
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardView() {
-
 		return "dashboard";
 	}
 
@@ -73,16 +71,14 @@ public class HomeController {
 		return errorService.execute();
 	}
 
-	@RequestMapping(value = "/seshowstacktrace", method = RequestMethod.GET)
+	@RequestMapping(value = "/seerrorreportpreview", method = RequestMethod.GET)
 	@ResponseBody
 	public String serviceEngineErrorShowStackTrace(@RequestParam String lineNumber) {
-		String stackTraceText = errorService.getStackTrace(Integer.parseInt(lineNumber));
-		return stackTraceText;
+        return errorService.getStackTrace(Integer.parseInt(lineNumber));
 	}
 
 	@RequestMapping(value = "/downloadstacktrace", produces = "text/plain")
 	public void downloadStackTrace(@RequestParam int lineNumber, HttpServletResponse response) throws IOException {
-
 		String stackTraceText = errorService.getStackTrace(lineNumber);
 		byte[] numberOfBytesCopied = stackTraceText.getBytes(StandardCharsets.UTF_8);
 		
@@ -96,8 +92,6 @@ public class HomeController {
 
 		outStream.flush();
 		LOG.debug("Number of bytes viewed/written: {} bytes", numberOfBytesCopied.length);
-		// response.setHeader(name, value);
-
 	}
 
 	@RequestMapping(value = "/dcerrorreport", method = RequestMethod.GET)

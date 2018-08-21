@@ -225,7 +225,6 @@
     <script type="text/javascript">
         function show(input) {
             event.preventDefault();
-
             // Open Bootstrap Modal
             openModel();
             // Get data from Server
@@ -242,7 +241,7 @@
         function ajaxGet(input) {
             $.ajax({
                 type: "GET",
-                url: "/seshowstacktrace",
+                url:window.location.pathname+"preview",
                 data: {
                     "lineNumber": input
                 },
@@ -262,7 +261,7 @@
                 $(".modal-body #greetingId").text(data);
             } else {
                 $(".modal-body #greetingId").text(
-                    "Can Not Get Data from Server!");
+                    "No data from server.");
             }
         }
     </script>

@@ -136,16 +136,6 @@ public class HomeController {
 		System.out.println(numberOfBytesCopied);
 	}
 
-	@RequestMapping("/batchdetailsJSON")
-	@ResponseBody
-	public Object getBatchDetails() throws IOException {
-		File f = new File(
-				"C:\\Users\\Chelsea\\workspace\\powerappslogmonitor\\batches_notifications\\BatchManager\\eCollect\\Batch-01.Jun.2018-07_48_02.log");
-
-		return bmMetrics.extractFeatures(bmMetrics.getFile(f));
-
-	}
-
 	@RequestMapping(value = "/batchdetails", method = RequestMethod.GET)
 	public Object getBatchDetails(Model model, @RequestParam String logname) throws IOException {
 		model.addAttribute("batchDetails",

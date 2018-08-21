@@ -28,12 +28,10 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-
-    // Dependency Injection region
     private ServiceEngineLogService errorService;
     private BatchManagerLogService bmService;
     private BatchManagerLogMetrics bmMetrics;
-private JsonToHashMap jsonToHashMap;
+    private JsonToHashMap jsonToHashMap;
     @Value("${app.bmJson}")
     private String bmJson;
     private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
@@ -45,10 +43,10 @@ private JsonToHashMap jsonToHashMap;
         this.errorService = errorService;
         this.bmService = bmService;
         this.bmMetrics = bmMetrics;
-        this.jsonToHashMap=jsonToHashMap;
+        this.jsonToHashMap = jsonToHashMap;
     }
 
-    private String getRootPath(){
+    private String getRootPath() {
         return jsonToHashMap.toHashMap(bmJson).get("bmRootPath");
     }
 
@@ -78,22 +76,21 @@ private JsonToHashMap jsonToHashMap;
     @RequestMapping(value = "/seshowstacktrace", method = RequestMethod.GET)
     @ResponseBody
     public String serviceEngineErrorShowStackTrace(@RequestParam String lineNumber) {
-      String stackTraceText = errorService.getStackTrace(Integer.parseInt(lineNumber));
+        String stackTraceText = errorService.getStackTrace(Integer.parseInt(lineNumber));
         return stackTraceText;
     }
 
     @RequestMapping(value = "/downloadstacktrace", produces = "text/plain")
-    public String downloadStackTrace(@RequestParam int lineNumber, HttpServletResponse response)
+    public void downloadStackTrace(@RequestParam int lineNumber, HttpServletResponse response)
             throws IOException {
         String stackTraceText = errorService.getStackTrace(lineNumber);
-
-        // create file and write content into the file
+        /*create file and write content into the file*/
         FileOutputStream out = new FileOutputStream("./stack_traces/stackTrace.txt");
         out.write(stackTraceText.getBytes());
         out.flush();
         out.close();
 
-        // resource path
+        /*resource path*/
         Path path = Paths.get("./stack_traces/stackTrace.txt");
 
         response.setContentType("text/plain");
@@ -104,8 +101,6 @@ private JsonToHashMap jsonToHashMap;
         long numberOfBytesCopied = Files.copy(path, outStream);
         outStream.flush();
         LOG.debug("Number of bytes viewed/written: {} bytes", numberOfBytesCopied);
-        // response.setHeader(name, value);
-        return "se-errorlogreport";
     }
 
     @RequestMapping(value = "/dcerrorreport", method = RequestMethod.GET)
@@ -114,7 +109,6 @@ private JsonToHashMap jsonToHashMap;
         return "dash-errorlogreport";
     }
 
-    // return json response
     @RequestMapping(value = "/bmerrorreportJSON", method = RequestMethod.GET)
     @ResponseBody
     public Object batchManagerErrorLogReportJSON(Model model) {
@@ -131,20 +125,18 @@ private JsonToHashMap jsonToHashMap;
     }
 
     @RequestMapping(value = "/downloadbatch", produces = "text/plain")
-    public String downloadBatch(@RequestParam String logname, HttpServletResponse response) throws IOException {
-        // resource path
+    public void downloadBatch(@RequestParam String logname, HttpServletResponse response) throws IOException {
+        /*resource path*/
         Path path = Paths.get(getRootPath() + "/" + logname);
 
         response.setContentType("text/plain");
-        response.setContentLength((int)path.toFile().length());
+        response.setContentLength((int) path.toFile().length());
         response.addHeader("Content-Disposition", "attachment; filename=" + logname);
 
         ServletOutputStream outStream = response.getOutputStream();
         long numberOfBytesCopied = Files.copy(path, outStream);
         outStream.flush();
         System.out.println(numberOfBytesCopied);
-        // response.setHeader(name, value);
-        return "batchManager-report";
     }
 
     @RequestMapping("/batchdetailsJSON")

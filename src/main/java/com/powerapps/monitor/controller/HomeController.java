@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,133 +29,129 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-    private ServiceEngineLogService errorService;
-    private BatchManagerLogService bmService;
-    private BatchManagerLogMetrics bmMetrics;
-    private JsonToHashMap jsonToHashMap;
-    @Value("${app.bmJson}")
-    private String bmJson;
-    private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
+	private ServiceEngineLogService errorService;
+	private BatchManagerLogService bmService;
+	private BatchManagerLogMetrics bmMetrics;
+	private JsonToHashMap jsonToHashMap;
+	@Value("${app.bmJson}")
+	private String bmJson;
+	private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 
-    @Autowired
-    public HomeController(ServiceEngineLogService errorService,
-                          BatchManagerLogService bmService, BatchManagerLogMetrics bmMetrics,
-                          JsonToHashMap jsonToHashMap) {
-        this.errorService = errorService;
-        this.bmService = bmService;
-        this.bmMetrics = bmMetrics;
-        this.jsonToHashMap = jsonToHashMap;
-    }
+	@Autowired
+	public HomeController(ServiceEngineLogService errorService, BatchManagerLogService bmService,
+			BatchManagerLogMetrics bmMetrics, JsonToHashMap jsonToHashMap) {
+		this.errorService = errorService;
+		this.bmService = bmService;
+		this.bmMetrics = bmMetrics;
+		this.jsonToHashMap = jsonToHashMap;
+	}
 
-    private String getRootPath() {
-        return jsonToHashMap.toHashMap(bmJson).get("bmRootPath");
-    }
+	private String getRootPath() {
+		return jsonToHashMap.toHashMap(bmJson).get("bmRootPath");
+	}
 
-    @RequestMapping("/")
-    public String index() {
-        return "redirect:/seerrorreport";
-    }
+	@RequestMapping("/")
+	public String index() {
+		return "redirect:/seerrorreport";
+	}
 
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String dashboardView() {
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public String dashboardView() {
 
-        return "dashboard";
-    }
+		return "dashboard";
+	}
 
-    @RequestMapping(value = "/seerrorreport", method = RequestMethod.GET)
-    public String serviceEngineErrorLogReport(Model model) {
-        model.addAttribute("errorReport", errorService.execute());
-        return "se-errorlogreport";
-    }
+	@RequestMapping(value = "/seerrorreport", method = RequestMethod.GET)
+	public String serviceEngineErrorLogReport(Model model) {
+		model.addAttribute("errorReport", errorService.execute());
+		return "se-errorlogreport";
+	}
 
-    @RequestMapping(value = "/seerrorreportJSON", method = RequestMethod.GET)
-    @ResponseBody
-    public Object serviceEngineErrorLogReportJSON() {
-        return errorService.execute();
-    }
+	@RequestMapping(value = "/seerrorreportJSON", method = RequestMethod.GET)
+	@ResponseBody
+	public Object serviceEngineErrorLogReportJSON() {
+		return errorService.execute();
+	}
 
-    @RequestMapping(value = "/seshowstacktrace", method = RequestMethod.GET)
-    @ResponseBody
-    public String serviceEngineErrorShowStackTrace(@RequestParam String lineNumber) {
-        String stackTraceText = errorService.getStackTrace(Integer.parseInt(lineNumber));
-        return stackTraceText;
-    }
+	@RequestMapping(value = "/seshowstacktrace", method = RequestMethod.GET)
+	@ResponseBody
+	public String serviceEngineErrorShowStackTrace(@RequestParam String lineNumber) {
+		String stackTraceText = errorService.getStackTrace(Integer.parseInt(lineNumber));
+		return stackTraceText;
+	}
 
-    @RequestMapping(value = "/downloadstacktrace", produces = "text/plain")
-    public void downloadStackTrace(@RequestParam int lineNumber, HttpServletResponse response)
-            throws IOException {
-        String stackTraceText = errorService.getStackTrace(lineNumber);
-        /*create file and write content into the file*/
-        FileOutputStream out = new FileOutputStream("./stack_traces/stackTrace.txt");
-        out.write(stackTraceText.getBytes());
-        out.flush();
-        out.close();
+	@RequestMapping(value = "/downloadstacktrace", produces = "text/plain")
+	public void downloadStackTrace(@RequestParam int lineNumber, HttpServletResponse response) throws IOException {
 
-        /*resource path*/
-        Path path = Paths.get("./stack_traces/stackTrace.txt");
+		String stackTraceText = errorService.getStackTrace(lineNumber);
+		byte[] numberOfBytesCopied = stackTraceText.getBytes(StandardCharsets.UTF_8);
+		
+		response.setContentType("text/plain; charset=UTF-8");
+		response.setContentLength(numberOfBytesCopied.length);
+		response.addHeader("Content-Disposition", "attachment; filename=" + "Stacktrace(" + lineNumber + ")");
 
-        response.setContentType("text/plain");
-        response.setContentLength(stackTraceText.length());
-        response.addHeader("Content-Disposition", "attachment; filename=" + "Stacktrace");
+		ServletOutputStream outStream = response.getOutputStream();
 
-        ServletOutputStream outStream = response.getOutputStream();
-        long numberOfBytesCopied = Files.copy(path, outStream);
-        outStream.flush();
-        LOG.debug("Number of bytes viewed/written: {} bytes", numberOfBytesCopied);
-    }
+		outStream.write(numberOfBytesCopied);
 
-    @RequestMapping(value = "/dcerrorreport", method = RequestMethod.GET)
-    public String dataConnectorErrorLogReport(Model model) {
-        model.addAttribute("errorReport", errorService.execute());
-        return "dash-errorlogreport";
-    }
+		outStream.flush();
+		LOG.debug("Number of bytes viewed/written: {} bytes", numberOfBytesCopied.length);
+		// response.setHeader(name, value);
 
-    @RequestMapping(value = "/bmerrorreportJSON", method = RequestMethod.GET)
-    @ResponseBody
-    public Object batchManagerErrorLogReportJSON(Model model) {
-        List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(getRootPath())));
-        model.addAttribute("summaryList", summary);
-        return summary;
-    }
+	}
 
-    @RequestMapping(value = "/bmerrorreport", method = RequestMethod.GET)
-    public Object batchManagerErrorLogReport(Model model) {
-        List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(getRootPath())));
-        model.addAttribute("summaryList", summary);
-        return "batchManager-report";
-    }
+	@RequestMapping(value = "/dcerrorreport", method = RequestMethod.GET)
+	public String dataConnectorErrorLogReport(Model model) {
+		model.addAttribute("errorReport", errorService.execute());
+		return "dash-errorlogreport";
+	}
 
-    @RequestMapping(value = "/downloadbatch", produces = "text/plain")
-    public void downloadBatch(@RequestParam String logname, HttpServletResponse response) throws IOException {
-        /*resource path*/
-        Path path = Paths.get(getRootPath() + "/" + logname);
+	@RequestMapping(value = "/bmerrorreportJSON", method = RequestMethod.GET)
+	@ResponseBody
+	public Object batchManagerErrorLogReportJSON(Model model) {
+		List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(getRootPath())));
+		model.addAttribute("summaryList", summary);
+		return summary;
+	}
 
-        response.setContentType("text/plain");
-        response.setContentLength((int) path.toFile().length());
-        response.addHeader("Content-Disposition", "attachment; filename=" + logname);
+	@RequestMapping(value = "/bmerrorreport", method = RequestMethod.GET)
+	public Object batchManagerErrorLogReport(Model model) {
+		List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(getRootPath())));
+		model.addAttribute("summaryList", summary);
+		return "batchManager-report";
+	}
 
-        ServletOutputStream outStream = response.getOutputStream();
-        long numberOfBytesCopied = Files.copy(path, outStream);
-        outStream.flush();
-        System.out.println(numberOfBytesCopied);
-    }
+	@RequestMapping(value = "/downloadbatch", produces = "text/plain")
+	public void downloadBatch(@RequestParam String logname, HttpServletResponse response) throws IOException {
+		/* resource path */
+		Path path = Paths.get(getRootPath() + "/" + logname);
 
-    @RequestMapping("/batchdetailsJSON")
-    @ResponseBody
-    public Object getBatchDetails() throws IOException {
-        File f = new File(
-                "C:\\Users\\Chelsea\\workspace\\powerappslogmonitor\\batches_notifications\\BatchManager\\eCollect\\Batch-01.Jun.2018-07_48_02.log");
+		response.setContentType("text/plain");
+		response.setContentLength((int) path.toFile().length());
+		response.addHeader("Content-Disposition", "attachment; filename=" + logname);
 
-        return bmMetrics.extractFeatures(bmMetrics.getFile(f));
+		ServletOutputStream outStream = response.getOutputStream();
+		long numberOfBytesCopied = Files.copy(path, outStream);
+		outStream.flush();
+		System.out.println(numberOfBytesCopied);
+	}
 
-    }
+	@RequestMapping("/batchdetailsJSON")
+	@ResponseBody
+	public Object getBatchDetails() throws IOException {
+		File f = new File(
+				"C:\\Users\\Chelsea\\workspace\\powerappslogmonitor\\batches_notifications\\BatchManager\\eCollect\\Batch-01.Jun.2018-07_48_02.log");
 
-    @RequestMapping(value = "/batchdetails", method = RequestMethod.GET)
-    public Object getBatchDetails(Model model, @RequestParam String logname) throws IOException {
-        model.addAttribute("batchDetails",
-                bmMetrics.extractFeatures(bmMetrics.getFile(new File(getRootPath() + "/" + logname))));
-        return "fragments/template-bm-logmetric-report";
+		return bmMetrics.extractFeatures(bmMetrics.getFile(f));
 
-    }
+	}
+
+	@RequestMapping(value = "/batchdetails", method = RequestMethod.GET)
+	public Object getBatchDetails(Model model, @RequestParam String logname) throws IOException {
+		model.addAttribute("batchDetails",
+				bmMetrics.extractFeatures(bmMetrics.getFile(new File(getRootPath() + "/" + logname))));
+		return "fragments/template-bm-logmetric-report";
+
+	}
 
 }

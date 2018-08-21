@@ -21,7 +21,6 @@ import com.kollect.etl.util.JsonUtils;
 
 
 @Component
-@ComponentScan({"org.springframework.mail.javamail","com.kollect.etl.notification.config","com.kollect.etl.notification.service","com.kollect.etl.notification.entity"})
 public class EmailConfigAssembler {
   
   @Value("${app.generalEmailJson}")

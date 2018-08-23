@@ -1,5 +1,6 @@
 package com.powerapps.monitor.controller;
 
+import com.kollect.etl.util.JsonUtils;
 import com.powerapps.monitor.model.LogSummary;
 import com.powerapps.monitor.service.BatchManagerLogMetrics;
 import com.powerapps.monitor.service.BatchManagerLogService;
@@ -74,14 +75,14 @@ public class HomeController {
 	@RequestMapping(value = "/seerrorreportpreview", method = RequestMethod.GET)
 	@ResponseBody
 	public String serviceEngineErrorShowStackTrace(@RequestParam String lineNumber) {
-        return errorService.getStackTrace(Integer.parseInt(lineNumber));
+		return errorService.getStackTrace(Integer.parseInt(lineNumber));
 	}
 
 	@RequestMapping(value = "/downloadstacktrace", produces = "text/plain")
 	public void downloadStackTrace(@RequestParam int lineNumber, HttpServletResponse response) throws IOException {
 		String stackTraceText = errorService.getStackTrace(lineNumber);
 		byte[] numberOfBytesCopied = stackTraceText.getBytes(StandardCharsets.UTF_8);
-		
+
 		response.setContentType("text/plain; charset=UTF-8");
 		response.setContentLength(numberOfBytesCopied.length);
 		response.addHeader("Content-Disposition", "attachment; filename=" + "Stacktrace(" + lineNumber + ")");
@@ -131,10 +132,12 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/batchdetails", method = RequestMethod.GET)
-	public Object getBatchDetails(Model model, @RequestParam String logname) throws IOException {
-		model.addAttribute("batchDetails",
-				bmMetrics.extractFeatures(bmMetrics.getFile(new File(getRootPath() + "/" + logname))));
-		return "fragments/template-bm-logmetric-report";
+	@ResponseBody
+	public String getBatchDetails(@RequestParam String logname) throws IOException {
+		String json = new JsonUtils()
+				.toJson(bmMetrics.extractFeatures(bmMetrics.getFile(new File(getRootPath() + "/" + logname))));
+		System.out.println("reach here");
+		return json;
 
 	}
 

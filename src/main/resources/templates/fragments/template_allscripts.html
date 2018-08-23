@@ -223,22 +223,20 @@
     </script>
 
     <script type="text/javascript">
-        function show(input) {
+        function showDataInModal(input) {
             event.preventDefault();
-            // Open Bootstrap Modal
-            openModel();
-            // Get data from Server
-            ajaxGet(input);
+            openModal();
+            ajaxGetData(input);
 
         }
 
-        // Open Bootstrap Modal
-        function openModel() {
+        /* Open Bootstrap Modal*/
+        function openModal() {
             $("#modalId").modal();
         }
 
-        // DO GET
-        function ajaxGet(input) {
+        /* DO GET without refresh*/
+        function ajaxGetData(input) {
             $.ajax({
                 type: "GET",
                 url:window.location.pathname+"preview",
@@ -247,10 +245,10 @@
                 },
                 dataType: "text",
                 success: function (data) {
-                    // fill data to Modal Body
+                    /* fill data to Modal Body*/
                     fillData(data);
                 },
-                error: function (e) {
+                error: function () {
                     fillData(null);
                 }
             });

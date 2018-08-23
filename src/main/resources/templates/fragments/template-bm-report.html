@@ -1,65 +1,97 @@
 <div th:fragment="bmLogFragment" class="col-md-12 col-xs-12">
-    <div class="x_panel">
-        <div class="x_title">
-            <h2>
-                <small>Today's Report</small>
-            </h2>
-            <div class="clearfix"></div>
-        </div>
-        <div class='row'>
-            <div class='col-md-12'>
-                <span class = "text-center">
-                    <p th:text="${size}" class="red"></p>
-                    <p th:text="${content}" class="red"></p>
-                    <p th:text="${success}" class="green"></p>
-                </span>
-                <table id="datatable-buttons"
-                       class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Batch Manager Log</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Status</th>
-                        <th>Running Time (Min)</th>
-                        <th>Details</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="report, status : ${summaryList}">
-                        <td th:text="${status.index + 1}"></td>
-                        <td id = "logFileName" th:text="${report.logFileName}"></td>
-                        <td
-                                th:text="${#dates.format(report.startTime, 'dd-MMM-yyyy HH:mm')}"></td>
-                        <td
-                                th:text="${#dates.format(report.endTime, 'dd-MMM-yyyy HH:mm')}"></td>
-                        <td th:switch="${report.batchStatus}">
-                            <p class="label label-danger" th:case="1">Failed</p>
-                            <p class="label label-success" th:case="2">Successful</p>
-                            <p class="label label-info" th:case="3">In Progress</p>
-                        </td>
-                        <td th:text="${#numbers.formatDecimal(report.runningTime,2,2)}"></td>
-                        <td><a
-                                th:href="@{'/batchdetails?logname=' + ${report.logFileName}}"
-                                data-backdrop="static" id="viewBatchManagerFile"> <span
-                                data-toggle="tooltip" title="Preview Batch Manager File"
-                                class="glyphicon glyphicon-eye-open"> </span>
-                        </a>
-                        <a th:href="@{'/downloadbatch?logname=' + ${report.logFileName}}">
+	<div class="x_panel">
+		<div class="x_title">
+			<h2>
+				<small>Today's Report</small>
+			</h2>
+			<div class="clearfix"></div>
+		</div>
+		<div class='row'>
+			<div class='col-md-12'>
+				<span class="text-center">
+					<p th:text="${size}" class="red"></p>
+					<p th:text="${content}" class="red"></p>
+					<p th:text="${success}" class="green"></p>
+				</span>
+				<table id="datatable-buttons"
+					class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>No.</th>
+							<th>Batch Manager Log</th>
+							<th>Start Date</th>
+							<th>End Date</th>
+							<th>Status</th>
+							<th>Running Time (Min)</th>
+							<th>Details</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="report, status : ${summaryList}">
+							<td th:text="${status.index + 1}"></td>
+							<td id="logFileName" th:text="${report.logFileName}"></td>
+							<td
+								th:text="${#dates.format(report.startTime, 'dd-MMM-yyyy HH:mm')}"></td>
+							<td
+								th:text="${#dates.format(report.endTime, 'dd-MMM-yyyy HH:mm')}"></td>
+							<td th:switch="${report.batchStatus}">
+								<p class="label label-danger" th:case="1">Failed</p>
+								<p class="label label-success" th:case="2">Successful</p>
+								<p class="label label-info" th:case="3">In Progress</p>
+							</td>
+							<td th:text="${#numbers.formatDecimal(report.runningTime,2,2)}"></td>
+							<td><a href="#"
+								th:onclick="'javascript:showBatchDetails(\'' + ${report.logFileName} + '\')'">
+									<span data-toggle="tooltip" title="Preview Batch Manager File"
+									class="glyphicon glyphicon-eye-open"> </span>
+							</a>                          <!-- Bootstrap Modal -->
+								<div class="modal fade" id="modalId" role="dialog">
+									<div class="modal-dialog" style="margin: auto; width: 1000px;">
+
+										<!-- Bootstrap Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Batch Details</h4>
+											</div>
+
+											<div class="modal-body">
+
+												<table class="hidden table table-striped table-bordered "
+													id="modalTable">
+
+													<tr>
+
+														<th>Batch</th>
+														<th>Status</th>
+														<th>Running Time (Min)</th>
+													</tr>
+												</table>
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Close</button>
+
+											</div>
+										</div>
+									</div>
+
+								</div> <a
+								th:href="@{'/downloadbatch?logname=' + ${report.logFileName}}">
 									<span data-toggle="tooltip" title="Download Batch Manager File"
-                                          class="glyphicon glyphicon-download red"> </span>
-                            </a>
-                            <a th:href="@{'/sendadhocemail?logFileName=' + ${report.logFileName}}" data-toggle="modal"> <span
-                                    data-toggle="tooltip" title="Send Email"
-                                    class="glyphicon glyphicon-envelope"> </span>
-                            </a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+									class="glyphicon glyphicon-download red"> </span>
+							</a> <a
+								th:href="@{'/sendadhocemail?logFileName=' + ${report.logFileName}}"
+								data-toggle="modal"> <span data-toggle="tooltip"
+									title="Send Email" class="glyphicon glyphicon-envelope">
+								</span>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
 

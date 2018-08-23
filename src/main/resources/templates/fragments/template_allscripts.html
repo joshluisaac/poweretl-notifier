@@ -1,315 +1,296 @@
 <div th:fragment="scripts">
-	<!-- jQuery -->
-	<script src="../vendors/jquery/dist/jquery.min.js"
-		th:src="@{vendors/jquery/dist/jquery.min.js}"></script>
-	<!-- Bootstrap -->
-	<script src="../vendors/bootstrap/dist/js/bootstrap.min.js"
-		th:src="@{vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
-	<!-- Dropzonejs -->
-	<script src="../vendors/dropzone/dist/dropzone.js"
-		th:src="@{vendors/dropzone/dist/dropzone.js}"></script>
-	<!-- FastClick -->
-	<script src="../vendors/fastclick/lib/fastclick.js"
-		th:src="@{vendors/fastclick/lib/fastclick.js}"></script>
-	<!-- NProgress -->
-	<script src="../vendors/nprogress/nprogress.js"
-		th:src="@{vendors/nprogress/nprogress.js}"></script>
-	<!-- bootstrap-progressbar -->
-	<script
-		src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"
-		th:src="@{vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
-	<!-- iCheck -->
-	<script src="../vendors/iCheck/icheck.min.js"
-		th:src="@{vendors/iCheck/icheck.min.js}"></script>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"
+            th:src="@{vendors/jquery/dist/jquery.min.js}"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"
+            th:src="@{vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <!-- Dropzonejs -->
+    <script src="../vendors/dropzone/dist/dropzone.js"
+            th:src="@{vendors/dropzone/dist/dropzone.js}"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"
+            th:src="@{vendors/fastclick/lib/fastclick.js}"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"
+            th:src="@{vendors/nprogress/nprogress.js}"></script>
+    <!-- bootstrap-progressbar -->
+    <script
+            src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"
+            th:src="@{vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"
+            th:src="@{vendors/iCheck/icheck.min.js}"></script>
 
-	<!-- Datatables -->
-	<script src="../vendors/datatables.net/js/jquery.dataTables.min.js"
-		th:src="@{vendors/datatables.net/js/jquery.dataTables.min.js}"></script>
-	<script
-		src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"
-		th:src="@{vendors/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
-	<script
-		src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"
-		th:src="@{vendors/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
-	<script
-		src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"
-		th:src="@{vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js}"></script>
-	<script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"
-		th:src="@{vendors/datatables.net-buttons/js/buttons.flash.min.js}"></script>
-	<script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"
-		th:src="@{vendors/datatables.net-buttons/js/buttons.html5.min.js}"></script>
-	<script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"
-		th:src="@{vendors/datatables.net-buttons/js/buttons.print.min.js}"></script>
-	<script
-		src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"
-		th:src="@{vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js}"></script>
-	<script
-		src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"
-		th:src="@{vendors/datatables.net-keytable/js/dataTables.keyTable.min.js}"></script>
-	<script
-		src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"
-		th:src="@{vendors/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
-	<script
-		src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"
-		th:src="@{vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js}"></script>
-	<script
-		src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"
-		th:src="@{vendors/datatables.net-scroller/js/dataTables.scroller.min.js}"></script>
-	<script src="../vendors/jszip/dist/jszip.min.js"
-		th:src="@{vendors/jszip/dist/jszip.min.js}"></script>
-	<script src="../vendors/pdfmake/build/pdfmake.min.js"
-		th:src="@{vendors/pdfmake/build/pdfmake.min.js}"></script>
-	<script src="../vendors/pdfmake/build/vfs_fonts.js"
-		th:src="@{vendors/pdfmake/build/vfs_fonts.js}"></script>
-
-
-	<!-- bootstrap-daterangepicker -->
-	<script src="../vendors/moment/min/moment.min.js"
-		th:src="@{vendors/moment/min/moment.min.js}"></script>
-	<script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"
-		th:src="@{vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
-	<!-- bootstrap-wysiwyg -->
-	<script src="../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"
-		th:src="@{vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js}"></script>
-	<script src="../vendors/jquery.hotkeys/jquery.hotkeys.js"
-		th:src="@{vendors/jquery.hotkeys/jquery.hotkeys.js}"></script>
-	<script src="../vendors/google-code-prettify/src/prettify.js"
-		th:src="@{vendors/google-code-prettify/src/prettify.js}"></script>
-	<!-- jQuery Tags Input -->
-	<script src="../vendors/jquery.tagsinput/src/jquery.tagsinput.js"
-		th:src="@{vendors/jquery.tagsinput/src/jquery.tagsinput.js}"></script>
-	<!-- Switchery -->
-	<script src="../vendors/switchery/dist/switchery.min.js"
-		th:src="@{vendors/switchery/dist/switchery.min.js}"></script>
-	<!-- Select2 -->
-	<script src="../vendors/select2/dist/js/select2.full.min.js"
-		th:src="@{vendors/select2/dist/js/select2.full.min.js}"></script>
-	<!-- Parsley -->
-	<script src="../vendors/parsleyjs/dist/parsley.min.js"
-		th:src="@{vendors/parsleyjs/dist/parsley.min.js}"></script>
-	<!-- Autosize -->
-	<script src="../vendors/autosize/dist/autosize.min.js"
-		th:src="@{vendors/autosize/dist/autosize.min.js}"></script>
-	<!-- jQuery autocomplete -->
-	<script
-		src="../vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"
-		th:src="@{vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js}"></script>
-	<!-- starrr -->
-	<script src="../vendors/starrr/dist/starrr.js"
-		th:src="@{vendors/starrr/dist/starrr.js}"></script>
-	<!-- Custom Theme Scripts -->
-	<script src="../build/js/custom.min.js"
-		th:src="@{build/js/custom.min.js}"></script>
+    <!-- Datatables -->
+    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"
+            th:src="@{vendors/datatables.net/js/jquery.dataTables.min.js}"></script>
+    <script
+            src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"
+            th:src="@{vendors/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+    <script
+            src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"
+            th:src="@{vendors/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+    <script
+            src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"
+            th:src="@{vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js}"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"
+            th:src="@{vendors/datatables.net-buttons/js/buttons.flash.min.js}"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"
+            th:src="@{vendors/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"
+            th:src="@{vendors/datatables.net-buttons/js/buttons.print.min.js}"></script>
+    <script
+            src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"
+            th:src="@{vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js}"></script>
+    <script
+            src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"
+            th:src="@{vendors/datatables.net-keytable/js/dataTables.keyTable.min.js}"></script>
+    <script
+            src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"
+            th:src="@{vendors/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+    <script
+            src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"
+            th:src="@{vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js}"></script>
+    <script
+            src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"
+            th:src="@{vendors/datatables.net-scroller/js/dataTables.scroller.min.js}"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js"
+            th:src="@{vendors/jszip/dist/jszip.min.js}"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js"
+            th:src="@{vendors/pdfmake/build/pdfmake.min.js}"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"
+            th:src="@{vendors/pdfmake/build/vfs_fonts.js}"></script>
 
 
-	<!-- BootstrapAddClear -->
-	<script src="../vendors/bootstrap/dist/js/bootstrap-add-clear.min.js"
-		th:src="@{vendors/bootstrap/dist/js/bootstrap-add-clear.min.js}"></script>
-	<script>
-		$(function() {
-			$(".hasclear").addClear({
-				symbolClass : "glyphicon glyphicon-remove",
-			})
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"
+            th:src="@{vendors/moment/min/moment.min.js}"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"
+            th:src="@{vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+    <!-- bootstrap-wysiwyg -->
+    <script src="../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"
+            th:src="@{vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js}"></script>
+    <script src="../vendors/jquery.hotkeys/jquery.hotkeys.js"
+            th:src="@{vendors/jquery.hotkeys/jquery.hotkeys.js}"></script>
+    <script src="../vendors/google-code-prettify/src/prettify.js"
+            th:src="@{vendors/google-code-prettify/src/prettify.js}"></script>
+    <!-- jQuery Tags Input -->
+    <script src="../vendors/jquery.tagsinput/src/jquery.tagsinput.js"
+            th:src="@{vendors/jquery.tagsinput/src/jquery.tagsinput.js}"></script>
+    <!-- Switchery -->
+    <script src="../vendors/switchery/dist/switchery.min.js"
+            th:src="@{vendors/switchery/dist/switchery.min.js}"></script>
+    <!-- Select2 -->
+    <script src="../vendors/select2/dist/js/select2.full.min.js"
+            th:src="@{vendors/select2/dist/js/select2.full.min.js}"></script>
+    <!-- Parsley -->
+    <script src="../vendors/parsleyjs/dist/parsley.min.js"
+            th:src="@{vendors/parsleyjs/dist/parsley.min.js}"></script>
+    <!-- Autosize -->
+    <script src="../vendors/autosize/dist/autosize.min.js"
+            th:src="@{vendors/autosize/dist/autosize.min.js}"></script>
+    <!-- jQuery autocomplete -->
+    <script
+            src="../vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"
+            th:src="@{vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js}"></script>
+    <!-- starrr -->
+    <script src="../vendors/starrr/dist/starrr.js"
+            th:src="@{vendors/starrr/dist/starrr.js}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"
+            th:src="@{build/js/custom.min.js}"></script>
 
-		});
-	</script>
 
-	<!-- Ajax Form Submit / For Admin Panel -->
-	<script type="text/javascript">
-		$(function() {
-			$('#ajaxForm')
-					.submit(
-							function(e) {
-								e.preventDefault();
-								if ($(this).parsley().isValid()) {
-									$.post($('#ajaxForm').attr('action'), $(
-											this).serialize());
-									$(
-											'<div class = "green text-center"><b>Data has been saved successfully.<b></div>')
-											.insertAfter('#insertMessage')
-											.delay(3000).fadeOut();
-								}
-							});
-		});
-	</script>
+    <!-- BootstrapAddClear -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap-add-clear.min.js"
+            th:src="@{vendors/bootstrap/dist/js/bootstrap-add-clear.min.js}"></script>
+    <script>
+        $(function () {
+            $(".hasclear").addClear({
+                symbolClass: "glyphicon glyphicon-remove",
+            })
 
-	<!--  Ajax For all batches -->
+        });
+    </script>
 
-	<script type="text/javascript">
-		$(function() {
-			$('.submitBatchForm')
-					.submit(
-							function(e) {
-								var currentForm = this;
-								e.preventDefault();
-								if ($(currentForm).parsley().isValid()) {
-									$(currentForm).hide();
-									$(
-											'<div id = "status"><span class="red glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Batch in progress...</div>')
-											.insertAfter($(currentForm));
-									$
-											.ajax({
-												url : $(currentForm).attr(
-														'action'),
-												data : $(currentForm)
-														.serialize(),
-												type : 'POST',
-												success : function(data) {
-													console.log(data);
-													$('#status').remove();
-													if (data == -1) {
-														$(
-																'<div class = "red"> The batch is currently running, please wait...</div>')
-																.insertAfter(
-																		$(currentForm));
-													} else
-														$(
-																'<div class = "green"></div>')
-																.html(
-																		" Records updated: "
-																				+ data)
-																.insertAfter(
-																		$(currentForm));
-												}
-											});
-								}
-							});
-		});
-	</script>
+    <!-- Ajax Form Submit / For Admin Panel -->
+    <script type="text/javascript">
+        $(function () {
+            $('#ajaxForm')
+                .submit(
+                    function (e) {
+                        e.preventDefault();
+                        if ($(this).parsley().isValid()) {
+                            $.post($('#ajaxForm').attr('action'), $(
+                                this).serialize());
+                            $(
+                                '<div class = "green text-center"><b>Data has been saved successfully.<b></div>')
+                                .insertAfter('#insertMessage')
+                                .delay(3000).fadeOut();
+                        }
+                    });
+        });
+    </script>
 
-	<!-- Load all batches in the batch page, avoid next page ajax bug-->
-	<script>
-		$('#loadAllDatatable').dataTable({
-			"paging" : false,
-			scrollCollapse : true
-		});
-	</script>
+    <!--  Ajax For all batches -->
 
-	<script type="text/javascript">
-		$(function() {
-			$('#emailBatchForm, #emailTestForm')
-					.submit(
-							function(e) {
-								var currentForm = this;
-								e.preventDefault();
-								$(currentForm).hide();
-								$(
-										'<div id = "status"><span class="red glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Email sending in progress...</div>')
-										.insertAfter($(currentForm));
-								$
-										.ajax({
-											url : $(currentForm).attr('action'),
-											data : $(currentForm).serialize(),
-											type : 'POST',
-											success : function(data) {
-												console.log(data);
-												$('#status').remove();
-												if (data < 86400000) {
-													$(
-															'<div class = "red"> Email already sent. Please wait 24 hours...</div>')
-															.insertAfter(
-																	$(currentForm));
-												} else
-													$(
-															'<div class = "green"></div>')
-															.html(
-																	"Email has been sent successfully. ")
-															.insertAfter(
-																	$(currentForm));
-											}
-										});
-							});
-		});
-	</script>
+    <script type="text/javascript">
+        $(function () {
+            $('.submitBatchForm')
+                .submit(
+                    function (e) {
+                        var currentForm = this;
+                        e.preventDefault();
+                        if ($(currentForm).parsley().isValid()) {
+                            $(currentForm).hide();
+                            $(
+                                '<div id = "status"><span class="red glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Batch in progress...</div>')
+                                .insertAfter($(currentForm));
+                            $
+                                .ajax({
+                                    url: $(currentForm).attr(
+                                        'action'),
+                                    data: $(currentForm)
+                                        .serialize(),
+                                    type: 'POST',
+                                    success: function (data) {
+                                        console.log(data);
+                                        $('#status').remove();
+                                        if (data == -1) {
+                                            $(
+                                                '<div class = "red"> The batch is currently running, please wait...</div>')
+                                                .insertAfter(
+                                                    $(currentForm));
+                                        } else
+                                            $(
+                                                '<div class = "green"></div>')
+                                                .html(
+                                                    " Records updated: "
+                                                    + data)
+                                                .insertAfter(
+                                                    $(currentForm));
+                                    }
+                                });
+                        }
+                    });
+        });
+    </script>
 
-	<script type="text/javascript">
-		function showDataInModal(input) {
-			event.preventDefault();
+    <!-- Load all batches in the batch page, avoid next page ajax bug-->
+    <script>
+        $('#loadAllDatatable').dataTable({
+            "paging": false,
+            scrollCollapse: true
+        });
+    </script>
+
+    <!-- Ajax forms with response-->
+    <script type="text/javascript">
+        $(function () {
+            $('#emailBatchForm, #emailTestForm')
+                .submit(
+                    function (e) {
+                        var currentForm = this;
+                        e.preventDefault();
+                        $(currentForm).hide();
+                        $(
+                            '<div id = "status"><span class="red glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Email sending in progress...</div>')
+                            .insertAfter($(currentForm));
+                        $
+                            .ajax({
+                                url: $(currentForm).attr('action'),
+                                data: $(currentForm).serialize(),
+                                type: 'POST',
+                                success: function (data) {
+                                    console.log(data);
+                                    $('#status').remove();
+                                    if (data < 86400000) {
+                                        $(
+                                            '<div class = "red"> Email already sent. Please wait 24 hours...</div>')
+                                            .insertAfter(
+                                                $(currentForm));
+                                    } else
+                                        $(
+                                            '<div class = "green"></div>')
+                                            .html(
+                                                "Email has been sent successfully. ")
+                                            .insertAfter(
+                                                $(currentForm));
+                                }
+                            });
+                    });
+        });
+    </script>
+
+    <!-- View text or table format data from json to a modal box-->
+    <script type="text/javascript">
+        function showDataInModal(input) {
+            event.preventDefault();
             $("#modalId").modal();
-			ajaxGetData(input);
+            ajaxGetData(input);
 
-		}
+        }
 
-		/* DO GET without refresh*/
-		function ajaxGetData(input) {
-			$.ajax({
-				type : "GET",
-				url : window.location.pathname + "preview",
-				data : {
-					"lineNumber" : input
-				},
-				dataType : "text",
-				success : function(data) {
-					/* fill data to Modal Body*/
+        /* DO GET without refresh*/
+        function ajaxGetData(input) {
+            var url = window.location.pathname + "preview";
+            var dataType = "text";
+            if (url.toString() === "/bmerrorreportpreview")
+                dataType = "json";
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {
+                    "input": input
+                },
+                dataType: dataType,
+                success: function (data) {
+                    /* fill data to Modal Body*/
                     if (data != null)
-                        $(".modal-body #insertText").text(data);
-				},
-				error : function() {
-                    $(".modal-body #insertText").innerHTML = "No data from server.";
-				}
-			});
-		}
-	</script>
-	
-	<script type="text/javascript">
-		function showBatchDetails(input) {
-			event.preventDefault();
-            $("#modalId").modal();
-			ajaxGet(input);
-		}
+                        if (url.toString() === "/bmerrorreportpreview") {
+                            fillBatchData(data);
+                        }
+                        else
+                            $(".modal-body #insertText").text(data);
+                },
+                error: function () {
+                    $("#insertText").html("<p>No data from server.</p>");
+                }
+            });
+        }
 
-		function ajaxGet(input) {
-			$.ajax({
-				type : "GET",
-				// this has to be dynamic for the sake of reusability
-				url : "/batchdetails",
-				data : {
-					"logname" : input
-				},
-				dataType : "json",
-				success : function(data) {
-					fillData(data);
+        /*Only for bmerrorreportpreview url*/
+        function fillBatchData(data) {
+            var len = data.length;
+            var txt = "";
+            var status = "";
+            if (len > 0) {
+                for (var i = 0; i < len; i++) {
 
-				},
-				error : function() {
-					fillData(null);
-				}
-			});
-		}
+                    if (data[i]["batchStatus"] === 1) {
+                        status = "<p class='label label-success'>Successful</p>";
+                    } else if (data[i]["batchStatus"] === 2) {
+                        status = "<p class='label label-info'>In Progress</p>";
+                    } else {
+                        status = "<p class='label label-danger'>Failed</p>";
+                    }
+                    txt += "<tr><td>"
+                        + data[i]["batchName"] + "</td><td>"
+                        + status + "</td><td>" +
+                        parseFloat(data[i]["runningTime"]).toFixed(2)
+                        + "</td></tr>";
 
-		function fillData(data) {
-			if (data != null) {
-				var len = data.length;
-				var txt = "";
-				var status = "";
-				if (len > 0) {
-					for (var i = 0; i < len; i++) {
-
-						if (data[i].batchStatus == 1) {
-							status = "Successful";
-						} else if (data[i].batchStatus == 2) {
-							status = "In Progress";
-						} else {
-							status = "Failed";
-						}
-						txt += "<tr><td>"
-							+ data[i].batchName + "</td><td>"
-								+ status + "</td><td>" +
-							parseFloat(data[i].runningTime).toFixed(2)
-								+ "</td></tr>";
-
-					}
-					if (txt != null) {
-					    txt="<tr><th>Batch</th><th>Status</th>" +
-							"<th>Running Time (Min)</th></tr>"+txt;
-						$("#modalTable").html(txt).removeClass("hidden");
-					}
-
-				}
-			} else {
-                $("#modalTable").html("No data from server.").removeClass("hidden");
-			}
-		}
-	</script>
+                }
+                if (txt != null) {
+                    txt = "<tr><th>Batch</th><th>Status</th>" +
+                        "<th>Running Time (Min)</th></tr>" + txt;
+                    $("#modalTable").html(txt).removeClass("hidden");
+                }
+            } else {
+                $("#insertText").html("<p>No data from server.</p>").removeClass("hidden");
+            }
+        }
+    </script>
 
 </div>

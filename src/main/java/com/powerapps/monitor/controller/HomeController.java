@@ -74,8 +74,8 @@ public class HomeController {
 
 	@RequestMapping(value = "/seerrorreportpreview", method = RequestMethod.GET)
 	@ResponseBody
-	public String serviceEngineErrorShowStackTrace(@RequestParam String lineNumber) {
-		return errorService.getStackTrace(Integer.parseInt(lineNumber));
+	public String serviceEngineErrorShowStackTrace(@RequestParam String input) {
+		return errorService.getStackTrace(Integer.parseInt(input));
 	}
 
 	@RequestMapping(value = "/downloadstacktrace", produces = "text/plain")
@@ -131,11 +131,11 @@ public class HomeController {
 		System.out.println(numberOfBytesCopied);
 	}
 
-	@RequestMapping(value = "/batchdetails", method = RequestMethod.GET)
+	@RequestMapping(value = "/bmerrorreportpreview", method = RequestMethod.GET)
 	@ResponseBody
-	public String getBatchDetails(@RequestParam String logname) throws IOException {
+	public String getBatchDetails(@RequestParam String input) throws IOException {
 		return new JsonUtils()
-				.toJson(bmMetrics.extractFeatures(bmMetrics.getFile(new File(getRootPath() + "/" + logname))));
+				.toJson(bmMetrics.extractFeatures(bmMetrics.getFile(new File(getRootPath() + "/" + input))));
 
 	}
 

@@ -225,14 +225,9 @@
 	<script type="text/javascript">
 		function showDataInModal(input) {
 			event.preventDefault();
-			openModal();
+            $("#modalId").modal();
 			ajaxGetData(input);
 
-		}
-
-		/* Open Bootstrap Modal*/
-		function openModal() {
-			$("#modalId").modal();
 		}
 
 		/* DO GET without refresh*/
@@ -246,40 +241,23 @@
 				dataType : "text",
 				success : function(data) {
 					/* fill data to Modal Body*/
-					fillData(data);
+                    if (data != null)
+                        $(".modal-body #insertText").text(data);
 				},
 				error : function() {
-					fillData(null);
+                    $(".modal-body #insertText").innerHTML = "No data from server.";
 				}
 			});
-		}
-
-		function fillData(data) {
-			if (data != null) {
-				$(".modal-body #greetingId").text(data);
-			} else {
-				$(".modal-body #greetingId").text("No data from server.");
-			}
 		}
 	</script>
 	
 	<script type="text/javascript">
 		function showBatchDetails(input) {
 			event.preventDefault();
-
-			// Open Bootstrap Modal
-			openModel();
-			// Get data from Server
+            $("#modalId").modal();
 			ajaxGet(input);
-			//fillData("something")
 		}
 
-		// Open Bootstrap Modal
-		function openModel() {
-			$("#modalId").modal();
-		}
-
-		// DO GET
 		function ajaxGet(input) {
 			$.ajax({
 				type : "GET",
@@ -290,11 +268,10 @@
 				},
 				dataType : "json",
 				success : function(data) {
-					// fill data to Modal Body
 					fillData(data);
 
 				},
-				error : function(e) {
+				error : function() {
 					fillData(null);
 				}
 			});
@@ -330,7 +307,7 @@
 
 				}
 			} else {
-                $(".modal-body").text("No data from server.");
+                $("#modalTable").html("No data from server.").removeClass("hidden");
 			}
 		}
 	</script>

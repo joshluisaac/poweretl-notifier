@@ -134,10 +134,8 @@ public class HomeController {
 	@RequestMapping(value = "/batchdetails", method = RequestMethod.GET)
 	@ResponseBody
 	public String getBatchDetails(@RequestParam String logname) throws IOException {
-		String json = new JsonUtils()
+		return new JsonUtils()
 				.toJson(bmMetrics.extractFeatures(bmMetrics.getFile(new File(getRootPath() + "/" + logname))));
-		System.out.println("reach here");
-		return json;
 
 	}
 

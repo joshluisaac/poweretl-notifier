@@ -315,21 +315,22 @@
 						} else {
 							status = "Failed";
 						}
-						txt += "<tr><td>" + data[i].batchName + "</td><td>"
-								+ status + "</td><td>" + parseFloat(data[i].runningTime).toFixed(2)
+						txt += "<tr><td>"
+							+ data[i].batchName + "</td><td>"
+								+ status + "</td><td>" +
+							parseFloat(data[i].runningTime).toFixed(2)
 								+ "</td></tr>";
-
-						//	$("#batchstatus").html(status);
 
 					}
 					if (txt != null) {
+					    txt="<tr><th>Batch</th><th>Status</th>" +
+							"<th>Running Time (Min)</th></tr>"+txt;
 						$("#modalTable").html(txt).removeClass("hidden");
-
 					}
 
 				}
 			} else {
-				alert("Can Not Get Data from Server!");
+                $(".modal-body").text("No data from server.");
 			}
 		}
 	</script>

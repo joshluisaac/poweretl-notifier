@@ -225,18 +225,18 @@
 
     <!-- View text or table format data from json to a modal box-->
     <script type="text/javascript">
-        function showDataInModal(input) {
+        function showDataInModal(input, url, modalId, dataInsertId) {
             event.preventDefault();
-            $("#modalId").modal();
-            ajaxGetData(input);
+            $(document.getElementById(modalId)).modal();
+            /*Pass the URL, dataInsertId and input dynamically. */
+            ajaxGetData(input, url, dataInsertId);
 
         }
 
         /* DO GET without refresh*/
-        function ajaxGetData(input) {
-            var url = window.location.pathname + "preview";
+        function ajaxGetData(input, url, dataInsertId) {
             var dataType = "text";
-            if (url.toString() === "/bmerrorreportpreview")
+            if (url.toString() === "bmerrorreportpreview")
                 dataType = "json";
             $.ajax({
                 type: "GET",
@@ -248,20 +248,26 @@
                 success: function (data) {
                     /* fill data to Modal Body*/
                     if (data != null)
-                        if (url.toString() === "/bmerrorreportpreview") {
-                            fillBatchData(data);
+                        if (url.toString() === "bmerrorreportpreview") {
+                            fillBatchData(data, dataInsertId);
+                        }
+                        else if (url.toString() === "sendadhocemail"){
+                            $(document.getElementById(dataInsertId)).val(data);
                         }
                         else
-                            $(".modal-body #insertText").text(data);
+                            $(document.getElementById(dataInsertId)).text(data);
                 },
                 error: function () {
-                    $("#insertText").html("<p>No data from server.</p>");
+                    if (url.toString() === "sendadhocemail"){
+                        $(document.getElementById(dataInsertId)).val("No logFile, please check if path is set correctly.");
+                    }
+                    $(document.getElementById(dataInsertId)).html("<p>No data from server.</p>");
                 }
             });
         }
 
         /*Only for bmerrorreportpreview url*/
-        function fillBatchData(data) {
+        function fillBatchData(data, dataInsertId) {
             var len = data.length;
             var txt = "";
             var status = "";
@@ -288,7 +294,7 @@
                     $("#modalTable").html(txt).removeClass("hidden");
                 }
             } else {
-                $("#insertText").html("<p>No data from server.</p>").removeClass("hidden");
+                $(document.getElementById(dataInsertId)).html("<p>No data from server.</p>").removeClass("hidden");
             }
         }
     </script>

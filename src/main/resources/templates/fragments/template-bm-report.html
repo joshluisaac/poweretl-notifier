@@ -41,11 +41,12 @@
 							</td>
 							<td th:text="${#numbers.formatDecimal(report.runningTime,2,2)}"></td>
 							<td><a href="#"
-								th:onclick="'javascript:showDataInModal(\'' + ${report.logFileName} + '\')'">
+								th:onclick="'showDataInModal(\'' + ${report.logFileName} + '\',
+								\'bmerrorreportpreview\', \'batchDetailsModal\', \'insertText\')'">
 									<span data-toggle="tooltip" title="Preview Batch Manager File"
 									class="glyphicon glyphicon-eye-open"> </span>
 							</a>                          <!-- Bootstrap Modal -->
-								<div class="modal fade" id="modalId" role="dialog">
+								<div class="modal fade" id="batchDetailsModal" role="dialog">
 									<div class="modal-dialog" style="margin: auto; width: 1000px;">
 
 										<!-- Bootstrap Modal content-->
@@ -75,12 +76,77 @@
 								th:href="@{'/downloadbatch?logname=' + ${report.logFileName}}">
 									<span data-toggle="tooltip" title="Download Batch Manager File"
 									class="glyphicon glyphicon-download red"> </span>
-							</a> <a
-								th:href="@{'/sendadhocemail?logFileName=' + ${report.logFileName}}"
-								data-toggle="modal"> <span data-toggle="tooltip"
-									title="Send Email" class="glyphicon glyphicon-envelope">
-								</span>
-							</a></td>
+							</a>
+								<a href="#"
+								   th:onclick="'showDataInModal(\'' + ${report.logFileName} + '\',
+                                    \'sendadhocemail\',\'emailModal\',\'logName\')'"><span
+										data-toggle="tooltip" title="Send Email"
+										class="glyphicon glyphicon-envelope"></span></a>
+
+								<div class="modal fade" id="emailModal" role="dialog"
+									 tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+
+										<!-- Bootstrap Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title text-center">New Message</h4>
+											</div>
+
+											<div class="modal-body">
+												<form method="POST" action="/sendadhocemail"
+													  enctype="multipart/form-data">
+													<div style="margin:0 auto;width:60%">
+														<div class="form-group">
+															<label for="logName" class="col-form-label">
+																Log File: &nbsp;&nbsp;&nbsp;
+															</label>
+															<input name="logFileName" readonly id="logName">
+														</div>
+														<br><br>
+														<div class="form-group">
+															<label for="title" class="col-form-label">Email
+																Title:</label>
+															<input type="text" name="title" class="form-control"
+																   id="title" required>
+														</div>
+														<br><br>
+														<div class="form-group">
+															<label for="message" class="col-form-label">
+																Message:&nbsp;&nbsp;&nbsp;
+															</label>
+															<textarea name="body" class="form-control" id="message"
+																	  required rows="5"></textarea>
+														</div>
+														<br><br>
+														<div class="form-group">
+															<label for="attachment" class="col-form-label">
+																Attach: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															</label>
+															<input type="file" name="attachment"
+																   class="form-control"
+																   style="width: 225px; height: 33px;" id = "attachment"/>
+															<p class="blue text-right">
+																Upload only up to 1MB attachments.
+															</p>
+														</div>
+													</div>
+													<div class="modal-footer">
+														<div class="col-md-4 col-md-offset-8">
+															<button type="submit" class="btn btn-primary btn-sm">Send
+															</button>
+															<button type="button" class="btn btn-secondary"
+																	data-dismiss="modal">Close
+															</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>

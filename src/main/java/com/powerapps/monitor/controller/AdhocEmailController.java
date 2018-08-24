@@ -7,10 +7,10 @@ import com.kollect.etl.util.Utils;
 import com.powerapps.monitor.service.EmailSenderService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,10 +32,9 @@ public class AdhocEmailController {
     }
 
     @GetMapping("/sendadhocemail")
-    public Object sendAdhocEmail(@RequestParam String logFileName,
-                                 Model model){
-        model.addAttribute("logFileName", logFileName);
-        return "fragments/template_adhoc_email_modal";
+    @ResponseBody
+    public Object sendAdhocEmail(@RequestParam ("input") String logFileName){
+        return logFileName;
     }
 
     @PostMapping("/sendadhocemail")

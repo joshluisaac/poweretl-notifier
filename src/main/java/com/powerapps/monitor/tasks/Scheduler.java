@@ -24,23 +24,21 @@ import java.io.IOException;
 public class Scheduler {
     /*Required services*/
     private final BatchManagerLogService bmService;
-    private final EmailSenderService emailClient;
     private final DataConnectorNotification dcNotificationService;
     /*Required variables*/
     @Value("${app.dcServerLogPath}")
     String dcServerLogPath;
-    private static final Logger LOG = LoggerFactory.getLogger(Scheduler.class);
+    private final Logger logger = LoggerFactory.getLogger(Scheduler.class);
     /*The constructor for the class to inject the necessary services*/
     @Autowired
     public Scheduler(BatchManagerLogService bmService,
-                     EmailSenderService emailClient,
+                     
                      DataConnectorNotification dcNotificationService){
         this.bmService=bmService;
-        this.emailClient=emailClient;
         this.dcNotificationService=dcNotificationService;
     }
 
-    @Scheduled(fixedRateString = "${interval}")
+    //@Scheduled(fixedRateString = "${interval}")
     public void runFixedSchedule() throws IOException {
         bmService.emailAndPersistToCache();
     }
@@ -49,7 +47,7 @@ public class Scheduler {
     public void sendDataConnectorStatsEmail() throws IOException {
         String title = "MBSB - Daily Data Loading";
         String context = "mbsb";
-        LOG.info("DataConnector Email Notification Running...at {} using thread {}", System.currentTimeMillis(), Thread.currentThread().getName());
+        logger.info("DataConnector Email Notification Running...at {} using thread {}", System.currentTimeMillis(), Thread.currentThread().getName());
         dcNotificationService.execute(title, dcServerLogPath, context);
     }
 }

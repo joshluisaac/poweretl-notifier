@@ -33,6 +33,7 @@ public class DataConnectorNotification {
   private final IEmailContentBuilder emailContentBuilder;
   private final IEmailClient emailClient;
   private final EmailHelper emailHelper;
+  private FileUtils fileUtils = new FileUtils();
   private final Logger logger = LoggerFactory.getLogger(DataConnectorNotification.class);
   
   
@@ -81,7 +82,7 @@ public class DataConnectorNotification {
     
     String lineStartsWith = new DateUtils().getDaysAgoToString("yyyy-MM-dd", Integer.parseInt(daysAgo), new Date());
     String fileName = "dc_stats_"+ context +"_"+ lineStartsWith + ".json";
-    List<String> cacheList = new FileUtils().readFile(cacheFilePath);
+    List<String> cacheList = fileUtils.readFile(fileUtils.getFileFromClasspath(cacheFilePath));
     boolean isExists = cacheList.contains(fileName);
     
     boolean execute = (!isExists||(renotify.equals("true"))) ? true : false;

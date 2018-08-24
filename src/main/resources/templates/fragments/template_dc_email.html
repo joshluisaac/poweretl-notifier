@@ -78,7 +78,13 @@ th {
 						<td><span th:text="${stat.key}"></span></td>
 						<td><span th:text="${stat.eligible}"></span></td>
 						<td><span th:text="${stat.loaded}"></span></td>
-						<td><span th:text="${stat.eligible - stat.loaded}"></span></td>
+						<td>
+							<span th:if="${stat.eligible - stat.loaded > 0}"
+								  class = "text-danger"
+								  th:text="${stat.eligible - stat.loaded}"></span>
+							<span th:if="${stat.eligible - stat.loaded < 1}"
+								  th:text="${stat.eligible - stat.loaded}"></span>
+						</td>
 						<td><span th:text="${stat.duration}"></span></td>
 						<td><span th:text="${stat.rowsPerSec}"></span></td>
 					</tr>

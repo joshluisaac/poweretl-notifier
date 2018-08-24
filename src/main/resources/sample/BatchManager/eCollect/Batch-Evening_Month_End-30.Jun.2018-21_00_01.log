@@ -1,0 +1,52 @@
+2018-06-30 21:00:01,430 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-30 21:00:01,569 DEBUG --START--
+2018-06-30 21:00:01,573 INFO  Starting - Batch - truncateScoringData from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:00:01,579 INFO  Execute - Batch - truncateScoringData
+2018-06-30 21:00:01,680 INFO  Completed - Batch - truncateScoringData from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:00:01,681 INFO  Finished - Batch - truncateScoringData
+2018-06-30 21:00:01,681 INFO  Starting - Batch - truncateAccountMiaTrend from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:00:01,682 INFO  Execute - Batch - truncateAccountMiaTrend
+2018-06-30 21:00:02,148 INFO  Completed - Batch - truncateAccountMiaTrend from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:00:02,148 INFO  Finished - Batch - truncateAccountMiaTrend
+2018-06-30 21:00:02,148 INFO  Starting - Batch - ClearAccTreatmentInfo from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:00:02,150 INFO  Execute - Batch - ClearAccTreatmentInfo
+2018-06-30 21:00:07,068 INFO  Completed - Batch - ClearAccTreatmentInfo from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:00:07,068 INFO  Finished - Batch - ClearAccTreatmentInfo
+2018-06-30 21:00:07,068 INFO  Starting - Batch - InsertAccTreatmentInfo from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:00:07,070 INFO  Execute - Batch - InsertAccTreatmentInfo
+2018-06-30 21:00:12,286 INFO  Completed - Batch - InsertAccTreatmentInfo from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:00:12,287 INFO  Finished - Batch - InsertAccTreatmentInfo
+2018-06-30 21:00:12,287 INFO  Starting - Batch - UpdateAccTreatmentInfoForPromise from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:00:12,288 INFO  Execute - Batch - UpdateAccTreatmentInfoForPromise
+2018-06-30 21:07:34,530 INFO  Completed - Batch - UpdateAccTreatmentInfoForPromise from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:07:34,530 INFO  Finished - Batch - UpdateAccTreatmentInfoForPromise
+2018-06-30 21:07:34,530 INFO  Starting - Batch - UpdateAccTreatmentInfoForCalls from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:07:34,532 INFO  Execute - Batch - UpdateAccTreatmentInfoForCalls
+2018-06-30 21:11:05,833 INFO  Completed - Batch - UpdateAccTreatmentInfoForCalls from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:11:05,834 INFO  Finished - Batch - UpdateAccTreatmentInfoForCalls
+2018-06-30 21:11:05,834 INFO  Starting - Batch - DeleteCIFTotalOS from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:11:05,835 INFO  Execute - Batch - DeleteCIFTotalOS
+2018-06-30 21:11:21,432 INFO  Completed - Batch - DeleteCIFTotalOS from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:11:21,432 INFO  Finished - Batch - DeleteCIFTotalOS
+2018-06-30 21:11:21,432 INFO  Starting - Batch - InsertCIFTotalOS from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:11:21,434 INFO  Execute - Batch - InsertCIFTotalOS
+2018-06-30 21:12:16,213 INFO  Completed - Batch - InsertCIFTotalOS from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:12:16,214 INFO  Finished - Batch - InsertCIFTotalOS
+2018-06-30 21:12:16,214 INFO  Starting - Batch - DeleteAccMarketValue from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:12:16,215 INFO  Execute - Batch - DeleteAccMarketValue
+2018-06-30 21:12:30,331 INFO  Completed - Batch - DeleteAccMarketValue from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:12:30,331 INFO  Finished - Batch - DeleteAccMarketValue
+2018-06-30 21:12:30,331 INFO  Starting - Batch - InsertAccMarketValue from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:12:30,333 INFO  Execute - Batch - InsertAccMarketValue
+2018-06-30 21:13:20,766 INFO  Completed - Batch - InsertAccMarketValue from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:13:20,767 INFO  Finished - Batch - InsertAccMarketValue
+2018-06-30 21:13:20,767 INFO  Starting - Batch - UpdateCustomerPrefixName from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:13:20,768 INFO  Execute - Batch - UpdateCustomerPrefixName
+2018-06-30 21:25:57,357 INFO  Completed - Batch - UpdateCustomerPrefixName from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:25:57,357 INFO  Finished - Batch - UpdateCustomerPrefixName
+2018-06-30 21:25:57,357 INFO  Starting - Batch - updatePmmContactInfo from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:25:57,358 INFO  Execute - Batch - updatePmmContactInfo
+2018-06-30 21:25:57,889 INFO  Completed - Batch - updatePmmContactInfo from /bcrp/prd/application/BatchManager/bin/Evening_Month_End.batch
+2018-06-30 21:25:57,889 INFO  Finished - Batch - updatePmmContactInfo
+2018-06-30 21:25:57,889 DEBUG --DONE--

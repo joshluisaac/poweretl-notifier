@@ -1,0 +1,12 @@
+2018-06-18 07:20:03,957 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-18 07:20:04,104 DEBUG --START--
+2018-06-18 07:20:04,109 INFO  Starting - Batch - ctiUserWorkListTabs from /bcrp/prd/application/BatchManager/bin/ctiExtraction.batch
+2018-06-18 07:20:04,114 INFO  Execute - Batch - ctiUserWorkListTabs
+2018-06-18 07:27:00,565 INFO  Completed - Batch - ctiUserWorkListTabs from /bcrp/prd/application/BatchManager/bin/ctiExtraction.batch
+2018-06-18 07:27:00,565 INFO  Finished - Batch - ctiUserWorkListTabs
+2018-06-18 07:27:00,566 INFO  Starting - Batch - ctiExtraction from /bcrp/prd/application/BatchManager/bin/ctiExtraction.batch
+2018-06-18 07:27:00,567 INFO  Execute - Batch - ctiExtraction
+2018-06-18 07:34:44,727 INFO  Completed - Batch - ctiExtraction from /bcrp/prd/application/BatchManager/bin/ctiExtraction.batch
+2018-06-18 07:34:44,727 INFO  Finished - Batch - ctiExtraction
+2018-06-18 07:34:44,727 DEBUG --DONE--

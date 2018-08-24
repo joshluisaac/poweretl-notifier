@@ -1,0 +1,8 @@
+2018-06-14 14:23:03,656 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765
+LOGIN SUCCESSFUL
+2018-06-14 14:23:03,997 DEBUG --START--
+2018-06-14 14:23:04,003 INFO  Starting - Batch - processCallLog from /carma/application/BatchManager/bin/CallLogger.batch
+2018-06-14 14:23:04,010 INFO  Execute - Batch - processCallLog
+2018-06-14 14:31:39,760 INFO  Completed - Batch - processCallLog from /carma/application/BatchManager/bin/CallLogger.batch
+2018-06-14 14:31:39,760 INFO  Finished - Batch - processCallLog
+2018-06-14 14:31:39,761 DEBUG --DONE--

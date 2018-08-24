@@ -1,0 +1,8 @@
+2018-06-19 22:00:01,449 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765
+LOGIN SUCCESSFUL
+2018-06-19 22:00:01,782 DEBUG --START--
+2018-06-19 22:00:01,788 INFO  Starting - Batch - bulkAgencyLetterExtraction from /carma/application/BatchManager/bin/bulkAgencyLetterExtraction.batch
+2018-06-19 22:00:01,795 INFO  Execute - Batch - bulkAgencyLetterExtraction
+2018-06-19 22:00:03,197 INFO  Completed - Batch - bulkAgencyLetterExtraction from /carma/application/BatchManager/bin/bulkAgencyLetterExtraction.batch
+2018-06-19 22:00:03,197 INFO  Finished - Batch - bulkAgencyLetterExtraction
+2018-06-19 22:00:03,197 DEBUG --DONE--

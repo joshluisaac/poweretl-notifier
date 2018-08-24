@@ -1,0 +1,36 @@
+2018-06-22 07:17:01,946 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-22 07:17:02,073 DEBUG --START--
+2018-06-22 07:17:02,078 INFO  Starting - Batch - executeWlgHpIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,083 INFO  Execute - Batch - executeWlgHpIlAdhoc
+2018-06-22 07:17:02,096 INFO  Completed - Batch - executeWlgHpIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,096 INFO  Finished - Batch - executeWlgHpIlAdhoc
+2018-06-22 07:17:02,096 INFO  Starting - Batch - executeWlgHpPreIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,097 INFO  Execute - Batch - executeWlgHpPreIlAdhoc
+2018-06-22 07:17:02,105 INFO  Completed - Batch - executeWlgHpPreIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,105 INFO  Finished - Batch - executeWlgHpPreIlAdhoc
+2018-06-22 07:17:02,105 INFO  Starting - Batch - executeWlgPlIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,106 INFO  Execute - Batch - executeWlgPlIlAdhoc
+2018-06-22 07:17:02,114 INFO  Completed - Batch - executeWlgPlIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,114 INFO  Finished - Batch - executeWlgPlIlAdhoc
+2018-06-22 07:17:02,115 INFO  Starting - Batch - executeWlgPlPreIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,115 INFO  Execute - Batch - executeWlgPlPreIlAdhoc
+2018-06-22 07:17:02,123 INFO  Completed - Batch - executeWlgPlPreIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,123 INFO  Finished - Batch - executeWlgPlPreIlAdhoc
+2018-06-22 07:17:02,123 INFO  Starting - Batch - executeWlgMgIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,124 INFO  Execute - Batch - executeWlgMgIlAdhoc
+2018-06-22 07:17:02,132 INFO  Completed - Batch - executeWlgMgIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,132 INFO  Finished - Batch - executeWlgMgIlAdhoc
+2018-06-22 07:17:02,132 INFO  Starting - Batch - executeWlgMgPreIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,132 INFO  Execute - Batch - executeWlgMgPreIlAdhoc
+2018-06-22 07:17:02,141 INFO  Completed - Batch - executeWlgMgPreIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,141 INFO  Finished - Batch - executeWlgMgPreIlAdhoc
+2018-06-22 07:17:02,141 INFO  Starting - Batch - executeWlgOdIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,142 INFO  Execute - Batch - executeWlgOdIlAdhoc
+2018-06-22 07:17:02,152 INFO  Completed - Batch - executeWlgOdIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,152 INFO  Finished - Batch - executeWlgOdIlAdhoc
+2018-06-22 07:17:02,152 INFO  Starting - Batch - executeWlgOdPreIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,152 INFO  Execute - Batch - executeWlgOdPreIlAdhoc
+2018-06-22 07:17:02,162 INFO  Completed - Batch - executeWlgOdPreIlAdhoc from /bcrp/prd/application/BatchManager/bin/DailyAdhocAssignment.batch
+2018-06-22 07:17:02,162 INFO  Finished - Batch - executeWlgOdPreIlAdhoc
+2018-06-22 07:17:02,162 DEBUG --DONE--

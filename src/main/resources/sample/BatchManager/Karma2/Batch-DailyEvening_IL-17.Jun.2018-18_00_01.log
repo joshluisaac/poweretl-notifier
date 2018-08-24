@@ -1,0 +1,44 @@
+2018-06-17 18:00:01,867 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-17 18:00:02,234 DEBUG --START--
+2018-06-17 18:00:02,238 INFO  Starting - Batch - contactNumberCleansingUpdates from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:00:02,242 INFO  Execute - Batch - contactNumberCleansingUpdates
+2018-06-17 18:00:17,272 INFO  Completed - Batch - contactNumberCleansingUpdates from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:00:17,272 INFO  Finished - Batch - contactNumberCleansingUpdates
+2018-06-17 18:00:17,272 INFO  Starting - Batch - stagingSmsTreatmentUpdate from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:00:17,273 INFO  Execute - Batch - stagingSmsTreatmentUpdate
+2018-06-17 18:00:17,390 INFO  Completed - Batch - stagingSmsTreatmentUpdate from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:00:17,390 INFO  Finished - Batch - stagingSmsTreatmentUpdate
+2018-06-17 18:00:17,390 INFO  Starting - Batch - searchContactNumberRefresh from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:00:17,390 INFO  Execute - Batch - searchContactNumberRefresh
+2018-06-17 18:05:33,059 INFO  Completed - Batch - searchContactNumberRefresh from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:05:33,059 INFO  Finished - Batch - searchContactNumberRefresh
+2018-06-17 18:05:33,059 INFO  Starting - Batch - updatePmmContactInfo from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:05:33,060 INFO  Execute - Batch - updatePmmContactInfo
+2018-06-17 18:05:33,537 INFO  Completed - Batch - updatePmmContactInfo from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:05:33,537 INFO  Finished - Batch - updatePmmContactInfo
+2018-06-17 18:05:33,537 INFO  Starting - Batch - summarizeAccountHostLegalAction from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:05:33,537 INFO  Execute - Batch - summarizeAccountHostLegalAction
+2018-06-17 18:06:59,655 INFO  Completed - Batch - summarizeAccountHostLegalAction from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:06:59,655 INFO  Finished - Batch - summarizeAccountHostLegalAction
+2018-06-17 18:06:59,655 INFO  Starting - Batch - updateDailyWorklistAssignmentToHistory from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:06:59,656 INFO  Execute - Batch - updateDailyWorklistAssignmentToHistory
+2018-06-17 18:07:00,202 INFO  Completed - Batch - updateDailyWorklistAssignmentToHistory from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:07:00,203 INFO  Finished - Batch - updateDailyWorklistAssignmentToHistory
+2018-06-17 18:07:00,203 INFO  Starting - Batch - updateAccountWorklistAssignment from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:07:00,203 INFO  Execute - Batch - updateAccountWorklistAssignment
+2018-06-17 18:08:07,812 INFO  Completed - Batch - updateAccountWorklistAssignment from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:08:07,812 INFO  Finished - Batch - updateAccountWorklistAssignment
+2018-06-17 18:08:07,812 INFO  Starting - Batch - updateAccountWorklistAssignmentMg from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:08:07,813 INFO  Execute - Batch - updateAccountWorklistAssignmentMg
+2018-06-17 18:08:19,637 INFO  Completed - Batch - updateAccountWorklistAssignmentMg from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:08:19,637 INFO  Finished - Batch - updateAccountWorklistAssignmentMg
+2018-06-17 18:08:19,637 INFO  Starting - Batch - refreshAccountCorresspondenceAddress from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:08:19,638 INFO  Execute - Batch - refreshAccountCorresspondenceAddress
+2018-06-17 18:13:25,386 INFO  Completed - Batch - refreshAccountCorresspondenceAddress from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:13:25,386 INFO  Finished - Batch - refreshAccountCorresspondenceAddress
+2018-06-17 18:13:25,386 INFO  Starting - Batch - updateUserAutoInvalid from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:13:25,386 INFO  Execute - Batch - updateUserAutoInvalid
+2018-06-17 18:13:25,448 INFO  Completed - Batch - updateUserAutoInvalid from /bcrp/prd/application/BatchManager/bin/DailyEvening_IL.batch
+2018-06-17 18:13:25,448 INFO  Finished - Batch - updateUserAutoInvalid
+2018-06-17 18:13:25,448 DEBUG --DONE--

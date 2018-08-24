@@ -1,0 +1,32 @@
+2018-06-21 07:33:08,907 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765
+LOGIN SUCCESSFUL
+2018-06-21 07:33:09,115 DEBUG --START--
+2018-06-21 07:33:09,121 INFO  Starting - Batch - processHostData from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:33:09,129 INFO  Execute - Batch - processHostData
+2018-06-21 07:49:41,927 INFO  Completed - Batch - processHostData from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:49:41,927 INFO  Finished - Batch - processHostData
+2018-06-21 07:49:41,927 INFO  Starting - Batch - appPaidEvaluationProcess from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:49:41,928 INFO  Execute - Batch - appPaidEvaluationProcess
+2018-06-21 07:50:13,947 INFO  Completed - Batch - appPaidEvaluationProcess from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:50:13,948 INFO  Finished - Batch - appPaidEvaluationProcess
+2018-06-21 07:50:13,948 INFO  Starting - Batch - ctiExtraction from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:50:13,948 INFO  Execute - Batch - ctiExtraction
+2018-06-21 07:53:46,155 INFO  Completed - Batch - ctiExtraction from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:53:46,155 INFO  Finished - Batch - ctiExtraction
+2018-06-21 07:53:46,156 INFO  Starting - Batch - promiseEvaluation from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:53:46,156 INFO  Execute - Batch - promiseEvaluation
+2018-06-21 07:55:26,065 INFO  Completed - Batch - promiseEvaluation from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:55:26,065 INFO  Finished - Batch - promiseEvaluation
+2018-06-21 07:55:26,065 INFO  Starting - Batch - appDailyProcess from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:55:26,066 INFO  Execute - Batch - appDailyProcess
+2018-06-21 07:58:40,897 INFO  Completed - Batch - appDailyProcess from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:58:40,897 INFO  Finished - Batch - appDailyProcess
+2018-06-21 07:58:40,897 INFO  Starting - Batch - updateSettlementProposal from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:58:40,898 INFO  Execute - Batch - updateSettlementProposal
+2018-06-21 07:58:42,485 INFO  Completed - Batch - updateSettlementProposal from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:58:42,485 INFO  Finished - Batch - updateSettlementProposal
+2018-06-21 07:58:42,486 INFO  Starting - Batch - poolCallingPriority from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:58:42,486 INFO  Execute - Batch - poolCallingPriority
+2018-06-21 07:58:42,524 INFO  Completed - Batch - poolCallingPriority from /carma/application/BatchManager/bin/Daily.batch
+2018-06-21 07:58:42,524 INFO  Finished - Batch - poolCallingPriority
+2018-06-21 07:58:42,524 DEBUG --DONE--

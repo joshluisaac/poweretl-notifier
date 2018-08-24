@@ -1,0 +1,16 @@
+2018-06-25 09:30:01,888 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-25 09:30:02,083 DEBUG --START--
+2018-06-25 09:30:02,088 INFO  Starting - Batch - generateTreeBulkSms from /bcrp/prd/application/BatchManager/bin/AdhocBulkSms.batch
+2018-06-25 09:30:02,094 INFO  Execute - Batch - generateTreeBulkSms
+2018-06-25 09:49:46,354 INFO  Completed - Batch - generateTreeBulkSms from /bcrp/prd/application/BatchManager/bin/AdhocBulkSms.batch
+2018-06-25 09:49:46,354 INFO  Finished - Batch - generateTreeBulkSms
+2018-06-25 09:49:46,354 INFO  Starting - Batch - generateBulkSmstreatmentviaTreeGeneration from /bcrp/prd/application/BatchManager/bin/AdhocBulkSms.batch
+2018-06-25 09:49:46,356 INFO  Execute - Batch - generateBulkSmstreatmentviaTreeGeneration
+2018-06-25 10:55:23,630 INFO  Completed - Batch - generateBulkSmstreatmentviaTreeGeneration from /bcrp/prd/application/BatchManager/bin/AdhocBulkSms.batch
+2018-06-25 10:55:23,630 INFO  Finished - Batch - generateBulkSmstreatmentviaTreeGeneration
+2018-06-25 10:55:23,630 INFO  Starting - Batch - extractSmsFromSummTable from /bcrp/prd/application/BatchManager/bin/AdhocBulkSms.batch
+2018-06-25 10:55:23,632 INFO  Execute - Batch - extractSmsFromSummTable
+2018-06-25 10:59:16,495 INFO  Completed - Batch - extractSmsFromSummTable from /bcrp/prd/application/BatchManager/bin/AdhocBulkSms.batch
+2018-06-25 10:59:16,495 INFO  Finished - Batch - extractSmsFromSummTable
+2018-06-25 10:59:16,496 DEBUG --DONE--

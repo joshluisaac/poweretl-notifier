@@ -1,0 +1,12 @@
+2018-06-30 13:27:39,680 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765
+LOGIN SUCCESSFUL
+2018-06-30 13:27:39,839 DEBUG --START--
+2018-06-30 13:27:39,844 INFO  Starting - Batch - updateSettlementProposal from /carma/application/BatchManager/bin/Daily_RerunFail.batch
+2018-06-30 13:27:39,851 INFO  Execute - Batch - updateSettlementProposal
+2018-06-30 13:27:42,096 INFO  Completed - Batch - updateSettlementProposal from /carma/application/BatchManager/bin/Daily_RerunFail.batch
+2018-06-30 13:27:42,096 INFO  Finished - Batch - updateSettlementProposal
+2018-06-30 13:27:42,096 INFO  Starting - Batch - poolCallingPriority from /carma/application/BatchManager/bin/Daily_RerunFail.batch
+2018-06-30 13:27:42,097 INFO  Execute - Batch - poolCallingPriority
+2018-06-30 13:27:42,132 INFO  Completed - Batch - poolCallingPriority from /carma/application/BatchManager/bin/Daily_RerunFail.batch
+2018-06-30 13:27:42,132 INFO  Finished - Batch - poolCallingPriority
+2018-06-30 13:27:42,132 DEBUG --DONE--

@@ -1,0 +1,52 @@
+2018-06-01 15:24:24,090 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-01 15:24:27,408 DEBUG --START--
+2018-06-01 15:24:27,412 INFO  Starting - Batch - promiseEvaluation from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:24:27,418 INFO  Execute - Batch - promiseEvaluation
+2018-06-01 15:25:54,817 INFO  Completed - Batch - promiseEvaluation from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:25:54,817 INFO  Finished - Batch - promiseEvaluation
+2018-06-01 15:25:54,817 INFO  Starting - Batch - deleteContactStatusPac from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:25:54,819 INFO  Execute - Batch - deleteContactStatusPac
+2018-06-01 15:25:54,846 INFO  Completed - Batch - deleteContactStatusPac from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:25:54,846 INFO  Finished - Batch - deleteContactStatusPac
+2018-06-01 15:25:54,846 INFO  Starting - Batch - MONTHLY_AGENCY_RECEIVA_DELETE_BATCH from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:25:54,847 INFO  Execute - Batch - MONTHLY_AGENCY_RECEIVA_DELETE_BATCH
+2018-06-01 15:25:54,898 INFO  Completed - Batch - MONTHLY_AGENCY_RECEIVA_DELETE_BATCH from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:25:54,898 INFO  Finished - Batch - MONTHLY_AGENCY_RECEIVA_DELETE_BATCH
+2018-06-01 15:25:54,898 INFO  Starting - Batch - MONTHLY_AGENCY_PAYMENT_DELETE_BATCH from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:25:54,899 INFO  Execute - Batch - MONTHLY_AGENCY_PAYMENT_DELETE_BATCH
+2018-06-01 15:25:55,010 INFO  Completed - Batch - MONTHLY_AGENCY_PAYMENT_DELETE_BATCH from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:25:55,010 INFO  Finished - Batch - MONTHLY_AGENCY_PAYMENT_DELETE_BATCH
+2018-06-01 15:25:55,010 INFO  Starting - Batch - wlgPreviousMonthHp from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:25:55,011 INFO  Execute - Batch - wlgPreviousMonthHp
+2018-06-01 15:36:59,992 INFO  Completed - Batch - wlgPreviousMonthHp from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:36:59,992 INFO  Finished - Batch - wlgPreviousMonthHp
+2018-06-01 15:36:59,992 INFO  Starting - Batch - wlgPreviousMonthOd from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:36:59,994 INFO  Execute - Batch - wlgPreviousMonthOd
+2018-06-01 15:46:03,616 INFO  Completed - Batch - wlgPreviousMonthOd from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:46:03,616 INFO  Finished - Batch - wlgPreviousMonthOd
+2018-06-01 15:46:03,617 INFO  Starting - Batch - wlgPreviousMonthMg from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:46:03,618 INFO  Execute - Batch - wlgPreviousMonthMg
+2018-06-01 15:51:28,227 INFO  Completed - Batch - wlgPreviousMonthMg from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:51:28,227 INFO  Finished - Batch - wlgPreviousMonthMg
+2018-06-01 15:51:28,227 INFO  Starting - Batch - wlgPreviousMonthHistory from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 15:51:28,228 INFO  Execute - Batch - wlgPreviousMonthHistory
+2018-06-01 16:23:16,454 INFO  Completed - Batch - wlgPreviousMonthHistory from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 16:23:16,454 INFO  Finished - Batch - wlgPreviousMonthHistory
+2018-06-01 16:23:16,455 INFO  Starting - Batch - executeHpAccountAssignmentSnapshot from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 16:23:16,456 INFO  Execute - Batch - executeHpAccountAssignmentSnapshot
+2018-06-01 16:28:31,845 INFO  Completed - Batch - executeHpAccountAssignmentSnapshot from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 16:28:31,845 INFO  Finished - Batch - executeHpAccountAssignmentSnapshot
+2018-06-01 16:28:31,845 INFO  Starting - Batch - executeUplAccountAssignmentSnapshot from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 16:28:31,846 INFO  Execute - Batch - executeUplAccountAssignmentSnapshot
+2018-06-01 16:30:04,821 INFO  Completed - Batch - executeUplAccountAssignmentSnapshot from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 16:30:04,822 INFO  Finished - Batch - executeUplAccountAssignmentSnapshot
+2018-06-01 16:30:04,822 INFO  Starting - Batch - executeOdAccountAssignmentSnapshot from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 16:30:04,823 INFO  Execute - Batch - executeOdAccountAssignmentSnapshot
+2018-06-01 16:38:02,072 INFO  Completed - Batch - executeOdAccountAssignmentSnapshot from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 16:38:02,072 INFO  Finished - Batch - executeOdAccountAssignmentSnapshot
+2018-06-01 16:38:02,072 INFO  Starting - Batch - executeMgAccountAssignmentSnapshot from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 16:38:02,073 INFO  Execute - Batch - executeMgAccountAssignmentSnapshot
+2018-06-01 16:38:18,305 INFO  Completed - Batch - executeMgAccountAssignmentSnapshot from /bcrp/prd/application/BatchManager/bin/Begin_PreWL_4.batch
+2018-06-01 16:38:18,306 INFO  Finished - Batch - executeMgAccountAssignmentSnapshot
+2018-06-01 16:38:18,306 DEBUG --DONE--

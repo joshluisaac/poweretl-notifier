@@ -1,0 +1,28 @@
+2018-06-01 12:14:02,335 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765
+LOGIN SUCCESSFUL
+2018-06-01 12:14:02,516 DEBUG --START--
+2018-06-01 12:14:02,522 INFO  Starting - Batch - appPaidEvaluationProcess from /carma/application/BatchManager/bin/1stOfMonth.batch
+2018-06-01 12:14:02,528 INFO  Execute - Batch - appPaidEvaluationProcess
+2018-06-01 12:14:33,043 INFO  Completed - Batch - appPaidEvaluationProcess from /carma/application/BatchManager/bin/1stOfMonth.batch
+2018-06-01 12:14:33,043 INFO  Finished - Batch - appPaidEvaluationProcess
+2018-06-01 12:14:33,044 INFO  Starting - Batch - appKpiHistoryArchives from /carma/application/BatchManager/bin/1stOfMonth.batch
+2018-06-01 12:14:33,044 INFO  Execute - Batch - appKpiHistoryArchives
+2018-06-01 12:15:38,050 INFO  Completed - Batch - appKpiHistoryArchives from /carma/application/BatchManager/bin/1stOfMonth.batch
+2018-06-01 12:15:38,050 INFO  Finished - Batch - appKpiHistoryArchives
+2018-06-01 12:15:38,050 INFO  Starting - Batch - loadPreviousMonthAssignmentDetails from /carma/application/BatchManager/bin/1stOfMonth.batch
+2018-06-01 12:15:38,051 INFO  Execute - Batch - loadPreviousMonthAssignmentDetails
+2018-06-01 12:26:20,684 INFO  Completed - Batch - loadPreviousMonthAssignmentDetails from /carma/application/BatchManager/bin/1stOfMonth.batch
+2018-06-01 12:26:20,684 INFO  Finished - Batch - loadPreviousMonthAssignmentDetails
+2018-06-01 12:26:20,684 INFO  Starting - Batch - wlgNonChargeOff from /carma/application/BatchManager/bin/1stOfMonth.batch
+2018-06-01 12:26:20,685 INFO  Execute - Batch - wlgNonChargeOff
+2018-06-01 13:08:52,480 INFO  Completed - Batch - wlgNonChargeOff from /carma/application/BatchManager/bin/1stOfMonth.batch
+2018-06-01 13:08:52,480 INFO  Finished - Batch - wlgNonChargeOff
+2018-06-01 13:08:52,480 INFO  Starting - Batch - wlgChargeOff from /carma/application/BatchManager/bin/1stOfMonth.batch
+2018-06-01 13:08:52,481 INFO  Execute - Batch - wlgChargeOff
+2018-06-01 13:17:45,881 INFO  Completed - Batch - wlgChargeOff from /carma/application/BatchManager/bin/1stOfMonth.batch
+2018-06-01 13:17:45,881 INFO  Finished - Batch - wlgChargeOff
+2018-06-01 13:17:45,882 INFO  Starting - Batch - deleteAgencyAssignmentKPI from /carma/application/BatchManager/bin/1stOfMonth.batch
+2018-06-01 13:17:45,882 INFO  Execute - Batch - deleteAgencyAssignmentKPI
+2018-06-01 13:17:46,676 INFO  Completed - Batch - deleteAgencyAssignmentKPI from /carma/application/BatchManager/bin/1stOfMonth.batch
+2018-06-01 13:17:46,676 INFO  Finished - Batch - deleteAgencyAssignmentKPI
+2018-06-01 13:17:46,676 DEBUG --DONE--

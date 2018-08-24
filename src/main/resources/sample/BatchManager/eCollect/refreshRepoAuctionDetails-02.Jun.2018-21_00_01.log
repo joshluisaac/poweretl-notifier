@@ -1,0 +1,8 @@
+2018-06-02 21:00:01,450 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/
+LOGIN SUCCESSFUL
+2018-06-02 21:00:01,619 DEBUG --START--
+2018-06-02 21:00:01,623 INFO  Starting - Batch - refreshRepoAuctionDetails from /bcrp/prd/application/BatchManager/bin/refreshRepoAuctionDetails.batch
+2018-06-02 21:00:01,628 INFO  Execute - Batch - refreshRepoAuctionDetails
+2018-06-02 21:34:10,104 INFO  Completed - Batch - refreshRepoAuctionDetails from /bcrp/prd/application/BatchManager/bin/refreshRepoAuctionDetails.batch
+2018-06-02 21:34:10,105 INFO  Finished - Batch - refreshRepoAuctionDetails
+2018-06-02 21:34:10,105 DEBUG --DONE--

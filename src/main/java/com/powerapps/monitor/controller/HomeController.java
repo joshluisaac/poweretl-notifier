@@ -1,6 +1,6 @@
 package com.powerapps.monitor.controller;
 
-import com.kollect.etl.util.JsonUtils;
+import com.powerapps.monitor.config.JsonWriter;
 import com.powerapps.monitor.model.LogSummary;
 import com.powerapps.monitor.service.BatchManagerLogMetrics;
 import com.powerapps.monitor.service.BatchManagerLogService;
@@ -35,15 +35,18 @@ public class HomeController {
 	private JsonToHashMap jsonToHashMap;
 	@Value("${app.bmJson}")
 	private String bmJson;
+	private JsonWriter jsonWriter;
 	private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
 	public HomeController(ServiceEngineLogService errorService, BatchManagerLogService bmService,
-			BatchManagerLogMetrics bmMetrics, JsonToHashMap jsonToHashMap) {
+			BatchManagerLogMetrics bmMetrics, JsonToHashMap jsonToHashMap,
+                          JsonWriter jsonWriter) {
 		this.errorService = errorService;
 		this.bmService = bmService;
 		this.bmMetrics = bmMetrics;
 		this.jsonToHashMap = jsonToHashMap;
+		this.jsonWriter=jsonWriter;
 	}
 
 	private String getRootPath() {
@@ -134,8 +137,8 @@ public class HomeController {
 	@RequestMapping(value = "/bmerrorreportpreview", method = RequestMethod.GET)
 	@ResponseBody
 	public String getBatchDetails(@RequestParam String input) throws IOException {
-		return new JsonUtils()
-				.toJson(bmMetrics.extractFeatures(bmMetrics.getFile(new File(getRootPath() + "/" + input))));
+		return jsonWriter.
+                generateJson(bmMetrics.extractFeatures(bmMetrics.getFile(new File(getRootPath() + "/" + input))));
 
 	}
 

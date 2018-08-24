@@ -1,5 +1,6 @@
 package com.powerapps.monitor.service;
 
+import com.kollect.etl.util.FileUtils;
 import com.powerapps.monitor.config.JsonReader;
 import com.powerapps.monitor.model.SeProperties;
 import com.powerapps.monitor.model.ServiceEngineErrorReport;
@@ -19,6 +20,7 @@ public class ServiceEngineLogService {
   
   private JsonReader reader;
   private final Utils util;
+  private FileUtils fileUtils = new FileUtils();
 
   @Value("${app.seJson}")
   private String seJsonPath;
@@ -30,7 +32,8 @@ public class ServiceEngineLogService {
   }
 
   private String getConfig() {
-    return util.listToBuffer(util.readFile(new File(seJsonPath))).toString();
+    return util.listToBuffer(util.readFile(
+            fileUtils.getFileFromClasspath(seJsonPath))).toString();
   }
 
   private String getRegexPattern(final String config){

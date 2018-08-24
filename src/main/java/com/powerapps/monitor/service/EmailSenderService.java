@@ -2,6 +2,7 @@ package com.powerapps.monitor.service;
 
 import com.kollect.etl.notification.entity.Email;
 import com.kollect.etl.notification.service.*;
+import com.kollect.etl.util.FileUtils;
 import com.kollect.etl.util.JsonToHashMap;
 import com.kollect.etl.util.JsonUtils;
 import com.kollect.etl.util.Utils;
@@ -39,6 +40,7 @@ public class EmailSenderService {
     @Value("${app.adhocEmailLog}")
     String adhocEmailLogPath;
 
+    private FileUtils fileUtils = new FileUtils();
     private IEmailClient emailClient;
     private final IEmailContentBuilder emailContentBuilder;
     private IEmailLogger emailLogger = new EmailLogger();
@@ -60,29 +62,47 @@ public class EmailSenderService {
                                MultipartFile attachment, File logFile) {
         String content = emailContentBuilder.buildSimpleEmail(body, templateName);
                 
-        Email mail = new Email(jsonToHashMap.toHashMapFromJson(generalEmailJsonPath).get("fromEmail"),
-                jsonToHashMap.toHashMapFromJson(adhocEmailJsonPath).get("recipient"),
+        Email mail = new Email(jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(generalEmailJsonPath).toString()).get("fromEmail"),
+                jsonToHashMap.toHashMapFromJson(
+                        fileUtils.getFileFromClasspath(adhocEmailJsonPath).toString())
+                        .get("recipient"),
                 title, content, attachment, logFile);
         String status = emailClient.execute(mail);
-        String[] logArray = {jsonToHashMap.toHashMapFromJson(adhocEmailJsonPath).get("recipient"),
+        String[] logArray = {jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(adhocEmailJsonPath).toString())
+                .get("recipient"),
                 title, logFile.getName(), getSendTime(), status};
         emailLogger.persistLogToCsv(new ArrayList<>(Arrays.asList(logArray)),
-                adhocEmailLogPath);
+                fileUtils.getFileFromClasspath(adhocEmailLogPath).toString());
     }
 
     private void sendAutoEmail(File logFile, String autoEmailJsonPath) {
-        String content = emailContentBuilder.buildSimpleEmail(jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("message")
+        String content = emailContentBuilder.buildSimpleEmail(jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(autoEmailJsonPath).toString())
+                        .get("message")
                 , templateName);
-        Email mail = new Email(jsonToHashMap.toHashMapFromJson(generalEmailJsonPath).get("fromEmail"),
-                jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("recipient"),
-                jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("subject"),
+        Email mail = new Email(jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(generalEmailJsonPath).toString()).get("fromEmail"),
+                jsonToHashMap.toHashMapFromJson(
+                        fileUtils.getFileFromClasspath(autoEmailJsonPath).toString())
+                        .get("recipient"),
+                jsonToHashMap.toHashMapFromJson(
+                        fileUtils.getFileFromClasspath(autoEmailJsonPath).toString())
+                        .get("subject"),
                 content, null, logFile);
         String status = emailClient.execute(mail);
-        String[] logArray = {jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("recipient")
-                , jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("subject")
+        String[] logArray = {jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(autoEmailJsonPath).toString())
+                .get("recipient")
+                , jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(autoEmailJsonPath).toString())
+                .get("subject")
                 , logFile.getName(), getSendTime(), status};
         emailLogger.persistLogToCsv(new ArrayList<>(Arrays.asList(logArray)),
-                jsonToHashMap.toHashMapFromJson(autoEmailJsonPath).get("pathToEmailLog"));
+                jsonToHashMap.toHashMapFromJson(
+                        fileUtils.getFileFromClasspath(autoEmailJsonPath).toString())
+                        .get("pathToEmailLog"));
     }
 
     private void sendSeAutoEmail(File logFile) {

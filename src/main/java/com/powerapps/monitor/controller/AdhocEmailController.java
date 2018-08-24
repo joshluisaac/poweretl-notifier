@@ -53,13 +53,15 @@ public class AdhocEmailController {
         /* Check if attachment meets size criterion and is not empty, or if there was no attachment at all. */
         if (attachment.getSize() < 1000001 && attachment.getSize() != 0 || attachment.isEmpty()){
             if (logFileName.equals("ServerError.log")){
-                File logFile = fileUtils.getFileFromClasspath(jsonToHashMap.toHashMapFromJson(seJsonPath).get("seRootPath")
+                File logFile = new File(jsonToHashMap.toHashMapFromJson(
+                        fileUtils.getFileFromClasspath(seJsonPath).toString()).get("seRootPath")
                         +"/"+logFileName);
                 this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
                 redirectPage = "seerrorreport";
             }
             else {
-                File logFile = fileUtils.getFileFromClasspath(jsonToHashMap.toHashMapFromJson(bmJsonPath).get("bmRootPath")
+                File logFile = new File(jsonToHashMap.toHashMapFromJson(
+                        fileUtils.getFileFromClasspath(bmJsonPath).toString()).get("bmRootPath")
                         + "/" + logFileName);
                 this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
                 redirectPage = "bmerrorreport";

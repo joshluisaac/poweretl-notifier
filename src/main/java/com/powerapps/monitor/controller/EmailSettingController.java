@@ -1,5 +1,6 @@
 package com.powerapps.monitor.controller;
 
+import com.kollect.etl.util.FileUtils;
 import com.kollect.etl.util.JsonToHashMap;
 import com.kollect.etl.util.JsonUtils;
 import com.kollect.etl.util.Utils;
@@ -30,35 +31,41 @@ public class EmailSettingController {
     private JsonUtils jsonUtils = new JsonUtils();
     private Utils utils = new Utils();
     private final JsonToHashMap jsonToHashMap = new JsonToHashMap(jsonUtils, utils);
+    private FileUtils fileUtils = new FileUtils();
 
     @GetMapping("/seautoemailsettings")
     public String seAutoEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(seAutoEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(seAutoEmailJsonPath).toString()));
         return "seAutoEmailSettingsForm";
     }
 
     @GetMapping("/dcautoemailsettings")
     public String dcAutoEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(dcAutoEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(dcAutoEmailJsonPath).toString()));
         return "dcAutoEmailSettingsForm";
     }
 
     @GetMapping("/bmautoemailsettings")
     public String bmAutoEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(bmAutoEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(bmAutoEmailJsonPath).toString()));
         System.out.println(model);
         return "bmAutoEmailSettingsForm";
     }
 
     @GetMapping("/adhocemailsettings")
     public String adhocEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(adhocEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(adhocEmailJsonPath).toString()));
         return "adhocEmailSettingsForm";
     }
 
     @GetMapping("/generalemailsettings")
     public String generalEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(generalEmailJsonPath));
+        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(generalEmailJsonPath).toString()));
         return "generalEmailSettingsForm";
     }
 
@@ -72,7 +79,8 @@ public class EmailSettingController {
         toStore.put("host", generalEmailSettings.get("host"));
         toStore.put("port", generalEmailSettings.get("port"));
         String jsonOut = jsonUtils.toJson(toStore);
-        utils.writeTextFile(generalEmailJsonPath, jsonOut, false);
+        utils.writeTextFile(fileUtils.getFileFromClasspath(
+                generalEmailJsonPath).toString(), jsonOut, false);
     }
 
     private void autoEmailSettingWriter(HashMap<String, String> AutoEmailSettings,
@@ -83,7 +91,8 @@ public class EmailSettingController {
         toStore.put("message", AutoEmailSettings.get("message"));
         toStore.put("pathToEmailLog", AutoEmailSettings.get("pathToEmailLog"));
         String jsonOut = jsonUtils.toJson(toStore);
-        utils.writeTextFile(autoEmailJsonPath, jsonOut, false);
+        utils.writeTextFile(fileUtils.getFileFromClasspath(
+                autoEmailJsonPath).toString(), jsonOut, false);
     }
 
     @ResponseBody
@@ -110,6 +119,7 @@ public class EmailSettingController {
         Map<String, String> toStore = new HashMap<>();
         toStore.put("recipient", adhocEmailSettings.get("recipient"));
         String jsonOut = jsonUtils.toJson(toStore);
-        utils.writeTextFile(adhocEmailJsonPath, jsonOut, false);
+        utils.writeTextFile(fileUtils.getFileFromClasspath(
+                        adhocEmailJsonPath).toString(), jsonOut, false);
     }
 }

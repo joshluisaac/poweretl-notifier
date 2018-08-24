@@ -1,5 +1,6 @@
 package com.powerapps.monitor.controller;
 
+import com.kollect.etl.util.FileUtils;
 import com.powerapps.monitor.config.JsonReader;
 import com.powerapps.monitor.config.JsonWriter;
 import com.powerapps.monitor.model.BmProperties;
@@ -14,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.File;
-
 @Controller
 public class BatchManagerSettingController {
 
     private final JsonWriter bmWriter;
     private final JsonReader jsonReader;
     private final Utils util;
+    private FileUtils fileUtils = new FileUtils();
 
     @Value("${app.bmJson}")
     private String bmJsonPath;
@@ -36,7 +36,7 @@ public class BatchManagerSettingController {
 
     @RequestMapping(value = Path.Web.GET_BM_WEB_SETTING, method = RequestMethod.GET)
     public String batchManagerSettings(Model model) {
-        String jsonText = util.listToBuffer(util.readFile(new File(bmJsonPath))).toString();
+        String jsonText = util.listToBuffer(util.readFile(fileUtils.getFileFromClasspath(bmJsonPath))).toString();
         model.addAttribute("result",jsonReader.readJson(jsonText,BmProperties.class));
         return "batchManagerSettings";
     }
@@ -51,7 +51,7 @@ public class BatchManagerSettingController {
 
         BmProperties bmProp = new BmProperties(bmRootPath, batchStartRegex, batchDoneRegex, batchErrorRegex, bmCache);
         String out = bmWriter.generateJson(bmProp);
-        util.writeTextFile(bmJsonPath, out, false);
+        util.writeTextFile(fileUtils.getFileFromClasspath(bmJsonPath).toString(), out, false);
     }
 
 

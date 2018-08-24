@@ -1,5 +1,6 @@
 package com.powerapps.monitor.controller;
 
+import com.kollect.etl.util.FileUtils;
 import com.kollect.etl.util.JsonToHashMap;
 import com.kollect.etl.util.JsonUtils;
 import com.kollect.etl.util.Utils;
@@ -21,6 +22,7 @@ public class AdhocEmailController {
     private String bmJsonPath;
     @Value("${app.seJson}")
     private String seJsonPath;
+    private FileUtils fileUtils = new FileUtils();
 
     private EmailSenderService emailClient;
     private final JsonToHashMap jsonToHashMap = new JsonToHashMap(new JsonUtils(), new Utils());
@@ -51,13 +53,13 @@ public class AdhocEmailController {
         /* Check if attachment meets size criterion and is not empty, or if there was no attachment at all. */
         if (attachment.getSize() < 1000001 && attachment.getSize() != 0 || attachment.isEmpty()){
             if (logFileName.equals("ServerError.log")){
-                File logFile = new File(jsonToHashMap.toHashMapFromJson(seJsonPath).get("seRootPath")
+                File logFile = fileUtils.getFileFromClasspath(jsonToHashMap.toHashMapFromJson(seJsonPath).get("seRootPath")
                         +"/"+logFileName);
                 this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
                 redirectPage = "seerrorreport";
             }
             else {
-                File logFile = new File(jsonToHashMap.toHashMapFromJson(bmJsonPath).get("bmRootPath")
+                File logFile = fileUtils.getFileFromClasspath(jsonToHashMap.toHashMapFromJson(bmJsonPath).get("bmRootPath")
                         + "/" + logFileName);
                 this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
                 redirectPage = "bmerrorreport";

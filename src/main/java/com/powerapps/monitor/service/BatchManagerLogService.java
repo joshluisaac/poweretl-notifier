@@ -30,6 +30,7 @@ public class BatchManagerLogService {
 
     private JsonReader reader;
     private final Utils util;
+    private FileUtils fileUtils = new FileUtils();
 
     @Autowired
     public BatchManagerLogService(JsonReader reader, Utils util) {
@@ -38,7 +39,8 @@ public class BatchManagerLogService {
     }
 
     private String getConfig() {
-        return util.listToBuffer(util.readFile(new File(bmJsonPath))).toString();
+        return util.listToBuffer(util.readFile(
+                fileUtils.getFileFromClasspath(bmJsonPath))).toString();
     }
 
     private String getStartRegex(final String config){

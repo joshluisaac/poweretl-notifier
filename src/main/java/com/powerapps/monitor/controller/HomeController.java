@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -116,7 +117,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/bmerrorreport", method = RequestMethod.GET)
 	public Object batchManagerErrorLogReport(Model model) {
-		List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(fileUtils.getFileFromClasspath(getRootPath())));
+		List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(getRootPath())));
 		model.addAttribute("summaryList", summary);
 		return "batchManager-report";
 	}

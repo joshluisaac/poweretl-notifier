@@ -1,5 +1,6 @@
 package com.powerapps.monitor.controller;
 
+import com.kollect.etl.util.FileUtils;
 import com.kollect.etl.util.PropertiesUtils;
 import com.kollect.etl.util.PropertyToHashMap;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,12 +20,14 @@ public class SchedulerController {
     @Value("${app.emailSchedulerProp}")
     private String emailSchedulerPropPath;
 
+    private FileUtils fileUtils = new FileUtils();
     private PropertyToHashMap propertyToHashMap = new PropertyToHashMap();
 
     @RequestMapping(value = "/fixedinterval", method = RequestMethod.GET)
     public String fixedIntervalSettings(Model model) throws IOException {
         model.addAttribute("result",
-                new PropertiesUtils().loadPropertiesFile(fixedSchedulerPropPath)
+                new PropertiesUtils().loadPropertiesFile(
+                        fileUtils.getFileFromClasspath(fixedSchedulerPropPath).toString())
                         .getProperty("interval"));
         return "fixedIntervalSettings";
     }
@@ -35,13 +38,16 @@ public class SchedulerController {
             throws IOException {
         HashMap<String, String> toStore = new HashMap<>();
         toStore.put("interval", keyValuePair.get("interval"));
-        this.propertyToHashMap.hashMapToProp(fixedSchedulerPropPath, toStore);
+        this.propertyToHashMap.hashMapToProp(
+                fileUtils.getFileFromClasspath(fixedSchedulerPropPath).toString(),
+                toStore);
     }
 
     @RequestMapping(value = "/emailscheduler", method = RequestMethod.GET)
     public String emailScheduler(Model model) throws IOException {
         model.addAttribute("result",
-                this.propertyToHashMap.propToHashMap(emailSchedulerPropPath));
+                this.propertyToHashMap.propToHashMap(
+                        fileUtils.getFileFromClasspath(emailSchedulerPropPath).toString()));
         return "emailSchedulerSettings";
     }
 
@@ -60,7 +66,9 @@ public class SchedulerController {
                 concat(keyValuePair.get("minute"))+" ".concat(keyValuePair.get("hour"))+" ".
                 concat(keyValuePair.get("day"))+" ".concat(keyValuePair.get("month")+" ".
                 concat(keyValuePair.get("year"))));
-        this.propertyToHashMap.hashMapToProp(emailSchedulerPropPath, toStore);
+        this.propertyToHashMap.hashMapToProp(
+                fileUtils.getFileFromClasspath(emailSchedulerPropPath).toString(),
+                toStore);
     }
 
 }

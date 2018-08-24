@@ -1,6 +1,7 @@
 package com.powerapps.monitor.controller;
 
 import com.kollect.etl.util.CsvReadWriteUtils;
+import com.kollect.etl.util.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,29 +20,34 @@ public class NotificationReportController {
     @Value("${app.adhocEmailLog}")
     private String adhocEmailLog;
 
+    private FileUtils fileUtils = new FileUtils();
     private final CsvReadWriteUtils csvReadWriteUtils = new CsvReadWriteUtils(new com.kollect.etl.util.Utils());
 
     @RequestMapping(value = "/seemailnotifreport", method = RequestMethod.GET)
     public String serviceEngineEmailNotifReport(Model model) {
-        model.addAttribute("resultList",csvReadWriteUtils.readCsvToListMap(seAutoEmailLog));
+        model.addAttribute("resultList",csvReadWriteUtils.readCsvToListMap(
+                fileUtils.getFileFromClasspath(seAutoEmailLog).toString()));
         return "serviceEngineEmailNotifReport";
     }
 
     @RequestMapping(value = "/dcemailnotifreport", method = RequestMethod.GET)
     public String dataConnectorEmailNotifReport(Model model) {
-        model.addAttribute("resultList",csvReadWriteUtils.readCsvToListMap(dcAutoEmailLog));
+        model.addAttribute("resultList",csvReadWriteUtils.readCsvToListMap(
+                fileUtils.getFileFromClasspath(dcAutoEmailLog).toString()));
         return "dataConnectorEmailNotifReport";
     }
 
     @RequestMapping(value = "/bmemailnotifreport", method = RequestMethod.GET)
     public String batchManagerEmailNotifReport(Model model) {
-        model.addAttribute("resultList",csvReadWriteUtils.readCsvToListMap(bmAutoEmailLog));
+        model.addAttribute("resultList",csvReadWriteUtils.readCsvToListMap(
+                fileUtils.getFileFromClasspath(bmAutoEmailLog).toString()));
         return "batchManagerEmailNotifReport";
     }
 
     @GetMapping("/adhocemailnotifreport")
     public String adhocEmailNotifReport(Model model) {
-        model.addAttribute("resultList",csvReadWriteUtils.readCsvToListMap(adhocEmailLog));
+        model.addAttribute("resultList",csvReadWriteUtils.readCsvToListMap(
+                fileUtils.getFileFromClasspath(adhocEmailLog).toString()));
         return "adhocEmailNotifReport";
     }
 

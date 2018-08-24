@@ -1,5 +1,6 @@
 package com.powerapps.monitor.controller;
 
+import com.kollect.etl.util.FileUtils;
 import com.powerapps.monitor.config.JsonWriter;
 import com.powerapps.monitor.model.LogSummary;
 import com.powerapps.monitor.service.BatchManagerLogMetrics;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -36,6 +36,7 @@ public class HomeController {
 	@Value("${app.bmJson}")
 	private String bmJson;
 	private JsonWriter jsonWriter;
+	private FileUtils fileUtils = new FileUtils();
 	private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
@@ -50,7 +51,8 @@ public class HomeController {
 	}
 
 	private String getRootPath() {
-		return jsonToHashMap.toHashMap(bmJson).get("bmRootPath");
+		return jsonToHashMap.toHashMap(
+                fileUtils.getFileFromClasspath(bmJson).toString()).get("bmRootPath");
 	}
 
 	@RequestMapping("/")
@@ -107,14 +109,14 @@ public class HomeController {
 	@RequestMapping(value = "/bmerrorreportJSON", method = RequestMethod.GET)
 	@ResponseBody
 	public Object batchManagerErrorLogReportJSON(Model model) {
-		List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(getRootPath())));
+		List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(fileUtils.getFileFromClasspath(getRootPath())));
 		model.addAttribute("summaryList", summary);
 		return summary;
 	}
 
 	@RequestMapping(value = "/bmerrorreport", method = RequestMethod.GET)
 	public Object batchManagerErrorLogReport(Model model) {
-		List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(new File(getRootPath())));
+		List<LogSummary> summary = bmService.getAllLogSummary(bmService.getLogFiles(fileUtils.getFileFromClasspath(getRootPath())));
 		model.addAttribute("summaryList", summary);
 		return "batchManager-report";
 	}
@@ -138,7 +140,8 @@ public class HomeController {
 	@ResponseBody
 	public String getBatchDetails(@RequestParam String input) throws IOException {
 		return jsonWriter.
-                generateJson(bmMetrics.extractFeatures(bmMetrics.getFile(new File(getRootPath() + "/" + input))));
+                generateJson(bmMetrics.extractFeatures(bmMetrics.getFile(
+                        fileUtils.getFileFromClasspath(getRootPath() + "/" + input))));
 
 	}
 

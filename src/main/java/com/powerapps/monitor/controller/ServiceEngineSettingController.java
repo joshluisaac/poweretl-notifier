@@ -1,5 +1,6 @@
 package com.powerapps.monitor.controller;
 
+import com.kollect.etl.util.FileUtils;
 import com.powerapps.monitor.config.JsonReader;
 import com.powerapps.monitor.config.JsonWriter;
 import com.powerapps.monitor.model.SeProperties;
@@ -13,13 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.File;
-
 @Controller
 public class ServiceEngineSettingController {
   private final JsonWriter seWriter;
   private final JsonReader jsonReader;
   private final Utils util;
+  private FileUtils fileUtils = new FileUtils();
 
   @Value("${app.seJson}")
   private String seJsonPath;
@@ -37,12 +37,14 @@ public class ServiceEngineSettingController {
       @RequestParam String seErrorLog) {
     SeProperties data = new SeProperties(seRootPath, seExceptionRegex, seErrorLog);
     String output = seWriter.generateJson(data);
-    util.writeTextFile(seJsonPath, output, false);
+    util.writeTextFile(
+            fileUtils.getFileFromClasspath(seJsonPath).toString(), output, false);
   }
 
   @RequestMapping(value = "/viewsesetting", method = RequestMethod.GET)
   public String view(Model model) {
-    String jsonText = util.listToBuffer(util.readFile(new File(seJsonPath))).toString();
+    String jsonText = util.listToBuffer(util.readFile(fileUtils.getFileFromClasspath(
+            seJsonPath))).toString();
     model.addAttribute("result",jsonReader.readJson(jsonText,SeProperties.class));
     return "serviceEngineSettings";
   }

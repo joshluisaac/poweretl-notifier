@@ -9,7 +9,11 @@
         <div class="x_content"></div>
         <div class='row'>
             <div class='col-md-12'>
-                <br>
+                <span class="text-center">
+					<p th:text="${size}" class="red"></p>
+					<p th:text="${content}" class="red"></p>
+					<p th:text="${success}" class="green"></p>
+				</span>
                 <table id="datatable-buttons"
                        class="table table-striped table-bordered">
                     <thead>

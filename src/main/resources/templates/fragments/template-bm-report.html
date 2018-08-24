@@ -41,7 +41,7 @@
 							</td>
 							<td th:text="${#numbers.formatDecimal(report.runningTime,2,2)}"></td>
 							<td><a href="#"
-								th:onclick="'javascript:showBatchDetails(\'' + ${report.logFileName} + '\')'">
+								th:onclick="'javascript:showDataInModal(\'' + ${report.logFileName} + '\')'">
 									<span data-toggle="tooltip" title="Preview Batch Manager File"
 									class="glyphicon glyphicon-eye-open"> </span>
 							</a>                          <!-- Bootstrap Modal -->
@@ -52,21 +52,15 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">Batch Details</h4>
+												<h4 class="modal-title text-center">Batch Details</h4>
 											</div>
 
 											<div class="modal-body">
 
 												<table class="hidden table table-striped table-bordered "
 													id="modalTable">
-
-													<tr>
-
-														<th>Batch</th>
-														<th>Status</th>
-														<th>Running Time (Min)</th>
-													</tr>
 												</table>
+												<pre class="hidden" id="insertText"></pre>
 
 											</div>
 											<div class="modal-footer">

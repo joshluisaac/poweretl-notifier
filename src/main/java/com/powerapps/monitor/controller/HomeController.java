@@ -142,7 +142,7 @@ public class HomeController {
 	public String getBatchDetails(@RequestParam String input) throws IOException {
 		return jsonWriter.
                 generateJson(bmMetrics.extractFeatures(bmMetrics.getFile(
-                        fileUtils.getFileFromClasspath(getRootPath() + "/" + input))));
+                        new File(getRootPath() + "/" + input))));
 
 	}
 

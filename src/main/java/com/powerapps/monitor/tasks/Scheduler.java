@@ -20,7 +20,7 @@ import java.io.IOException;
  * @author hashim
  */
 @Component
-@PropertySource(value = "file:config/fixedSchedulerConfig.properties")
+@PropertySource("classpath:config/fixedSchedulerConfig.properties")
 public class Scheduler {
     /*Required services*/
     private final BatchManagerLogService bmService;

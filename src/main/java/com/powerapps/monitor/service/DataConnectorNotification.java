@@ -3,6 +3,7 @@ package com.powerapps.monitor.service;
 import com.kollect.etl.notification.entity.Email;
 import com.kollect.etl.notification.service.IEmailClient;
 import com.kollect.etl.notification.service.IEmailContentBuilder;
+import com.kollect.etl.util.CryptUtils;
 import com.kollect.etl.util.DateUtils;
 import com.kollect.etl.util.FileUtils;
 import com.kollect.etl.util.dataconnector.TotalLoaded;
@@ -16,7 +17,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -33,7 +36,7 @@ public class DataConnectorNotification {
   private final IEmailContentBuilder emailContentBuilder;
   private final IEmailClient emailClient;
   private final EmailHelper emailHelper;
-  private FileUtils fileUtils = new FileUtils();
+private FileUtils fileUtils = new FileUtils();
   private final Logger logger = LoggerFactory.getLogger(DataConnectorNotification.class);
   
   
@@ -79,10 +82,11 @@ public class DataConnectorNotification {
   }
 
   public void execute(String title, String serverLogPath, String context) throws IOException {
-    
+    boolean reexecute = false;
     String lineStartsWith = new DateUtils().getDaysAgoToString("yyyy-MM-dd", Integer.parseInt(daysAgo), new Date());
     String fileName = "dc_stats_"+ context +"_"+ lineStartsWith + ".json";
-    List<String> cacheList = fileUtils.readFile(fileUtils.getFileFromClasspath(cacheFilePath));
+    //List<String> cacheList = new FileUtils().readFile(cacheFilePath);
+List<String> cacheList = fileUtils.readFile(fileUtils.getFileFromClasspath(cacheFilePath));
     boolean isExists = cacheList.contains(fileName);
     
     boolean execute = (!isExists||(renotify.equals("true"))) ? true : false;
@@ -93,21 +97,47 @@ public class DataConnectorNotification {
       
       /*Serialize to JSON string*/
       List<TotalLoaded> stats = dcStats.getStats(serverLogPath, daysAgo);
-      
       String jsonText = dcStats.jsonEncode(stats);
-      System.out.println(jsonText);
-      /*Build email content*/
-      String emailContent = emailContentBuilder.buildExtractLoadEmail("fragments/template_dc_email", stats);
-      /*Construct and assemble email object*/
-      Email mail = new Email(fromEmail, recipient, title,emailContent, null, null);
-              
-      /*Send email*/
-      emailClient.execute(mail);
-      /*write difference to cache*/
-      emailHelper.persistToCache(fileName);
+      String hashStr = CryptUtils.sha256HexHash(jsonText);
+      String destFileName = "out/" + fileName;
+      
+      boolean fileExists = fileExistsChecker(fileName);
+      
+      if(fileExists) {
+        String cachedFileContent = FileUtils.readFile(destFileName, StandardCharsets.UTF_8);
+        String cachedFileContentHash = CryptUtils.sha256HexHash(cachedFileContent); 
+        //check if current and previous are same
+        reexecute = hashStr.equals(cachedFileContentHash) ? true : false;
+      }
+      
+      if(!reexecute) {
+        deleteAndReplaceFile(destFileName, jsonText);
+        /*Build email content*/
+        String emailContent = emailContentBuilder.buildExtractLoadEmail("fragments/template_dc_email", stats);
+        /*Construct and assemble email object*/
+        Email mail = new Email(fromEmail, recipient, title,emailContent, null, null);
+        /*Send email*/
+        emailClient.execute(mail);
+        /*write difference to cache*/
+        emailHelper.persistToCache(fileName);
+      } else {
+        logger.info("Re-evaluating {} : DataConnector logs hasn't changed since last loading, email will not be resent", fileName);
+      }
     }
-    
-    
-
   }
+  
+  private void deleteAndReplaceFile(String fileName, String content) {
+    FileUtils futils = new FileUtils();
+    futils.deleteFile(new File(fileName));
+    futils.writeTextFile(fileName, content);
+    logger.info("Replaced file {}", fileName);
+  }
+  
+  
+  private boolean fileExistsChecker(String fileName) {
+    List<String> l=  new FileUtils().getFileList(new File("out"));
+    return l.contains(fileName) ? true:false;
+  }
+  
+  
 }

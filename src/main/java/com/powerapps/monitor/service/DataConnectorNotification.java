@@ -1,6 +1,7 @@
 package com.powerapps.monitor.service;
 
 import com.kollect.etl.notification.entity.Email;
+import com.kollect.etl.notification.entity.EmailConfigEntity;
 import com.kollect.etl.notification.service.IEmailClient;
 import com.kollect.etl.notification.service.IEmailContentBuilder;
 import com.kollect.etl.util.CryptUtils;
@@ -31,12 +32,11 @@ public class DataConnectorNotification {
 
 
   private DcStatistics dcStats;
-  private String fromEmail = "datareceived@kollect.my";
-  
   private final IEmailContentBuilder emailContentBuilder;
   private final IEmailClient emailClient;
   private final EmailHelper emailHelper;
-private FileUtils fileUtils = new FileUtils();
+  private final EmailConfigEntity emailConfig;
+  private FileUtils fileUtils = new FileUtils();
   private final Logger logger = LoggerFactory.getLogger(DataConnectorNotification.class);
   
   
@@ -61,15 +61,12 @@ private FileUtils fileUtils = new FileUtils();
   public DataConnectorNotification(
       DcStatistics dcStats,
       IEmailContentBuilder emailContentBuilder,
-      IEmailClient emailClient,EmailHelper emailHelper) {
+      IEmailClient emailClient,EmailHelper emailHelper, EmailConfigEntity emailConfig) {
     this.dcStats = dcStats;
     this.emailContentBuilder = emailContentBuilder;
     this.emailClient = emailClient;
     this.emailHelper = emailHelper;
-    //validateProperty();
- 
-      
-    
+    this.emailConfig = emailConfig;
   }
   
   
@@ -85,8 +82,7 @@ private FileUtils fileUtils = new FileUtils();
     boolean reexecute = false;
     String lineStartsWith = new DateUtils().getDaysAgoToString("yyyy-MM-dd", Integer.parseInt(daysAgo), new Date());
     String fileName = "dc_stats_"+ context +"_"+ lineStartsWith + ".json";
-    //List<String> cacheList = new FileUtils().readFile(cacheFilePath);
-List<String> cacheList = fileUtils.readFile(fileUtils.getFileFromClasspath(cacheFilePath));
+    List<String> cacheList = fileUtils.readFile(fileUtils.getFileFromClasspath(cacheFilePath));
     boolean isExists = cacheList.contains(fileName);
     
     boolean execute = (!isExists||(renotify.equals("true"))) ? true : false;
@@ -111,15 +107,20 @@ List<String> cacheList = fileUtils.readFile(fileUtils.getFileFromClasspath(cache
       }
       
       if(!reexecute) {
-        deleteAndReplaceFile(destFileName, jsonText);
+        
         /*Build email content*/
         String emailContent = emailContentBuilder.buildExtractLoadEmail("fragments/template_dc_email", stats);
         /*Construct and assemble email object*/
-        Email mail = new Email(fromEmail, recipient, title,emailContent, null, null);
+        Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, null);
         /*Send email*/
-        emailClient.execute(mail);
-        /*write difference to cache*/
-        emailHelper.persistToCache(fileName);
+        String emailStatus = emailClient.execute(mail);
+        if(emailStatus.equals("Success")) {
+          deleteAndReplaceFile(destFileName, jsonText);
+          /*write difference to cache*/
+          emailHelper.persistToCache(fileName);
+        }else {
+          logger.info("Email Failed and wasn't sent");
+        }
       } else {
         logger.info("Re-evaluating {} : DataConnector logs hasn't changed since last loading, email will not be resent", fileName);
       }

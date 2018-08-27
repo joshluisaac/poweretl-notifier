@@ -1,1 +1,11 @@
-{"password":"K@L#eKT#12","port":"587","host":"mail.automanage.biz","username":"datareceived@kollect.my","fromEmail":"datareceived@kollect.my"}
+{
+	"password": "artisan@Tvirus#!",
+	"debug": "false",
+	"smtpAuth": "true",
+	"port": "587",
+	"startTls": "true",
+	"transportProtocol": "smtp",
+	"host": "smtp.gmail.com",
+	"username": "MBSBDOM\\powerkollect",
+	"fromEmail": "nwankwo.joshua@gmail.com"
+}

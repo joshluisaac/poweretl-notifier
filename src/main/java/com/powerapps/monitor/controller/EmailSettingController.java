@@ -1,5 +1,6 @@
 package com.powerapps.monitor.controller;
 
+import com.kollect.etl.notification.entity.EmailConfigEntity;
 import com.kollect.etl.util.FileUtils;
 import com.kollect.etl.util.JsonToHashMap;
 import com.kollect.etl.util.JsonUtils;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,9 +66,11 @@ public class EmailSettingController {
     }
 
     @GetMapping("/generalemailsettings")
-    public String generalEmailSettings(Model model) {
-        model.addAttribute("result", jsonToHashMap.toHashMapFromJson(
-                fileUtils.getFileFromClasspath(generalEmailJsonPath).toString()));
+    public String generalEmailSettings(Model model) throws FileNotFoundException {
+      
+      EmailConfigEntity config  = new JsonUtils().fromJson(new FileReader(new FileUtils().getFileFromClasspath(generalEmailJsonPath)), EmailConfigEntity.class);
+      
+        model.addAttribute("result", config);
         return "generalEmailSettingsForm";
     }
 
@@ -78,6 +83,13 @@ public class EmailSettingController {
         toStore.put("fromEmail", generalEmailSettings.get("fromEmail"));
         toStore.put("host", generalEmailSettings.get("host"));
         toStore.put("port", generalEmailSettings.get("port"));
+        
+        toStore.put("smtpAuth", generalEmailSettings.get("smtpAuth"));
+        toStore.put("startTls", generalEmailSettings.get("startTls"));
+        toStore.put("debug", generalEmailSettings.get("debug"));
+        toStore.put("transportProtocol", generalEmailSettings.get("transportProtocol"));
+        
+        
         String jsonOut = jsonUtils.toJson(toStore);
         utils.writeTextFile(fileUtils.getFileFromClasspath(
                 generalEmailJsonPath).toString(), jsonOut, false);

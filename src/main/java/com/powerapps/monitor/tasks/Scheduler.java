@@ -43,7 +43,7 @@ public class Scheduler {
         bmService.emailAndPersistToCache();
     }
 
-    @Scheduled(fixedDelay = 120000)
+    @Scheduled(fixedRateString = "${interval}")
     public void sendDataConnectorStatsEmail() throws IOException {
         String title = "MBSB - Daily Data Loading";
         String context = "mbsb";

@@ -43,11 +43,10 @@ public class Scheduler {
         bmService.emailAndPersistToCache();
     }
 
-    //@Scheduled(fixedDelay = 120000)
+    @Scheduled(fixedDelay = 120000)
     public void sendDataConnectorStatsEmail() throws IOException {
         String title = "MBSB - Daily Data Loading";
         String context = "mbsb";
-        logger.info("DataConnector Email Notification Running...at {} using thread {}", System.currentTimeMillis(), Thread.currentThread().getName());
         dcNotificationService.execute(title, dcServerLogPath, context);
     }
 }

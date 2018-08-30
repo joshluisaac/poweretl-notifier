@@ -31,9 +31,9 @@
 							<td th:text="${status.index + 1}"></td>
 							<td id="logFileName" th:text="${report.logFileName}"></td>
 							<td
-								th:text="${#dates.format(report.startTime, 'dd-MMM-yyyy HH:mm')}"></td>
+								th:text="${#dates.format(report.startTime, 'dd-MMM-yyyy HH:mm') +' @ '+ #dates.format(report.startTime, 'HH:mm')}"></td>
 							<td
-								th:text="${#dates.format(report.endTime, 'dd-MMM-yyyy HH:mm')}"></td>
+								th:text="${#dates.format(report.endTime, 'dd-MMM-yyyy') +' @ '+ #dates.format(report.endTime, 'HH:mm')}"></td>
 							<td th:switch="${report.batchStatus}">
 								<p class="label label-danger" th:case="1">Failed</p>
 								<p class="label label-success" th:case="2">Successful</p>

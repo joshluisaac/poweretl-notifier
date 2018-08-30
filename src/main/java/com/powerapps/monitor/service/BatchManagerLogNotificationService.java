@@ -57,15 +57,16 @@ public class BatchManagerLogNotificationService {
     String emailContent = null;
     String title = null;
 
-    
-    for(int i=0; i < 4; i++) {
+    int queueMaxSize = 5;
+    LOG.info("Queue max size: {}", queueMaxSize);
+    for(int i=0; i < queueMaxSize; i++) {
       LogSummary summary = summaries.get(i);
       int batchStatus = summary.getBatchStatus();
       String log = summary.getLogFileName();
       if (batchStatus != 3) {
           if (batchStatus == 1) {
             /*send failed email*/
-            title = MessageFormat.format("MBSB: PowerApp Batch Manager Report Summary For {0}. Status {1}", new Object[] {log,"Failed"});
+            title = MessageFormat.format("{1}: MBSB PowerApps System Alert - Batch Manager Report Summary For {0}", new Object[] {log,"FAILED"});
             emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_bm_email", summary);
             
             /*Construct and assemble email object*/
@@ -77,7 +78,7 @@ public class BatchManagerLogNotificationService {
             if(emailStatus.equals("Success")) new FileUtils().writeTextFile(bmConfig.getBmCache(), log + "\n");
           } else {
             /*send successful email*/
-            title = MessageFormat.format("MBSB: PowerApp Batch Manager Report Summary For {0}. Status {1}", new Object[] {log,"Successful"});
+            title = MessageFormat.format("{1}: MBSB PowerApps System Alert - Batch Manager Report Summary For {0}", new Object[] {log,"SUCCESSFUL"});
             emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_bm_email", summary);
             
             /*Construct and assemble email object*/

@@ -1,8 +1,7 @@
 package com.powerapps.monitor.tasks;
 
-import com.powerapps.monitor.service.BatchManagerLogService;
+import com.powerapps.monitor.service.BatchManagerLogNotificationService;
 import com.powerapps.monitor.service.DataConnectorNotification;
-import com.powerapps.monitor.service.EmailSenderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ import java.io.IOException;
 @PropertySource("classpath:config/fixedSchedulerConfig.properties")
 public class Scheduler {
     /*Required services*/
-    private final BatchManagerLogService bmService;
+    private final BatchManagerLogNotificationService bmService;
     private final DataConnectorNotification dcNotificationService;
     /*Required variables*/
     @Value("${app.dcServerLogPath}")
@@ -31,16 +30,16 @@ public class Scheduler {
     private final Logger logger = LoggerFactory.getLogger(Scheduler.class);
     /*The constructor for the class to inject the necessary services*/
     @Autowired
-    public Scheduler(BatchManagerLogService bmService,
+    public Scheduler(BatchManagerLogNotificationService bmService,
                      
                      DataConnectorNotification dcNotificationService){
         this.bmService=bmService;
         this.dcNotificationService=dcNotificationService;
     }
 
-    //@Scheduled(fixedRateString = "${interval}")
+    @Scheduled(fixedRateString = "${interval}")
     public void runFixedSchedule() throws IOException {
-        bmService.emailAndPersistToCache();
+        bmService.execute();
     }
 
     @Scheduled(fixedRateString = "${interval}")

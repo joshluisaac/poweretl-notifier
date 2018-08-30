@@ -2,7 +2,6 @@ package com.powerapps.monitor.service;
 
 import com.kollect.etl.util.FileUtils;
 import com.kollect.etl.util.ListUtils;
-import com.powerapps.monitor.config.JsonReader;
 import com.powerapps.monitor.model.Batch;
 import com.powerapps.monitor.model.BmProperties;
 import com.powerapps.monitor.model.LogSummary;
@@ -28,39 +27,31 @@ public class BatchManagerLogService {
     @Value("${app.bmJson}")
     private String bmJsonPath;
 
-    private JsonReader reader;
-    private final Utils util;
-    private FileUtils fileUtils = new FileUtils();
+    public BmProperties bmConfig;
 
     @Autowired
-    public BatchManagerLogService(JsonReader reader, Utils util) {
-        this.reader = reader;
-        this.util = util;
+    public BatchManagerLogService(BmProperties bmConfig) {
+        this.bmConfig = bmConfig;
+    }
+    
+    private String getStartRegex(){
+        return bmConfig.getBatchStartRegex();
     }
 
-    private String getConfig() {
-        return util.listToBuffer(util.readFile(
-                fileUtils.getFileFromClasspath(bmJsonPath))).toString();
+    private String getErrorRegex(){
+        return bmConfig.getBatchErrorRegex();
     }
 
-    private String getStartRegex(final String config){
-        return reader.readJson(config, BmProperties.class).getBatchStartRegex();
+    private String getDoneRegex(){
+        return bmConfig.getBatchDoneRegex();
     }
 
-    private String getErrorRegex(final String config){
-        return reader.readJson(config, BmProperties.class).getBatchErrorRegex();
+    private String getRootPath(){
+        return bmConfig.getBmRootPath();
     }
 
-    private String getDoneRegex(final String config){
-        return reader.readJson(config, BmProperties.class).getBatchDoneRegex();
-    }
-
-    private String getRootPath(final String config){
-        return reader.readJson(config, BmProperties.class).getBmRootPath();
-    }
-
-    private String getBmCache(final String config){
-        return reader.readJson(config, BmProperties.class).getBmCache();
+    public String getBmCache(){
+        return bmConfig.getBmCache();
     }
 
     // needs refactoring
@@ -86,30 +77,26 @@ public class BatchManagerLogService {
         return new ListUtils().subtract(cacheList, logList);
     }
 
-    // obtains the batch status for a particular batch
-    private int getBatchStatus(String log) {
-        return summarizeLog(log).getBatchStatus();
-    }
-
-    public void emailAndPersistToCache() throws IOException {
-        List<String> availableLogList = getLogFiles(new File(getRootPath(getConfig())));
-        List<String> cacheList = getCachedList(new File(getBmCache(getConfig())));
+    private void emailAndPersistToCache() throws IOException {
+        List<String> availableLogList = getLogFiles(new File(getRootPath()));
+        List<String> cacheList = getCachedList(new File(getBmCache()));
         List<String> unCachedList = fetchNewlyAddedLogFiles(cacheList, availableLogList);
         int count = unCachedList.size();
         LOG.info("Number of files uncached: {}", count);
         if (count != 0) {
             for (String log : unCachedList) {
-                int status = getBatchStatus(log);
+              LogSummary summary = summarizeLog(log);
+                int status = summary.getBatchStatus();
                 if (status != 3) {
                     if (status == 1) {
                         //send failed email
                         //if email was sent then persist to cache
-                        new FileUtils().writeTextFile(getBmCache(getConfig()), log + "\n");
+                        new FileUtils().writeTextFile(getBmCache(), log + "\n");
                         LOG.info("Cached {}", log);
                     } else {
                         //send successful email
                         //if email was sent then persist to cache
-                        new FileUtils().writeTextFile(getBmCache(getConfig()), log + "\n");
+                        new FileUtils().writeTextFile(getBmCache(), log + "\n");
                         LOG.info("Cached {}", log);
                     }
                 }
@@ -117,14 +104,34 @@ public class BatchManagerLogService {
         } else {
             LOG.info("Count is {}, nothing to cache", count);
         }
-
     }
+    
+
+    public List<LogSummary> getBmLogSummaries() throws IOException {
+      List<String> availableLogList = getLogFiles(new File(getRootPath()));
+      List<String> cacheList = getCachedList(new File(getBmCache()));
+      List<String> unCachedList = fetchNewlyAddedLogFiles(cacheList, availableLogList);
+      int count = unCachedList.size();
+      List<LogSummary> summaries = new ArrayList<>();
+      LOG.info("Number of files uncached: {}", count);
+      if (count != 0) {
+          for (String log : unCachedList) {
+            LogSummary summary = summarizeLog(log);
+            summaries.add(summary);
+          }
+      } else {
+          LOG.info("Count is {}, nothing to cache", count);
+      }
+      return summaries;
+  }
+    
+    
 
     private LogSummary summarizeLog(String log) {
-        List<String> regexList = new ArrayList<>(Arrays.asList(getStartRegex(getConfig()),
-                getErrorRegex(getConfig()), getDoneRegex(getConfig())));
+        List<String> regexList = new ArrayList<>(Arrays.asList(getStartRegex(),
+                getErrorRegex(), getDoneRegex()));
         //LOG.info("Processing {}", log);
-        List<String> lines = Utils.readLogFile(new File(getRootPath(getConfig()), log));
+        List<String> lines = Utils.readLogFile(new File(getRootPath(), log));
         boolean isStartEntry = false;
         boolean isDoneEntry = false;
         boolean isErrorEntry = false;

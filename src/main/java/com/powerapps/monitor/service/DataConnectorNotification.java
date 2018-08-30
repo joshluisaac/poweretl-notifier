@@ -46,6 +46,10 @@ public class DataConnectorNotification {
   @Value("${app.extractionEmailLogPath}")
   private String extractionEmailLogPath;
   
+  @Value("${app.outDir}")
+  private String outDir;
+  
+  
   @Value("${app.cacheFilePath}")
   private String cacheFilePath;
   
@@ -68,21 +72,13 @@ public class DataConnectorNotification {
     this.emailHelper = emailHelper;
     this.emailConfig = emailConfig;
   }
-  
-  
-  
-  void validateProperty() {
-  if(renotify.equals("true") || renotify.equals("false") ) {
-  logger.error("The specified property 'app.dcnotification.renotify' is invalid. Please check propety value");
-  throw new IllegalArgumentException("Invalid property 'app.dcnotification.renotify'");
-}
-  }
+
 
   public void execute(String title, String serverLogPath, String context) throws IOException {
     boolean reexecute = false;
     String lineStartsWith = new DateUtils().getDaysAgoToString("yyyy-MM-dd", Integer.parseInt(daysAgo), new Date());
     String fileName = "dc_stats_"+ context +"_"+ lineStartsWith + ".json";
-    List<String> cacheList = fileUtils.readFile(fileUtils.getFileFromClasspath(cacheFilePath));
+    List<String> cacheList = fileUtils.readFile(new File(cacheFilePath));
     boolean isExists = cacheList.contains(fileName);
     
     boolean execute = (!isExists||(renotify.equals("true"))) ? true : false;
@@ -95,7 +91,7 @@ public class DataConnectorNotification {
       List<TotalLoaded> stats = dcStats.getStats(serverLogPath, daysAgo);
       String jsonText = dcStats.jsonEncode(stats);
       String hashStr = CryptUtils.sha256HexHash(jsonText);
-      String destFileName = "out/" + fileName;
+      String destFileName = outDir +"/"+ fileName;
       
       boolean fileExists = fileExistsChecker(fileName);
       
@@ -136,7 +132,7 @@ public class DataConnectorNotification {
   
   
   private boolean fileExistsChecker(String fileName) {
-    List<String> l=  new FileUtils().getFileList(new File("out"));
+    List<String> l=  new FileUtils().getFileList(new File(outDir));
     return l.contains(fileName) ? true:false;
   }
   

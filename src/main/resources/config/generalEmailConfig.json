@@ -1,11 +1,1 @@
-{
-	"password": "artisan@Tvirus#!",
-	"debug": "false",
-	"smtpAuth": "true",
-	"port": "587",
-	"startTls": "true",
-	"transportProtocol": "smtp",
-	"host": "smtp.gmail.com",
-	"username": "MBSBDOM\\powerkollect",
-	"fromEmail": "nwankwo.joshua@gmail.com"
-}
+{"password":"XXXXXX","debug":"false","smtpAuth":"true","port":"587","startTls":"true","transportProtocol":"smtp","host":"smtp.gmail.com","username":"nwankwo.joshua@gmail.com","fromEmail":"nwankwo.joshua@gmail.com"}

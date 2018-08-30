@@ -1,1 +1,1 @@
-{"seRootPath":"/media/joshua/martian/kvworkspace/PowerETL/poweretl-notifier/src/main/resources/sample","seExceptionRegex":"^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (ERROR UNEXPECTED_EXCEPTION)","seErrorLog":"ServerError.log"}
+{"seRootPath":"../sample","seExceptionRegex":"^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (ERROR UNEXPECTED_EXCEPTION)","seErrorLog":"ServerError.log"}

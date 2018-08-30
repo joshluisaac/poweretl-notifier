@@ -25,7 +25,7 @@ hs_err_pid*
 target
 resources_
 *.iml
-/bin/
+#/bin/
 .classpath
 .project
 .settings/

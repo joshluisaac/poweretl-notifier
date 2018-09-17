@@ -21,10 +21,10 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @ComponentScan({"org.springframework.mail.javamail","com.kollect.etl.notification.config","com.kollect.etl.notification.service","com.kollect.etl.notification.entity"})
@@ -53,13 +53,9 @@ public class DataConnectorNotification {
   @Value("${app.cacheFilePath}")
   private String cacheFilePath;
   
-  @Value("${spring.mail.properties.batch.autoupdate.recipients}")
-  String recipient;
   
   @Value("${app.dcnotification.renotify}") String renotify;
   
-  
-  List<String> x = new ArrayList<>(Arrays.asList("true","false"));
 
   @Autowired
   public DataConnectorNotification(
@@ -74,7 +70,7 @@ public class DataConnectorNotification {
   }
 
 
-  public void execute(String title, String serverLogPath, String context) throws IOException {
+  public void execute(String title, String serverLogPath, String context, String recipient) throws IOException {
     boolean reexecute = false;
     String lineStartsWith = new DateUtils().getDaysAgoToString("yyyy-MM-dd", Integer.parseInt(daysAgo), new Date());
     String fileName = "dc_stats_"+ context +"_"+ lineStartsWith + ".json";
@@ -89,6 +85,11 @@ public class DataConnectorNotification {
       
       /*Serialize to JSON string*/
       List<TotalLoaded> stats = dcStats.getStats(serverLogPath, daysAgo);
+      
+      Map<String, Object> modelMap  = new HashMap<>();
+      modelMap.put("stats", stats);
+      modelMap.put("tenantContext", context);
+      
       String jsonText = dcStats.jsonEncode(stats);
       String hashStr = CryptUtils.sha256HexHash(jsonText);
       String destFileName = outDir +"/"+ fileName;
@@ -105,7 +106,7 @@ public class DataConnectorNotification {
       if(!reexecute) {
         
         /*Build email content*/
-        String emailContent = emailContentBuilder.buildExtractLoadEmail("fragments/template_dc_email", stats);
+        String emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_dc_email", modelMap);
         /*Construct and assemble email object*/
         Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, null);
         /*Send email*/

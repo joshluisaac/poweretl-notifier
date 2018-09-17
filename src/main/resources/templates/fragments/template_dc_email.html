@@ -51,7 +51,7 @@ th {
 	<div class="content">
 		<p>
 			Hi there,<br>
-			<br> This is an Automated Notification for MBSB Loading Statistics <span
+			<br> This is an Automated Notification Loading Statistics for <span
 				th:text="${#dates.format(#dates.createNow(), 'dd MMMM yyyy.')}"></span>
 			<br>
 			<br> Loading Summary &amp; Statistics
@@ -73,7 +73,7 @@ th {
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="stat, status : ${stats}">
+					<tr th:each="stat, status : ${stats.stats}">
 					    <td th:text="${status.index + 1}"></td>
 						<td><span th:text="${stat.key}"></span></td>
 						<td><span th:text="${stat.eligible}"></span></td>

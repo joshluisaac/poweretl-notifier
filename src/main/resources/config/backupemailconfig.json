@@ -1,0 +1,11 @@
+{
+	"password": "powerintegrator@k88",
+	"debug": "false",
+	"smtpAuth": "true",
+	"port": "587",
+	"startTls": "true",
+	"transportProtocol": "smtp",
+	"host": "smtp.gmail.com",
+	"username": "powerintegrator@gmail.com",
+	"fromEmail": "powerintegrator@gmail.com"
+}

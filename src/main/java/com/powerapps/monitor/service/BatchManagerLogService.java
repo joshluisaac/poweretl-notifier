@@ -76,37 +76,8 @@ public class BatchManagerLogService {
     private List<String> fetchNewlyAddedLogFiles(List<String> cacheList, List<String> logList) {
         return new ListUtils().subtract(cacheList, logList);
     }
-
-    private void emailAndPersistToCache() throws IOException {
-        List<String> availableLogList = getLogFiles(new File(getRootPath()));
-        List<String> cacheList = getCachedList(new File(getBmCache()));
-        List<String> unCachedList = fetchNewlyAddedLogFiles(cacheList, availableLogList);
-        int count = unCachedList.size();
-        LOG.info("Number of files uncached: {}", count);
-        if (count != 0) {
-            for (String log : unCachedList) {
-              LogSummary summary = summarizeLog(log);
-                int status = summary.getBatchStatus();
-                if (status != 3) {
-                    if (status == 1) {
-                        //send failed email
-                        //if email was sent then persist to cache
-                        new FileUtils().writeTextFile(getBmCache(), log + "\n");
-                        LOG.info("Cached {}", log);
-                    } else {
-                        //send successful email
-                        //if email was sent then persist to cache
-                        new FileUtils().writeTextFile(getBmCache(), log + "\n");
-                        LOG.info("Cached {}", log);
-                    }
-                }
-            }
-        } else {
-            LOG.info("Count is {}, nothing to cache", count);
-        }
-    }
     
-
+    
     public List<LogSummary> getBmLogSummaries() throws IOException {
       List<String> availableLogList = getLogFiles(new File(getRootPath()));
       List<String> cacheList = getCachedList(new File(getBmCache()));

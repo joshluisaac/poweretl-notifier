@@ -15,7 +15,6 @@ import com.kollect.etl.notification.entity.EmailConfigEntity;
 import com.kollect.etl.notification.service.IEmailClient;
 import com.kollect.etl.notification.service.IEmailContentBuilder;
 import com.kollect.etl.util.FileUtils;
-import com.powerapps.monitor.component.EmailHelper;
 import com.powerapps.monitor.model.BmProperties;
 import com.powerapps.monitor.model.LogSummary;
 
@@ -30,34 +29,35 @@ public class BatchManagerLogNotificationService {
   private final BatchManagerLogService logService;
   private final IEmailContentBuilder emailContentBuilder;
   private final IEmailClient emailClient;
-  private final EmailHelper emailHelper;
   private final EmailConfigEntity emailConfig;
   
-  @Value("${spring.mail.properties.batch.autoupdate.recipients}")
-  String recipient;
   
+  @Value("${app.emailMaxQueueSize}")
+  String emailMaxQueueSize;
+  
+  
+  //emailMaxQueueSize
   @Autowired
   public BatchManagerLogNotificationService(BatchManagerLogService logService,IEmailContentBuilder emailContentBuilder,
-      IEmailClient emailClient,EmailHelper emailHelper, EmailConfigEntity emailConfig) {
+      IEmailClient emailClient,EmailConfigEntity emailConfig) {
       this.logService = logService;
       this.emailContentBuilder = emailContentBuilder;
       this.emailClient = emailClient;
-      this.emailHelper = emailHelper;
       this.emailConfig = emailConfig;
   }
   
   
   
-  public void execute() throws IOException {
+  public void execute(String recipient) throws IOException {
     List<LogSummary> summaries = logService.getBmLogSummaries();
-    int count = summaries.size();
     BmProperties bmConfig = logService.bmConfig; 
     
     /*Build email content*/
     String emailContent = null;
     String title = null;
 
-    int queueMaxSize = 5;
+    int queueMaxSize = Integer.parseInt(emailMaxQueueSize);
+    LOG.info("Processing {} of {} total Batch Manager logs", queueMaxSize,summaries.size());
     LOG.info("Queue max size: {}", queueMaxSize);
     for(int i=0; i < queueMaxSize; i++) {
       LogSummary summary = summaries.get(i);

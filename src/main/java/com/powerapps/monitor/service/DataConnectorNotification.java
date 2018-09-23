@@ -80,9 +80,6 @@ public class DataConnectorNotification {
     boolean execute = (!isExists||(renotify.equals("true"))) ? true : false;
     
     if(execute) {
-      
-      logger.info("DataConnector Email Notification Running...at {} using thread {}", System.currentTimeMillis(), Thread.currentThread().getName());
-      
       /*Serialize to JSON string*/
       List<TotalLoaded> stats = dcStats.getStats(serverLogPath, daysAgo);
       

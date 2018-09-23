@@ -22,8 +22,8 @@ import java.io.IOException;
 @PropertySource("classpath:config/fixedSchedulerConfig.properties")
 public class Scheduler {
   /* Required services */
-  private final BatchManagerLogNotificationService bmService;
-  private final DataConnectorNotification dcNotificationService;
+  protected final BatchManagerLogNotificationService bmService;
+  protected final DataConnectorNotification dcNotificationService;
 
   /* Required variables */
 
@@ -129,12 +129,7 @@ public class Scheduler {
   public void sendDataConnectorStatsEmail() throws IOException {
     if(dcEnableSchedler) dcNotificationService.execute(dcEmailTitle, dcServerLogPath, dcEmailContext, dcEmailRecepients);
   }
-
-  @Scheduled(fixedRateString = "${interval}")
-  public void sendDataConnectorStatsEmailYYC() throws IOException {
-    if(yycDcEnableSchedler) dcNotificationService.execute(yycDcEmailTitle, yycDcServerLogPath, yycDcEmailContext, yycDcEmailRecepients);
-  }
-
+  
   @Scheduled(fixedRateString = "${interval}")
   public void sendDataConnectorStatsEmailPBK() throws IOException {
     if(pbkDcEnableSchedler) dcNotificationService.execute(pbkDcEmailTitle, pbkDcServerLogPath, pbkDcEmailContext, pbkDcEmailRecepients);

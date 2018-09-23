@@ -80,6 +80,7 @@ public class BatchManagerLogService {
     
     public List<LogSummary> getBmLogSummaries() throws IOException {
       List<String> availableLogList = getLogFiles(new File(getRootPath()));
+      System.out.println(availableLogList);
       List<String> cacheList = getCachedList(new File(getBmCache()));
       List<String> unCachedList = fetchNewlyAddedLogFiles(cacheList, availableLogList);
       int count = unCachedList.size();
@@ -99,6 +100,7 @@ public class BatchManagerLogService {
     
 
     private LogSummary summarizeLog(String log) {
+      System.out.println(log);
         List<String> regexList = new ArrayList<>(Arrays.asList(getStartRegex(),
                 getErrorRegex(), getDoneRegex()));
         //LOG.info("Processing {}", log);
@@ -160,6 +162,8 @@ public class BatchManagerLogService {
                 batch.setEndTime(batchEndTime);
             }
         }
+        System.out.println(batch.getEndTime().getTime());
+        System.out.println(batch.getStartTime().getTime());
         batch.setRunningTime(((batch.getEndTime().getTime() - batch.getStartTime().getTime())/ 1000) / 60f);
         return new LogSummary(log, isStartEntry, isDoneEntry, errorTerminated, batch.getStartTime(), batch.getEndTime(), batchStatus,
                 batch.getRunningTime());

@@ -129,16 +129,7 @@ public class Scheduler {
   public void sendDataConnectorStatsEmail() throws IOException {
     if(dcEnableSchedler) dcNotificationService.execute(dcEmailTitle, dcServerLogPath, dcEmailContext, dcEmailRecepients);
   }
-<<<<<<< HEAD
-
-  //@Scheduled(fixedRateString = "${interval}")
-  public void sendDataConnectorStatsEmailYYC() throws IOException {
-    if(yycDcEnableSchedler) dcNotificationService.execute(yycDcEmailTitle, yycDcServerLogPath, yycDcEmailContext, yycDcEmailRecepients);
-  }
-
-=======
   
->>>>>>> a11788ad82777201f9e4daa6c331d925c049948e
   @Scheduled(fixedRateString = "${interval}")
   public void sendDataConnectorStatsEmailPBK() throws IOException {
     if(pbkDcEnableSchedler) dcNotificationService.execute(pbkDcEmailTitle, pbkDcServerLogPath, pbkDcEmailContext, pbkDcEmailRecepients);

@@ -2,6 +2,8 @@ package com.powerapps.monitor.tasks;
 
 import com.powerapps.monitor.service.BatchManagerLogNotificationService;
 import com.powerapps.monitor.service.DataConnectorNotification;
+import com.powerapps.monitor.service.TransferedFileServce;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ public class Scheduler {
   /* Required services */
   protected final BatchManagerLogNotificationService bmService;
   protected final DataConnectorNotification dcNotificationService;
+  protected final TransferedFileServce transferService;
 
   /* Required variables */
 
@@ -54,27 +57,7 @@ public class Scheduler {
   @Value("${app.yyc.dc.recepients}")
   String yycDcEmailRecepients;
 
-  @Value("#{ ${app.pbk.dc.scheduler.enable} eq true ? true : false }")
-  boolean pbkDcEnableSchedler;
-  @Value("${app.pbk.dc.serverLogPath}")
-  String pbkDcServerLogPath;
-  @Value("${app.pbk.dc.emailTitle}")
-  String pbkDcEmailTitle;
-  @Value("${app.pbk.dc.emailContext}")
-  String pbkDcEmailContext;
-  @Value("${app.pbk.dc.recepients}")
-  String pbkDcEmailRecepients;
 
-  @Value("#{ ${app.pelita.dc.scheduler.enable} eq true ? true : false }")
-  boolean pelitaDcEnableSchedler;
-  @Value("${app.pelita.dc.serverLogPath}")
-  String pelitaDcServerLogPath;
-  @Value("${app.pelita.dc.emailTitle}")
-  String pelitaDcEmailTitle;
-  @Value("${app.pelita.dc.emailContext}")
-  String pelitaDcEmailContext;
-  @Value("${app.pelita.dc.recepients}")
-  String pelitaDcEmailRecepients;
 
   @Value("#{ ${app.cco.dc.scheduler.enable} eq true ? true : false }")
   boolean ccoDcEnableSchedler;
@@ -87,16 +70,7 @@ public class Scheduler {
   @Value("${app.cco.dc.recepients}")
   String ccoDcEmailRecepients;
 
-  @Value("#{ ${app.mbsb.dc.scheduler.enable} eq true ? true : false }")
-  boolean mbsbDcEnableSchedler;
-  @Value("${app.mbsb.dc.serverLogPath}")
-  String mbsbDcServerLogPath;
-  @Value("${app.mbsb.dc.emailTitle}")
-  String mbsbDcEmailTitle;
-  @Value("${app.mbsb.dc.emailContext}")
-  String mbsbDcEmailContext;
-  @Value("${app.mbsb.dc.recepients}")
-  String mbsbDcEmailRecepients;
+
 
   @Value("#{ ${app.ecollecthp.dc.scheduler.enable} eq true ? true : false }")
   boolean ecollecthpDcEnableSchedler;
@@ -115,9 +89,10 @@ public class Scheduler {
   @Autowired
   public Scheduler(BatchManagerLogNotificationService bmService,
 
-      DataConnectorNotification dcNotificationService) {
+      DataConnectorNotification dcNotificationService, TransferedFileServce transferService) {
     this.bmService = bmService;
     this.dcNotificationService = dcNotificationService;
+    this.transferService = transferService;
   }
 
   @Scheduled(fixedRateString = "${interval}")
@@ -126,33 +101,24 @@ public class Scheduler {
   }
 
   @Scheduled(fixedRateString = "${interval}")
-  public void sendDataConnectorStatsEmail() throws IOException {
+  public void sendDataConnectorStatsEmail() throws Exception {
     if(dcEnableSchedler) dcNotificationService.execute(dcEmailTitle, dcServerLogPath, dcEmailContext, dcEmailRecepients);
   }
   
-  @Scheduled(fixedRateString = "${interval}")
-  public void sendDataConnectorStatsEmailPBK() throws IOException {
-    if(pbkDcEnableSchedler) dcNotificationService.execute(pbkDcEmailTitle, pbkDcServerLogPath, pbkDcEmailContext, pbkDcEmailRecepients);
-  }
+
 
   @Scheduled(fixedRateString = "${interval}")
-  public void sendDataConnectorStatsEmailPelita() throws IOException {
-    if(pelitaDcEnableSchedler) dcNotificationService.execute(pelitaDcEmailTitle, pelitaDcServerLogPath, pelitaDcEmailContext,
-        pelitaDcEmailRecepients);
-  }
-
-  @Scheduled(fixedRateString = "${interval}")
-  public void sendDataConnectorStatsEmailCCO() throws IOException {
+  public void sendDataConnectorStatsEmailCCO() throws Exception {
     if(ccoDcEnableSchedler) dcNotificationService.execute(ccoDcEmailTitle, ccoDcServerLogPath, ccoDcEmailContext, ccoDcEmailRecepients);
   }
 
-  @Scheduled(fixedRateString = "${interval}")
-  public void sendDataConnectorStatsEmailMBSB() throws IOException {
-    if(mbsbDcEnableSchedler) dcNotificationService.execute(mbsbDcEmailTitle, mbsbDcServerLogPath, mbsbDcEmailContext, mbsbDcEmailRecepients);
-  }
+//  @Scheduled(fixedRateString = "${interval}")
+//  public void sendDataConnectorStatsEmailMBSB() throws Exception {
+//    if(mbsbDcEnableSchedler) dcNotificationService.execute(mbsbDcEmailTitle, mbsbDcServerLogPath, mbsbDcEmailContext, mbsbDcEmailRecepients);
+//  }
 
   @Scheduled(fixedRateString = "${interval}")
-  public void sendDataConnectorStatsEmailEcollectHp() throws IOException {
+  public void sendDataConnectorStatsEmailEcollectHp() throws Exception {
     if(ecollecthpDcEnableSchedler) dcNotificationService.execute(ecollecthpDcEmailTitle, ecollecthpDcServerLogPath, ecollecthpDcEmailContext,
         ecollecthpDcEmailRecepients);
   }

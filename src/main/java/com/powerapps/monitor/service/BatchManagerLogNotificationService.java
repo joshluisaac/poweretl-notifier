@@ -63,39 +63,46 @@ public class BatchManagerLogNotificationService {
     int queueMaxSize = Integer.parseInt(emailMaxQueueSize);
     LOG.info("Processing {} of {} total Batch Manager logs", queueMaxSize,summaries.size());
     LOG.info("Queue max size: {}", queueMaxSize);
-    for(int i=0; i < queueMaxSize; i++) {
-      LogSummary summary = summaries.get(i);
-      int batchStatus = summary.getBatchStatus();
-      String log = summary.getLogFileName();
-      File file = new File(bmConfig.getBmRootPath()+"/", log);
-      if (batchStatus != 3) {
-          if (batchStatus == 1) {
-            /*send failed email*/
-            title = MessageFormat.format("{0}: {1} {2}", new Object[] {"FAILED",emailTitle,log});
-            emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_bm_email", summary);
-            
-            /*Construct and assemble email object*/
-            Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, file);
-            /*Send email*/
-            String emailStatus = emailClient.execute(mail);
-            
-            /*if email was sent then persist to cache*/
-            if(emailStatus.equals("Success")) new FileUtils().writeTextFile(bmConfig.getBmCache(), log + "\n");
-          } else {
-            /*send successful email*/
-            title = MessageFormat.format("{0}: {1} {2}", new Object[] {"SUCCESSFUL",emailTitle,log});
-            emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_bm_email", summary);
-            
-            /*Construct and assemble email object*/
-            Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, file);
-            /*Send email*/
-            String emailStatus = emailClient.execute(mail);
-            
-            /*if email was sent then persist to cache*/
-            if(emailStatus.equals("Success")) new FileUtils().writeTextFile(bmConfig.getBmCache(), log + "\n");
-          }
-      }
-  }
+    
+    if(summaries.size() > 0) {
+      for(int i=0; i < queueMaxSize; i++) {
+        LogSummary summary = summaries.get(i);
+        int batchStatus = summary.getBatchStatus();
+        String log = summary.getLogFileName();
+        LOG.info("Processing: {}", log);
+        File file = new File(bmConfig.getBmRootPath()+"/", log);
+        if (batchStatus != 3) {
+            if (batchStatus == 1) {
+              /*send failed email*/
+              title = MessageFormat.format("{0}: {1} {2}", new Object[] {"FAILED",emailTitle,log});
+              emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_bm_email", summary);
+              
+              /*Construct and assemble email object*/
+              Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, file);
+              /*Send email*/
+              String emailStatus = emailClient.execute(mail);
+              
+              /*if email was sent then persist to cache*/
+              if(emailStatus.equals("Success")) new FileUtils().writeTextFile(bmConfig.getBmCache(), log + "\n");
+            } else {
+              /*send successful email*/
+              title = MessageFormat.format("{0}: {1} {2}", new Object[] {"SUCCESSFUL",emailTitle,log});
+              emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_bm_email", summary);
+              
+              /*Construct and assemble email object*/
+              Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, file);
+              /*Send email*/
+              String emailStatus = emailClient.execute(mail);
+              
+              /*if email was sent then persist to cache*/
+              if(emailStatus.equals("Success")) new FileUtils().writeTextFile(bmConfig.getBmCache(), log + "\n");
+            }
+        }
+    }
+    }
+    
+    
+
 } 
 
 }

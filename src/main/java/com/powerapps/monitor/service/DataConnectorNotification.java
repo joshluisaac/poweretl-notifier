@@ -19,7 +19,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,6 +32,7 @@ public class DataConnectorNotification {
 
   private DcStatistics dcStats;
   private final IEmailContentBuilder emailContentBuilder;
+  private final  ZipFileHelper rejectionFetcher;
   private final IEmailClient emailClient;
   private final EmailHelper emailHelper;
   private final EmailConfigEntity emailConfig;
@@ -61,16 +61,28 @@ public class DataConnectorNotification {
   public DataConnectorNotification(
       DcStatistics dcStats,
       IEmailContentBuilder emailContentBuilder,
-      IEmailClient emailClient,EmailHelper emailHelper, EmailConfigEntity emailConfig) {
+      IEmailClient emailClient,EmailHelper emailHelper, EmailConfigEntity emailConfig,
+      ZipFileHelper rejectionFetcher) {
     this.dcStats = dcStats;
     this.emailContentBuilder = emailContentBuilder;
     this.emailClient = emailClient;
     this.emailHelper = emailHelper;
     this.emailConfig = emailConfig;
+    this.rejectionFetcher = rejectionFetcher;
+  }
+  
+  public File getZipFile(String serverLogDir, String context) throws Exception {
+    File[] files = rejectionFetcher.listChildFiles(new File(serverLogDir));
+    String zipFile = rejectionFetcher.zipFile(context, files, serverLogDir);
+    return new File(zipFile);
+  }
+  
+  public void execute(String title, String serverLogPath, String context, String recipient) throws Exception{
+    this.execute(title, serverLogPath, context, recipient,null);
   }
 
 
-  public void execute(String title, String serverLogPath, String context, String recipient) throws IOException {
+  public void execute(String title, String serverLogPath, String context, String recipient, String serverLogDir) throws Exception {
     boolean reexecute = false;
     String lineStartsWith = new DateUtils().getDaysAgoToString("yyyy-MM-dd", Integer.parseInt(daysAgo), new Date());
     String fileName = "dc_stats_"+ context +"_"+ lineStartsWith + ".json";
@@ -105,7 +117,11 @@ public class DataConnectorNotification {
         /*Build email content*/
         String emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_dc_email", modelMap);
         /*Construct and assemble email object*/
-        Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, null);
+        
+
+        
+        Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, getZipFile(serverLogDir,context));
+        
         /*Send email*/
         String emailStatus = emailClient.execute(mail);
         if(emailStatus.equals("Success")) {

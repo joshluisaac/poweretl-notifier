@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<style>
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+.content {
+	margin: 0 auto;
+	text-align: center;
+	max-width: 60%;
+	/*background-image: url("http://blog.visme.co/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-045.jpg");*/
+	padding: 25px;
+}
+
+table {
+	border-collapse: collapse;
+	max-width: 100%;
+}
+
+td, th {
+	border: 1px solid #333;
+	text-align: left;
+	padding: 5px;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+tr:hover {
+	background-color: #eeeeff;
+}
+
+th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: darkslategray;
+	color: white;
+}
+
+.center {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<div class="content">
+		<p>
+			Hi there,<br>
+			<br> This is an Automated Notification Data Files Transfer Statistics for <span
+				th:text="${#dates.format(#dates.createNow(), 'dd MMMM yyyy.')}"></span>
+			<br>
+			<br> Data Transfer Summary &amp; Statistics
+		</p>
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th colspan="7" class="center">Data Transfer Metrics</th>
+					</tr>
+					<tr>
+					    <th>#</th>
+						<th>File Name</th>
+						<th>Arrival Time</th>
+						<th>Total # of Lines Transfered</th>
+						<th>File Size (MB)</th>
+						<th>Status</th>
+						
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="stat, status : ${stats.stats}">
+					    <td th:text="${status.index + 1}"></td>
+						<td width="25%"><span th:text="${stat.fileName}"></span></td>
+						<td width="25%" th:text="${#dates.format(stat.arrivalTimestamp, 'dd-MMM-yyyy') +' @ '+ #dates.format(stat.arrivalTimestamp, 'HH:mm')}"></td>
+						<td width="25%"><span th:text="${#numbers.formatDecimal(stat.numberOfLines, 0, 'COMMA', 0, 'POINT')}"></span></td>
+						<td width="25%"><span th:text="${#numbers.formatDecimal(stat.numberOfBytes,2,2)}"></span></td>
+						<td width="25%" th:switch="${stat.transferStatus}">
+								<p style="color:green;" class="label label-success" th:case="1"><strong>RECEIVED</strong></p>
+								<p style="color:blue;" class="label label-info" th:case="2"><strong>EMPTY</strong></p>
+								<p style="color:red;" class="label label-danger" th:case="3"><strong>FAILED</strong></p>
+						</td>
+						
+					</tr>
+				</tbody>
+			</table> 
+		</div>
+		<p>
+			Regards,<br>
+			PowerIntegrator Auto Update<br>
+			<img src="https://i.imgur.com/K7O6DHF.png">
+		</p>
+	</div>
+</body>
+</html>

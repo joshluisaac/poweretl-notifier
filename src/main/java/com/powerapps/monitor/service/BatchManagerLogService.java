@@ -99,6 +99,7 @@ public class BatchManagerLogService {
     
 
     private LogSummary summarizeLog(String log) {
+        System.out.println(log);
         List<String> regexList = new ArrayList<>(Arrays.asList(getStartRegex(),
                 getErrorRegex(), getDoneRegex()));
         //LOG.info("Processing {}", log);
@@ -116,6 +117,7 @@ public class BatchManagerLogService {
         Timestamp batchEndTime = null;
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
+            System.out.println(line);
             if (!isStartEntry) {
                 boolean isStarted = Utils.matcher(line, regexList.get(0)).find();
                 if (isStarted) {
@@ -153,12 +155,27 @@ public class BatchManagerLogService {
                     continue;
                 }
             }
-
+            
+            
             if ((i == (lines.size() - 1)) && (endTime == null)) {
                 batchStatus = 3; // inprogress
                 batchEndTime = new Timestamp(System.currentTimeMillis());
                 batch.setEndTime(batchEndTime);
-            }
+            }  
+            
+            
+            
+        }
+        if(batchStatus == 3) {
+          if(batch.getStartTime() == null) {
+            batchStatus = 1; // failed
+            
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            batchEndTime = now;
+            batchStartTime = now;
+            batch.setStartTime(batchStartTime);
+            batch.setEndTime(batchStartTime);
+          }
         }
         batch.setRunningTime(((batch.getEndTime().getTime() - batch.getStartTime().getTime())/ 1000) / 60f);
         return new LogSummary(log, isStartEntry, isDoneEntry, errorTerminated, batch.getStartTime(), batch.getEndTime(), batchStatus,

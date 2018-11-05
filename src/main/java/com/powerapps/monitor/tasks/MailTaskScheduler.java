@@ -65,6 +65,21 @@ public class MailTaskScheduler extends Scheduler {
   @Value("${app.pelita.dc.serverLogDir}")
   String serverLogDirPelita;
   
+  @Value("#{ ${app.cco.dc.scheduler.enable} eq true ? true : false }")
+  boolean ccoDcEnableSchedler;
+  @Value("${app.cco.dc.serverLogPath}")
+  String ccoDcServerLogPath;
+  @Value("${app.cco.dc.emailTitle}")
+  String ccoDcEmailTitle;
+  @Value("${app.cco.dc.emailContext}")
+  String ccoDcEmailContext;
+  @Value("${app.cco.dc.recepients}")
+  String ccoDcEmailRecepients;
+  @Value("${app.cco.dc.scheduler.cronexpression}")
+  String cronExpressioncco;
+  @Value("${app.cco.dc.serverLogDir}")
+  String serverLogDircco;
+  
   
   @Value("#{ ${app.mbsb.dc.scheduler.enable} eq true ? true : false }")
   boolean mbsbDcEnableSchedler;
@@ -87,10 +102,7 @@ public class MailTaskScheduler extends Scheduler {
   String transferCronExpression;
   
   
-
   
-  
-
   @Scheduled(cron = "${app.yyc.dc.scheduler.cronexpression}")
   public void sendDataConnectorStatsEmailYYC() throws Exception {
     logger.info("Firing email task at {}", cronExpression);
@@ -111,6 +123,14 @@ public class MailTaskScheduler extends Scheduler {
     if (pelitaDcEnableSchedler)
       dcNotificationService.execute(pelitaDcEmailTitle, pelitaDcServerLogPath, pelitaDcEmailContext,
           pelitaDcEmailRecepients, serverLogDirPelita);
+  }
+  
+  
+  @Scheduled(cron = "${app.cco.dc.scheduler.cronexpression}")
+  public void sendDataConnectorStatsEmailCco() throws Exception {
+    if (ccoDcEnableSchedler)
+      dcNotificationService.execute(ccoDcEmailTitle, ccoDcServerLogPath, ccoDcEmailContext,
+          ccoDcEmailRecepients, serverLogDircco);
   }
   
   

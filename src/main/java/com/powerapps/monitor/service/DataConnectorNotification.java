@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -42,6 +43,9 @@ public class DataConnectorNotification {
   
   @Value("${app.daysAgo}")
   private String daysAgo;
+  
+  @Value("${app.attachment.maxlimit}")
+  private String emailFileSizeLimit;
   
   @Value("${app.extractionEmailLogPath}")
   private String extractionEmailLogPath;
@@ -116,11 +120,11 @@ public class DataConnectorNotification {
         
         /*Build email content*/
         String emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_dc_email", modelMap);
-        /*Construct and assemble email object*/
-        
-
-        
-        Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, getZipFile(serverLogDir,context));
+        File zipFile = getZipFile(serverLogDir,context);
+        long actualFileSize = (zipFile.length()/1000)/1000;
+        Email mail = email(actualFileSize, emailConfig.getFromEmail(), recipient, title, emailContent, null, zipFile);
+        //Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, getZipFile(serverLogDir,context));
+        //Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, null);
         
         /*Send email*/
         String emailStatus = emailClient.execute(mail);
@@ -135,6 +139,28 @@ public class DataConnectorNotification {
         logger.info("Re-evaluating {} : DataConnector logs hasn't changed since last loading, email will not be resent", fileName);
       }
     }
+  }
+  
+  /**
+   * Sends an email if the actual file size is less than or equal to the defined limit
+   * @param actualFileSize of the sent attachment in MBs
+   * @param from senders email
+   * @param recipient recipient's email
+   * @param title email subject
+   * @param emailContent mail html document
+   * @param attachment email multipart attachment
+   * @param file email attachment
+   * 
+   * @return returns the mail object
+   **/
+  private Email email(long actualFileSize, String from, String recipient, String title,
+      String emailContent, MultipartFile attachment,
+      File file) {
+    Email mail = null;
+    if (actualFileSize <= Long.parseLong(emailFileSizeLimit)) {
+     mail = new Email(from, recipient, title,emailContent, null, file);
+    } else mail = new Email(from, recipient, title,emailContent, null, null);
+    return mail;
   }
   
   private void deleteAndReplaceFile(String fileName, String content) {

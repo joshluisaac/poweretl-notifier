@@ -123,10 +123,7 @@ public class MailTaskScheduler extends Scheduler {
           serverLogDirMbsb);
   }
   
-  
-  
-  //@Scheduled(cron = "${app.mbsb.dc.transfer.scheduler.cronexpression}")
-  @Scheduled(fixedRateString = "120000")
+  @Scheduled(cron = "${app.mbsb.dc.transfer.scheduler.cronexpression}")
   public void sendDataTransferStatsEmailMbsb() throws Exception {
     logger.info("Firing data transfer email task at {}", transferCronExpression);
     if (mbsbTransferEnableSchedler)

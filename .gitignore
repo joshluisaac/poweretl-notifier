@@ -31,3 +31,4 @@ resources_
 .settings/
 *.bluej
 localchanges
+.idea

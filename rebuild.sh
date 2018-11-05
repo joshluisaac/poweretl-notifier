@@ -5,17 +5,12 @@ mvn_log_file=mvn.log
 
 rm -rf $mvn_log_file
 right_now=$(date +"%Y%m%d")
-build_name="poweretl-notifier_"$right_now
+timestamp=$(date +"%Y%m%d_%H%M%S")
+build_name="poweretl-notifier_"$timestamp
 
 mvn_clean_install(){
 mvn clean install -Dmaven.test.skip dependency:copy-dependencies > $mvn_log_file
 }
-
-
-#mvn dependency:copy-dependencies@copy-dependencies
-
-#mvn exec:java
-
 
 #check_build_compilation
 check_build_compilation() {
@@ -33,7 +28,7 @@ fi
 
 
 assemble_build(){
-rm -rf $build_name
+rm -rf poweretl-notifier_*
 mkdir $build_name
 cp target/poweretl-notifier-0.0.1-SNAPSHOT.jar lib
 cp -r lib $build_name/lib
@@ -54,6 +49,11 @@ echo `date '+%Y-%m-%d %H:%M:%S'` "Created $build_name.zip"
 clean_up(){
 rm -rf $build_name
 echo `date '+%Y-%m-%d %H:%M:%S'` "Clean up completed"
+}
+
+
+deploy(){
+    scp -P 5422 $build_name.zip kvalleydb@sftp.kollectvalley.my:/home/kvalleydb/notifier
 }
 
 

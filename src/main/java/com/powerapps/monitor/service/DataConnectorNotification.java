@@ -99,6 +99,11 @@ public class DataConnectorNotification {
       /*Serialize to JSON string*/
       List<TotalLoaded> stats = dcStats.getStats(serverLogPath, daysAgo);
       
+      for(TotalLoaded tot: stats) {
+        tot.setPercentageLoaded();
+        tot.setPercentageRejected();
+      }
+      
       Map<String, Object> modelMap  = new HashMap<>();
       modelMap.put("stats", stats);
       modelMap.put("tenantContext", context);
@@ -123,9 +128,6 @@ public class DataConnectorNotification {
         File zipFile = getZipFile(serverLogDir,context);
         long actualFileSize = (zipFile.length()/1000)/1000;
         Email mail = email(actualFileSize, emailConfig.getFromEmail(), recipient, title, emailContent, null, zipFile);
-        //Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, getZipFile(serverLogDir,context));
-        //Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, null);
-        
         /*Send email*/
         String emailStatus = emailClient.execute(mail);
         if(emailStatus.equals("Success")) {
@@ -163,14 +165,26 @@ public class DataConnectorNotification {
     return mail;
   }
   
+  /**
+   * Deletes a file and replaces it with a new content 
+   * 
+   * @param fileName the name of the file to be deleted
+   * @param content the new content
+   *  
+   **/
   private void deleteAndReplaceFile(String fileName, String content) {
     FileUtils futils = new FileUtils();
     futils.deleteFile(new File(fileName));
     futils.writeTextFile(fileName, content);
-    logger.info("Replaced file {}", fileName);
+    logger.info("Deleted & replaced file {}", fileName);
   }
   
-  
+  /**
+   * Checks if a file exits in a given directory.
+   * 
+   * @param fileName the name of the file to be be checked
+   * @return returns true if the file exists and false if it doesn't
+   **/
   private boolean fileExistsChecker(String fileName) {
     List<String> l=  new FileUtils().getFileList(new File(outDir));
     return l.contains(fileName) ? true:false;

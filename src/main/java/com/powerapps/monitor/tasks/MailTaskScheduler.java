@@ -126,7 +126,8 @@ public class MailTaskScheduler extends Scheduler {
   }
   
   
-  @Scheduled(cron = "${app.cco.dc.scheduler.cronexpression}")
+  //@Scheduled(cron = "${app.cco.dc.scheduler.cronexpression}")
+  @Scheduled(fixedRateString = "${interval}")
   public void sendDataConnectorStatsEmailCco() throws Exception {
     if (ccoDcEnableSchedler)
       dcNotificationService.execute(ccoDcEmailTitle, ccoDcServerLogPath, ccoDcEmailContext,

@@ -99,30 +99,8 @@ public class Scheduler {
   public void runFixedSchedule() throws IOException {
     if(bmEnableSchedler) bmService.execute(dcEmailRecepients);
   }
-
-  @Scheduled(fixedRateString = "${interval}")
-  public void sendDataConnectorStatsEmail() throws Exception {
-    if(dcEnableSchedler) dcNotificationService.execute(dcEmailTitle, dcServerLogPath, dcEmailContext, dcEmailRecepients);
-  }
   
-
-
-  @Scheduled(fixedRateString = "${interval}")
-  public void sendDataConnectorStatsEmailCCO() throws Exception {
-    if(ccoDcEnableSchedler) dcNotificationService.execute(ccoDcEmailTitle, ccoDcServerLogPath, ccoDcEmailContext, ccoDcEmailRecepients);
-  }
-
-//  @Scheduled(fixedRateString = "${interval}")
-//  public void sendDataConnectorStatsEmailMBSB() throws Exception {
-//    if(mbsbDcEnableSchedler) dcNotificationService.execute(mbsbDcEmailTitle, mbsbDcServerLogPath, mbsbDcEmailContext, mbsbDcEmailRecepients);
-//  }
-
-  @Scheduled(fixedRateString = "${interval}")
-  public void sendDataConnectorStatsEmailEcollectHp() throws Exception {
-    if(ecollecthpDcEnableSchedler) dcNotificationService.execute(ecollecthpDcEmailTitle, ecollecthpDcServerLogPath, ecollecthpDcEmailContext,
-        ecollecthpDcEmailRecepients);
-  }
-
+  
   // @Scheduled(fixedRateString = "${interval}")
   public void run1() throws IOException, InterruptedException {
     logger.info("Running...{} using {}", "run1", Thread.currentThread().getName());

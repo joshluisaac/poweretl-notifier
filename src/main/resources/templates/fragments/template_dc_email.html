@@ -60,7 +60,7 @@ th {
 			<table>
 				<thead>
 					<tr>
-						<th colspan="7" class="center">Loading Metrics</th>
+						<th colspan="9" class="center">Loading Metrics</th>
 					</tr>
 					<tr>
 					    <th>#</th>
@@ -68,25 +68,31 @@ th {
 						<th>Total # of Records Extracted</th>
 						<th>Total # of Records Loaded</th>
 						<th>Total # of Records Rejected</th>
-						<th>Duration (sec)</th>
-						<th># of Row Processed per/sec (sec)</th>
+						<th>Loaded (%)</th>
+						<th>Rejected (%)</th>
+						<th>Running Time (sec)</th>
+						<th>Throughput per/sec</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="stat, status : ${stats.stats}">
 					    <td th:text="${status.index + 1}"></td>
 						<td><span th:text="${stat.key}"></span></td>
-						<td><span th:text="${stat.eligible}"></span></td>
-						<td><span th:text="${stat.loaded}"></span></td>
+						<td><span th:text="${#numbers.formatDecimal(stat.eligible, 0, 'COMMA', 0, 'POINT')}"></span></td>
+						<td><span th:text="${#numbers.formatDecimal(stat.loaded, 0, 'COMMA', 0, 'POINT')}"></span></td>
 						<td>
-							<span th:if="${stat.eligible - stat.loaded > 0}"
-								  class = "text-danger"
-								  th:text="${stat.eligible - stat.loaded}"></span>
-							<span th:if="${stat.eligible - stat.loaded < 1}"
-								  th:text="${stat.eligible - stat.loaded}"></span>
+							<span th:if="${stat.eligible - stat.loaded > 0}" style="color:red;font-weight: bold;" th:text="${#numbers.formatDecimal(stat.eligible - stat.loaded, 0, 'COMMA', 0, 'POINT')}"></span>
+							<span th:if="${stat.eligible - stat.loaded < 1}" th:text="${#numbers.formatDecimal(stat.eligible - stat.loaded, 0, 'COMMA', 0, 'POINT')}"></span>
 						</td>
-						<td><span th:text="${stat.duration}"></span></td>
-						<td><span th:text="${stat.rowsPerSec}"></span></td>
+						<td>
+							<span th:text="${#numbers.formatDecimal((stat.percentageLoaded), 1, 'COMMA', 2, 'POINT')}"></span>
+						</td>
+						
+					    <td>
+							<span th:text="${#numbers.formatDecimal(stat.percentageRejected, 1, 'COMMA', 2, 'POINT')}"></span>
+						</td>
+						<td><span th:text="${#numbers.formatDecimal(stat.duration, 0, 'COMMA', 0, 'POINT')}"></span></td>
+						<td><span th:text="${#numbers.formatDecimal(stat.rowsPerSec, 0, 'COMMA', 0, 'POINT')}"></span></td>
 					</tr>
 				</tbody>
 			</table>

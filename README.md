@@ -4,9 +4,10 @@ PowerApps notification and monitoring app
 
 
 ## Sections
--[Building PowerETL Notifier](#build)
+1. [Building PowerETL Notifier](#build)
 
--[Headers](#headers)
+1. [Starting PowerETL Notifier](#start)
+2. [Stopping PowerETL Notifier](#stop)
 
 
 ---
@@ -17,17 +18,17 @@ The naming convention uses the format `poweretl-notifier_%Y%m%d_%H%M%S.zip`
 
 ---
 
-## Headers
-Headers are defined by the '#' symbol. One '#' for H1,  two for H2, etc
+--
+## Start
+Navigate into the bin directory and run __startPowerEtlNotifier.sh__, this would start PowerETL Notifier and listening at the designated port number. The port number is a configurable property in __resources/application.properties__
 
+--
 
-> **TODO**. Create an H1
+--
+## Stop
+In the bin directory is a bash file called __stopPowerEtlNotifier.sh__, this would retrieve the process id from __logs/procid__ file and then kill the process. Execute __stopPowerEtlNotifier.sh__ to stop PowerETL Notifier. 
 
-> **TODO**. Create an H2
-
-> **TODO**. Create an H3
-
-> **TODO**. Create an H4
+--
 
 
 

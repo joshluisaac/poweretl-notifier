@@ -7,7 +7,7 @@ Notifies metrics, statistics and monitoring data exposing that through REST APIs
 - [PowerETL Notifier - some background](#poweretl-notifier---some-background)
 - [Sections](#sections)
 - [System requirements](#system-requirements)
-- [Building PowerETL Notifier](#building-poweretl-notifier)
+- [Building PowerETL Notifier on Linux](#building-poweretl-notifier-on-linux)
 - [Starting PowerETL Notifier](#starting-poweretl-notifier)
 - [Shutting down PowerETL Notifier](#shutting-down-poweretl-notifier)
 - [API documentation](#api-documentation)
@@ -23,8 +23,13 @@ PowerETL Notifier has the following requirements:
 
 
 ---
-## Building PowerETL Notifier
+## Building PowerETL Notifier on Linux
 Building the project will download the required dependencies, assemble the artefact into a build structure and generate a zip file for deployment. Execute the [build script](build.sh) to accomplish this. The build zip file can be found at the project root directory with a timestamp naming convention.  
+
+Follow the instructions below to build the Notifier on the Linux environment:
+```
+./build.sh
+```
 
 The following log message is evidence of successful build generation
 ```
@@ -64,7 +69,7 @@ A successful startup is indicated by the log message as follows:
 
 ---
 ## Shutting down PowerETL Notifier
-In the `bin` directory is a bash file called [stop script](bin/stopPowerEtlNotifier.sh), executing this would retrieve the [process id](logs/procid) file and then kill the process. 
+In the `bin` directory is a bash file called [stop script](bin/stopPowerEtlNotifier.sh), executing this would retrieve the processId from the [procfile](logs/procid) and then kill the process. 
 
 
 ---

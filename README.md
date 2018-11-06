@@ -11,8 +11,19 @@ Notifies metrics, statistics and monitoring data exposing that through REST APIs
 
 ---
 
+## Requirements
+
+PowerETL Notifier has the following requirements:
+
+
+*   Apache maven 3.5.3+ (check with `mvn --version`)
+*   Oracle JDK 1.8+ (check with `java -version`)
+
+
+---
+
 ## Build
-Building the project will download the required dependencies, assemble the artefact into a build structure and generate a zip file for deployment. Execute *build.sh* to accomplish this. The build zip file can be found at the project root directory with a timestamp naming convention.  
+Building the project will download the required dependencies, assemble the artefact into a build structure and generate a zip file for deployment. Execute the [build script](build.sh) to accomplish this. The build zip file can be found at the project root directory with a timestamp naming convention.  
 
 The naming convention uses the format `poweretl-notifier_%Y%m%d_%H%M%S.zip`
 
@@ -20,11 +31,11 @@ The naming convention uses the format `poweretl-notifier_%Y%m%d_%H%M%S.zip`
 
 ---
 ## Start
-Navigate into the bin directory and run *startPowerEtlNotifier.sh*, this would start PowerETL Notifier and listening at the designated port number. The port number is a configurable property in *resources/application.properties*
+Navigate into the `bin` directory and execute the [start script](bin/startPowerEtlNotifier.sh), this would start PowerETL Notifier and listening at the designated port number. The port number is a configurable property in [application properties](src/main/resources/application.properties)
 
 ---
 ## Stop
-In the *bin* directory is a bash file called *stopPowerEtlNotifier.sh*, executing this would retrieve the process id from *logs/procid* file and then kill the process. Execute *stopPowerEtlNotifier.sh* to stop PowerETL Notifier. 
+In the `bin` directory is a bash file called [stop script](bin/stopPowerEtlNotifier.sh), executing this would retrieve the [process id](logs/procid) file and then kill the process. 
 
 ---
 

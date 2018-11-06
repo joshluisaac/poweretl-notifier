@@ -144,7 +144,7 @@ public class DataConnectorNotification {
   }
   
   /**
-   * Sends an email if the actual file size is less than or equal to the defined limit
+   * Sends an email if the actual file size is less than or equal to the defined limit.
    * @param actualFileSize of the sent attachment in MBs
    * @param from senders email
    * @param recipient recipient's email

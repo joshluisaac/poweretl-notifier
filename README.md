@@ -9,9 +9,13 @@ PowerApps notification and monitoring app
 -[Headers](#headers)
 
 
+---
 ## Build
-This will download the required dependencies, assemble the build structure and generate a zip file for deployment. Execute __rebuild.sh__ to accomplish this.
+This will download the required dependencies, assemble the build structure and generate a zip file for deployment. Execute __rebuild.sh__ to accomplish this. The build zip file can be found at the project root directory with a timestamp naming convention.  
 
+The naming convention uses the format `poweretl-notifier_%Y%m%d_%H%M%S.zip`
+
+---
 
 ## Headers
 Headers are defined by the '#' symbol. One '#' for H1,  two for H2, etc

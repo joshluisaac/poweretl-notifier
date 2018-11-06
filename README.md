@@ -6,7 +6,7 @@ Notifies metrics, statistics and monitoring data exposing that through REST APIs
 ## Sections
 1. [Building PowerETL Notifier](#build)
 2. [Starting PowerETL Notifier](#start)
-3. [Stopping PowerETL Notifier](#stop)
+3. [Stopping PowerETL Notifier](#Shutting)
 
 
 ---
@@ -37,16 +37,18 @@ The naming convention uses the format `poweretl-notifier_%Y%m%d_%H%M%S.zip`
 
 
 ---
-## Start
+## Starting PowerETL Notifier
 Navigate into the `bin` directory and execute the [start script](bin/startPowerEtlNotifier.sh), this would start PowerETL Notifier and listening at the designated port number. The port number is a configurable property in [application properties](src/main/resources/application.properties)
 
 
 
 ---
-## Stop
+## Shutting down PowerETL Notifier
 In the `bin` directory is a bash file called [stop script](bin/stopPowerEtlNotifier.sh), executing this would retrieve the [process id](logs/procid) file and then kill the process. 
 
 ---
+# Recent changes
 
+See [Recent changes](site/recent-changes.md) for recent changes to PowerETL Notifier, including any backward incompatible changes.
 
 

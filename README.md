@@ -38,7 +38,7 @@ Navigate into the `bin` directory and execute the [start script](bin/startPowerE
 
 A successful startup is indicated by the log message as follows:
 ```
-2018-11-06 19:40:16,715 INFO  Starting StartLogMonitor on xubuntuVostro with PID 12591 (/media/joshua/martian/kvworkspace/PowerETL/poweretl-notifier/target/classes started by joshua in /media/joshua/martian/kvworkspace/PowerETL/poweretl-notifier/bin)
+2018-11-06 19:40:16,715 INFO  Starting StartLogMonitor on xubuntuVostro with PID 12591
 2018-11-06 19:40:16,718 INFO  No active profile set, falling back to default profiles: default
 2018-11-06 19:40:16,819 INFO  HV000001: Hibernate Validator 5.3.6.Final
 2018-11-06 19:40:17,918 INFO  Logging initialized @1806ms to org.eclipse.jetty.util.log.Slf4jLog
@@ -47,7 +47,7 @@ A successful startup is indicated by the log message as follows:
 2018-11-06 19:40:18,076 INFO  No SessionScavenger set, using defaults
 2018-11-06 19:40:18,079 INFO  Scavenging every 600000ms
 2018-11-06 19:40:18,083 INFO  Initializing Spring embedded WebApplicationContext
-2018-11-06 19:40:18,197 INFO  Started o.s.b.c.e.j.JettyEmbeddedWebAppContext@4cd1c1dc{/,[file:///tmp/jetty-docbase.4250930944911120981.8088/],AVAILABLE}
+2018-11-06 19:40:18,197 INFO  Started o.s.b.c.e.j.JettyEmbeddedWebAppContext@4cd1c1dc...
 2018-11-06 19:40:18,198 INFO  Started @2086ms
 2018-11-06 19:40:18,272 INFO  Initialized and constructed EmailConfigEntity Bean
 2018-11-06 19:40:18,280 INFO  Initialized and constructed JavaMailSender Bean

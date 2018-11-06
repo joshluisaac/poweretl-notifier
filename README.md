@@ -18,17 +18,17 @@ The naming convention uses the format `poweretl-notifier_%Y%m%d_%H%M%S.zip`
 
 ---
 
---
+---
 ## Start
 Navigate into the bin directory and run __startPowerEtlNotifier.sh__, this would start PowerETL Notifier and listening at the designated port number. The port number is a configurable property in __resources/application.properties__
 
---
+---
 
---
+---
 ## Stop
 In the bin directory is a bash file called __stopPowerEtlNotifier.sh__, this would retrieve the process id from __logs/procid__ file and then kill the process. Execute __stopPowerEtlNotifier.sh__ to stop PowerETL Notifier. 
 
---
+---
 
 
 

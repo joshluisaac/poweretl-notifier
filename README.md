@@ -4,13 +4,18 @@ Notifies metrics, statistics and monitoring data exposing that through REST APIs
 
 ---
 ## Sections
-1. [Building PowerETL Notifier](#build)
-2. [Starting PowerETL Notifier](#start)
-3. [Stopping PowerETL Notifier](#Shutting)
+- [PowerETL Notifier - some background](#poweretl-notifier---some-background)
+- [Sections](#sections)
+- [System requirements](#system-requirements)
+- [Building PowerETL Notifier](#building-poweretl-notifier)
+- [Starting PowerETL Notifier](#starting-poweretl-notifier)
+- [Shutting down PowerETL Notifier](#shutting-down-poweretl-notifier)
+- [API documentation](#api-documentation)
+- [Recent changes](#recent-changes)
 
 
 ---
-## Requirements
+## System requirements
 PowerETL Notifier has the following requirements:
 
 *   Apache maven 3.5.3+ (check with `mvn --version`)
@@ -56,8 +61,6 @@ A successful startup is indicated by the log message as follows:
 2018-11-06 19:40:19,380 INFO  Started StartLogMonitor in 2.903 seconds (JVM running for 3.269)
 
 ```
-
-
 
 ---
 ## Shutting down PowerETL Notifier

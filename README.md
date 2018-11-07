@@ -93,11 +93,16 @@ See [Recent changes](site/recent-changes.md) for recent changes to PowerETL Noti
 1. How do i check if Notifier's service is running on Linux?
    
    You can run one of the following commands
-   ```
+   ```bash
    ps aux | grep -i "StartLogMonitor"
-
    ```
 
 2. How do i check what port Notifier is listening on?
+   
+   ```bash
+   procid=`cat $LOGS/procid`
+   netstat -plnt | grep $procid
+   ```
+3. 
 
 

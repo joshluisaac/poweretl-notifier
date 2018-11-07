@@ -81,6 +81,22 @@ public class MailTaskScheduler extends Scheduler {
   String serverLogDircco;
   
   
+  @Value("#{ ${app.ictzone.dc.scheduler.enable} eq true ? true : false }")
+  boolean ictzoneDcEnableSchedler;
+  @Value("${app.ictzone.dc.serverLogPath}")
+  String ictzoneDcServerLogPath;
+  @Value("${app.ictzone.dc.emailTitle}")
+  String ictzoneDcEmailTitle;
+  @Value("${app.ictzone.dc.emailContext}")
+  String ictzoneDcEmailContext;
+  @Value("${app.ictzone.dc.recepients}")
+  String ictzoneDcEmailRecepients;
+  @Value("${app.ictzone.dc.scheduler.cronexpression}")
+  String cronExpressionictzone;
+  @Value("${app.ictzone.dc.serverLogDir}")
+  String serverLogDirictzone;
+  
+  
   @Value("#{ ${app.mbsb.dc.scheduler.enable} eq true ? true : false }")
   boolean mbsbDcEnableSchedler;
   @Value("${app.mbsb.dc.serverLogPath}")
@@ -126,12 +142,18 @@ public class MailTaskScheduler extends Scheduler {
   }
   
   
-  //@Scheduled(cron = "${app.cco.dc.scheduler.cronexpression}")
-  @Scheduled(fixedRateString = "${interval}")
+  @Scheduled(cron = "${app.cco.dc.scheduler.cronexpression}")
   public void sendDataConnectorStatsEmailCco() throws Exception {
     if (ccoDcEnableSchedler)
       dcNotificationService.execute(ccoDcEmailTitle, ccoDcServerLogPath, ccoDcEmailContext,
           ccoDcEmailRecepients, serverLogDircco);
+  }
+  
+  @Scheduled(cron = "${app.ictzone.dc.scheduler.cronexpression}")
+  public void sendDataConnectorStatsEmailictzone() throws Exception {
+    if (ictzoneDcEnableSchedler)
+      dcNotificationService.execute(ictzoneDcEmailTitle, ictzoneDcServerLogPath, ictzoneDcEmailContext,
+          ictzoneDcEmailRecepients, serverLogDirictzone);
   }
   
   

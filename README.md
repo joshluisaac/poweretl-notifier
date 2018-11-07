@@ -97,7 +97,7 @@ See [Recent changes](site/recent-changes.md) for recent changes to PowerETL Noti
    ps aux | grep -i "StartLogMonitor"
    ```
 
-2. How do i check what port Notifier is listening on?
+2. How do i check what port number Notifier is listening on?
    
    ```bash
    procid=`cat $LOGS/procid`

@@ -12,6 +12,7 @@ Notifies metrics, statistics and monitoring data exposing that through REST APIs
 - [Shutting down PowerETL Notifier](#shutting-down-poweretl-notifier)
 - [API documentation](#api-documentation)
 - [Recent changes](#recent-changes)
+- [FAQs](#faqs)
 
 
 ---
@@ -85,5 +86,18 @@ Documentation for APIs is provided here:
 ## Recent changes
 
 See [Recent changes](site/recent-changes.md) for recent changes to PowerETL Notifier, including any backward incompatible changes.
+
+
+## FAQs
+
+1. How do i check if Notifier's service is running on Linux?
+   
+   You can run one of the following commands
+   ```
+   ps aux | grep -i "StartLogMonitor"
+
+   ```
+
+2. How do i check what port Notifier is listening on?
 
 

@@ -52,9 +52,6 @@ echo `date '+%Y-%m-%d %H:%M:%S'` "Clean up completed"
 }
 
 
-deploy(){
-    scp -P 5422 $build_name.zip kvalleydb@sftp.kollectvalley.my:/home/kvalleydb/notifier
-}
 
 
 

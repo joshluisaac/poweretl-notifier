@@ -99,7 +99,7 @@ public class BatchManagerLogService {
     
 
     private LogSummary summarizeLog(String log) {
-        System.out.println(log);
+        //System.out.println(log);
         List<String> regexList = new ArrayList<>(Arrays.asList(getStartRegex(),
                 getErrorRegex(), getDoneRegex()));
         //LOG.info("Processing {}", log);
@@ -117,7 +117,7 @@ public class BatchManagerLogService {
         Timestamp batchEndTime = null;
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
-            System.out.println(line);
+            //System.out.println(line);
             if (!isStartEntry) {
                 boolean isStarted = Utils.matcher(line, regexList.get(0)).find();
                 if (isStarted) {

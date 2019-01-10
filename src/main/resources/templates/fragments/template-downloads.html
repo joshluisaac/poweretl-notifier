@@ -1,0 +1,155 @@
+<div th:fragment="downloadFragment" class="col-md-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                <small>Today's Files</small>
+            </h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content"></div>
+        <div class='row'>
+            <div class='col-md-12'>
+                <span class="text-center">
+					<p th:text="${size}" class="red"></p>
+					<p th:text="${content}" class="red"></p>
+					<p th:text="${success}" class="green"></p>
+				</span>
+                <table id="datatable-buttons"
+                       class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Line Number</th>
+                        <th>Log Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Event/Query Where Error Occured</th>
+                        <th>User PC Name</th>
+                        <th>Notification Sent</th>
+                        <th>Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="report, status : ${errorReport}">
+                        <td th:text="${status.index + 1}"></td>
+                        <td th:text="${report.lineNumber}"></td>
+                        <td th:text="${report.logName}"></td>
+                        <td
+                                th:text="${#dates.format(report.occurredDate, 'dd-MMM-yyyy HH:mm')}"></td>
+                        <td th:text="${#dates.format(report.occurredDate, 'HH:mm')}"></td>
+                        <td th:text="${report.eventQueryName}"></td>
+                        <td th:text="${report.pcName}"></td>
+                        <td>No</td>
+
+                        <td><a href="#"
+                               th:onclick="'showDataInModal(\'' + ${report.lineNumber} +
+                                '\', \'seerrorreportpreview\', \'stackTraceModal\',
+                                \'insertText\')'"><span
+                                data-toggle="tooltip" title="Preview Stacktrace"
+                                class="glyphicon glyphicon-eye-open"></span></a> <!-- Bootstrap Modal -->
+                            <div class="modal fade" id="stackTraceModal" role="dialog">
+                                <div class="modal-dialog" style="margin: auto; width: 1000px;">
+
+                                    <!-- Bootstrap Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title text-center">Stacktrace</h4>
+                                        </div>
+
+                                        <div class="modal-body">
+
+                                            <pre id="insertText"></pre>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <a
+                                    th:href="@{'/downloadstacktrace?lineNumber=' + ${report.lineNumber}}">
+									<span data-toggle="tooltip" title="Download Stacktrace"
+                                          class="glyphicon glyphicon-download red"> </span>
+                            </a> <a href="#"
+                                    th:onclick="'showDataInModal(\'' + ${report.logName} + '\',
+                                    \'sendadhocemail\',\'emailModal\',\'logName\')'"><span
+                                    data-toggle="tooltip" title="Send Email"
+                                    class="glyphicon glyphicon-envelope"></span></a>
+                            <div class="modal fade" id="emailModal" role="dialog"
+                                 tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+
+                                    <!-- Bootstrap Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title text-center">New Message</h4>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form method="POST" action="/sendadhocemail"
+                                                  enctype="multipart/form-data">
+                                                <div style="margin:0 auto;width:60%">
+                                                <div class="form-group">
+                                                        <label for="logName" class="col-form-label">
+                                                            Log File: &nbsp;&nbsp;&nbsp;
+                                                        </label>
+                                                        <input name="logFileName" readonly id="logName"
+                                                               style="border: none;">
+                                                </div>
+                                                    <br><br>
+                                                <div class="form-group">
+                                                    <label for="title" class="col-form-label">Email
+                                                        Title:</label>
+                                                    <input type="text" name="title" class="form-control"
+                                                           id="title" required>
+                                                </div>
+                                                <br><br>
+                                                <div class="form-group">
+                                                    <label for="message" class="col-form-label">
+                                                        Message:&nbsp;&nbsp;&nbsp;
+                                                    </label>
+                                                    <textarea name="body" class="form-control" id="message"
+                                                              required rows="5"></textarea>
+                                                </div>
+                                                <br><br>
+                                                <div class="form-group">
+                                                    <label for="attachment" class="col-form-label">
+                                                        Attach: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </label>
+                                                    <input type="file" name="attachment"
+                                                           class="form-control"
+                                                           style="width: 225px; height: 33px;" id = "attachment"/>
+                                                    <p class="blue text-right">
+                                                    Upload only up to 1MB attachments.
+                                                    </p>
+                                                </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="col-md-4 col-md-offset-8">
+                                                        <button type="submit" class="btn btn-primary btn-sm">Send
+                                                        </button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

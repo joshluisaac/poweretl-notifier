@@ -12,26 +12,26 @@ import com.powerapps.monitor.config.ServerConfigProperties;
 
 @Controller
 public class ServerPropertiesController {
-  
+
   public final ServerConfigProperties servProp;
   private final AppConfigProperties appConfig;
-  
+
   @Autowired
-  public ServerPropertiesController(ServerConfigProperties servProp,AppConfigProperties appConfig) {
+  public ServerPropertiesController(ServerConfigProperties servProp, AppConfigProperties appConfig) {
     this.servProp = servProp;
     this.appConfig = appConfig;
   }
-  
+
   @GetMapping("/properties")
   @ResponseBody
   public Object properties(Model model) {
-   
+
     return servProp.toString();
   }
-  
+
   @GetMapping("/applicationproperties")
   @ResponseBody
-  public Object appProperties(Model model) {   
+  public Object appProperties(Model model) {
     return appConfig.toString();
   }
 

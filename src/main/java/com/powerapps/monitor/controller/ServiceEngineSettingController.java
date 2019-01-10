@@ -34,7 +34,7 @@ public class ServiceEngineSettingController {
   @RequestMapping(value = "/savesesetting", method = RequestMethod.POST)
   @ResponseBody
   public void save(@RequestParam String seRootPath, @RequestParam String seExceptionRegex,
-      @RequestParam String seErrorLog) {
+                   @RequestParam String seErrorLog) {
     SeProperties data = new SeProperties(seRootPath, seExceptionRegex, seErrorLog);
     String output = seWriter.generateJson(data);
     util.writeTextFile(
@@ -45,7 +45,7 @@ public class ServiceEngineSettingController {
   public String view(Model model) {
     String jsonText = util.listToBuffer(util.readFile(fileUtils.getFileFromClasspath(
             seJsonPath))).toString();
-    model.addAttribute("result",jsonReader.readJson(jsonText,SeProperties.class));
+    model.addAttribute("result", jsonReader.readJson(jsonText, SeProperties.class));
     return "serviceEngineSettings";
   }
 

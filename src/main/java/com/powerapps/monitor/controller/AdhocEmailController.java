@@ -18,55 +18,54 @@ import java.io.File;
 
 @Controller
 public class AdhocEmailController {
-    @Value("${app.bmJson}")
-    private String bmJsonPath;
-    @Value("${app.seJson}")
-    private String seJsonPath;
-    private FileUtils fileUtils = new FileUtils();
+  @Value("${app.bmJson}")
+  private String bmJsonPath;
+  @Value("${app.seJson}")
+  private String seJsonPath;
+  private FileUtils fileUtils = new FileUtils();
 
-    private EmailSenderService emailClient;
-    private final JsonToHashMap jsonToHashMap = new JsonToHashMap(new JsonUtils(), new Utils());
+  private EmailSenderService emailClient;
+  private final JsonToHashMap jsonToHashMap = new JsonToHashMap(new JsonUtils(), new Utils());
 
-    public AdhocEmailController(EmailSenderService emailClient){
-        this.emailClient=emailClient;
+  public AdhocEmailController(EmailSenderService emailClient) {
+    this.emailClient = emailClient;
+  }
+
+  @GetMapping("/sendadhocemail")
+  @ResponseBody
+  public Object sendAdhocEmail(@RequestParam("input") String logFileName) {
+    return logFileName;
+  }
+
+  @PostMapping("/sendadhocemail")
+  public Object sendAdhocEmail(@RequestParam String logFileName,
+                               @RequestParam String title,
+                               @RequestParam String body,
+                               @RequestParam(required = false) MultipartFile attachment,
+                               RedirectAttributes redirAttr) {
+    String redirectPage = null;
+    /* Check if file is too large (>1MB), redirect to error message if true. */
+    if (attachment.getSize() > 1000000) {
+      redirAttr.addFlashAttribute("size", "Error: Email attachment file is too large, please upload only up to 1MB.");
     }
 
-    @GetMapping("/sendadhocemail")
-    @ResponseBody
-    public Object sendAdhocEmail(@RequestParam ("input") String logFileName){
-        return logFileName;
+    /* Check if attachment meets size criterion and is not empty, or if there was no attachment at all. */
+    if (attachment.getSize() < 1000001 && attachment.getSize() != 0 || attachment.isEmpty()) {
+      if (logFileName.equals("ServerError.log")) {
+        File logFile = new File(jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(seJsonPath).toString()).get("seRootPath")
+                + "/" + logFileName);
+        this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
+        redirectPage = "seerrorreport";
+      } else {
+        File logFile = new File(jsonToHashMap.toHashMapFromJson(
+                fileUtils.getFileFromClasspath(bmJsonPath).toString()).get("bmRootPath")
+                + "/" + logFileName);
+        this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
+        redirectPage = "bmerrorreport";
+      }
+      redirAttr.addFlashAttribute("success", "Email for " + logFileName + " was sent successfully.");
     }
-
-    @PostMapping("/sendadhocemail")
-    public Object sendAdhocEmail(@RequestParam String logFileName,
-                                 @RequestParam String title,
-                                 @RequestParam String body,
-                                 @RequestParam (required = false) MultipartFile attachment,
-                                 RedirectAttributes redirAttr) {
-        String redirectPage = null;
-        /* Check if file is too large (>1MB), redirect to error message if true. */
-        if (attachment.getSize() > 1000000){
-            redirAttr.addFlashAttribute("size", "Error: Email attachment file is too large, please upload only up to 1MB.");
-        }
-
-        /* Check if attachment meets size criterion and is not empty, or if there was no attachment at all. */
-        if (attachment.getSize() < 1000001 && attachment.getSize() != 0 || attachment.isEmpty()){
-            if (logFileName.equals("ServerError.log")){
-                File logFile = new File(jsonToHashMap.toHashMapFromJson(
-                        fileUtils.getFileFromClasspath(seJsonPath).toString()).get("seRootPath")
-                        +"/"+logFileName);
-                this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
-                redirectPage = "seerrorreport";
-            }
-            else {
-                File logFile = new File(jsonToHashMap.toHashMapFromJson(
-                        fileUtils.getFileFromClasspath(bmJsonPath).toString()).get("bmRootPath")
-                        + "/" + logFileName);
-                this.emailClient.sendAdhocEmail(title, body, attachment, logFile);
-                redirectPage = "bmerrorreport";
-            }
-            redirAttr.addFlashAttribute("success", "Email for "+logFileName+" was sent successfully.");
-        }
-        return "redirect:/"+redirectPage;
-    }
+    return "redirect:/" + redirectPage;
+  }
 }

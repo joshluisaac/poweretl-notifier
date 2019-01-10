@@ -88,6 +88,10 @@ public class BatchManagerLogNotificationService {
               /*send successful email*/
               title = MessageFormat.format("{0}: {1} {2}", new Object[] {"SUCCESSFUL",emailTitle,log});
               emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_bm_email", summary);
+
+              if (title.startsWith("SUCCESSFUL: MBSB Completion of PowerKollect Daily Batch loading for Batch-daily")) {
+                recipient = "itoperator@mbsbbank.com";
+              }
               
               /*Construct and assemble email object*/
               Email mail = new Email(emailConfig.getFromEmail(), recipient, title,emailContent, null, file);

@@ -30,6 +30,15 @@ public class ZipFileHelper {
     });
     return files;
   }
+
+  FilenameFilter accept = (File dir, final String name) ->  name.endsWith(".stacktrace") || name.endsWith(".bad");
+
+
+
+  public File[] listChildFiles2(final File dir) {
+    File[] files = dir.listFiles(accept);
+    return files;
+  }
   
   public String zipFile(String context, File[] files, String Dest) throws Exception {
     final String zipFileName =  context + "_rejection_stacktrace_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()).concat(".zip");

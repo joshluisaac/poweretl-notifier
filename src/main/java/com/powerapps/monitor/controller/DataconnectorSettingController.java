@@ -29,17 +29,16 @@ public class DataconnectorSettingController {
     this.util = util;
   }
 
-  
-  
+
   @RequestMapping(value = "/savedcsettings", method = RequestMethod.POST)
   public void saveDcSettings(@RequestParam String dcRootPath, @RequestParam String dcExceptionRegex, @RequestParam String dcErrorLog) {
     DcProperties dcProp = new DcProperties(dcRootPath, dcExceptionRegex, dcErrorLog);
     String output = dcWriter.generateJson(dcProp);
     util.writeTextFile(fileUtils.getFileFromClasspath(dcJsonPath).toString(), output, false);
-    
+
   }
-  
-  @RequestMapping(value="/viewdcsettings", method = RequestMethod.GET)
+
+  @RequestMapping(value = "/viewdcsettings", method = RequestMethod.GET)
   public String viewDcSettings(Model model) {
     String JsonText = util.listToBuffer(util.readFile(fileUtils.getFileFromClasspath(dcJsonPath))).toString();
     model.addAttribute("result", jsonReader.readJson(JsonText, DcProperties.class));

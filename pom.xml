@@ -70,6 +70,14 @@
             <version>${project.version}</version>
         </dependency>
 
+      <!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy-all</artifactId>
+        <version>2.4.15</version>
+      </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>
@@ -133,6 +141,30 @@
                     <overWriteReleases>true</overWriteReleases>
                     <overWriteSnapshots>true</overWriteSnapshots>
                     <overWriteIfNewer>true</overWriteIfNewer>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>com.powerapps.monitor.StartLogMonitor</argument>
+                    </arguments>
+                    <addResourcesToClasspath>true</addResourcesToClasspath>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>src/main/resources/config</additionalClasspathElement>
+                    </additionalClasspathElements>
                 </configuration>
             </plugin>
         </plugins>

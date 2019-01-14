@@ -42,8 +42,8 @@ public class Scheduler {
   String dcEmailTitle;
   @Value("${app.dc.emailContext}")
   String dcEmailContext;
-  @Value("${app.dc.recepients}")
-  String dcEmailRecepients;
+  @Value("${app.mbsb.bm.recepients}")
+  String bmEmailRecepients;
 
   
   @Value("#{ ${app.yyc.dc.scheduler.enable} eq true ? true : false }")
@@ -97,20 +97,7 @@ public class Scheduler {
 
   @Scheduled(fixedRateString = "${interval}")
   public void runFixedSchedule() throws IOException {
-    if(bmEnableSchedler) bmService.execute(dcEmailRecepients);
+    if(bmEnableSchedler) bmService.execute(bmEmailRecepients);
   }
   
-  
-  // @Scheduled(fixedRateString = "${interval}")
-  public void run1() throws IOException, InterruptedException {
-    logger.info("Running...{} using {}", "run1", Thread.currentThread().getName());
-    Thread.sleep(10000);
-    logger.info("Still running...{} using {}", "run1", Thread.currentThread().getName());
-  }
-
-  // @Scheduled(fixedRateString = "${interval}")
-  public void run2() throws IOException {
-    logger.info("Running...{} using {}", "run2", Thread.currentThread().getName());
-  }
-
 }

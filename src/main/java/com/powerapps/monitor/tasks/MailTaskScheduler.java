@@ -107,6 +107,8 @@ public class MailTaskScheduler extends Scheduler {
   String mbsbDcEmailContext;
   @Value("${app.mbsb.dc.recepients}")
   String mbsbDcEmailRecepients;
+  @Value("${app.mbsb.dc.transfer.recepients}")
+  String mbsbTransferEmailRecepients;
   @Value("${app.mbsb.dc.scheduler.cronexpression}")
   String cronExpressionMbsb;
   @Value("${app.mbsb.dc.serverLogDir}")
@@ -170,7 +172,7 @@ public class MailTaskScheduler extends Scheduler {
   public void sendDataTransferStatsEmailMbsb() throws Exception {
     logger.info("Firing data transfer email task at {}", transferCronExpression);
     if (mbsbTransferEnableSchedler)
-      transferService.execute(mbsbDcEmailRecepients,mbsbDcEmailContext);
+      transferService.execute(mbsbTransferEmailRecepients,mbsbDcEmailContext);
   }
 
 }

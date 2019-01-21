@@ -23,7 +23,7 @@ import com.powerapps.monitor.model.LogSummary;
 public class BatchManagerLogNotificationService {
 
   private static final Logger LOG = LoggerFactory.getLogger(BatchManagerLogNotificationService.class);
-  private final BatchManagerLogService logService;
+  public final BatchManagerLogService logService;
   private final IEmailContentBuilder emailContentBuilder;
   private final IEmailClient emailClient;
   private final EmailConfigEntity emailConfig;

@@ -1,6 +1,5 @@
-package com.powerapps.scripts
-import com.kollect.etl.notification.entity.Email
-import com.powerapps.monitor.model.BmProperties
+package com.powerapps.monitor.com.powerapps.monitor.dsl
+
 import com.powerapps.monitor.model.LogSummary
 import com.powerapps.monitor.service.BatchManagerLogNotificationService
 import com.powerapps.monitor.service.BatchManagerLogService

@@ -1,6 +1,8 @@
-package com.powerapps.monitor.service
+package com.powerapps.monitor.com.powerapps.monitor.dsl
 
 import com.powerapps.monitor.model.LogSummary
+import com.powerapps.monitor.service.BatchManagerLogNotificationService
+import com.powerapps.monitor.service.BatchManagerLogService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired

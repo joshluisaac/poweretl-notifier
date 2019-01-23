@@ -8,7 +8,7 @@ The following will need to be updated to suit your environment.
 
 
 
-`bmRootPath` This is the path to DataConnector logs directory
+`bmRootPath` This is the path to where BatchManager logs resides.
 
 `batchStartRegex` Regex used to identify the start position of the contents of the log file (Default settings, please don't modify)
 
@@ -40,9 +40,22 @@ There are two ways to update these settings. The first method is directly editin
 
 A cleaner and less error prone method of updating BM settings is by using the UI. 
 
-
-Reference-style: 
 ![alt text][logo]
+
+
+```properties
+
+app.ictzone.dc.scheduler.enable=false
+app.ictzone.dc.scheduler.cronexpression=0 18 19 * * *
+app.ictzone.dc.recepients=kvloading@kollect.my
+app.ictzone.dc.serverLogPath=/home/kvalleydb/etl/ictzone-loading/logs/Server.log
+app.ictzone.dc.serverLogDir=/home/kvalleydb/etl/ictzone-loading/logs/
+app.ictzone.dc.emailTitle=ICTZone KollectValley System Alert: Data Loading
+app.ictzone.dc.emailContext=ictzone
+app.ictzone.dc.additionalMessages=
+
+
+```
 
 
 

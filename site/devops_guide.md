@@ -3,17 +3,18 @@
 
 ## BatchManager Email Notification 
 This email notifies users on the status of batch jobs. 
-
 This includes the batch name, batch running time, start/end time and batch status.
 
-A sample email is presented below
+A sample email is presented in the figure below
 
 ![Alt text][bmemail]
+
+Figure 1: BatchManager email notification.
 
 
 ## BatchManager Email Notification  -  Settings
 
-A couple of setup are required to get notification running for Batch Manager (BM).
+A setup is required to get notification running for Batch Manager (BM).
 
 The following will need to be updated to suit your environment.
 
@@ -27,6 +28,11 @@ The following will need to be updated to suit your environment.
 `batchErrorRegex` Regex used to identify the errors in the contents of the log file  (Default settings, please don't modify)
 
 `bmCache` Stores the history of BM sent emails. (Default to `../out/bmcache.csv`)
+
+`app.bm.scheduler.enable` Enables BM scheduler cron
+
+`app.bm.emailTitle` BM email title.
+
 
 ## How do i update these settings?
 
@@ -46,6 +52,15 @@ There are two ways to update these settings. The first method is directly editin
 
 ```
 
+Update the following properties in [application.properties](src/main/resources/application.properties)
+
+```properties
+
+app.bm.scheduler.enable=false
+app.bm.emailTitle=MBSB Completion of PowerKollect Daily Batch loading for 
+
+```
+
 ### Method 2: Updating settings from UI (recommended)
 
 A cleaner and less error prone method of updating BM settings is by using the UI. 
@@ -57,15 +72,33 @@ A cleaner and less error prone method of updating BM settings is by using the UI
 ## DataConnector Email Notification 
 
 
-```properties
+## DataConnector Email Notification  - Settings
 
+A setup is required to get notification running for DataConnector (DC).
+
+
+```properties
+#flag to enable DC scheduler
 app.ictzone.dc.scheduler.enable=false
+
+#DC scheduler cron expression
 app.ictzone.dc.scheduler.cronexpression=0 18 19 * * *
+
+#Comma separated list of recipients
 app.ictzone.dc.recepients=kvloading@kollect.my
-app.ictzone.dc.serverLogPath=/home/kvalleydb/etl/ictzone-loading/logs/Server.log
+
+#Path to folder where Server.log resides 
 app.ictzone.dc.serverLogDir=/home/kvalleydb/etl/ictzone-loading/logs/
+
+#Path to Server.log file
+app.ictzone.dc.serverLogPath=/home/kvalleydb/etl/ictzone-loading/logs/Server.log
+
+#DC email title
 app.ictzone.dc.emailTitle=ICTZone KollectValley System Alert: Data Loading
+
+#DC unique identifier.Update it to the name of the project
 app.ictzone.dc.emailContext=ictzone
+
 app.ictzone.dc.additionalMessages=
 
 

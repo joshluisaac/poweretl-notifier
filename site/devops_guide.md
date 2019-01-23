@@ -125,9 +125,22 @@ A sample email notification for data files transport is presented below
 
 ![Alt text][transportEmail]
 
+Figure 3: Data transfer email notification.
 
 
 
+## SFTP Email Notification - Settings
+
+
+```properties
+
+app.mbsb.dc.transfer.scheduler.enable=false
+app.mbsb.dc.transfer.recepients=joshua@kollect.my
+app.mbsb.dc.transfer.scheduler.cronexpression=0 21 13 * * *
+app.mbsb.dc.transfer.emailTitle=SUCCESSFUL: MBSB Completion of PowerKollect Daily Data Transfer
+app.mbsb.dc.transfer.schemaFile=config/transferSchema.txt
+app.mbsb.dc.transfer.stageDir=/ftp/ffiles/Daily
+```
 
 
 

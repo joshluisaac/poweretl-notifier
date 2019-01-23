@@ -1,1 +1,7 @@
-{"bmRootPath":"/media/joshua/martian2/kollectprojects/mbsb/_mbsb_prd_logs/logs/","batchStartRegex":"^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (DEBUG) (--START--)","batchDoneRegex":"^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (DEBUG) (--DONE--)","batchErrorRegex":"^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (ERROR)","bmCache":"../out/bmcache.csv"}
+{
+  "bmRootPath": "/media/joshua/martian2/kollectprojects/mbsb/_mbsb_prd_logs/logs/",
+  "batchStartRegex": "^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (DEBUG) (--START--)",
+  "batchDoneRegex": "^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (DEBUG) (--DONE--)",
+  "batchErrorRegex": "^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (ERROR)",
+  "bmCache": "/media/joshua/martian/linked_projects/notifier/out/bmcache.csv"
+}

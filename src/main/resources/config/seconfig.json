@@ -1,1 +1,5 @@
-{"seRootPath":"../sample","seExceptionRegex":"^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (ERROR UNEXPECTED_EXCEPTION)","seErrorLog":"ServerError.log"}
+{
+  "seRootPath": "/media/joshua/martian/linked_projects/notifier/sample/hlbb_ecollect",
+  "seExceptionRegex": "^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (ERROR UNEXPECTED_EXCEPTION)",
+  "seErrorLog": "ServerError.log"
+}

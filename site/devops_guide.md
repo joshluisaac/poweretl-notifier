@@ -1,11 +1,21 @@
-## Dev ops guide
+# Dev ops guide
 
 
 ## BatchManager Email Notification 
+This email notifies users on the status of batch jobs. 
+
+This includes the batch name, batch running time, start/end time and batch status.
+
+A sample email is presented below
+
+![Alt text][bmemail]
+
+
+## BatchManager Email Notification  -  Settings
+
 A couple of setup are required to get notification running for Batch Manager (BM).
 
 The following will need to be updated to suit your environment.
-
 
 
 `bmRootPath` This is the path to where BatchManager logs resides.
@@ -44,6 +54,9 @@ A cleaner and less error prone method of updating BM settings is by using the UI
 ![Alt text][bmConfigImage]
 
 
+## DataConnector Email Notification 
+
+
 ```properties
 
 app.ictzone.dc.scheduler.enable=false
@@ -59,6 +72,31 @@ app.ictzone.dc.additionalMessages=
 ```
 
 
+## SFTP Email Notification 
+
+This email alters users of the number of files, file size, number of records and 
+status of data files which has been transferred from the core to PowerApps staging environment.
+
+A sample email notification for data files transport is presented below
+
+![Alt text][transportEmail]
+
+
+
+
+
+
+
+
+
 
 [bmConfigImage]: bm_ui_settings.png "Logo Title Text 2"
+[transportEmail]: transport_email.png "Logo Title Text 2"
+[bmemail]: bmemail.png "Logo Title Text 2"
+
+
+
+
+
+
 

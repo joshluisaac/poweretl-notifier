@@ -41,7 +41,7 @@ There are two ways to update these settings. The first method is directly editin
 A cleaner and less error prone method of updating BM settings is by using the UI. 
 
 
-![bmConfigImage][bmConfigImage]
+![bm setting Image][bmConfigImage]
 
 
 ```properties

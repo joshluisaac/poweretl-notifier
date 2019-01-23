@@ -41,7 +41,7 @@ There are two ways to update these settings. The first method is directly editin
 A cleaner and less error prone method of updating BM settings is by using the UI. 
 
 
-![bm setting Image][bmConfigImage]
+![bm setting Image][bm_ui_settings.png]
 
 
 ```properties
@@ -60,5 +60,5 @@ app.ictzone.dc.additionalMessages=
 
 
 
-[bmConfigImage]: https://gitlab.com/poweretl/powerappslogmonitor/blob/bb3a2d03d6370cb0a2431be3bd56eb6a98a19886/site/bm_ui_settings.png "Logo Title Text 2"
+[bmConfigImage]: site/bm_ui_settings.png "Logo Title Text 2"
 

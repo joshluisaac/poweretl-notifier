@@ -71,6 +71,17 @@ A cleaner and less error prone method of updating BM settings is by using the UI
 
 ## DataConnector Email Notification 
 
+This email notifies users of the following metrics:
+* Number of records that was extracted from the core.
+* Number of records that was loaded from the data file which came from the core.
+* Number of records that was rejected after loading.
+* Running time which is the duration loading took.
+* Throught put/sec: Number of records that was processed per second.
+
+![Alt text][dcemail]
+
+Figure 2: DataConnector email notification.
+
 
 ## DataConnector Email Notification  - Settings
 
@@ -107,7 +118,7 @@ app.ictzone.dc.additionalMessages=
 
 ## SFTP Email Notification 
 
-This email alters users of the number of files, file size, number of records and 
+This email alerts users of the number of files, file size, number of records and 
 status of data files which has been transferred from the core to PowerApps staging environment.
 
 A sample email notification for data files transport is presented below
@@ -126,6 +137,9 @@ A sample email notification for data files transport is presented below
 [bmConfigImage]: bm_ui_settings.png "Logo Title Text 2"
 [transportEmail]: transport_email.png "Logo Title Text 2"
 [bmemail]: bmemail.png "Logo Title Text 2"
+[dcemail]: dc_email.png "Logo Title Text 2"
+
+
 
 
 

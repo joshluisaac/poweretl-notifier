@@ -44,6 +44,8 @@ A cleaner and less error prone method of updating BM settings is by using the UI
 Reference-style: 
 ![alt text][logo]
 
+
+
 [logo]: https://gitlab.com/poweretl/powerappslogmonitor/blob/bb3a2d03d6370cb0a2431be3bd56eb6a98a19886/site/bm_ui_settings.png "Logo Title Text 2"
 
 ![Kiku](bm_ui_settings.png)

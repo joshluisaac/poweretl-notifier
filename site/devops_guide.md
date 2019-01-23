@@ -41,7 +41,7 @@ There are two ways to update these settings. The first method is directly editin
 A cleaner and less error prone method of updating BM settings is by using the UI. 
 
 
-![bm setting Image][bm_ui_settings.png]
+![Alt text][bmConfigImage]
 
 
 ```properties
@@ -60,5 +60,5 @@ app.ictzone.dc.additionalMessages=
 
 
 
-[bmConfigImage]: site/bm_ui_settings.png "Logo Title Text 2"
+[bmConfigImage]: bm_ui_settings.png "Logo Title Text 2"
 

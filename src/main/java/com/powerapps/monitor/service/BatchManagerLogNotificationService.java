@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 
+import com.powerapps.monitor.model.EmailBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class BatchManagerLogNotificationService {
   // emailMaxQueueSize
   @Autowired
   public BatchManagerLogNotificationService(BatchManagerLogService logService, IEmailContentBuilder emailContentBuilder,
-      IEmailClient emailClient, EmailConfigEntity emailConfig) {
+                                            IEmailClient emailClient, EmailConfigEntity emailConfig) {
     this.logService = logService;
     this.emailContentBuilder = emailContentBuilder;
     this.emailClient = emailClient;
@@ -51,8 +52,6 @@ public class BatchManagerLogNotificationService {
     final String recipientTmp = recipient;
     List<LogSummary> summaries = logService.getBmLogSummaries();
     BmProperties bmConfig = logService.bmConfig;
-
-    // System.out.println(bmConfig.getBmRootPath());
 
     /* Build email content */
     String emailContent = null;
@@ -66,49 +65,52 @@ public class BatchManagerLogNotificationService {
       for (int i = 0; i < queueMaxSize; i++) {
         LogSummary summary = summaries.get(i);
         int batchStatus = summary.getBatchStatus();
-        String log = summary.getLogFileName();
-        LOG.info("Processing: {}", log);
-        File file = new File(bmConfig.getBmRootPath() + "/", log);
+        String batchLogName = summary.getLogFileName();
+        LOG.info("Processing: {}", batchLogName);
+        File file = new File(bmConfig.getBmRootPath() + "/", batchLogName);
+        emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_bm_email", summary);
+
         if (batchStatus != 3) {
           if (batchStatus == 1) {
-            /* send failed email */
-            title = MessageFormat.format("{0}: {1} {2}", new Object[] { "FAILED", emailTitle, log });
-            emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_bm_email", summary);
+            /* failed email title */
+            title = MessageFormat.format("{0}: {1} {2}", new Object[]{"FAILED", emailTitle, batchLogName});
 
-            /* Construct and assemble email object */
-            Email mail = new Email(emailConfig.getFromEmail(), recipient, title, emailContent, null, file);
-            /* Send email */
-            String emailStatus = emailClient.execute(mail);
-
-            /* if email was sent then persist to cache */
-            if (emailStatus.equals("Success"))
-              new FileUtils().writeTextFile(bmConfig.getBmCache(), log + "\n");
           } else {
-            /* send successful email */
-            title = MessageFormat.format("{0}: {1} {2}", new Object[] { "SUCCESSFUL", emailTitle, log });
-            emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_bm_email", summary);
-            
-            
+            /* successful email title */
+            title = MessageFormat.format("{0}: {1} {2}", new Object[]{"SUCCESSFUL", emailTitle, batchLogName});
 
             if (title.startsWith("SUCCESSFUL: MBSB Completion of PowerKollect Daily Batch loading for  Batch-daily-")) {
               recipient = itoperator;
-            }else {
+            } else {
               recipient = recipientTmp;
             }
-            /* Construct and assemble email object */
-            Email mail = new Email(emailConfig.getFromEmail(), recipient, title, emailContent, null, file);
-
-            /* Send email */
-            String emailStatus = emailClient.execute(mail);
-
-            /* if email was sent then persist to cache */
-            if (emailStatus.equals("Success"))
-              new FileUtils().writeTextFile(bmConfig.getBmCache(), log + "\n");
           }
+          /* Construct and assemble email object */
+          Email mail = new EmailBuilder()
+                  .from(emailConfig.getFromEmail())
+                  .to(recipient)
+                  .body(emailContent)
+                  .title(title)
+                  .includeFileAtt(file)
+                  .includeAtt(null)
+                  .create();
+
+          /* Send email */
+          String emailStatus = emailClient.execute(mail);
+
+          /* if email was sent then persist to cache */
+          persistToCache(emailStatus, bmConfig.getBmCache(), batchLogName);
+
         }
       }
     }
 
+  }
+
+
+  private void persistToCache(String emailStatus, String cacheFilePath, String batchLogName) {
+    if (emailStatus.equals("Success"))
+      new FileUtils().writeTextFile(cacheFilePath, batchLogName + "\n");
   }
 
 }

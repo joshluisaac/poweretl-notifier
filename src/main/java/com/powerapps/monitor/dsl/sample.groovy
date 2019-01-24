@@ -1,4 +1,6 @@
-package com.powerapps.monitor.com.powerapps.monitor.dsl
+package com.powerapps.monitor.dsl
+
+
 def x = 104
 println x.getClass()
 x = "Guru99"

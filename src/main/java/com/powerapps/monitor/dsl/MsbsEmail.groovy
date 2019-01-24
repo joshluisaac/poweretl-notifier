@@ -1,4 +1,4 @@
-package com.powerapps.monitor.com.powerapps.monitor.dsl
+package com.powerapps.monitor.dsl
 
 import com.powerapps.monitor.model.LogSummary
 import com.powerapps.monitor.service.BatchManagerLogNotificationService
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service
 @Service
 class MbsbEmail {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MbsbEmail.class)
+    //private static final Logger LOG = LoggerFactory.getLogger(MbsbEmail.class)
     private final BatchManagerLogService logService;
     private final BatchManagerLogNotificationService notifService
 
@@ -58,7 +58,7 @@ class MbsbEmail {
     }
 
     static void main(String[] args) {
-        MbsbEmail mbsbEmail = new MbsbEmail()
+        MbsbEmail mbsbEmail = new MbsbEmail2()
         mbsbEmail.sendEmail()
     }
 

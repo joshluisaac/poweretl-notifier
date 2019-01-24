@@ -1,4 +1,4 @@
-package com.powerapps.monitor.com.powerapps.monitor.dsl
+package com.powerapps.monitor.dsl
 
 class Explore {
 

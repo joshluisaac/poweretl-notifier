@@ -18,6 +18,8 @@ public class DcEmailConfiguration {
   String renotify;
   String daysAgo;
 
+  public DcEmailConfiguration(){}
+
   public DcEmailConfiguration(String recipients, String operator, String isEnabled,
                               String cronExpression, String serverLogPath, String serverLogDir, String title,
                               String context, String additionalMsg, String tenant, String daysAgo, String renotify) {

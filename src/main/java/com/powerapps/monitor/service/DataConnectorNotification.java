@@ -82,8 +82,9 @@ public class DataConnectorNotification {
   }
 
 
-  public void execute(String title, String serverLogPath, String context, String recipient, String serverLogDir, String daysAgo, String renotify ) throws Exception {
+  public String execute(String title, String serverLogPath, String context, String recipient, String serverLogDir, String daysAgo, String renotify ) throws Exception {
     boolean reexecute = false;
+    String emailStatus = "Unsent";
     String lineStartsWith = new DateUtils().getDaysAgoToString("yyyy-MM-dd", Integer.parseInt(daysAgo), new Date());
     String fileName = "dc_stats_"+ context +"_"+ lineStartsWith + ".json";
     List<String> cacheList = fileUtils.readFile(new File(cacheFilePath));
@@ -125,18 +126,23 @@ public class DataConnectorNotification {
         long actualFileSize = (zipFile.length()/1000)/1000;
         Email mail = email(actualFileSize, emailConfig.getFromEmail(), recipient, title, emailContent, null, zipFile);
         /*Send email*/
-        String emailStatus = emailClient.execute(mail);
+        emailStatus = emailClient.execute(mail);
         if(emailStatus.equals("Success")) {
+          emailStatus = "Email has been sent to ".concat(recipient);
           deleteAndReplaceFile(destFileName, jsonText);
           /*write difference to cache*/
           emailHelper.persistToCache(fileName);
         }else {
-          logger.info("Email Failed and wasn't sent");
+          emailStatus = "Email Failed and wasn't sent";
+          logger.info(emailStatus);
         }
       } else {
-        logger.info("Re-evaluating {} : DataConnector logs hasn't changed since last loading, email will not be resent", fileName);
+        emailStatus = "DataConnector logs hasn't changed since last loading, email will not be resent";
+        logger.info("Re-evaluating {} : {}", fileName,emailStatus);
       }
     }
+
+    return emailStatus;
   }
   
   /**

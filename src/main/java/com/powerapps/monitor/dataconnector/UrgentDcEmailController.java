@@ -9,26 +9,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-public class AdhocEmailController {
+public class UrgentDcEmailController {
 
-    private static final long PERIOD = 3600000;
     private DataConnectorNotification dcNotificationService;
 
 
     @Autowired
-    public AdhocEmailController(DataConnectorNotification dcNotificationService) {
+    public UrgentDcEmailController(DataConnectorNotification dcNotificationService) {
         this.dcNotificationService = dcNotificationService;
     }
 
 
-    @PostMapping("sendDcAdhocEmail")
+    @PostMapping("api/v1.0/dc/sendemail")
     @ResponseBody
-    public String sendDcAdhocEmail(@RequestBody DcEmailConfiguration body) throws Exception{
-
-        System.out.println("Request Body: " + body.toString());
-
-        //dcNotificationService.execute(null,null,null,null,null,null,null);
-        return "someString";
+    public String sendDcAdhocEmail(@RequestBody DcEmailConfiguration body) throws Exception {
+        String status = dcNotificationService.execute(
+                body.getTitle(),
+                body.serverLogPath,
+                body.getContext(),
+                body.getRecipients(),
+                body.getServerLogDir(),
+                body.getDaysAgo(),
+                body.getRenotify());
+        return status;
     }
 
 

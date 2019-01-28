@@ -117,7 +117,7 @@ app.ictzone.dc.additionalMessages=
 
 
 ## Sending DC emails from terminal
-Using an API endpoint you could send DC email notification using the command below. This script comes handy in SIT and UAT environments when you need to send an email notification on urgent or ad-hoc basis. 
+Using an API endpoint you could send DC email notification using the command below. This script comes handy in SIT and UAT environments when you need to notify notify users on urgent or ad-hoc basis. 
 
 ```bash
 curl --header "Content-Type: application/json" \

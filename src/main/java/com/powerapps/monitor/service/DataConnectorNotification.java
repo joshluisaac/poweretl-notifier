@@ -41,8 +41,9 @@ public class DataConnectorNotification {
   private final Logger logger = LoggerFactory.getLogger(DataConnectorNotification.class);
   
   
-  @Value("${app.daysAgo}")
-  private String daysAgo;
+  //@Value("${app.daysAgo}") private String daysAgo;
+  //@Value("${app.dcnotification.renotify}") String renotify;
+
   
   @Value("${app.attachment.maxlimit}")
   private String emailFileSizeLimit;
@@ -52,14 +53,9 @@ public class DataConnectorNotification {
   
   @Value("${app.outDir}")
   private String outDir;
-  
-  
+
   @Value("${app.cacheFilePath}")
   private String cacheFilePath;
-  
-  
-  @Value("${app.dcnotification.renotify}") String renotify;
-  
 
   @Autowired
   public DataConnectorNotification(
@@ -82,11 +78,11 @@ public class DataConnectorNotification {
   }
   
   public void execute(String title, String serverLogPath, String context, String recipient) throws Exception{
-    this.execute(title, serverLogPath, context, recipient,null);
+    this.execute(title, serverLogPath, context, recipient,null,"0", "true");
   }
 
 
-  public void execute(String title, String serverLogPath, String context, String recipient, String serverLogDir) throws Exception {
+  public void execute(String title, String serverLogPath, String context, String recipient, String serverLogDir, String daysAgo, String renotify ) throws Exception {
     boolean reexecute = false;
     String lineStartsWith = new DateUtils().getDaysAgoToString("yyyy-MM-dd", Integer.parseInt(daysAgo), new Date());
     String fileName = "dc_stats_"+ context +"_"+ lineStartsWith + ".json";
@@ -107,7 +103,7 @@ public class DataConnectorNotification {
       Map<String, Object> modelMap  = new HashMap<>();
       modelMap.put("stats", stats);
       modelMap.put("tenantContext", context);
-      
+
       String jsonText = dcStats.jsonEncode(stats);
       String hashStr = CryptUtils.sha256HexHash(jsonText);
       String destFileName = outDir +"/"+ fileName;

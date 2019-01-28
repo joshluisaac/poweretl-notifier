@@ -126,21 +126,21 @@ public class MailTaskScheduler extends Scheduler {
     logger.info("Firing email task at {}", cronExpression);
     if (yycDcEnableSchedler)
       dcNotificationService.execute(yycDcEmailTitle, yycDcServerLogPath, yycDcEmailContext, yycDcEmailRecepients,
-          serverLogDir);
+          serverLogDir,null,null);
   }
 
   @Scheduled(cron = "${app.pbk.dc.scheduler.cronexpression}")
   public void sendDataConnectorStatsEmailPBK() throws Exception {
     if (pbkDcEnableSchedler)
       dcNotificationService.execute(pbkDcEmailTitle, pbkDcServerLogPath, pbkDcEmailContext, pbkDcEmailRecepients,
-          serverLogDirPBK);
+          serverLogDirPBK,null,null);
   }
 
   @Scheduled(cron = "${app.pelita.dc.scheduler.cronexpression}")
   public void sendDataConnectorStatsEmailPelita() throws Exception {
     if (pelitaDcEnableSchedler)
       dcNotificationService.execute(pelitaDcEmailTitle, pelitaDcServerLogPath, pelitaDcEmailContext,
-          pelitaDcEmailRecepients, serverLogDirPelita);
+          pelitaDcEmailRecepients, serverLogDirPelita,null,null);
   }
   
   
@@ -148,14 +148,14 @@ public class MailTaskScheduler extends Scheduler {
   public void sendDataConnectorStatsEmailCco() throws Exception {
     if (ccoDcEnableSchedler)
       dcNotificationService.execute(ccoDcEmailTitle, ccoDcServerLogPath, ccoDcEmailContext,
-          ccoDcEmailRecepients, serverLogDircco);
+          ccoDcEmailRecepients, serverLogDircco,null,null);
   }
   
   @Scheduled(cron = "${app.ictzone.dc.scheduler.cronexpression}")
   public void sendDataConnectorStatsEmailictzone() throws Exception {
     if (ictzoneDcEnableSchedler)
       dcNotificationService.execute(ictzoneDcEmailTitle, ictzoneDcServerLogPath, ictzoneDcEmailContext,
-          ictzoneDcEmailRecepients, serverLogDirictzone);
+          ictzoneDcEmailRecepients, serverLogDirictzone,null,null);
   }
   
   
@@ -165,7 +165,7 @@ public class MailTaskScheduler extends Scheduler {
     if (mbsbDcEnableSchedler)
       dcNotificationService.execute(mbsbDcEmailTitle, mbsbDcServerLogPath, mbsbDcEmailContext, 
           mbsbDcEmailRecepients,
-          serverLogDirMbsb);
+          serverLogDirMbsb,null,null);
   }
   
   @Scheduled(cron = "${app.mbsb.dc.transfer.scheduler.cronexpression}")

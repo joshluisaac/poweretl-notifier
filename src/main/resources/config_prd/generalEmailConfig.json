@@ -1,0 +1,11 @@
+{
+	"password": "K@L#eKT#12",
+	"debug": "false",
+	"smtpAuth": "true",
+	"port": "587",
+	"startTls": "true",
+	"transportProtocol": "smtp",
+	"host": "mail.automanage.biz",
+	"username": "datareceived@kollect.my",
+	"fromEmail": "datareceived@kollect.my"
+}

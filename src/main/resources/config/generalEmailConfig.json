@@ -1,11 +1,11 @@
 {
-	"password": "K@L#eKT#12",
+	"password": "powerintegrator@k88",
 	"debug": "false",
 	"smtpAuth": "true",
 	"port": "587",
 	"startTls": "true",
 	"transportProtocol": "smtp",
-	"host": "mail.automanage.biz",
-	"username": "datareceived@kollect.my",
-	"fromEmail": "datareceived@kollect.my"
+	"host": "smtp.gmail.com",
+	"username": "powerintegrator@gmail.com",
+	"fromEmail": "powerintegrator@gmail.com"
 }

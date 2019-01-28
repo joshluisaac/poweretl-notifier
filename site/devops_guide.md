@@ -116,6 +116,32 @@ app.ictzone.dc.additionalMessages=
 ```
 
 
+## Sending DC emails from terminal
+Using an API endpoint you could send DC email notification using the command below. This script comes handy in SIT and UAT environments when you need to send an email notification on urgent or ad-hoc basis. 
+
+```bash
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{
+"recipients": "nwankwo.joshua@gmail.com,joshua@kollect.my",
+"operator": "nwankwo.joshua@gmail.com,joshua@kollect.my",
+"isEnabled": "false",
+"cronExpression": "* 45 *",
+"serverLogPath": "/home/joshua/Downloads/br_dc_sample_logs/log.log",
+"serverLogDir": "/home/joshua/Downloads/br_dc_sample_logs/",
+"title": "SUCCESSFUL: BR Completion of PowerKollect Daily Data Loading",
+"context": "br",
+"additionalMsg": "",
+"tenant": "br",
+"daysAgo": "5",
+"renotify": "true"
+}' \
+http://localhost:8088/api/v1.0/dc/sendemail
+
+
+```
+
+
 ## SFTP Email Notification 
 
 This email alerts users of the number of files, file size, number of records and 

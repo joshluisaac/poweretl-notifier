@@ -12,3 +12,4 @@ This document tracks recent changes to PowerETL Notifier.
 * Added `app.attachment.maxlimit` property in [application.properties](src/main/resources/application.properties) file which restricts files greater than the specified limit.
 * Added bold red font for rejected records so that operators attention is drawn to it.
 * Added more metrics such as loaded and rejected percentage which is a relative measure against the overall records.
+* Created an API endpoint that allows sending of DC email notifcation on ad-hoc/urgent basis. This comes handy in non production environemnts such as SIT and UAT when you many need to notification after loading is completed.

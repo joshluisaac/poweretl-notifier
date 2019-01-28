@@ -14,10 +14,8 @@ import java.util.Map;
 public class DcEmailScheduler {
 
   private static final Logger LOG = LoggerFactory.getLogger(DcEmailScheduler.class);
-  protected final DataConnectorNotification dcNotificationService;
-
-
-  Map<String,DcEmailConfiguration> configMap;
+  private final DataConnectorNotification dcNotificationService;
+  private Map<String,DcEmailConfiguration> configMap;
 
 
   @Autowired

@@ -92,12 +92,6 @@
       </dependency>
 
 
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>27.0.1-jre</version>
-        </dependency>
-
     </dependencies>
 
     <dependencyManagement>
@@ -158,6 +152,7 @@
                 </executions>
                 <configuration>
                     <outputDirectory>lib</outputDirectory>
+                    <includeScope>compile</includeScope>
                     <overWriteReleases>true</overWriteReleases>
                     <overWriteSnapshots>true</overWriteSnapshots>
                     <overWriteIfNewer>true</overWriteIfNewer>

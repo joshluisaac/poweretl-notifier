@@ -56,6 +56,7 @@ echo `date '+%Y-%m-%d %H:%M:%S'` "Clean up completed"
 
 
 build(){
+rm -rf "lib/*.jar"
 mvn_clean_install
 check_build_compilation
 assemble_build

@@ -25,7 +25,7 @@ public class UrgentDcEmailController {
     public String sendDcAdhocEmail(@RequestBody DcEmailConfiguration body) throws Exception {
         String status = dcNotificationService.execute(
                 body.getTitle(),
-                body.serverLogPath,
+                body.getServerLogPath(),
                 body.getContext(),
                 body.getRecipients(),
                 body.getServerLogDir(),

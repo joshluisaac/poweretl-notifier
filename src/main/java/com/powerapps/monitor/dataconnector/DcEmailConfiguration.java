@@ -1,8 +1,5 @@
 package com.powerapps.monitor.dataconnector;
 
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
-
 public class DcEmailConfiguration {
 
   String recipients;
@@ -136,19 +133,19 @@ public class DcEmailConfiguration {
 
   @Override
   public String toString() {
-    return MoreObjects.toStringHelper(this)
-            .add("recipients", recipients)
-            .add("operator", operator)
-            .add("isEnabled", isEnabled)
-            .add("cronExpression", cronExpression)
-            .add("serverLogPath", serverLogPath)
-            .add("serverLogDir", serverLogDir)
-            .add("title", title)
-            .add("context", context)
-            .add("additionalMsg", additionalMsg)
-            .add("tenant", tenant)
-            .add("renotify", renotify)
-            .add("daysAgo", daysAgo)
-            .toString();
+    return "DcEmailConfiguration{" +
+            "recipients='" + recipients + '\'' +
+            ", operator='" + operator + '\'' +
+            ", isEnabled='" + isEnabled + '\'' +
+            ", cronExpression='" + cronExpression + '\'' +
+            ", serverLogPath='" + serverLogPath + '\'' +
+            ", serverLogDir='" + serverLogDir + '\'' +
+            ", title='" + title + '\'' +
+            ", context='" + context + '\'' +
+            ", additionalMsg='" + additionalMsg + '\'' +
+            ", tenant='" + tenant + '\'' +
+            ", renotify='" + renotify + '\'' +
+            ", daysAgo='" + daysAgo + '\'' +
+            '}';
   }
 }

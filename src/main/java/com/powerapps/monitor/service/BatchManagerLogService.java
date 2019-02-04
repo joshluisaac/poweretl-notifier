@@ -95,10 +95,10 @@ public class BatchManagerLogService {
       }
       return summaries;
   }
-    
-    
 
-    private LogSummary summarizeLog(String log) {
+
+
+    public LogSummary summarizeLog(String log) {
         //System.out.println(log);
         List<String> regexList = new ArrayList<>(Arrays.asList(getStartRegex(),
                 getErrorRegex(), getDoneRegex()));

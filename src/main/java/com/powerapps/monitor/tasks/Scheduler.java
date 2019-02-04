@@ -2,7 +2,7 @@ package com.powerapps.monitor.tasks;
 
 import com.powerapps.monitor.service.BatchManagerLogNotificationService;
 import com.powerapps.monitor.service.DataConnectorNotification;
-import com.powerapps.monitor.service.TransferedFileServce;
+import com.powerapps.monitor.transport.TransferedFileServce;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

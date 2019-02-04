@@ -23,6 +23,9 @@ public class UrgentDcEmailController {
     @PostMapping("api/v1.0/dc/sendemail")
     @ResponseBody
     public String sendDcAdhocEmail(@RequestBody DcEmailConfiguration body) throws Exception {
+        if( !body.getIsEnabled().equals("true") ) {
+            return "Email Unsent. Please check \"isEnabled\" property and ensure it is set to true";
+        }
         String status = dcNotificationService.execute(
                 body.getTitle(),
                 body.getServerLogPath(),

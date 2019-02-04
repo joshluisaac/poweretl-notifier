@@ -54,7 +54,7 @@ public class SampleController {
   }
 
 
-  @RequestMapping(value = "request2", method = RequestMethod.GET)
+  @RequestMapping(value = "request2", method = RequestMethod.POST)
   @ResponseBody
   public Map handleRequest2(@RequestBody ResponseTransfer body, RequestEntity requestEntity) {
 

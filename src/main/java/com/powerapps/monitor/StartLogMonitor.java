@@ -1,6 +1,6 @@
 package com.powerapps.monitor;
 
-import com.powerapps.monitor.dataconnector.ScheduledTaskExecutor;
+import com.powerapps.monitor.dataconnector.ScheduledTaskExecutorNative;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -19,7 +19,7 @@ public class StartLogMonitor {
 
 
     private static void publishDcEmail(ConfigurableApplicationContext context){
-        ScheduledTaskExecutor task = context.getBean(ScheduledTaskExecutor.class);
+        ScheduledTaskExecutorNative task = context.getBean(ScheduledTaskExecutorNative.class);
         task.execute();
     }
 

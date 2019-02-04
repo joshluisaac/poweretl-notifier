@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.powerapps.monitor.service.BatchManagerLogNotificationService;
 import com.powerapps.monitor.service.DataConnectorNotification;
-import com.powerapps.monitor.service.TransferedFileServce;
+import com.powerapps.monitor.transport.TransferedFileServce;
 
 @Component
 public class MailTaskScheduler extends Scheduler {

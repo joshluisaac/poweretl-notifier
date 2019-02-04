@@ -1,4 +1,4 @@
-package com.powerapps.monitor.service;
+package com.powerapps.monitor.transport;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -57,18 +57,13 @@ public class TransferedFileServce {
     Map<String, Object> modelMap  = new HashMap<>();
     modelMap.put("stats", getStats());
     modelMap.put("tenantContext", context);
-    
     String emailContent = emailContentBuilder.buildEmailTemplate("fragments/template_dc_transfer_email", modelMap);
-    
-    /*Construct and assemble email object*/
     Email mail = new Email(emailConfig.getFromEmail(), recipient, transferEmailTitle,emailContent, null, null);
-    /*Send email*/
     String emailStatus = emailClient.execute(mail);
   }
   
   
   List<String> readSchemaFile() throws IOException {
-    //new FileUtils().re
     return new FileUtils().readFile(new FileUtils().getFileFromClasspath(schemaFile));
   }
   

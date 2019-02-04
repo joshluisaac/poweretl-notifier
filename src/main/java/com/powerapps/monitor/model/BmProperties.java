@@ -6,6 +6,8 @@ package com.powerapps.monitor.model;
 public class BmProperties {
   
   private String bmRootPath,batchStartRegex,batchDoneRegex,batchErrorRegex,bmCache;
+
+  public BmProperties(){}
   
   public BmProperties(String bmRootPath, String batchStartRegex, String batchDoneRegex, String batchErrorRegex,
       String bmCache) {

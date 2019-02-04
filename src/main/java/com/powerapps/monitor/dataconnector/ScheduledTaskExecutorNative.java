@@ -14,14 +14,14 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class ScheduledTaskExecutor {
+public class ScheduledTaskExecutorNative {
 
     private static final long PERIOD = 3600000;
     private DcEmailTask emailTask;
 
 
     @Autowired
-    public ScheduledTaskExecutor(DcEmailTask emailTask) {
+    public ScheduledTaskExecutorNative(DcEmailTask emailTask) {
         this.emailTask = emailTask;
     }
 

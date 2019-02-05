@@ -190,7 +190,7 @@ public class BatchManagerLogService {
         summary.setLogFileName(log);
         return summary;
     }
-    
+
     // needs refactoring
     public List<LogSummary> getAllLogSummary(List<String> logs) {
         List<LogSummary> summaryMetrics = new ArrayList<>();

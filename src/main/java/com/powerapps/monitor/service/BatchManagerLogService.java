@@ -28,29 +28,30 @@ public class BatchManagerLogService {
     private String bmJsonPath;
 
     public BmProperties bmConfig;
+    public LogSummary summary = new LogSummary();
 
     @Autowired
     public BatchManagerLogService(BmProperties bmConfig) {
         this.bmConfig = bmConfig;
     }
-    
-    private String getStartRegex(){
+
+    private String getStartRegex() {
         return bmConfig.getBatchStartRegex();
     }
 
-    private String getErrorRegex(){
+    private String getErrorRegex() {
         return bmConfig.getBatchErrorRegex();
     }
 
-    private String getDoneRegex(){
+    private String getDoneRegex() {
         return bmConfig.getBatchDoneRegex();
     }
 
-    private String getRootPath(){
+    private String getRootPath() {
         return bmConfig.getBmRootPath();
     }
 
-    public String getBmCache(){
+    public String getBmCache() {
         return bmConfig.getBmCache();
     }
 
@@ -76,34 +77,30 @@ public class BatchManagerLogService {
     private List<String> fetchNewlyAddedLogFiles(List<String> cacheList, List<String> logList) {
         return new ListUtils().subtract(cacheList, logList);
     }
-    
-    
+
+
     public List<LogSummary> getBmLogSummaries() throws IOException {
-      List<String> availableLogList = getLogFiles(new File(getRootPath()));
-      List<String> cacheList = getCachedList(new File(getBmCache()));
-      List<String> unCachedList = fetchNewlyAddedLogFiles(cacheList, availableLogList);
-      int count = unCachedList.size();
-      List<LogSummary> summaries = new ArrayList<>();
-      LOG.info("Number of files uncached: {}", count);
-      if (count != 0) {
-          for (String log : unCachedList) {
-            LogSummary summary = summarizeLog(log);
-            summaries.add(summary);
-          }
-      } else {
-          LOG.info("Count is {}, nothing to cache", count);
-      }
-      return summaries;
-  }
+        List<String> availableLogList = getLogFiles(new File(getRootPath()));
+        List<String> cacheList = getCachedList(new File(getBmCache()));
+        List<String> unCachedList = fetchNewlyAddedLogFiles(cacheList, availableLogList);
+        int count = unCachedList.size();
+        List<LogSummary> summaries = new ArrayList<>();
+        LOG.info("Number of files uncached: {}", count);
+        if (count != 0) {
+            for (String log : unCachedList) {
+                LogSummary summary = summarizeLog(log);
+                summaries.add(summary);
+            }
+        } else {
+            LOG.info("Count is {}, nothing to cache", count);
+        }
+        return summaries;
+    }
 
 
-
-    public LogSummary summarizeLog(String log) {
-        //System.out.println(log);
+    public void parseLog(List<String> lines) {
         List<String> regexList = new ArrayList<>(Arrays.asList(getStartRegex(),
                 getErrorRegex(), getDoneRegex()));
-        //LOG.info("Processing {}", log);
-        List<String> lines = Utils.readLogFile(new File(getRootPath(), log));
         boolean isStartEntry = false;
         boolean isDoneEntry = false;
         boolean isErrorEntry = false;
@@ -117,7 +114,6 @@ public class BatchManagerLogService {
         Timestamp batchEndTime = null;
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
-            //System.out.println(line);
             if (!isStartEntry) {
                 boolean isStarted = Utils.matcher(line, regexList.get(0)).find();
                 if (isStarted) {
@@ -155,33 +151,46 @@ public class BatchManagerLogService {
                     continue;
                 }
             }
-            
-            
             if ((i == (lines.size() - 1)) && (endTime == null)) {
                 batchStatus = 3; // inprogress
                 batchEndTime = new Timestamp(System.currentTimeMillis());
                 batch.setEndTime(batchEndTime);
-            }  
-            
-            
-            
+            }
         }
-        if(batchStatus == 3) {
-          if(batch.getStartTime() == null) {
-            batchStatus = 1; // failed
-            
-            Timestamp now = new Timestamp(System.currentTimeMillis());
-            batchEndTime = now;
-            batchStartTime = now;
-            batch.setStartTime(batchStartTime);
-            batch.setEndTime(batchStartTime);
-          }
+        if (batchStatus == 3) {
+            if (batch.getStartTime() == null) {
+                batchStatus = 1; // failed
+                Timestamp now = new Timestamp(System.currentTimeMillis());
+                batchEndTime = now;
+                batchStartTime = now;
+                batch.setStartTime(batchStartTime);
+                batch.setEndTime(batchStartTime);
+            }
         }
-        batch.setRunningTime(((batch.getEndTime().getTime() - batch.getStartTime().getTime())/ 1000) / 60f);
-        return new LogSummary(log, isStartEntry, isDoneEntry, errorTerminated, batch.getStartTime(), batch.getEndTime(), batchStatus,
-                batch.getRunningTime());
+        batch.setRunningTime(((batch.getEndTime().getTime() - batch.getStartTime().getTime()) / 1000) / 60f);
+
+        summary.setLogFileName(null);
+        summary.setStartEntry(isStartEntry);
+        summary.setDoneEntry(isDoneEntry);
+        summary.setErrorTerminated(errorTerminated);
+        summary.setStartTime(batch.getStartTime());
+        summary.setEndTime(batch.getEndTime());
+        summary.setBatchStatus(batchStatus);
+        summary.setRunningTime(batch.getRunningTime());
     }
 
+    public LogSummary summarizeLog(List<String> lines) {
+        parseLog(lines);
+        return summary;
+    }
+
+    public LogSummary summarizeLog(String log) {
+        List<String> lines = Utils.readLogFile(new File(getRootPath(), log));
+        parseLog(lines);
+        summary.setLogFileName(log);
+        return summary;
+    }
+    
     // needs refactoring
     public List<LogSummary> getAllLogSummary(List<String> logs) {
         List<LogSummary> summaryMetrics = new ArrayList<>();

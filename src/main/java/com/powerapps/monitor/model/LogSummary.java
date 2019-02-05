@@ -1,5 +1,8 @@
 package com.powerapps.monitor.model;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
 import java.sql.Timestamp;
 
 public class LogSummary {
@@ -9,6 +12,8 @@ public class LogSummary {
     String logFileName;
     int batchStatus;
     double runningTime;
+
+    public LogSummary(){}
 
     public LogSummary(String logFileName, boolean isStartEntry, boolean isDoneEntry, boolean errorTerminated,
                       Timestamp startTime, Timestamp endTime, int batchStatus, double runningTime) {

@@ -15,11 +15,11 @@ class BatchManagerLogServiceTest extends Specification {
 
     def setup(){
         config = new BmProperties()
-        config.setBmRootPath("/media/joshua/martian/ptrworkspace/MBSB/MBSB-6.1.370-N20190129/MBSB-Linux/BatchManager/logs/")
+        config.setBmRootPath(TestConstants.BM_ROOT_PATH)
         config.setBatchStartRegex("^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (DEBUG) (--START--)")
         config.setBatchDoneRegex("^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (DEBUG) (--DONE--)")
         config.setBatchErrorRegex("^(\\d+ \\d+\\-\\d+-\\d+) (\\d+:\\d+:\\d+)(,)(\\d+) (ERROR)")
-        config.setBmCache("/media/joshua/martian/linked_projects/notifier/out/bmcache.csv")
+        config.setBmCache(TestConstants.BM_CACHE)
 
         logService = new BatchManagerLogService(config)
     }

@@ -7,6 +7,11 @@ class TestConstants {
     public static final String DC_EMAIL_CONFIG_HASH = '661f1237362a12386f5b18d157f0676a8c092bbdcd6ecd3e8725b3d93e12a55c'
 
 
+
+    public static final String BM_ROOT_PATH = "/Users/joshua/Dropbox/bmlogs/"
+    public static final String BM_CACHE = "/Users/joshua/projects/powerappslogmonitor/out/bmcache.csv"
+
+
     static List<String> bmLogLines (){
         def lines = new ArrayList<String>()
         lines.add("1 2019-02-05 06:54:41,609 INFO  HTTP_INIT_CLIENT: Starting HTTP interface connecting to server http://localhost:8765/")

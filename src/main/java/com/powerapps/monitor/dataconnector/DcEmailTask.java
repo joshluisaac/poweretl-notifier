@@ -34,7 +34,10 @@ public class DcEmailTask {
         try {
             executeTask();
         } catch (Exception e) {
-            LOG.error("Caught exception in ScheduledExecutorService. StackTrace:\n" + e.getStackTrace());
+            //System.out.println(e.getCause());
+            //e.printStackTrace();
+
+            LOG.error("Caught exception in ScheduledExecutorService. StackTrace:\n {}", e);
         }
     };
 

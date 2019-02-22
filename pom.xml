@@ -178,6 +178,7 @@
                     </arguments>
                     <addResourcesToClasspath>true</addResourcesToClasspath>
                     <additionalClasspathElements>
+                        <additionalClasspathElement>bin</additionalClasspathElement>
                         <additionalClasspathElement>src/main/resources/config</additionalClasspathElement>
                     </additionalClasspathElements>
                 </configuration>

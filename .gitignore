@@ -19,7 +19,6 @@ logs
 *.tar.gz
 *.rar
 *.zip
-*.jar
 
 #log files
 *.log
@@ -28,8 +27,6 @@ logs
 hs_err_pid*
 
 target
-lib
-/lib
 resources_
 *.iml
 #/bin/

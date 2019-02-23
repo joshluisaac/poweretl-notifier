@@ -17,8 +17,8 @@ import java.util.Map;
 public class SampleController {
 
 
-  private static String HTML_RESPONSE = "<html><body><h2>SOME dummy page</h2></body></html>";
-  private static String JSON_RESPONSE = "{\"name\":\"james\", \"address\":\"Jacka Street Balwyn North\"}";
+  private static final String HTML_RESPONSE = "<html><body><h2>SOME dummy page</h2></body></html>";
+  private static final String JSON_RESPONSE = "{\"name\":\"james\", \"address\":\"Jacka Street Balwyn North\"}";
 
 
   @RequestMapping(value = "/download", method = RequestMethod.GET)

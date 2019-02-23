@@ -26,7 +26,7 @@ public class UrgentDcEmailController {
         if( !body.getIsEnabled().equals("true") ) {
             return "Email Unsent. Please check \"isEnabled\" property and ensure it is set to true";
         }
-        String status = dcNotificationService.execute(
+        return dcNotificationService.execute(
                 body.getTitle(),
                 body.getServerLogPath(),
                 body.getContext(),
@@ -34,7 +34,6 @@ public class UrgentDcEmailController {
                 body.getServerLogDir(),
                 body.getDaysAgo(),
                 body.getRenotify());
-        return status;
     }
 
 

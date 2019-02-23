@@ -1,0 +1,137 @@
+[
+  {
+    "key": "CCO_CUSTOMER",
+    "loaded": 14620,
+    "eligible": 14620,
+    "duration": 51,
+    "rowsPerSec": 286,
+    "percentageLoaded": 100.0,
+    "percentageRejected": 0.0
+  },
+  {
+    "key": "CCO_CUSTOMER_PERSON_INCHARGE",
+    "loaded": 16145,
+    "eligible": 16145,
+    "duration": 44,
+    "rowsPerSec": 366,
+    "percentageLoaded": 100.0,
+    "percentageRejected": 0.0
+  },
+  {
+    "key": "CCO_CUSTOMER_EMAILS",
+    "loaded": 16264,
+    "eligible": 16264,
+    "duration": 53,
+    "rowsPerSec": 306,
+    "percentageLoaded": 100.0,
+    "percentageRejected": 0.0
+  },
+  {
+    "key": "CCO_CUSTOMER_PHONE_NOS",
+    "loaded": 14618,
+    "eligible": 14618,
+    "duration": 42,
+    "rowsPerSec": 348,
+    "percentageLoaded": 100.0,
+    "percentageRejected": 0.0
+  },
+  {
+    "key": "CCO_CUSTOMER_ADDRESSES",
+    "loaded": 14618,
+    "eligible": 14618,
+    "duration": 42,
+    "rowsPerSec": 348,
+    "percentageLoaded": 100.0,
+    "percentageRejected": 0.0
+  },
+  {
+    "key": "CCO_ACCOUNT",
+    "loaded": 14620,
+    "eligible": 14620,
+    "duration": 41,
+    "rowsPerSec": 356,
+    "percentageLoaded": 100.0,
+    "percentageRejected": 0.0
+  },
+  {
+    "key": "CCO_INVOICE",
+    "loaded": 15873,
+    "eligible": 16659,
+    "duration": 9,
+    "rowsPerSec": 1763,
+    "percentageLoaded": 95.28182964163516,
+    "percentageRejected": 4.718170358364848
+  },
+  {
+    "key": "CCO_INVOICE_IS_BHD",
+    "loaded": 52522,
+    "eligible": 52694,
+    "duration": 27,
+    "rowsPerSec": 1945,
+    "percentageLoaded": 99.67358712566896,
+    "percentageRejected": 0.3264128743310434
+  },
+  {
+    "key": "CCO_INVOICE_CCT_SB",
+    "loaded": 23898,
+    "eligible": 24536,
+    "duration": 13,
+    "rowsPerSec": 1838,
+    "percentageLoaded": 97.39973915878709,
+    "percentageRejected": 2.6002608412129113
+  },
+  {
+    "key": "CCO_INVOICE_TRX",
+    "loaded": 15560,
+    "eligible": 16659,
+    "duration": 19,
+    "rowsPerSec": 818,
+    "percentageLoaded": 93.40296536406747,
+    "percentageRejected": 6.597034635932529
+  },
+  {
+    "key": "CCO_INVOICE_TRX_CCT_SB",
+    "loaded": 23760,
+    "eligible": 24536,
+    "duration": 27,
+    "rowsPerSec": 880,
+    "percentageLoaded": 96.83730029344636,
+    "percentageRejected": 3.162699706553636
+  },
+  {
+    "key": "CCO_INVOICE_TRX_IS_BHD",
+    "loaded": 52332,
+    "eligible": 52694,
+    "duration": 52,
+    "rowsPerSec": 1006,
+    "percentageLoaded": 99.31301476448931,
+    "percentageRejected": 0.6869852355106844
+  },
+  {
+    "key": "CCO_TRANSACTION",
+    "loaded": 15560,
+    "eligible": 16659,
+    "duration": 17,
+    "rowsPerSec": 915,
+    "percentageLoaded": 93.40296536406747,
+    "percentageRejected": 6.597034635932529
+  },
+  {
+    "key": "CCO_TRANSACTION_CCT_SB",
+    "loaded": 23760,
+    "eligible": 24536,
+    "duration": 26,
+    "rowsPerSec": 913,
+    "percentageLoaded": 96.83730029344636,
+    "percentageRejected": 3.162699706553636
+  },
+  {
+    "key": "CCO_TRANSACTION_IS_BHD",
+    "loaded": 52332,
+    "eligible": 52694,
+    "duration": 54,
+    "rowsPerSec": 969,
+    "percentageLoaded": 99.31301476448931,
+    "percentageRejected": 0.6869852355106844
+  }
+]
